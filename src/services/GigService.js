@@ -11,8 +11,7 @@ class GigService {
     const result = await employeeProfession.findOne({ where: { professionId }, include: [employee] });
     const data = result.get('employee');
 
-    console.log(data.id);
-    return true;
+    return data.id === user.id;
   }
    
 }

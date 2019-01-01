@@ -67,7 +67,7 @@ class EmployerService{
      let { email, password } = content.input;
       email = email.trim().toLowerCase();
      let user = await this.models.employer.findOne({where:{email}});
-
+     console.log({user})
        if(!user){
           throw new AuthenticationError('User account not found! try again');
        }
@@ -96,7 +96,6 @@ class EmployerService{
 
 
   async employerCreateGig({ input, user,pubsub }) {
-    console.log(input);
     if (!user) {
        throw new AuthenticationError('You should be signed!');
     }
