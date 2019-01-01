@@ -8,7 +8,7 @@ module.exports = {
    jobSeeker: async (parent, args, { models, user }) => {
 
       if (!user) {
-            throw new AuthenticationError('You should be signed in before getting your uoser account ');
+            throw new AuthenticationError('You should be signed!');
       }
      
      const id = user.id;

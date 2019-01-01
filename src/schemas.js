@@ -19,11 +19,45 @@ module.exports = gql`
     updatedAt:DateTime
   }
 
-  fragment infor on JobSeeker {
+  type Employer{
+    id:Int!
+    fullName:String
+    email:String
+    phone:string
+    password:string
+    updatedAt:String
+    createdAt:String
+    license:String
+    hasLocation:String
+  }
+
+type Location{
+  id:Int!
+  logitude:String
+  latitude:String
+}
+
+type District{
+ id:Int!
+name:String
+}
+
+type Gig{
+  id:Int!
+  name:String!
+  details:String
+  budget:Float
+  duration:String
+  status:Int!
+  updatedAt:String
+  createdAt:String
+}
+  
+fragment infor on JobSeeker {
   email
 }
 
-  type Profession{
+type Profession{
     id:Int!
     name:String!
   }
