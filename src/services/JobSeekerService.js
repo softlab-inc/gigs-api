@@ -34,47 +34,44 @@ class JobSeekerSerivce{
 
     const { employee, employeeProfession,profession } = this.models;
   
-    // //hashing the user password
-    // const hashed = await bcrypt.hash(password, 10);
-    // let  documentImageUri='';
-    // let nationalIdImageUri = '';
+    //hashing the user password
+    const hashed = await bcrypt.hash(password, 10);
+    let  documentImageUri='';
+    let nationalIdImageUri = '';
       
-    //   let user = await this.models.employee.findOne({where:{email}});
+      let user = await this.models.employee.findOne({where:{email}});
 
-    //    if(user){
-    //       throw new AuthenticationError('Email was already used try again');
-    //    }
+       if(user){
+          throw new AuthenticationError('Email was already used try again');
+       }
     
-    // //saving uploaded files to respective Folders
-    // nationalIdImageUri = await getResult(nationalId,IDS_FOLDER);
-    // documentImageUri = await getResult(document,DOCS_FOLDER);
+    //saving uploaded files to respective Folders
+    nationalIdImageUri = await getResult(nationalId,IDS_FOLDER);
+    documentImageUri = await getResult(document,DOCS_FOLDER);
     
-    //  try {
-    //    const JobSeeker = await employee.create({
-    //                                     fullName,
-    //                                     email,
-    //                                     phone,
-    //                                     password:hashed,
-    //                                     documentImageUri,
-    //                                     nationalIdImageUri
-    //                                     });
+     try {
+       const JobSeeker = await employee.create({
+                                        fullName,
+                                        email,
+                                        phone,
+                                        password:hashed,
+                                        documentImageUri,
+                                        nationalIdImageUri
+                                        });
 
-    //    //if they never specified a profession
-    //    if (other) { 
-    //      let newProfession = await profession.create({ name: other });
-    //      await employeeProfession.create({ professionId: newProfession.id, employeeId: JobSeeker.id });
-    //    } else {
-    //      await employeeProfession.create({ professionId, employeeId: JobSeeker.id });
-    //    }
-    //    return JobSeeker;                                     
-    // } catch (error) {
-    //   throw new Error(error);
-    // }
-
-    return await employee.findOne({ where: { id: 1 } });
+       //if they never specified a profession
+       if (other) { 
+         let newProfession = await profession.create({ name: other });
+         await employeeProfession.create({ professionId: newProfession.id, employeeId: JobSeeker.id });
+       } else {
+         await employeeProfession.create({ professionId, employeeId: JobSeeker.id });
+       }
+       return JobSeeker;                                     
+    } catch (error) {
+      throw new Error(error);
+    }
 
   }
-
 
   async signInJobSeeker(content) {
   
@@ -131,9 +128,7 @@ class JobSeekerSerivce{
     
     let jobSeekerId = await this.models.employee.update({ profileImagUri }, { where: { id} });
     return profileImagUri;
-
 }
-
 
 
 }
