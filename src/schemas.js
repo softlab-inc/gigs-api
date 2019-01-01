@@ -80,6 +80,7 @@ type Profession{
     document:Upload!
     nationalId:Upload!
     professionId:Int!
+    other:String
  }
 
  input CreateProfession{

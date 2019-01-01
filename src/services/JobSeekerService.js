@@ -28,44 +28,50 @@ class JobSeekerSerivce{
    }
 
   async createJobSeeker(content) {
-    let { fullName, email, phone, password, document, nationalId, professionIds } = content.input;
+    let { fullName, email, phone, password, document, nationalId, professionId,other } = content.input;
     console.log(content.input);
      email = email.trim().toLowerCase();
 
-    const { employee, employeeProfession } = this.models;
+    const { employee, employeeProfession,profession } = this.models;
   
-    //hashing the user password
-    const hashed = await bcrypt.hash(password, 10);
-    let  documentImageUri='';
-    let nationalIdImageUri = '';
+    // //hashing the user password
+    // const hashed = await bcrypt.hash(password, 10);
+    // let  documentImageUri='';
+    // let nationalIdImageUri = '';
       
-      let user = await this.models.employee.findOne({where:{email}});
+    //   let user = await this.models.employee.findOne({where:{email}});
 
-       if(user){
-          throw new AuthenticationError('Email was already used try again');
-       }
+    //    if(user){
+    //       throw new AuthenticationError('Email was already used try again');
+    //    }
     
-    //saving uploaded files to respective Folders
-    nationalIdImageUri = await getResult(nationalId,IDS_FOLDER);
-    documentImageUri = await getResult(document,DOCS_FOLDER);
+    // //saving uploaded files to respective Folders
+    // nationalIdImageUri = await getResult(nationalId,IDS_FOLDER);
+    // documentImageUri = await getResult(document,DOCS_FOLDER);
     
-     try {
-       const JobSeeker = await employee.create({
-                                        fullName,
-                                        email,
-                                        phone,
-                                        password:hashed,
-                                        documentImageUri,
-                                        nationalIdImageUri
-                                        });
+    //  try {
+    //    const JobSeeker = await employee.create({
+    //                                     fullName,
+    //                                     email,
+    //                                     phone,
+    //                                     password:hashed,
+    //                                     documentImageUri,
+    //                                     nationalIdImageUri
+    //                                     });
 
-       await employeeProfession.create({professionId,employeeId:JobSeeker.id})
-       
-       return JobSeeker;                                     
-    } catch (error) {
-      throw new Error(error);
-    }
+    //    //if they never specified a profession
+    //    if (other) { 
+    //      let newProfession = await profession.create({ name: other });
+    //      await employeeProfession.create({ professionId: newProfession.id, employeeId: JobSeeker.id });
+    //    } else {
+    //      await employeeProfession.create({ professionId, employeeId: JobSeeker.id });
+    //    }
+    //    return JobSeeker;                                     
+    // } catch (error) {
+    //   throw new Error(error);
+    // }
 
+    return await employee.findOne({ where: { id: 1 } });
 
   }
 
@@ -80,12 +86,12 @@ class JobSeekerSerivce{
           throw new AuthenticationError('Error signing in');
        }
     
-          //comparing the password with the hash stored in the database 
+       //comparing the password with the hash stored in the database 
        let valid = await bcrypt.compare(password,user.password);
     
-     if(!valid){
-         throw new AuthenticationError('Error signing in')
-       }
+        if(!valid){
+            throw new AuthenticationError('Error signing in')
+          }
 
     return user;
 
@@ -97,9 +103,9 @@ class JobSeekerSerivce{
        throw new AuthenticationError('You should be signed!');
     }
     
-      const id = user.id;
+        const id = user.id;
       
-          await this.models.employee.update(
+         await this.models.employee.update(
             { status },
             { where: { id } }
           );

@@ -36,6 +36,7 @@ const server = new ApolloServer({
       return {connection,pubsub};
     }else{
       const token = req.headers.authorization || '';
+
       const user = getUser(token);
       console.log('====================================');
       console.log({user});
