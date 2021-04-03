@@ -2,6 +2,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const models = require('./models');
+const path = require('path');
 
 
 const {ApolloServer} = require('apollo-server-express');
@@ -15,7 +16,7 @@ const server = new ApolloServer({
   resolvers,
   context:{models}
 });
-dd
+
 const app = express();
 
 server.applyMiddleware({app,path:'/gigs-app/api/v1'});
