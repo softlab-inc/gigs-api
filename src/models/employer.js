@@ -30,6 +30,10 @@ module.exports = function(sequelize, DataTypes) {
     password: {
       type: DataTypes.TEXT,
       allowNull: true
+    },
+    license: {
+      type: DataTypes.TEXT,
+      allowNull: true
     }
   }, {
     sequelize,
@@ -45,19 +49,19 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "email",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "email" },
-        ]
-      },
-      {
         name: "phone",
         unique: true,
         using: "BTREE",
         fields: [
           { name: "phone" },
+        ]
+      },
+      {
+        name: "email",
+        unique: true,
+        using: "BTREE",
+        fields: [
+          { name: "email" },
         ]
       },
     ]

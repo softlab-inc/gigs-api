@@ -21,12 +21,8 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DECIMAL(10,2),
       allowNull: true
     },
-    startAt: {
-      type: DataTypes.DATE,
-      allowNull: true
-    },
-    endAt: {
-      type: DataTypes.DATE,
+    duration: {
+      type: DataTypes.INTEGER,
       allowNull: true
     },
     status: {

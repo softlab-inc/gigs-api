@@ -34,23 +34,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    country: {
-      type: DataTypes.INTEGER,
-      allowNull: true
-    },
     profileImage: {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    institution: {
-      type: DataTypes.STRING(30),
-      allowNull: true
-    },
     nationalId: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
-    recommendationLetter: {
       type: DataTypes.TEXT,
       allowNull: true
     },
