@@ -1,13 +1,17 @@
 
-const fs = require('fs');
+const bcrypt = require('bcrypt'); //password increption module
+const jwt = require('jsonwebtoken'); //json web token module
+const fs = require('fs'); 
 const path = require('path');
-const {AuthenticationError} = require('apollo-server-express')
+const {AuthenticationError,ForbiddenError} = require('apollo-server-express')
+
 
 /**
- * 
+ * This function is used to save a file strem onto the the system
  * @param {*stream object} name of file to be renamed
  * @returns 
  */
+
 const storeFS =async ({ stream, filename }) => {
     const uploadDir = '../uploads/profile-photos/';
     filename = `${Date.now()}-${filename.toLowerCase() }`

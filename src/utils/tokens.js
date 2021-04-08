@@ -1,0 +1,1 @@
+module.exports =   JWT_SECRETE = '$2a$10$HF2rs.iYSvX1l5FPrX697O';
