@@ -12,7 +12,4 @@ module.exports = gql`
   test(value:String):String
 
 }
-
-
-
   `;
