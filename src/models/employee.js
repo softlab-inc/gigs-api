@@ -53,6 +53,10 @@ module.exports = function(sequelize, DataTypes) {
         model: 'profession',
         key: 'id'
       }
+    },
+    documents: {
+      type: DataTypes.TEXT,
+      allowNull: true
     }
   }, {
     sequelize,
