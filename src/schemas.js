@@ -35,7 +35,7 @@ module.exports = gql`
     bio:String
     email:String!
     phone:String!
-    profileImage:String
+    profileImage:Upload
     documents:Upload!
     nationalId:Upload!
     professionIds:[Int!]

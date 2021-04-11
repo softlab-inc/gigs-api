@@ -34,12 +34,12 @@ function initModels(sequelize) {
   district.hasMany(employeeLocation, { foreignKey: "districtId"});
   employeeLocation.belongsTo(employee, { foreignKey: "employeeId"});
   employee.hasMany(employeeLocation, { foreignKey: "employeeId"});
-  employeeProfession.belongsTo(profession, { foreignKey: "professionid"});
-  employee.belongsToMany(profession, { through: employeeProfession, foreignKey: "employeeid", otherKey: "professionid" });
-  profession.hasMany(employeeProfession, { foreignKey: "professionid"});
-  employeeProfession.belongsTo(employee, { foreignKey: "employeeid"});
-  profession.belongsToMany(employee, { through: employeeProfession, foreignKey: "professionid", otherKey: "employeeid" });
-  employee.hasMany(employeeProfession, { foreignKey: "employeeid"});
+  employeeProfession.belongsTo(profession, { foreignKey: "professionId"});
+  employee.belongsToMany(profession, { through: employeeProfession, foreignKey: "employeeId", otherKey: "professionId" });
+  profession.hasMany(employeeProfession, { foreignKey: "professionId"});
+  employeeProfession.belongsTo(employee, { foreignKey: "employeeId"});
+  profession.belongsToMany(employee, { through: employeeProfession, foreignKey: "professionId", otherKey: "employeeId" });
+  employee.hasMany(employeeProfession, { foreignKey: "employeeId"});
   employerLocation.belongsTo(employer, { foreignKey: "employerId"});
   employer.hasMany(employerLocation, { foreignKey: "employerId"});
   employerLocation.belongsTo(district, { foreignKey: "districtId"});

@@ -3,7 +3,7 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('employeeProfession', {
-    professionid: {
+    professionId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
@@ -12,7 +12,7 @@ module.exports = function(sequelize, DataTypes) {
         key: 'id'
       }
     },
-    employeeid: {
+    employeeId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
@@ -31,22 +31,22 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "professionid" },
-          { name: "employeeid" },
+          { name: "professionId" },
+          { name: "employeeId" },
         ]
       },
       {
-        name: "FKemployeePr918710",
+        name: "FKemployeePr917718",
         using: "BTREE",
         fields: [
-          { name: "professionid" },
+          { name: "professionId" },
         ]
       },
       {
-        name: "FKemployeePr608251",
+        name: "FKemployeePr607259",
         using: "BTREE",
         fields: [
-          { name: "employeeid" },
+          { name: "employeeId" },
         ]
       },
     ]
