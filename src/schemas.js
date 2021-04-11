@@ -14,14 +14,19 @@ module.exports = gql`
     documents:String
     nationalId:String
     status:Int
+    hasProfession:[Profession]
     createdAt:DateTime
     updatedAt:DateTime
+  }
+
+  type Profession{
+    id:Int!
+    name:String!
   }
 
   #Queries
   type Query{
    test:String
-
  }
 
  #InputFields
@@ -33,6 +38,8 @@ module.exports = gql`
     profileImage:String
     documents:Upload!
     nationalId:Upload!
+    professionIds:[Int!]
+
  }
 
  #Mutations 

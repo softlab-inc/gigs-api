@@ -13,10 +13,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(60),
       allowNull: true
     },
-    companyName: {
-      type: DataTypes.STRING(30),
-      allowNull: true
-    },
     bio: {
       type: DataTypes.TEXT,
       allowNull: true
@@ -38,21 +34,18 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: true
     },
+    documents: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
     nationalId: {
       type: DataTypes.TEXT,
       allowNull: true
     },
     status: {
       type: DataTypes.INTEGER,
-      allowNull: true
-    },
-    professionId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'profession',
-        key: 'id'
-      }
+      allowNull: true,
+      defaultValue: 0
     }
   }, {
     sequelize,
@@ -73,13 +66,6 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "email" },
-        ]
-      },
-      {
-        name: "FKemployee288982",
-        using: "BTREE",
-        fields: [
-          { name: "professionId" },
         ]
       },
     ]

@@ -29,8 +29,25 @@ const storeFS =async ({ stream, filename }) => {
     );
 }
 
+const getResult =async (uploadFile) => {
+   const {filename,createReadStream } =  uploadFile;
+    const stream = createReadStream();
+    const result = await storeFS({ stream, filename });
+    return result.filename;
+}
+
+
 module.exports = {
   test:(parent,{name},context)=>  `my name is is ${name} 💡`,
+  createJobSeeker:async (parent,args,{fullName,bio,email,phone,profileImage,documents,nationalId,professionIds}) => {
+  
+     const profileImageUri = '',documentImageUri=''
+     profileImageUri = await getResult(profileImage);
+     documentImageUri = await getResult(documents);
+     
+     
+
+  }
 }
 
 
