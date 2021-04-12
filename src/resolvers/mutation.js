@@ -103,6 +103,7 @@ module.exports = {
   },
   createProfession:async (parent,{input},{models}) => {
      
+    //Mapping the list of names to {name:value}
     const  nameArr =   input.names.map(name => ({name}));
 
     try {
@@ -112,6 +113,27 @@ module.exports = {
       throw new Error(`Duplicated professoin ${error}`);
     }
   
+  },
+  signInJobSeeker:async (parent,{input},{models}) => {
+    
+     let  {email,password} = input;
+
+       email = email.trim().toLowerCase();
+
+      let user = await models.employee.findOne({where:{email}});
+
+       if(!user){
+          throw new AuthenticationError('Error signing in');
+       }
+
+        //comparing the password with the hash stored in the database 
+       let valid = await bcrypt.compare(password,user.password);
+
+       if(!valid){
+         throw AuthenticationError('Error signing in')
+       }
+      //signing the user and returning the json web token
+      return jwt.sign({id:user.id},JWT_SECRETE);
   }
 
 
