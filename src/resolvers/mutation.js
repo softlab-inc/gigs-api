@@ -19,8 +19,8 @@ const indexThree = 2
  */
 const storeFS =async ({ stream, filename },dirIndex) => {
     let dirs  = ['../uploads/profile-images/','../uploads/id-images/','../uploads/document-images'];
-    const uploadDir = dirs[dirIndex] ;
-    filename = `${Date.now()}-${filename.toLowerCase() }`
+    const uploadDir = dirs[dirIndex];
+    filename = `${Date.now()}-${filename.trim().toLowerCase() }`
     const fileName = path.join(__dirname,uploadDir,filename);
 
     return await new Promise((resolve, reject) =>
@@ -35,63 +35,73 @@ const storeFS =async ({ stream, filename },dirIndex) => {
     );
 }
 
+/**
+ * 
+ * @param {*} uploadFile upload file object containing filename  mimetype encoding and createReadStream() function
+ * @param {*} dirIndex  index to the folder locatoin where the image should be stored
+ * @returns 
+ */
 const getResult =async (uploadFile,dirIndex) => {
-   const {filename,createReadStream } =  uploadFile;
+  console.log({uploadFile,dirIndex});
+   const {filename,createReadStream } =await  uploadFile;
     const stream = createReadStream();
     const result = await storeFS({ stream, filename },dirIndex);
     return result.filename;
 }
 
-
-
 module.exports = {
+
   test:(parent,{name},context)=>  `my name is is ${name} 💡`,
   createJobSeeker:async (parent,{input},{models}) => {
      
-    const {fullName,bio,email,phone,document,nationalId,professionIds} = input;
+    let {fullName,email,phone,password,document,nationalId,professionIds} = input;
 
     console.log(input);
-
-    // email = email.trip().toLowerCase();
-
-    // //destructuring models to be used  i this file
-    //  const {employee,employeeProfession} = models;
     
-    //  //hashing the user password
-    //  const hashed = await bcrypt.hash(password, 10);
-    //  const documentImageUri='',nationalIdImageUri='';
+    email = email.trim().toLowerCase();
+
+    //destructuring models to be used  i this file
+    const {employee,employeeProfession} = models;
+
+     //hashing the user password
+    const hashed = await bcrypt.hash(password, 10);
+    let  documentImageUri='';
+    let nationalIdImageUri='';
     
-    //  //saving uploaded files to respective Folders
-    //  nationalIdUri = await getResult(nationalId,indexTwo);
-    //  documentImageUri = await getResult(documents,indexThree);
-     
-    // try {
-    //    const JobSeeker = await employee.create({fullName,
-    //                                     email,
-    //                                     phone,
-    //                                     password:hashed,
-    //                                     document:documentImageUri,
-    //                                     nationalId:nationalIdUri
-    //                                     });
-        
-    //      const idsIterator = professionIds[Symbol.iterator]();
+     //saving uploaded files to respective Folders
+     nationalIdImageUri = await getResult(nationalId,indexTwo);
+     documentImageUri = await getResult(document,indexThree);
+
+    try {
+       const JobSeeker = await employee.create({
+                                        fullName,
+                                        email,
+                                        phone,
+                                        password:hashed,
+                                        documentImageUri,
+                                        nationalIdImageUri
+                                        });
+
+         const idsIterator = professionIds[Symbol.iterator]();
          
-    //      for (const professionId of idsIterator) {
-    //       await employeeProfession.create({professionId,employeeId:JobSeeker.id})
-    //      }
+         for (const professionId of idsIterator) {
+          await employeeProfession.create({professionId,employeeId:JobSeeker.id})
+         }
 
-    //      return jwt.sign({id: JobSeeker.id},JWT_SECRETE);
+         return jwt.sign({id: JobSeeker.id},JWT_SECRETE);
+   
 
-    return 'Testing create JobSeeker'
                                                       
-    // } catch (error) {
-    //   console.error("Error occurred during the account creation ", error);
-    //   console.log(error);
-    //   throw new Error('Error occurred at account creation');
-    // }
+    } catch (error) {
+      console.error("Error occurred during the account creation ", error);
+      console.log(error);
+      throw new Error('Error occurred at account creation');
+    }
+
+ 
 
   },
-createProfession:async (parent,{input},{models}) => {
+  createProfession:async (parent,{input},{models}) => {
      
     const  nameArr =   input.names.map(name => ({name}));
 
@@ -99,12 +109,12 @@ createProfession:async (parent,{input},{models}) => {
       await models.profession.bulkCreate(nameArr);
        return 'Professions created successfully'
     } catch (error) {
-      throw new Error(`Duplicated professoin ${error}`)
+      throw new Error(`Duplicated professoin ${error}`);
     }
-       
+  
   }
 
 
-
 }
+
 

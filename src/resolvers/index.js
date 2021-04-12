@@ -12,3 +12,38 @@ module.exports={
 }
 
 
+
+
+// [
+// "Accounting", 
+// "Administration", 
+// "Acting ",
+// "Aviation", 
+// "Aeronautics",
+// "Back-End Developer",
+// "Branding",
+// "Carpenter",
+// "Chef",
+// "Copyright ",
+// "Customer Service ",
+// "Decorator ",
+// "Executive Assistant", 
+// "Event organizer",
+// "Financial Analyst", 
+// "Front-End Developer", 
+// "Full-Stack Engineer",
+// "Graphic Designer",
+// "Marketing ",
+// "Musician ",
+// "Office Management",
+// "Product Manager",
+// "Project Manager",
+// "Proposal Writing ",
+// "Photography",
+// "Public speaking", 
+// "Salesperson",
+// "Teaching ",
+// "Training", 
+// "Web Developer",
+// "Other "
+// ]
