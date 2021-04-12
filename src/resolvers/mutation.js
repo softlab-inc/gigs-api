@@ -43,6 +43,7 @@ const getResult =async (uploadFile,dirIndex) => {
 }
 
 
+
 module.exports = {
   test:(parent,{name},context)=>  `my name is is ${name} 💡`,
   createJobSeeker:async (parent,{fullName,bio,email,phone,profileImage,documents,nationalId,professionIds},{models}) => {
@@ -72,12 +73,10 @@ module.exports = {
          const idsIterator = professionIds[Symbol.iterator]();
          
          for (const professionId of idsIterator) {
-          await employeeProfession.create({professionId,employeeId:JobSeeker.id},JWT_SECRETE)
+          await employeeProfession.create({professionId,employeeId:JobSeeker.id})
          }
 
-        
-         
-         return jwt.sign({id: JobSeeker.id},);
+         return jwt.sign({id: JobSeeker.id},JWT_SECRETE);
                                                       
     } catch (error) {
       console.error("Error occurred during the account creation ", error);
@@ -85,12 +84,21 @@ module.exports = {
       throw new Error('Error occurred at account creation');
     }
 
-  }
-}
-
-
-
+  },
   
+  createProfession:async (parent,{input},{models}) => {
+     
+    const  nameArr =   input.names.map(name => ({name}));
+
+    try {
+      await models.profession.bulkCreate(nameArr);
+       return 'Professions created successfully'
+    } catch (error) {
+      throw new Errow(`Duplicated professoin ${error}`)
+    }
+       
+  }
 
 
+}
 

@@ -38,14 +38,21 @@ module.exports = gql`
     profileImage:Upload
     documents:Upload!
     nationalId:Upload!
-    professionIds:[Int!]
+    professionIds:[Int!]!
+ }
 
+ input CreateProfession{
+   names:[String!]!
  }
 
  #Mutations 
   type Mutation{
   test(value:String):String
-  createJobSeeker(input:CreateJobSeekerInput):JobSeeker
-
+  createJobSeeker(input:CreateJobSeekerInput):String!
+  createProfession(input:CreateProfession):String!
 }
   `;
+
+
+
+
