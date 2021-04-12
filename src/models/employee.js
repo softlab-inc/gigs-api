@@ -30,15 +30,15 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    profileImage: {
+    profileImagUri: {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    documents: {
+    documentImageUri: {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    nationalId: {
+    nationalIdImageUri: {
       type: DataTypes.TEXT,
       allowNull: true
     },

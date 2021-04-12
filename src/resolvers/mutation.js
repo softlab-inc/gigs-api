@@ -46,47 +46,52 @@ const getResult =async (uploadFile,dirIndex) => {
 
 module.exports = {
   test:(parent,{name},context)=>  `my name is is ${name} 💡`,
-  createJobSeeker:async (parent,{fullName,bio,email,phone,profileImage,documents,nationalId,professionIds},{models}) => {
-    
-    email = email.trip().toLowerCase();
-
-    //destructuring models to be used  i this file
-     const {employee,employeeProfession} = models;
-    
-     //hashing the user password
-     const hashed = await bcrypt.hash(password, 10);
-     const documentImageUri='',nationalIdUri='';
-    
-     //saving uploaded files to respective Folders
-     nationalIdUri = await getResult(nationalId,indexTwo);
-     documentImageUri = await getResult(documents,indexThree);
+  createJobSeeker:async (parent,{input},{models}) => {
      
-    try {
-       const JobSeeker = await employee.create({fullName,
-                                        email,
-                                        phone,
-                                        password:hashed,
-                                        document:documentImageUri,
-                                        nationalId:nationalIdUri
-                                        });
-        
-         const idsIterator = professionIds[Symbol.iterator]();
-         
-         for (const professionId of idsIterator) {
-          await employeeProfession.create({professionId,employeeId:JobSeeker.id})
-         }
+    const {fullName,bio,email,phone,document,nationalId,professionIds} = input;
 
-         return jwt.sign({id: JobSeeker.id},JWT_SECRETE);
+    console.log(input);
+
+    // email = email.trip().toLowerCase();
+
+    // //destructuring models to be used  i this file
+    //  const {employee,employeeProfession} = models;
+    
+    //  //hashing the user password
+    //  const hashed = await bcrypt.hash(password, 10);
+    //  const documentImageUri='',nationalIdImageUri='';
+    
+    //  //saving uploaded files to respective Folders
+    //  nationalIdUri = await getResult(nationalId,indexTwo);
+    //  documentImageUri = await getResult(documents,indexThree);
+     
+    // try {
+    //    const JobSeeker = await employee.create({fullName,
+    //                                     email,
+    //                                     phone,
+    //                                     password:hashed,
+    //                                     document:documentImageUri,
+    //                                     nationalId:nationalIdUri
+    //                                     });
+        
+    //      const idsIterator = professionIds[Symbol.iterator]();
+         
+    //      for (const professionId of idsIterator) {
+    //       await employeeProfession.create({professionId,employeeId:JobSeeker.id})
+    //      }
+
+    //      return jwt.sign({id: JobSeeker.id},JWT_SECRETE);
+
+    return 'Testing create JobSeeker'
                                                       
-    } catch (error) {
-      console.error("Error occurred during the account creation ", error);
-      console.log(error);
-      throw new Error('Error occurred at account creation');
-    }
+    // } catch (error) {
+    //   console.error("Error occurred during the account creation ", error);
+    //   console.log(error);
+    //   throw new Error('Error occurred at account creation');
+    // }
 
   },
-  
-  createProfession:async (parent,{input},{models}) => {
+createProfession:async (parent,{input},{models}) => {
      
     const  nameArr =   input.names.map(name => ({name}));
 
@@ -94,10 +99,11 @@ module.exports = {
       await models.profession.bulkCreate(nameArr);
        return 'Professions created successfully'
     } catch (error) {
-      throw new Errow(`Duplicated professoin ${error}`)
+      throw new Error(`Duplicated professoin ${error}`)
     }
        
   }
+
 
 
 }
