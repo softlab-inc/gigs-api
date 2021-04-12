@@ -32,7 +32,7 @@ module.exports = gql`
  #InputFields
  input CreateJobSeekerInput{
    fullName:String!
-    bio:String
+    password:String!
     email:String!
     phone:String!
     document:Upload!
@@ -48,7 +48,7 @@ module.exports = gql`
   type Mutation{
   test(value:String):String
   createJobSeeker(input:CreateJobSeekerInput):String!
-  createProfession(input:CreateProfession):String!
+  createProfession(input:CreateProfession):String
 }
   `;
 
