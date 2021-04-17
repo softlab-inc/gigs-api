@@ -10,14 +10,18 @@ module.exports = gql`
     bio:String
     email:String
     phone:String
-    profileImage:String
-    documents:String
-    nationalId:String
+    profileImagUri:String
+    documentImageUri:String
+    nationalIdImageUri:String
     status:Int
     hasProfession:[Profession]
     createdAt:DateTime
     updatedAt:DateTime
   }
+
+  fragment infor on JobSeeker {
+  email
+}
 
   type Profession{
     id:Int!
@@ -27,6 +31,9 @@ module.exports = gql`
   #Queries
   type Query{
    test:String
+   jobSeeker:JobSeeker
+   jobSeekers:[JobSeeker]
+
  }
 
  #InputFields

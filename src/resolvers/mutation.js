@@ -130,11 +130,12 @@ module.exports = {
        let valid = await bcrypt.compare(password,user.password);
 
        if(!valid){
-         throw AuthenticationError('Error signing in')
+         throw new AuthenticationError('Error signing in')
        }
       //signing the user and returning the json web token
       return jwt.sign({id:user.id},JWT_SECRETE);
-  }
+  },
+ 
 
 
 }
