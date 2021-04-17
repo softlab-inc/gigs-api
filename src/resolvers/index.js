@@ -1,6 +1,7 @@
 const Mutation = require('./mutation');
 const Query = require('./query');
-const {GraphQLDateTime}  = require('graphql-iso-date')
+const { GraphQLDateTime } = require('graphql-iso-date');
+const JobSeeker = require('./jobSeeker');
 
 /**
  * This module is responsible for exposion the Resolvers as Javascript objects
@@ -8,6 +9,7 @@ const {GraphQLDateTime}  = require('graphql-iso-date')
 module.exports={
   Mutation,
   Query,
+  JobSeeker,
   DateTime:GraphQLDateTime,
 }
 
