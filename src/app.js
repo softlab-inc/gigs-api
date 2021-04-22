@@ -21,6 +21,9 @@ const resolvers = require('./resolvers');
  * Expossed through the context from on point of truth 
  */
 const server = new ApolloServer({
+  subscriptions: {
+    path: '/subscriptions'
+  },
   typeDefs,
   resolvers,
   context:({req}) => {
