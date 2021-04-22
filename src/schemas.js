@@ -62,13 +62,13 @@ type Profession{
     name:String!
   }
 
+
   #Queries
   type Query{
-   test:String
-   jobSeeker:JobSeeker
-   jobSeekers:[JobSeeker]
-   professions:[Profession]
-
+  test:String
+  jobSeeker:JobSeeker
+  jobSeekers:[JobSeeker]
+  professions:[Profession]
  }
 
  #InputFields
@@ -97,7 +97,9 @@ type Profession{
   createJobSeeker(input:CreateJobSeekerInput):String!
   createProfession(input:CreateProfession):String
   signInJobSeeker(input:SignInJobSeeker):String!
-}
+ }
+
+
   `;
 
 
