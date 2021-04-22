@@ -6,7 +6,7 @@ const path = require('path');
 const cors = require('cors');
 const helmet = require('helmet');
 const JWT_SECRETE = require('./utils/tokens');
-const {ApolloServer} = require('apollo-server-express');
+const { ApolloServer } = require('apollo-server-express');
 const jwt = require('jsonwebtoken');
 
 
@@ -21,28 +21,31 @@ const resolvers = require('./resolvers');
  * Expossed through the context from on point of truth 
  */
 const server = new ApolloServer({
-  subscriptions: {
-    path: '/subscriptions'
-  },
   typeDefs,
   resolvers,
   context:({req}) => {
-      const token = req.headers.authorization;
+    const token = req.headers.authorization;
     const user = getUser(token);
-
       console.log('====================================');
       console.log(`Testing user existense => ${user}`);
       console.log('====================================');
-
     return {models,user}
-  }
+  },
+  subscriptions: {
+    path: '/subscriptions',
+    onConnect: (connectionParams, webSocket, context) => {
+      console.log('Client connected');
+    },
+    onDisconnect: (webSocket, context) => {
+      console.log('Client disconnected')
+    },
+  },
 });
-
 
 const app = express();
 
 //Applying Apollo  Graph GL middleware and setting the path
-server.applyMiddleware({app,path:'/gigs-app/api/v1'});
+server.applyMiddleware({ app, path: '/gigs-app/api/v1' });
 
 
 /**
