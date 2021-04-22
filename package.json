@@ -20,6 +20,7 @@
     "graphql": "^15.4.0",
     "graphql-depth-limit": "1.1.0",
     "graphql-iso-date": "3.6.1",
+    "graphql-subscriptions": "^1.2.1",
     "graphql-validation-complexity": "0.2.4",
     "helmet": "3.21.2",
     "jsonwebtoken": "8.5.1",

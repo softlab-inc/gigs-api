@@ -8,7 +8,7 @@ const pubsub = new PubSub();
 
 module.exports = {
   test: () => {
-    pubsub.publish(['TEST'],'test event triggered')
+   
     return 'Test is running';
   },
    jobSeeker: async (parent, args, { models, user }) => {

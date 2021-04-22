@@ -2,13 +2,15 @@ const bcrypt = require('bcrypt'); //password increption module
 const jwt = require('jsonwebtoken'); //json web token module
 const fs = require('fs'); 
 const path = require('path');
-const {AuthenticationError,ForbiddenError} = require('apollo-server-express');
+const {AuthenticationError,ForbiddenError,PubSub} = require('apollo-server-express');
 const JWT_SECRETE = require('../utils/tokens');
 
 
 const indexOne = 0
 const indexTwo = 1
 const indexThree = 2
+
+const pubsub = new PubSub();
 
 /**
  * This function is used to save a file strem onto the the system
@@ -51,7 +53,10 @@ const getResult =async (uploadFile,dirIndex) => {
 
 module.exports = {
 
-  test:(parent,{name},context)=>  `my name is is ${name} 💡`,
+  test: (parent, { name }, context) => {
+    pubsub.publish('TEST', { hasTested: `my name is ${name}` });
+    return 'Some has checked in ';
+  },
   createJobSeeker:async (parent,{input},{models}) => {
      
     let {fullName,email,phone,password,document,nationalId,professionIds} = input;
