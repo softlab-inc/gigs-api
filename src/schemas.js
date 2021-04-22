@@ -23,8 +23,8 @@ module.exports = gql`
     id:Int!
     fullName:String
     email:String
-    phone:string
-    password:string
+    phone:String
+    password:String
     updatedAt:String
     createdAt:String
     license:String
@@ -65,9 +65,10 @@ type Profession{
 
   #Queries
   type Query{
-   test:String
-   jobSeeker:JobSeeker
-   jobSeekers:[JobSeeker]
+  test:String
+  jobSeeker:JobSeeker
+  jobSeekers:[JobSeeker]
+  professions:[Profession]
  }
 
  #InputFields
