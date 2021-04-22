@@ -97,7 +97,17 @@ type Profession{
   createJobSeeker(input:CreateJobSeekerInput):String!
   createProfession(input:CreateProfession):String
   signInJobSeeker(input:SignInJobSeeker):String!
- }
+
+}
+
+
+#Subscriptions
+type Subscription{
+  hasTested:String
+}
+
+
+
 
 
   `;

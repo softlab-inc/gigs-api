@@ -1,10 +1,16 @@
 const {
     AuthenticationError,
-    ForbiddenError
+    ForbiddenError,
+    PubSub
 } = require('apollo-server-express');
 
+const pubsub = new PubSub();
+
 module.exports = {
-  test: () => 'testing if this is working just fine',
+  test: () => {
+   
+    return 'Test is running';
+  },
    jobSeeker: async (parent, args, { models, user }) => {
 
       if (!user) {
