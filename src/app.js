@@ -11,7 +11,7 @@ const jwt = require('jsonwebtoken');
 
 
 const pubsub = new PubSub();
-console.log(pubsub)
+
 
 
 //Constructing a schema, using the GraphGL schema query language
@@ -31,17 +31,16 @@ const server = new ApolloServer({
   context: ({ req,connection }) => {
     
     if (connection) {
-      return connection.context;
+      const token = connection.context.authorization || "";
+      return  { token };
     }else{
       const token = req.headers.authorization;
       const user = getUser(token);
       console.log('====================================');
       console.log(`Testing user existense => ${user}`);
       console.log('====================================');
-    
     return {models,user}
     }
-    
   },
   subscriptions: {
     path: '/subscriptions',
@@ -55,6 +54,8 @@ const server = new ApolloServer({
 });
 
 const app = express();
+
+console.log(pubsub)
 
 //Applying Apollo  Graph GL middleware and setting the path
 server.applyMiddleware({ app, path: '/gigs-app/api/v1' });
