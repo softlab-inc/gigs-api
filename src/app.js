@@ -10,7 +10,6 @@ const { ApolloServer,PubSub} = require('apollo-server-express');
 const jwt = require('jsonwebtoken');
 
 
-const pubsub = new PubSub();
 
 
 
@@ -19,7 +18,7 @@ const typeDefs = require('./schemas');
 //Providing a resolver to the schema fields
 const resolvers = require('./resolvers');
 
-console.log(typeDefs); 
+
 
 /**
  * Integrating the APOLLO_SERVER to server our Graph GL API
@@ -31,16 +30,18 @@ const server = new ApolloServer({
   context: ({ req,connection }) => {
     
     if (connection) {
-      const token = connection.context.authorization || "";
-      return  { token };
+      console.log(connection.context.authorization)
+      return connection.context;
     }else{
       const token = req.headers.authorization;
       const user = getUser(token);
       console.log('====================================');
       console.log(`Testing user existense => ${user}`);
       console.log('====================================');
+    
     return {models,user}
     }
+    
   },
   subscriptions: {
     path: '/subscriptions',
@@ -48,14 +49,13 @@ const server = new ApolloServer({
       console.log('Client connected');
     },
     onDisconnect: (webSocket, context) => {
+      console.log(context)
       console.log('Client disconnected')
     },
   },
 });
 
 const app = express();
-
-console.log(pubsub)
 
 //Applying Apollo  Graph GL middleware and setting the path
 server.applyMiddleware({ app, path: '/gigs-app/api/v1' });
