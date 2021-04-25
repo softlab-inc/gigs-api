@@ -97,13 +97,14 @@ type Profession{
   createJobSeeker(input:CreateJobSeekerInput):String!
   createProfession(input:CreateProfession):String
   signInJobSeeker(input:SignInJobSeeker):String!
-
+  userUpdateStatus(status:Int!):JobSeeker
 }
 
 #Subscriptions
 type Subscription{
   hasTested:String
   onStatusChange(token:String):String
+
 }
 
 

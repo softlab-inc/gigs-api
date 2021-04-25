@@ -11,9 +11,13 @@ module.exports = {
   },
   onStatusChange: {
     subscribe: (parent,args,context) => {
-      console.log("User isOneline",args);
+     
+      const { token } = args;
+      
+      console.log(token)
+
       return pubsub.asyncIterator(['onStatusChange']);
     }
-  }
+  },
 
   }

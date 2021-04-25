@@ -30,7 +30,7 @@ const server = new ApolloServer({
   context: ({ req,connection }) => {
     
     if (connection) {
-      console.log(connection.context.authorization)
+      console.log(connection.context)
       return connection.context;
     }else{
       const token = req.headers.authorization;
