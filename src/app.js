@@ -6,11 +6,9 @@ const path = require('path');
 const cors = require('cors');
 const helmet = require('helmet');
 const JWT_SECRETE = require('./utils/tokens');
-const { ApolloServer,PubSub} = require('apollo-server-express');
+const { ApolloServer} = require('apollo-server-express');
 const jwt = require('jsonwebtoken');
-
-
-
+const {PubSub }= require('graphql-subscriptions')
 
 
 //Constructing a schema, using the GraphGL schema query language
@@ -18,7 +16,8 @@ const typeDefs = require('./schemas');
 //Providing a resolver to the schema fields
 const resolvers = require('./resolvers');
 
-
+//const pubsub = new PubSub();
+const pubsub = new PubSub();
 
 /**
  * Integrating the APOLLO_SERVER to server our Graph GL API
@@ -31,7 +30,7 @@ const server = new ApolloServer({
     
     if (connection) {
       console.log(connection.context)
-      return connection.context;
+      return {connection,pubsub};
     }else{
       const token = req.headers.authorization;
       const user = getUser(token);
@@ -39,7 +38,7 @@ const server = new ApolloServer({
       console.log(`Testing user existense => ${user}`);
       console.log('====================================');
     
-    return {models,user}
+    return {models,user,pubsub}
     }
     
   },
@@ -49,7 +48,6 @@ const server = new ApolloServer({
       console.log('Client connected');
     },
     onDisconnect: (webSocket, context) => {
-      console.log(context)
       console.log('Client disconnected')
     },
   },

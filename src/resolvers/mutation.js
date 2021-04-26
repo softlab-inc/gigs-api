@@ -9,8 +9,6 @@ const indexOne = 0
 const indexTwo = 1
 const indexThree = 2
 
-const pubsub = new PubSub();
-
 /**
  * This function is used to save a file strem onto the the system
  * @param {*stream object} stream of file to be renamed
@@ -51,16 +49,13 @@ const getResult =async (uploadFile,dirIndex) => {
 }
 
 module.exports = {
-
-  test: (parent, { name }, context) => {
+  test: (parent, { name }, {pubsub}) => {
     pubsub.publish('TEST', { hasTested: `my name is ${name}` });
     return 'Some has checked in ';
   },
-  createJobSeeker:async (parent,{input},{models}) => {
+  createJobSeeker:async (parent,{input},{models,pubsub}) => {
      
     let {fullName,email,phone,password,document,nationalId,professionIds} = input;
-
-    console.log(input);
     
     email = email.trim().toLowerCase();
 
@@ -136,26 +131,24 @@ module.exports = {
       //signing the user and returning the json web token
       return jwt.sign({id:user.id},JWT_SECRETE);
   },
-  userUpdateStatus: async (parent, { status }, { models, user }) => {
+  userUpdateStatus: async (parent, { status }, { models, user,pubsub }) => {
     
        if (!user) {
             throw new AuthenticationError('You should be signed!');
        }
     const id = user.id;
    
-    const data =  await models.employee.update(
+    await models.employee.update(
       { status },
       { where: { id } }
     );
-    
-    console.log({ data });
 
-    const allUsers = await models.employee.findAll({where:{status:1}});
-     pubsub.publish('onStatusChange',{ onStatusChange: allUsers});
-    const newUser = await models.employee.findOne({id})
+    const allUsers = await models.employee.findAll();
+    pubsub.publish('onStatusChange', { onStatusChange: allUsers });
+    const newUser = await models.employee.findOne({where:{id}})
 
     return newUser;
-  
+
  }
 
 
