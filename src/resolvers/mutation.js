@@ -136,17 +136,22 @@ module.exports = {
       //signing the user and returning the json web token
       return jwt.sign({id:user.id},JWT_SECRETE);
   },
-  userUpdateStatus: async (parent,{status}, {models,user}) => {
-   
+  userUpdateStatus: async (parent, { status }, { models, user }) => {
+    
        if (!user) {
             throw new AuthenticationError('You should be signed!');
        }
     const id = user.id;
-    pubsub.publish('onStatusChange');
+   
     const data =  await models.employee.update(
       { status },
       { where: { id } }
-   );
+    );
+    
+    console.log({ data });
+
+    const allUsers = await models.employee.findAll({where:{status:1}});
+     pubsub.publish('onStatusChange',{ onStatusChange: allUsers});
     const newUser = await models.employee.findOne({id})
 
     return newUser;

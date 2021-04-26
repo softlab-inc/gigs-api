@@ -14,9 +14,7 @@ module.exports = {
   onStatusChange: {
     subscribe: (parent,args,context) => {
      
-      const { token } = args;
-      
-      console.log(token)
+      console.log("user subscribed to status change")
 
       return pubsub.asyncIterator(['onStatusChange']);
     }
