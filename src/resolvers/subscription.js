@@ -4,7 +4,10 @@ const pubsub = new PubSub();
 
 module.exports = {
   hasTested: {
-    subscribe: () => pubsub.asyncIterator(['TEST'])
+    subscribe: () => {
+       console.log("Some is testing the server ")
+      return pubsub.asyncIterator(['TEST']);
+    }
   },
 
   }

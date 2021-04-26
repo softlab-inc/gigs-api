@@ -100,7 +100,6 @@ type Profession{
 
 }
 
-
 #Subscriptions
 type Subscription{
   hasTested:String
