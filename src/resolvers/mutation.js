@@ -141,10 +141,15 @@ module.exports = {
        if (!user) {
             throw new AuthenticationError('You should be signed!');
        }
-    
     const id = user.id;
     pubsub.publish('onStatusChange');
-     await models.employee.update({where:{id,status}})
+    const data =  await models.employee.update(
+      { status },
+      { where: { id } }
+   );
+    const newUser = await models.employee.findOne({id})
+
+    return newUser;
   
  }
 

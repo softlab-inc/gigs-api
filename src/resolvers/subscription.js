@@ -1,4 +1,6 @@
 const { PubSub } = require('apollo-server-express');
+const jwt = require('jsonwebtoken');
+const JWT_SECRETE = require('../utils/tokens');
 
 const pubsub = new PubSub();
 
