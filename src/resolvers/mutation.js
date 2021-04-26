@@ -5,7 +5,6 @@ const path = require('path');
 const {AuthenticationError,ForbiddenError,PubSub} = require('apollo-server-express');
 const JWT_SECRETE = require('../utils/tokens');
 
-
 const indexOne = 0
 const indexTwo = 1
 const indexThree = 2
@@ -92,10 +91,7 @@ module.exports = {
          for (const professionId of idsIterator) {
           await employeeProfession.create({professionId,employeeId:JobSeeker.id})
          }
-
          return jwt.sign({id: JobSeeker.id},JWT_SECRETE);
-   
-
                                                       
     } catch (error) {
       console.error("Error occurred during the account creation ", error);
@@ -140,7 +136,28 @@ module.exports = {
       //signing the user and returning the json web token
       return jwt.sign({id:user.id},JWT_SECRETE);
   },
- 
+  userUpdateStatus: async (parent, { status }, { models, user }) => {
+    
+       if (!user) {
+            throw new AuthenticationError('You should be signed!');
+       }
+    const id = user.id;
+   
+    const data =  await models.employee.update(
+      { status },
+      { where: { id } }
+    );
+    
+    console.log({ data });
+
+    const allUsers = await models.employee.findAll({where:{status:1}});
+     pubsub.publish('onStatusChange',{ onStatusChange: allUsers});
+    const newUser = await models.employee.findOne({id})
+
+    return newUser;
+  
+ }
+
 
 
 }
