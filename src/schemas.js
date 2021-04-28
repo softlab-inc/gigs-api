@@ -103,7 +103,7 @@ type Profession{
 #Subscriptions
 type Subscription{
   hasTested:String
-  onStatusChange:[JobSeeker!]
+  onStatusChange:JobSeeker!
 }
 
 
