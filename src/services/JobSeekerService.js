@@ -1,6 +1,8 @@
 const bcrypt = require('bcrypt'); //password encryption module
 const storeFS = require('../utils/storeFS');
 
+const {AuthenticationError,ForbiddenError} = require('apollo-server-express');
+
 const PROFILE_FOLDER = 0
 const IDS_FOLDER = 1
 const DOCS_FOLDER = 2
@@ -67,6 +69,54 @@ class JobSeekerSerivce{
     }
 
 
+  }
+
+
+  async signInJobSeeker(content) {
+  
+    let { email, password } = content.input;
+      email = email.trim().toLowerCase();
+     let user = await this.models.employee.findOne({where:{email}});
+
+       if(!user){
+          throw new AuthenticationError('Error signing in');
+       }
+    
+          //comparing the password with the hash stored in the database 
+       let valid = await bcrypt.compare(password,user.password);
+    
+  
+     if(!valid){
+         throw new AuthenticationError('Error signing in')
+       }
+
+
+    return user;
+
+  }
+  
+
+
+
+  async userUpdateStatus({ status, user, pubsub }) {
+    
+    if (!user) {
+       throw new AuthenticationError('You should be signed!');
+    }
+    
+      const id = user.id;
+      
+          await this.models.employee.update(
+            { status },
+            { where: { id } }
+          );
+    
+         const newUser = await this.models.employee.findOne({ where: { id } });
+    
+         pubsub.publish('onStatusChange', { onStatusChange: newUser });
+
+    return newUser;
+  
   }
 
 

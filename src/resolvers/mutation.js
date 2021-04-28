@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt'); //password increption module
 const jwt = require('jsonwebtoken'); //json web token module
-const {AuthenticationError,ForbiddenError} = require('apollo-server-express');
+
 const JWT_SECRETE = require('../utils/tokens');
 
 const { JobSeekerSerivce } = require('../services');
@@ -39,41 +39,19 @@ module.exports = {
   
   },
   signInJobSeeker:async (parent,{input},{models}) => {
+
+      const jobSeekerService = new JobSeekerSerivce(models)
+     
+      const user = await jobSeekerService.signInJobSeeker({input})
     
-     let  {email,password} = input;
-
-       email = email.trim().toLowerCase();
-
-      let user = await models.employee.findOne({where:{email}});
-
-       if(!user){
-          throw new AuthenticationError('Error signing in');
-       }
-
-        //comparing the password with the hash stored in the database 
-       let valid = await bcrypt.compare(password,user.password);
-
-       if(!valid){
-         throw new AuthenticationError('Error signing in')
-       }
       //signing the user and returning the json web token
       return jwt.sign({id:user.id},JWT_SECRETE);
   },
   userUpdateStatus: async (parent, { status }, { models, user,pubsub }) => {
     
-       if (!user) {
-            throw new AuthenticationError('You should be signed!');
-       }
-    const id = user.id;
-   
-    await models.employee.update(
-      { status },
-      { where: { id } }
-    );
-
-    const allUsers = await models.employee.findAll();
-    pubsub.publish('onStatusChange', { onStatusChange: allUsers });
-    const newUser = await models.employee.findOne({ where: { id } });
+    const jobSeekerService =new JobSeekerSerivce(models);
+    
+    const newUser =await jobSeekerService.userUpdateStatus({ user, pubsub, status });
 
     return newUser;
 
