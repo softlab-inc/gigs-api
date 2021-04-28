@@ -145,7 +145,7 @@ module.exports = {
 
     const allUsers = await models.employee.findAll();
     pubsub.publish('onStatusChange', { onStatusChange: allUsers });
-    const newUser = await models.employee.findOne({where:{id}})
+    const newUser = await models.employee.findOne({ where: { id } });
 
     return newUser;
 
