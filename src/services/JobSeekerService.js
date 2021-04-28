@@ -1,9 +1,9 @@
 const bcrypt = require('bcrypt'); //password encryption module
 const storeFS = require('../utils/storeFS');
 
-const indexOne = 0
-const indexTwo = 1
-const indexThree = 2
+const PROFILE_FOLDER = 0
+const IDS_FOLDER = 1
+const DOCS_FOLDER = 2
 
 
 /**
@@ -59,8 +59,8 @@ class JobSeekerSerivce{
          }
        
         //saving uploaded files to respective Folders
-        nationalIdImageUri = await getResult(nationalId,indexTwo);
-        documentImageUri = await getResult(document,indexThree);
+        nationalIdImageUri = await getResult(nationalId,IDS_FOLDER);
+        documentImageUri = await getResult(document,DOCS_FOLDER);
        
        return JobSeeker;                                     
     } catch (error) {
