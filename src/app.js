@@ -6,8 +6,9 @@ const path = require('path');
 const cors = require('cors');
 const helmet = require('helmet');
 const JWT_SECRETE = require('./utils/tokens');
-const {ApolloServer} = require('apollo-server-express');
+const { ApolloServer} = require('apollo-server-express');
 const jwt = require('jsonwebtoken');
+const {PubSub }= require('graphql-subscriptions')
 
 
 //Constructing a schema, using the GraphGL schema query language
@@ -15,6 +16,8 @@ const typeDefs = require('./schemas');
 //Providing a resolver to the schema fields
 const resolvers = require('./resolvers');
 
+//const pubsub = new PubSub();
+const pubsub = new PubSub();
 
 /**
  * Integrating the APOLLO_SERVER to server our Graph GL API
@@ -23,23 +26,37 @@ const resolvers = require('./resolvers');
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context:({req}) => {
+  context: ({ req,connection }) => {
+    
+    if (connection) {
+      console.log(connection.context)
+      return {connection,pubsub};
+    }else{
       const token = req.headers.authorization;
-    const user = getUser(token);
-
+      const user = getUser(token);
       console.log('====================================');
       console.log(`Testing user existense => ${user}`);
       console.log('====================================');
-
-    return {models,user}
-  }
+    
+    return {models,user,pubsub}
+    }
+    
+  },
+  subscriptions: {
+    path: '/subscriptions',
+    onConnect: (connectionParams, webSocket, context) => {
+      console.log('Client connected');
+    },
+    onDisconnect: (webSocket, context) => {
+      console.log('Client disconnected')
+    },
+  },
 });
-
 
 const app = express();
 
 //Applying Apollo  Graph GL middleware and setting the path
-server.applyMiddleware({app,path:'/gigs-app/api/v1'});
+server.applyMiddleware({ app, path: '/gigs-app/api/v1' });
 
 
 /**

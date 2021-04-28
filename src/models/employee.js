@@ -30,15 +30,15 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    profileImage: {
+    profileImagUri: {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    documents: {
+    documentImageUri: {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    nationalId: {
+    nationalIdImageUri: {
       type: DataTypes.TEXT,
       allowNull: true
     },
@@ -46,14 +46,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: true,
       defaultValue: 0
-    },
-    professionId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'profession',
-        key: 'id'
-      }
     }
   }, {
     sequelize,
@@ -74,13 +66,6 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "email" },
-        ]
-      },
-      {
-        name: "FKemployee288982",
-        using: "BTREE",
-        fields: [
-          { name: "professionId" },
         ]
       },
     ]
