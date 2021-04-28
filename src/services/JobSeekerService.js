@@ -5,7 +5,6 @@ const PROFILE_FOLDER = 0
 const IDS_FOLDER = 1
 const DOCS_FOLDER = 2
 
-
 /**
  * 
  * @param {*} uploadFile upload file object containing filename  mimetype encoding and createReadStream() function
