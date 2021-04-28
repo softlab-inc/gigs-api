@@ -24,7 +24,6 @@ module.exports = {
       throw new Error('Email address already used try again!');
     }
 
-
   },
   createProfession:async (parent,{input},{models}) => {
      
