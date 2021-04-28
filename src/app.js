@@ -32,10 +32,10 @@ const server = new ApolloServer({
       console.log(connection.context)
       return {connection,pubsub};
     }else{
-      const token = req.headers.authorization;
+      const token = req.headers.authorization| '';
       const user = getUser(token);
       console.log('====================================');
-      console.log(`Testing user existense => ${user}`);
+      console.log({user});
       console.log('====================================');
     
     return {models,user,pubsub}
@@ -82,10 +82,10 @@ app.use(express.static(path.join(__dirname, 'uploads/documents/')));
  * @returns 
  */
 const getUser = token => {
+
   if(token){
-    try{
+    try {
     return jwt.verify(token,JWT_SECRETE);
-   
   }catch (error) {
     throw new Error('Invalid Session');
   }
