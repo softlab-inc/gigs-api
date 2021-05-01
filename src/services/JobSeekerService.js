@@ -40,8 +40,9 @@ class JobSeekerSerivce{
     let  documentImageUri='';
     let nationalIdImageUri = '';
     
-
-   
+    //saving uploaded files to respective Folders
+    nationalIdImageUri = await getResult(nationalId,IDS_FOLDER);
+    documentImageUri = await getResult(document,DOCS_FOLDER);
 
      try {
        const JobSeeker = await employee.create({
@@ -58,10 +59,6 @@ class JobSeekerSerivce{
          for (const professionId of idsIterator) {
           await employeeProfession.create({professionId,employeeId:JobSeeker.id})
          }
-       
-        //saving uploaded files to respective Folders
-        nationalIdImageUri = await getResult(nationalId,IDS_FOLDER);
-        documentImageUri = await getResult(document,DOCS_FOLDER);
        
        return JobSeeker;                                     
     } catch (error) {
