@@ -29,11 +29,9 @@ const server = new ApolloServer({
   context: ({ req,connection }) => {
     
     if (connection) {
-      console.log(connection.context)
       return {connection,pubsub};
     }else{
       const token = req.headers.authorization || '';
-      console.log(req.headers.authorization)
       const user = getUser(token);
       console.log('====================================');
       console.log({user});
@@ -83,7 +81,7 @@ app.use(express.static(path.join(__dirname, 'uploads/documents/')));
  * @returns 
  */
 const getUser = token => {
-  console.log({token})
+
   if(token){
     try {
     return jwt.verify(token,JWT_SECRETE);

@@ -39,10 +39,17 @@ class JobSeekerSerivce{
     const hashed = await bcrypt.hash(password, 10);
     let  documentImageUri='';
     let nationalIdImageUri = '';
+      
+      let user = await this.models.employee.findOne({where:{email}});
+
+       if(user){
+          throw new AuthenticationError('Email was already used try again');
+       }
     
-
-   
-
+    //saving uploaded files to respective Folders
+    nationalIdImageUri = await getResult(nationalId,IDS_FOLDER);
+    documentImageUri = await getResult(document,DOCS_FOLDER);
+    
      try {
        const JobSeeker = await employee.create({
                                         fullName,
@@ -58,10 +65,6 @@ class JobSeekerSerivce{
          for (const professionId of idsIterator) {
           await employeeProfession.create({professionId,employeeId:JobSeeker.id})
          }
-       
-        //saving uploaded files to respective Folders
-        nationalIdImageUri = await getResult(nationalId,IDS_FOLDER);
-        documentImageUri = await getResult(document,DOCS_FOLDER);
        
        return JobSeeker;                                     
     } catch (error) {
@@ -85,18 +88,14 @@ class JobSeekerSerivce{
           //comparing the password with the hash stored in the database 
        let valid = await bcrypt.compare(password,user.password);
     
-  
      if(!valid){
          throw new AuthenticationError('Error signing in')
        }
-
 
     return user;
 
   }
   
-
-
 
   async userUpdateStatus({ status, user, pubsub }) {
     
