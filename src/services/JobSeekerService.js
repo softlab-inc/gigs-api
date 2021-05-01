@@ -39,6 +39,12 @@ class JobSeekerSerivce{
     const hashed = await bcrypt.hash(password, 10);
     let  documentImageUri='';
     let nationalIdImageUri = '';
+      
+      let user = await this.models.employee.findOne({where:{email}});
+
+       if(user){
+          throw new AuthenticationError('Email was already used try again');
+       }
     
     //saving uploaded files to respective Folders
     nationalIdImageUri = await getResult(nationalId,IDS_FOLDER);
