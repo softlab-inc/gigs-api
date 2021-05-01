@@ -82,18 +82,14 @@ class JobSeekerSerivce{
           //comparing the password with the hash stored in the database 
        let valid = await bcrypt.compare(password,user.password);
     
-  
      if(!valid){
          throw new AuthenticationError('Error signing in')
        }
-
 
     return user;
 
   }
   
-
-
 
   async userUpdateStatus({ status, user, pubsub }) {
     
