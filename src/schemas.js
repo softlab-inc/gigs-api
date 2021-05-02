@@ -98,6 +98,7 @@ type Profession{
   createProfession(input:CreateProfession):String
   signInJobSeeker(input:SignInJobSeeker):String!
   userUpdateStatus(status:Int!):JobSeeker
+  jobSeekerUploadProfileImage(profileImage:Upload!):String
 }
 
 #Subscriptions

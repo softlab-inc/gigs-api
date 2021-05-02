@@ -51,11 +51,20 @@ module.exports = {
     
     const jobSeekerService =new JobSeekerSerivce(models);
     
-    const newUser =await jobSeekerService.userUpdateStatus({ user, pubsub, status });
+    const newUser = await jobSeekerService.userUpdateStatus({ user, pubsub, status });
 
     return newUser;
 
- }
+  },
+  jobSeekerUploadProfileImage: async (parent,{profileImag,models,user})=> {
+    const jobSeekerService = new JobSeekerSerivce(models);
+
+    const profileImagUri = jobSeekerService.uploadProfileImage({ user, profileImag });
+    
+    return profileImagUri;
+  }
+  
+
 
 }
 
