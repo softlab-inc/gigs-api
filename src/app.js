@@ -71,8 +71,9 @@ app.use(helmet());
 /**
  * Exporsing static files where all uploads shall be stored
  */
-app.use(express.static(path.join(__dirname, 'uploads/profile-photos/')));
-app.use(express.static(path.join(__dirname, 'uploads/documents/')));
+app.use(express.static(path.join(__dirname, '/uploads/profile-images/')));
+app.use(express.static(path.join(__dirname, '/uploads/document-images/')));
+app.use(express.static(path.join(__dirname, '/uploads/id-images/')));
 
 
 /**

@@ -98,12 +98,14 @@ type Profession{
   createProfession(input:CreateProfession):String
   signInJobSeeker(input:SignInJobSeeker):String!
   userUpdateStatus(status:Int!):JobSeeker
+  jobSeekerUploadProfileImage(profileImage:Upload!):String
 }
 
 #Subscriptions
 type Subscription{
   hasTested:String
   onStatusChange:JobSeeker!
+  
 }
 
 

@@ -61,7 +61,6 @@ class JobSeekerSerivce{
                                         });
 
          const idsIterator = professionIds[Symbol.iterator]();
-         
          for (const professionId of idsIterator) {
           await employeeProfession.create({professionId,employeeId:JobSeeker.id})
          }
@@ -96,7 +95,6 @@ class JobSeekerSerivce{
 
   }
   
-
   async userUpdateStatus({ status, user, pubsub }) {
     
     if (!user) {
@@ -117,6 +115,24 @@ class JobSeekerSerivce{
     return newUser;
   
   }
+ 
+  async uploadProfileImage({ user, profileImage }) {
+    console.log({user})
+  if (!user) {
+       throw new AuthenticationError('You should be signed!');
+  }
+    
+     const id = user.id;
+
+    let profileImagUri = '';
+    profileImagUri = await getResult(profileImage, PROFILE_FOLDER);
+    
+    let jobSeekerId = await this.models.employee.update({ profileImagUri }, { where: { id} });
+    return profileImagUri;
+
+}
+
+ 
 
 
 

@@ -17,7 +17,7 @@ module.exports = {
             throw new AuthenticationError('You should be signed!');
       }
      const {id} = user;
-     return await models.employee.findOne({ id });
+     return await models.employee.findOne({ where:{id} });
   },
   professions: async (parent,args,{models}) => models.profession.findAll(),
 }
