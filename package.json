@@ -4,8 +4,8 @@
   "private": true,
   "main": "app.js",
   "scripts": {
-    "start": "nodemon src/bin/www",
-    "dev": "nodemon src/bin/www"
+    "start": "nodemon ./src/bin/www",
+    "dev": "nodemon ./src/bin/www"
   },
   "dependencies": {
     "@graphql-modules/core": "^0.7.17",
