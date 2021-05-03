@@ -2,7 +2,7 @@
   "name": "api",
   "version": "1.0.0",
   "private": true,
-  "main": "/",
+  "main": "app.js",
   "scripts": {
     "start": "nodemon src/bin/www",
     "dev": "nodemon src/bin/www"
