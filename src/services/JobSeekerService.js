@@ -116,16 +116,19 @@ class JobSeekerSerivce{
   
   }
  
-  async uploadProfileImage({user,profileImage}) {
+  async uploadProfileImage({ user, profileImage }) {
+    console.log({user})
   if (!user) {
        throw new AuthenticationError('You should be signed!');
-    }
+  }
+    
+     const id = user.id;
 
     let profileImagUri = '';
     profileImagUri = await getResult(profileImage, PROFILE_FOLDER);
     
-    let jobseekerId = await this.models.employee.update({ profileImagUri }, { where: { id: user.id } });
-
+    let jobSeekerId = await this.models.employee.update({ profileImagUri }, { where: { id} });
+     console.log({jobSeekerId})
     return profileImagUri;
 
 }

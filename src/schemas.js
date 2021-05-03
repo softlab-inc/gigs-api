@@ -105,6 +105,7 @@ type Profession{
 type Subscription{
   hasTested:String
   onStatusChange:JobSeeker!
+  
 }
 
 

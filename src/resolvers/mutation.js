@@ -56,11 +56,11 @@ module.exports = {
     return newUser;
 
   },
-  jobSeekerUploadProfileImage: async (parent,{profileImag,models,user})=> {
+  jobSeekerUploadProfileImage: async (parent,{profileImage},{models,user})=> {
     const jobSeekerService = new JobSeekerSerivce(models);
 
-    const profileImagUri = jobSeekerService.uploadProfileImage({ user, profileImag });
-    
+    const profileImagUri = jobSeekerService.uploadProfileImage({ user, profileImage });
+
     return profileImagUri;
   }
   
