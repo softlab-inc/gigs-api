@@ -75,7 +75,6 @@ app.use(express.static(path.join(__dirname, '/uploads/profile-images/')));
 app.use(express.static(path.join(__dirname, '/uploads/document-images/')));
 app.use(express.static(path.join(__dirname, '/uploads/id-images/')));
 
-console.log(path.join(__dirname, '/uploads/profile-images/'))
 
 /**
  * 

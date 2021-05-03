@@ -128,7 +128,6 @@ class JobSeekerSerivce{
     profileImagUri = await getResult(profileImage, PROFILE_FOLDER);
     
     let jobSeekerId = await this.models.employee.update({ profileImagUri }, { where: { id} });
-     console.log({jobSeekerId})
     return profileImagUri;
 
 }
