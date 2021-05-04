@@ -12,12 +12,14 @@ const { PubSub } = require('graphql-subscriptions')
 
 require('dotenv').config()
 
-console.log(process.env.TEST);
+
 
 //Constructing a schema, using the GraphGL schema query language
 const typeDefs = require('./schemas');
+console.log(typeDefs);
 //Providing a resolver to the schema fields
 const resolvers = require('./resolvers');
+console.log(resolvers);
 
 //const pubsub = new PubSub();
 const pubsub = new PubSub(); 
