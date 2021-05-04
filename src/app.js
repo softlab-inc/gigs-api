@@ -8,8 +8,11 @@ const helmet = require('helmet');
 const JWT_SECRETE = require('./utils/tokens');
 const { ApolloServer} = require('apollo-server-express');
 const jwt = require('jsonwebtoken');
-const {PubSub }= require('graphql-subscriptions')
+const { PubSub } = require('graphql-subscriptions')
 
+require('dotenv').config()
+
+console.log(process.env.TEST);
 
 //Constructing a schema, using the GraphGL schema query language
 const typeDefs = require('./schemas');
@@ -17,7 +20,7 @@ const typeDefs = require('./schemas');
 const resolvers = require('./resolvers');
 
 //const pubsub = new PubSub();
-const pubsub = new PubSub();
+const pubsub = new PubSub(); 
 
 /**
  * Integrating the APOLLO_SERVER to server our Graph GL API
