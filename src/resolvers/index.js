@@ -1,7 +1,7 @@
 const Mutation = require('./mutation');
 const Query = require('./query');
 const { GraphQLDateTime } = require('graphql-iso-date');
-const JobSeeker = require('./jobSeeker');
+const JobSeeker = require('./jobseeker');
 const Subscription = require('./subscription');
 
 /**
