@@ -17,6 +17,8 @@ const storeFS =async ({ stream, filename },dirIndex) => {
 
     return await new Promise((resolve, reject) =>
         stream.on('error', error => {
+            console.log('Error ocurred')
+            console.log(error)
                 if (stream.truncated) // delete the truncated file
                   fs.unlinkSync(fileName);
                   reject(error);

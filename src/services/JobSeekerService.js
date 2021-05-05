@@ -14,7 +14,6 @@ const DOCS_FOLDER = 2
  * @returns 
  */
 const getResult =async (uploadFile,dirIndex) => {
-  console.log({uploadFile,dirIndex});
    const {filename,createReadStream } =await  uploadFile;
     const stream = createReadStream();
     const result = await storeFS({ stream, filename },dirIndex);
@@ -132,15 +131,7 @@ class JobSeekerSerivce{
 
 }
 
- 
 
-
-
-
-
-
-
-  
 
 }
 
