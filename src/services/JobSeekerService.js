@@ -45,10 +45,10 @@ class JobSeekerSerivce{
           throw new AuthenticationError('Email was already used try again');
        }
     
-    //saving uploaded files to respective Folders
-    nationalIdImageUri = await getResult(nationalId,IDS_FOLDER);
-    documentImageUri = await getResult(document,DOCS_FOLDER);
-    
+      //saving uploaded files to respective Folders
+      nationalIdImageUri = await getResult(nationalId,IDS_FOLDER);
+      documentImageUri = await getResult(document,DOCS_FOLDER);
+      
      try {
        const JobSeeker = await employee.create({
                                         fullName,
