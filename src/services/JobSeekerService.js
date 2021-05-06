@@ -59,10 +59,7 @@ class JobSeekerSerivce{
                                         nationalIdImageUri
                                         });
 
-         const idsIterator = professionIds[Symbol.iterator]();
-         for (const professionId of idsIterator) {
-          await employeeProfession.create({professionId,employeeId:JobSeeker.id})
-         }
+       await employeeProfession.create({professionId,employeeId:JobSeeker.id})
        
        return JobSeeker;                                     
     } catch (error) {

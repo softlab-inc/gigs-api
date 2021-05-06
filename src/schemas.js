@@ -79,7 +79,7 @@ type Profession{
     phone:String!
     document:Upload!
     nationalId:Upload!
-    professionIds:[Int!]!
+    professionId:Int!
  }
 
  input CreateProfession{
