@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken'); //json web token module
 
 const JWT_SECRETE = require('../utils/tokens');
 
-const { JobSeekerSerivce } = require('../services');
+const { JobSeekerSerivce,EmployerService} = require('../services');
 
 module.exports = {
   test: (parent, { name }, {pubsub}) => {
@@ -57,10 +57,14 @@ module.exports = {
 
     return profileImagUri;
   },
-  createEmployerInput: async (parent, { input }, { models }) => {
+  createEmployer: async (parent, { input }, { models }) => {
     
+    const employerService = new EmployerService(models);
 
-  }
+    const Employer = await employerService.createEmployer({ input });
+
+    return jwt.sign({ id: Employer.id }, JWT_SECRETE);
+  },
   
 
 

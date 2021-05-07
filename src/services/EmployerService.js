@@ -18,7 +18,7 @@ const getResult =async (uploadFile,dirIndex) => {
     return result.filename;
 }
 
-class EmploerService{
+class EmployerService{
 
   constructor(models) {
     this.models = models;
@@ -63,5 +63,7 @@ class EmploerService{
   }
 
 }
+
+module.exports = EmployerService;
 
 
