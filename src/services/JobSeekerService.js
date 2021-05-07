@@ -140,7 +140,7 @@ class JobSeekerSerivce{
     return await models.employee.findOne({ where:{id} });
 
   }
-
+ 
 }
 
 module.exports = JobSeekerSerivce;

@@ -27,7 +27,7 @@ module.exports = gql`
     password:String
     updatedAt:String
     createdAt:String
-    license:String
+    licenseImageUri:String
     hasLocation:String
   }
 
