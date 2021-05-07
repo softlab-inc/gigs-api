@@ -28,8 +28,8 @@ class JobSeekerSerivce{
    }
 
   async createJobSeeker(content) {
-    let { fullName, email, phone, password, document, nationalId, professionId,other } = content.input;
-    console.log(content.input);
+    let { fullName, email, phone, password, document, nationalId, professionId, other } = content.input;
+    
      email = email.trim().toLowerCase();
 
     const { employee, employeeProfession,profession } = this.models;

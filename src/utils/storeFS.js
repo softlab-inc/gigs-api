@@ -10,7 +10,7 @@ const path = require('path');
  * @returns 
  */
 const storeFS =async ({ stream, filename },dirIndex) => {
-    let dirs  = ['../uploads/profile-images/','../uploads/id-images/','../uploads/document-images'];
+    let dirs  = ['../uploads/profile-images/','../uploads/id-images/','../uploads/document-images/','../uploads/license-images/'];
     const uploadDir = dirs[dirIndex];
     filename = `${Date.now()}-${filename.trim().toLowerCase() }`
     const fileName = path.join(__dirname,uploadDir,filename);

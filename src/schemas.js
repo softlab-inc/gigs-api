@@ -109,7 +109,7 @@ type Profession{
   signInJobSeeker(input:SignInJobSeeker):String!
   userUpdateStatus(status:Int!):JobSeeker
   jobSeekerUploadProfileImage(profileImage:Upload!):String
-  CreateEmployer(input:CreateEmployerInput):String
+  createEmployer(input:CreateEmployerInput):String
 }
 
 #Subscriptions
