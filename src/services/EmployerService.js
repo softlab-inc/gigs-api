@@ -91,7 +91,7 @@ class EmployerService{
     }
 
     const { id } = user;
-    return await models.employer.findOne({ where:{id} });
+    return await this.models.employer.findOne({ where:{id} });
 
   }
 
