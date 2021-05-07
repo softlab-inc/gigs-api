@@ -62,6 +62,27 @@ class EmployerService{
     
   }
 
+  async signInEmployer(content) {
+   
+     let { email, password } = content.input;
+      email = email.trim().toLowerCase();
+     let user = await this.models.employer.findOne({where:{email}});
+
+       if(!user){
+          throw new AuthenticationError('User account not found! try again');
+       }
+    
+       //comparing the password with the hash stored in the database 
+       let valid = await bcrypt.compare(password,user.password);
+    
+        if(!valid){
+            throw new AuthenticationError('Email or password is wrong! try again')
+          }
+
+    return user;
+
+ }
+
 }
 
 module.exports = EmployerService;

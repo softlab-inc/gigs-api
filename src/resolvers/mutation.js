@@ -16,7 +16,7 @@ module.exports = {
 
       const JobSeeker = await jobSeekerSerivce.createJobSeeker({ input });
 
-       return jwt.sign({id: JobSeeker.id},JWT_SECRETE);
+      return jwt.sign({id: JobSeeker.id},JWT_SECRETE);
                                                       
   },
   createProfession:async (parent,{input},{models}) => {
@@ -65,9 +65,14 @@ module.exports = {
 
     return jwt.sign({ id: Employer.id }, JWT_SECRETE);
   },
+  signInEmployer: async (parent, { input }, { models }) => {
+    const employerService = new EmployerService(models);
+
+    const Employer = await employerService.signInEmployer({ input });
+
+    return jwt.sign({ id: Employer.id }, JWT_SECRETE);
+  }
   
-
-
 }
 
 

@@ -130,7 +130,6 @@ class JobSeekerSerivce{
     return profileImagUri;
 }
 
-
 }
 
 module.exports = JobSeekerSerivce;

@@ -101,15 +101,22 @@ type Profession{
    password:String!
  }
 
+ input SignInEmployerInput{
+   email:String!
+   password:String!
+ }
+
  #Mutations 
   type Mutation{
   test(value:String):String
   createJobSeeker(input:CreateJobSeekerInput):String!
   createProfession(input:CreateProfession):String
   signInJobSeeker(input:SignInJobSeeker):String!
+ 
   userUpdateStatus(status:Int!):JobSeeker
   jobSeekerUploadProfileImage(profileImage:Upload!):String
   createEmployer(input:CreateEmployerInput):String
+   signInEmployer(input:SignInEmployerInput):String!
 }
 
 #Subscriptions
