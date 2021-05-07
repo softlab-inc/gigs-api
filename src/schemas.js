@@ -82,6 +82,15 @@ type Profession{
     professionId:Int!
     other:String
  }
+ input CreateEmployerInput{
+    fullName:String!
+    companyName:String!
+    email:String!
+    phone:String!
+    password:String!
+    license:Upload!
+ }
+
 
  input CreateProfession{
    names:[String!]!
@@ -100,6 +109,7 @@ type Profession{
   signInJobSeeker(input:SignInJobSeeker):String!
   userUpdateStatus(status:Int!):JobSeeker
   jobSeekerUploadProfileImage(profileImage:Upload!):String
+  CreateEmployer(input:CreateEmployerInput):String
 }
 
 #Subscriptions
