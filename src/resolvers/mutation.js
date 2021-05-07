@@ -12,18 +12,12 @@ module.exports = {
   },
   createJobSeeker:async (parent,{input},{models,pubsub}) => {
 
-    try {
       const jobSeekerSerivce = new JobSeekerSerivce(models);
 
       const JobSeeker = await jobSeekerSerivce.createJobSeeker({ input });
 
-         return jwt.sign({id: JobSeeker.id},JWT_SECRETE);
+       return jwt.sign({id: JobSeeker.id},JWT_SECRETE);
                                                       
-    } catch (error) {
-      console.log(error);
-      throw new Error('Email address already used try again!');
-    }
-
   },
   createProfession:async (parent,{input},{models}) => {
      
@@ -62,6 +56,10 @@ module.exports = {
     const profileImagUri = jobSeekerService.uploadProfileImage({ user, profileImage });
 
     return profileImagUri;
+  },
+  createEmployerInput: async (parent, { input }, { models }) => {
+    
+
   }
   
 
