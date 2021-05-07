@@ -81,7 +81,21 @@ class EmployerService{
 
     return user;
 
- }
+  }
+  
+
+  async employer({user}) {
+    
+    if (!user) {
+       throw new AuthenticationError('You should be signed!');
+    }
+
+    const { id } = user;
+    return await models.employer.findOne({ where:{id} });
+
+  }
+
+  
 
 }
 

@@ -128,7 +128,18 @@ class JobSeekerSerivce{
     
     let jobSeekerId = await this.models.employee.update({ profileImagUri }, { where: { id} });
     return profileImagUri;
-}
+  }
+  
+  async jobSeeker({user}) {
+    
+    if (!user) {
+       throw new AuthenticationError('You should be signed!');
+    }
+    
+    const { id } = user;
+    return await models.employee.findOne({ where:{id} });
+
+  }
 
 }
 

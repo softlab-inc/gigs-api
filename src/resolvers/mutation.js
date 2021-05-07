@@ -72,6 +72,7 @@ module.exports = {
 
     return jwt.sign({ id: Employer.id }, JWT_SECRETE);
   }
+
   
 }
 

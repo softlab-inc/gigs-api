@@ -6,18 +6,20 @@ const {
 
 const pubsub = new PubSub();
 
+const { JobSeekerSerivce,EmployerService} = require('../services');
+
 module.exports = {
   test: () => {
-   
     return 'Test is running';
   },
    jobSeeker: async (parent, args, { models, user }) => {
+  
+     const jobSeekerService = new JobSeekerSerivce(models);
 
-      if (!user) {
-            throw new AuthenticationError('You should be signed!');
-      }
-     const {id} = user;
-     return await models.employee.findOne({ where:{id} });
+     return await jobSeekerService.jobSeeker({user})
+     
   },
-  professions: async (parent,args,{models}) => models.profession.findAll(),
+  professions: async (parent, args, { models }) => models.profession.findAll(),
+  
+  
 }

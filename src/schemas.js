@@ -60,13 +60,15 @@ fragment infor on JobSeeker {
 type Profession{
     id:Int!
     name:String!
-  }
+}
 
 
   #Queries
   type Query{
   test:String
   jobSeeker:JobSeeker
+  employer:Employer
+  employers:[Employer]
   jobSeekers:[JobSeeker]
   professions:[Profession]
  }
@@ -82,6 +84,7 @@ type Profession{
     professionId:Int!
     other:String
  }
+
  input CreateEmployerInput{
     fullName:String!
     companyName:String!
@@ -90,7 +93,6 @@ type Profession{
     password:String!
     license:Upload!
  }
-
 
  input CreateProfession{
    names:[String!]!
