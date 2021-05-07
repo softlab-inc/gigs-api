@@ -28,8 +28,8 @@ class JobSeekerSerivce{
    }
 
   async createJobSeeker(content) {
-    let { fullName, email, phone, password, document, nationalId, professionId,other } = content.input;
-    console.log(content.input);
+    let { fullName, email, phone, password, document, nationalId, professionId, other } = content.input;
+    
      email = email.trim().toLowerCase();
 
     const { employee, employeeProfession,profession } = this.models;
@@ -116,21 +116,31 @@ class JobSeekerSerivce{
   }
  
   async uploadProfileImage({ user, profileImage }) {
-    console.log({user})
+
   if (!user) {
        throw new AuthenticationError('You should be signed!');
   }
     
-     const id = user.id;
+      const id = user.id;
 
     let profileImagUri = '';
     profileImagUri = await getResult(profileImage, PROFILE_FOLDER);
     
-    let jobSeekerId = await this.models.employee.update({ profileImagUri }, { where: { id} });
+    await this.models.employee.update({ profileImagUri }, { where: { id} });
     return profileImagUri;
-}
+  }
+  
+  async jobSeeker({user}) {
+    
+    if (!user) {
+       throw new AuthenticationError('You should be signed!');
+    }
+    
+    const { id } = user;
+    return await models.employee.findOne({ where:{id} });
 
-
+  }
+ 
 }
 
 module.exports = JobSeekerSerivce;

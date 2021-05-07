@@ -27,7 +27,7 @@ module.exports = gql`
     password:String
     updatedAt:String
     createdAt:String
-    license:String
+    licenseImageUri:String
     hasLocation:String
   }
 
@@ -60,13 +60,15 @@ fragment infor on JobSeeker {
 type Profession{
     id:Int!
     name:String!
-  }
+}
 
 
   #Queries
   type Query{
   test:String
   jobSeeker:JobSeeker
+  employer:Employer
+  employers:[Employer]
   jobSeekers:[JobSeeker]
   professions:[Profession]
  }
@@ -83,11 +85,25 @@ type Profession{
     other:String
  }
 
+ input CreateEmployerInput{
+    fullName:String!
+    companyName:String!
+    email:String!
+    phone:String!
+    password:String!
+    license:Upload!
+ }
+
  input CreateProfession{
    names:[String!]!
  }
 
  input SignInJobSeeker{
+   email:String!
+   password:String!
+ }
+
+ input SignInEmployerInput{
    email:String!
    password:String!
  }
@@ -98,15 +114,17 @@ type Profession{
   createJobSeeker(input:CreateJobSeekerInput):String!
   createProfession(input:CreateProfession):String
   signInJobSeeker(input:SignInJobSeeker):String!
+ 
   userUpdateStatus(status:Int!):JobSeeker
   jobSeekerUploadProfileImage(profileImage:Upload!):String
+  createEmployer(input:CreateEmployerInput):String
+   signInEmployer(input:SignInEmployerInput):String!
 }
 
 #Subscriptions
 type Subscription{
   hasTested:String
   onStatusChange:JobSeeker!
-  
 }
 
   `;

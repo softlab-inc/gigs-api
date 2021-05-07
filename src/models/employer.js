@@ -31,7 +31,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    license: {
+    licenseImageUri: {
       type: DataTypes.TEXT,
       allowNull: true
     }
@@ -49,19 +49,19 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "phone",
-        unique: true,
-        using: "BTREE",
-        fields: [
-          { name: "phone" },
-        ]
-      },
-      {
         name: "email",
         unique: true,
         using: "BTREE",
         fields: [
           { name: "email" },
+        ]
+      },
+      {
+        name: "phone",
+        unique: true,
+        using: "BTREE",
+        fields: [
+          { name: "phone" },
         ]
       },
     ]

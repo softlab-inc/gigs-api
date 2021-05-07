@@ -1,23 +1,23 @@
-const {
-    AuthenticationError,
-    ForbiddenError,
-    PubSub
-} = require('apollo-server-express');
-
-const pubsub = new PubSub();
+const { JobSeekerSerivce,EmployerService} = require('../services');
 
 module.exports = {
   test: () => {
-   
     return 'Test is running';
   },
    jobSeeker: async (parent, args, { models, user }) => {
+  
+     const jobSeekerService = new JobSeekerSerivce(models);
 
-      if (!user) {
-            throw new AuthenticationError('You should be signed!');
-      }
-     const {id} = user;
-     return await models.employee.findOne({ where:{id} });
+     return await jobSeekerService.jobSeeker({user})
+     
   },
-  professions: async (parent,args,{models}) => models.profession.findAll(),
+  professions: async (parent, args, { models }) => models.profession.findAll(),
+  
+  employer: async (parent, args, { models, user }) => {
+    
+    const employerService = new EmployerService(models);
+
+    return await employerService.employer({user})
+  }
+
 }
