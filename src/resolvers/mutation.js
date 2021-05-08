@@ -6,10 +6,6 @@ const JWT_SECRETE = require('../utils/tokens');
 const { JobSeekerSerivce,EmployerService} = require('../services');
 
 module.exports = {
-  test: (parent, { name }, {pubsub}) => {
-    pubsub.publish('TEST', { hasTested: `my name is ${name}` });
-    return 'Some has checked in ';
-  },
   createJobSeeker:async (parent,{input},{models,pubsub}) => {
 
       const jobSeekerSerivce = new JobSeekerSerivce(models);
