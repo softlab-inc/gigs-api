@@ -46,11 +46,13 @@ type Gig{
   id:Int!
   name:String!
   details:String
+  paymentMethod:Int!
   budget:Float
-  duration:String
+  duration:Int
+  hourlyRate:Float
   status:Int!
-  updatedAt:String
-  createdAt:String
+  updatedAt:String!
+  createdAt:String!
 }
   
 fragment infor on JobSeeker {
@@ -107,16 +109,31 @@ type Profession{
    password:String!
  }
 
+ input EmployerCreateGigInput{
+    name:String!
+    details:String!
+    budge:Float!
+    duration:Int
+    hourly:Float
+    status:Int!
+    professionId:Int!
+    employerId:Int
+ }
+
  #Mutations 
   type Mutation{
   createJobSeeker(input:CreateJobSeekerInput):String!
-  createProfession(input:CreateProfession):String
   signInJobSeeker(input:SignInJobSeeker):String!
- 
-  userUpdateStatus(status:Int!):JobSeeker
   jobSeekerUploadProfileImage(profileImage:Upload!):String
+
+  createProfession(input:CreateProfession):String!
+
+  userUpdateStatus(status:Int!):JobSeeker
+ 
   createEmployer(input:CreateEmployerInput):String
-   signInEmployer(input:SignInEmployerInput):String!
+  signInEmployer(input:SignInEmployerInput):String!
+
+  employerCreateGig(input:EmployerCreateGigInput):Gig
 }
 
 #Subscriptions
