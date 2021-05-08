@@ -65,7 +65,6 @@ type Profession{
 
   #Queries
   type Query{
-  test:String
   jobSeeker:JobSeeker
   employer:Employer
   employers:[Employer]
@@ -110,7 +109,6 @@ type Profession{
 
  #Mutations 
   type Mutation{
-  test(value:String):String
   createJobSeeker(input:CreateJobSeekerInput):String!
   createProfession(input:CreateProfession):String
   signInJobSeeker(input:SignInJobSeeker):String!

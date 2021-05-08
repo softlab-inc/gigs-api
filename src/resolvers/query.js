@@ -1,9 +1,6 @@
 const { JobSeekerSerivce,EmployerService} = require('../services');
 
 module.exports = {
-  test: () => {
-    return 'Test is running';
-  },
    jobSeeker: async (parent, args, { models, user }) => {
   
      const jobSeekerService = new JobSeekerSerivce(models);
