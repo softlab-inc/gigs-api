@@ -14,7 +14,9 @@ module.exports = gql`
     documentImageUri:String
     nationalIdImageUri:String
     status:Int
-    hasProfession:[Profession]
+    hasProfession:[Profession!]
+    pendingGigs:[Gig!]
+    completeGigs:[Gig!]
     createdAt:DateTime
     updatedAt:DateTime
   }
@@ -51,6 +53,7 @@ type Gig{
   duration:Int
   hourlyRate:Float
   status:Int!
+  assignedTo:JobSeeker
   updatedAt:String!
   createdAt:String!
 }
@@ -69,9 +72,11 @@ type Profession{
   type Query{
   jobSeeker:JobSeeker
   employer:Employer
-  employers:[Employer]
-  jobSeekers:[JobSeeker]
-  professions:[Profession]
+  gig:Gig
+  employers:[Employer!]
+  jobSeekers:[JobSeeker!]
+  professions:[Profession!]
+  gigs:[Gig!]
  }
 
  #InputFields

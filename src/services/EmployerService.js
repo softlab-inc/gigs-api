@@ -95,6 +95,23 @@ class EmployerService{
 
   }
 
+
+  async employerCreateGig({ input, user,pubsub }) {
+    
+    if (!user) {
+       throw new AuthenticationError('You should be signed!');
+    }
+
+    try {
+   return  {id:1,name:'this is a created gig'}
+    } catch (error) {
+    throw new Error(error)
+    }
+
+  }
+
+
+
   
 
 }
