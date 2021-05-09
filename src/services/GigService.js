@@ -8,8 +8,10 @@ class GigService {
   async notifyJobSeekers({ professionId, user }){
     const {employeeProfession,notified,gig,employee} = this.models
     console.log({ professionId, user })
-    const result  = await employeeProfession.findOne({where:{professionId},include:[employee]})
-    console.log({ result });
+    const result = await employeeProfession.findOne({ where: { professionId }, include: [employee] });
+    const data = result.get('employee');
+
+    console.log(data.id);
     return true;
   }
    
