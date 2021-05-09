@@ -5,19 +5,17 @@ const models = require('./models');
 const path = require('path');
 const cors = require('cors');
 const helmet = require('helmet');
-const JWT_SECRETE = require('./utils/tokens');
 const { ApolloServer} = require('apollo-server-express');
-const jwt = require('jsonwebtoken');
 const { PubSub } = require('graphql-subscriptions')
-
-require('dotenv').config()
-
+require('dotenv').config();
+const getUser = require('../src/utils/getUser');
 
 
 //Constructing a schema, using the GraphGL schema query language
 const typeDefs = require('./schemas');
 //Providing a resolver to the schema fields
 const resolvers = require('./resolvers');
+
 
 
 //const pubsub = new PubSub();
@@ -49,7 +47,7 @@ const server = new ApolloServer({
   subscriptions: {
     path: '/subscriptions',
     onConnect: (connectionParams, webSocket, context) => {
-      console.log('Client connected');
+        console.log('Client connected');
     },
     onDisconnect: (webSocket, context) => {
       console.log('Client disconnected')
@@ -82,20 +80,5 @@ app.use(express.static(path.join(__dirname, '/uploads/id-images/')));
 app.use(express.static(path.join(__dirname, '/uploads/license-images/')));
 
 
-/**
- * 
- * @param {*} token static token used to autheticate the user
- * @returns 
- */
-const getUser = token => {
-
-  if(token){
-    try {
-    return jwt.verify(token,JWT_SECRETE);
-  }catch (error) {
-    throw new Error('Invalid Session');
-  }
-  }
-};
 
 module.exports = {app,server};

@@ -68,7 +68,7 @@ module.exports = {
 
     return jwt.sign({ id: Employer.id }, JWT_SECRETE);
   },
-  employerCreateGig: async (parent, { input }, { models, user }) => {
+  employerCreateGig: async (parent, { input }, { models, user,pubsub }) => {
     const employerService = new EmployerService(models);
     
      return await employerService.employerCreateGig({ user, input,pubsub });

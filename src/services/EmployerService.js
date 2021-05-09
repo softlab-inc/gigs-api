@@ -85,7 +85,7 @@ class EmployerService{
   
 
   async employer({user}) {
-    
+     console.log({user})
     if (!user) {
        throw new AuthenticationError('You should be signed!');
     }
@@ -103,7 +103,8 @@ class EmployerService{
     }
 
     try {
-   return  {id:1,name:'this is a created gig'}
+      pubsub.publish('onGigCreated', { onGigCreated: {id:1,name:'Telecom engineer',details:"Senior telecom engineer with 5 years of experiences",employerId:user.id,professionId:17} });
+   return  {id:1,name:'Telecom engineer',details:"Senior telecom engineer with 5 years of experiences",employerId:user.id,professionId:17}
     } catch (error) {
     throw new Error(error)
     }

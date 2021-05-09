@@ -117,12 +117,11 @@ type Profession{
  input EmployerCreateGigInput{
     name:String!
     details:String!
-    budge:Float!
+    budget:Float!
     duration:Int
     hourly:Float
-    status:Int!
+    status:Int
     professionId:Int!
-    employerId:Int
  }
 
  #Mutations 
@@ -143,7 +142,7 @@ type Profession{
 
 #Subscriptions
 type Subscription{
-  hasTested:String
+  onGigCreated(token:String!):Gig!
   onStatusChange:JobSeeker!
 }
 
