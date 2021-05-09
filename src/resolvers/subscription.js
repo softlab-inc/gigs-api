@@ -19,13 +19,15 @@ module.exports = {
       const gigService = new GigService(models);
       const { professionId } = payload.onGigCreated;
       const user = getUser(variables.token);
-     
-      console.log(user)
+      
+      const notified = await gigService.notifyJobSeekers({professionId, user} )
+
+      console.log({notified})
       //extract professionId from payload
       //look up from profession table for employer with same profession
       //if true notifed them of a gig else nothing is notified
       
-      return (payload === variables);
+      return notified;
       // return pubsub.asyncIterator(['onGigCreated']);
         },
       ),

@@ -96,14 +96,14 @@ class EmployerService{
 
 
   async employerCreateGig({ input, user,pubsub }) {
-    
+    console.log(input);
     if (!user) {
        throw new AuthenticationError('You should be signed!');
     }
 
     try {
-      pubsub.publish('onGigCreated', { onGigCreated: {id:1,name:'Telecom engineer',details:"Senior telecom engineer with 5 years of experiences",employerId:user.id,professionId:17} });
-   return  {id:1,name:'Telecom engineer',details:"Senior telecom engineer with 5 years of experiences",employerId:user.id,professionId:17}
+      pubsub.publish('onGigCreated', { onGigCreated: {id:1,...input,employerId:user.id,professionId:17,paymentMethod:1,status:0} });
+   return  {id:1,...input,employerId:user.id,professionId:17,paymentMethod:1,status:0}
     } catch (error) {
     throw new Error(error)
     }
