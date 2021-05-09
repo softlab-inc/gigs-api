@@ -18,6 +18,11 @@ module.exports = function(sequelize, DataTypes) {
         model: 'employee',
         key: 'id'
       }
+    },
+    status: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: 0
     }
   }, {
     sequelize,

@@ -17,7 +17,6 @@ const typeDefs = require('./schemas');
 const resolvers = require('./resolvers');
 
 
-
 //const pubsub = new PubSub();
 const pubsub = new PubSub(); 
 
@@ -31,7 +30,7 @@ const server = new ApolloServer({
   context: ({ req,connection }) => {
     
     if (connection) {
-      return {connection,pubsub};
+      return {connection,pubsub,models};
     }else{
       const token = req.headers.authorization || '';
 

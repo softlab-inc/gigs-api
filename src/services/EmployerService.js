@@ -83,9 +83,8 @@ class EmployerService{
 
   }
   
-
   async employer({user}) {
-     console.log({user})
+
     if (!user) {
        throw new AuthenticationError('You should be signed!');
     }

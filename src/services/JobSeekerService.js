@@ -137,7 +137,7 @@ class JobSeekerSerivce{
     }
     
     const { id } = user;
-    return await models.employee.findOne({ where:{id} });
+    return await this.models.employee.findOne({ where:{id} });
 
   }
  
