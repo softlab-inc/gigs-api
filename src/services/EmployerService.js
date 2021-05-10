@@ -4,6 +4,8 @@ const storeFS = require('../utils/storeFS');
 const { AuthenticationError, ForbiddenError } = require('apollo-server-express');
 
 const LICENSE_FOLDER = 3
+const PAY_BY_FULL_AMOUNT = 0;
+const PAY_BY_HOURLY_RATE = 1;
 
 /**
  * 
@@ -97,15 +99,32 @@ class EmployerService{
 
   async employerCreateGig({ input, user, pubsub }) {
     
+    const {
+        name,
+        details,  
+        budget,
+        hourlyRate,
+        duration,
+        professionId,
+        paymentMethod,
+    } = input;
+    
+
+
     if (!user) {
        throw new AuthenticationError('You should be signed!');
     }
 
     try {
-        pubsub.publish('onGigCreated', { onGigCreated: {id:1,...input,employerId:user.id,paymentMethod:1,status:0} });
-      return  {id:1,...input,employerId:user.id,paymentMethod:1,status:0}
+        if (paymentMethod === PAY_BY_FULL_AMOUNT) {
+          pubsub.publish('onGigCreated', { onGigCreated: {id:1,...input,...input,paymentMethod:PAY_BY_FULL_AMOUNT}});
+          return  {id:1,...input,...input,paymentMethod:PAY_BY_FULL_AMOUNT}
+        } else {
+          pubsub.publish('onGigCreated', { onGigCreated: {id:1,...input,...input,paymentMethod:PAY_BY_HOURLY_RATE}}); 
+          return  {id:1,...input,...input,paymentMethod:PAY_BY_HOURLY_RATE}
+      }
     } catch (error) {
-    throw new Error(error)
+      throw new Error(error);
     }
 
   }

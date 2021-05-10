@@ -21,12 +21,13 @@ class GigService {
      */
     if (this.isNotifiable(searchResults)) {
       return await this.notifyAllEmployers(employee, id);
+      //save to the notfiy table
     } else {
       return this.notifySomeEmployers(searchResults, id);
+       //save to the notfiify table
     }
 
   }
-
 
 
   isNotifiable(searchResults) {
@@ -50,7 +51,7 @@ class GigService {
     
     const employeeData = searchResult.map(data => data.get('employee'));
 
-    return employeeData.length;
+    return employeeData.length && true;
   }
    
 }
