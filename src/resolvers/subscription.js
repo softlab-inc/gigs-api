@@ -9,21 +9,17 @@ module.exports = {
     }
   },
   onGigCreated: {
+    /**
+       extract professionId from payload
+      look up from profession table for employer with same profession
+      if true notifed them of a gig else nothing is notified
+       */
     subscribe:withFilter((_, __, { pubsub}) => pubsub.asyncIterator('onGigCreated'),async (payload, variables,{models} ) => {
-      const gigService = new GigService(models);
-      const { professionId } = payload.onGigCreated;
-      const user = getUser(variables.token);
-      
-      // const notifyAll = await gigService.notifyAllJobSeekers({ professionId });
-     
-      const notified = await gigService.notifyJobSeeker({ professionId, employeeId:user.id });
-
-      //extract professionId from payload
-      //look up from profession table for employer with same profession
-      //if true notifed them of a gig else nothing is notified
-      
-      return notified;
-      // return pubsub.asyncIterator(['onGigCreated']);
+        const gigService = new GigService(models);
+        const { professionId } = payload.onGigCreated;
+        const user = getUser(variables.token);
+        const notified = await gigService.notifyJobSeeker({ professionId, employeeId:user.id });
+        return notified && true;
         },
       ),
     
