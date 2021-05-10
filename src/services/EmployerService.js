@@ -106,11 +106,11 @@ class EmployerService{
 
     try {
         if (paymentMethod === PAY_BY_FULL_AMOUNT) {
-          let gig = await this.models.gig.create({ ...input, paymentMethod: PAY_BY_FULL_AMOUNT });
+          let gig = await this.models.gig.create({ ...input, paymentMethod: PAY_BY_FULL_AMOUNT,employeeId:user.id});
           pubsub.publish('onGigCreated', { onGigCreated:{gig}});
           return gig;
         } else {
-          let gig = await this.models.gig.create({ ...input, paymentMethod: PAY_BY_HOURLY_RATE });
+          let gig = await this.models.gig.create({ ...input, paymentMethod: PAY_BY_HOURLY_RATE,employeeId:user.id });
           pubsub.publish('onGigCreated', { onGigCreated: {gig}}); 
           return gig;
       }
