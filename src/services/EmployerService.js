@@ -95,7 +95,8 @@ class EmployerService{
   }
 
 
-  async employerCreateGig({ input, user,pubsub }) {
+  async employerCreateGig({ input, user, pubsub }) {
+    
     if (!user) {
        throw new AuthenticationError('You should be signed!');
     }

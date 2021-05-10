@@ -9,7 +9,7 @@ module.exports = {
 
       const JobSeeker = await jobSeekerSerivce.createJobSeeker({ input });
 
-      return jwt.sign({id: JobSeeker.id},JWT_SECRETE);
+      return jwt.sign({id: JobSeeker.id},process.env.JWT_SECRETE);
                                                       
   },
   createProfession:async (parent,{input},{models}) => {
@@ -71,9 +71,10 @@ module.exports = {
     
     const gig = await employerService.employerCreateGig({ user, input, pubsub });
     
-    const notificationResult = await gigService.notifyAllJobSeekers(gig)
+    const notifiedResult = await gigService.notifyAllJobSeekers(gig)
 
-    console.log({notificationResult})
+    console.log(notifiedResult);
+    console.log({ gig });
 
     return gig;
 
