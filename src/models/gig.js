@@ -31,7 +31,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     hourlyRate: {
-      type: DataTypes.DECIMAL(7,5),
+      type: DataTypes.DECIMAL(7,2),
       allowNull: true
     },
     status: {
