@@ -5,16 +5,16 @@ class GigService {
     this.models = models;
   }
 
-  async notifyAllJobSeekers({ professionId}){
+  async notifyAllJobSeekers({ professionId,id}){
     const { employeeProfession, notified, gig, employee } = this.models;
 
     const searchResults = await employeeProfession.findAll({ where: { professionId }, include: [employee]});
 
     if (searchResults.length === 0) {
       const allEmployees = await employee.findAll({ attributes: ['id'] ,raw:true});
-      return allEmployees.map(data => ({employeeId:data.id}));
+      return allEmployees.map(data => ({employeeId:data.id,gigId:id}));
     } else {
-      const employees = searchResults.map(data => ({employeeId:data.get('employee').id}));
+      const employees = searchResults.map(data => ({employeeId:data.get('employee').id,gigId:id}));
       return employees;
     }
 
@@ -33,7 +33,6 @@ class GigService {
     //   return true;
     // } 
 
-    
   }
    
 }
