@@ -65,31 +65,19 @@ module.exports = {
 
     return jwt.sign({ id: Employer.id }, process.env.JWT_SECRETE);
   },
-  employerCreateGig: async (parent, { input }, { models, user,pubsub }) => {
-    const employerService = new EmployerService(models);
-    const gigService = new GigService(models);
-
-    const {
-        name,
-        details,  
-        budget,
-        hourlyRate,
-        duration,
-        professionId,
-        paymentMethod,
-    } = input;
+  employerCreateGig: async (parent, { input }, { models, user, pubsub }) => {
     
+    const employerService = new EmployerService(models);
 
+    const gigService = new GigService(models);
 
     const gig = await employerService.employerCreateGig({ user, input, pubsub });
     
     const notifiedResult = await gigService.notifyAllJobSeekers(gig);
 
-    console.log({notifiedResult});
-    console.log({ gig });
+    console.log({ notifiedResult });
 
-    return input;
-
+    return gig;
   }
 
   
