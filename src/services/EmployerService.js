@@ -101,16 +101,17 @@ class EmployerService{
     const {paymentMethod} = input;
     
     if (!user) {
+
        throw new AuthenticationError('You should be signed!');
     }
 
     try {
         if (paymentMethod === PAY_BY_FULL_AMOUNT) {
-          let gig = await this.models.gig.create({ ...input, paymentMethod: PAY_BY_FULL_AMOUNT,employeeId:user.id});
+          let gig = await this.models.gig.create({ ...input, paymentMethod: PAY_BY_FULL_AMOUNT,employerId:user.id});
           pubsub.publish('onGigCreated', { onGigCreated:{gig}});
           return gig;
         } else {
-          let gig = await this.models.gig.create({ ...input, paymentMethod: PAY_BY_HOURLY_RATE,employeeId:user.id });
+          let gig = await this.models.gig.create({ ...input, paymentMethod: PAY_BY_HOURLY_RATE,employerId:user.id });
           pubsub.publish('onGigCreated', { onGigCreated: {gig}}); 
           return gig;
       }
