@@ -109,19 +109,19 @@ class EmployerService{
         paymentMethod,
     } = input;
     
-
-
     if (!user) {
        throw new AuthenticationError('You should be signed!');
     }
 
     try {
         if (paymentMethod === PAY_BY_FULL_AMOUNT) {
-          pubsub.publish('onGigCreated', { onGigCreated: {id:1,...input,...input,paymentMethod:PAY_BY_FULL_AMOUNT}});
-          return  {id:1,...input,...input,paymentMethod:PAY_BY_FULL_AMOUNT}
+          let gig = await this.models.gig.create({ ...input, paymentMethod: PAY_BY_FULL_AMOUNT });
+          pubsub.publish('onGigCreated', { onGigCreated:{gig}});
+          return gig;
         } else {
-          pubsub.publish('onGigCreated', { onGigCreated: {id:1,...input,...input,paymentMethod:PAY_BY_HOURLY_RATE}}); 
-          return  {id:1,...input,...input,paymentMethod:PAY_BY_HOURLY_RATE}
+          let gig = await this.models.gig.create({ ...input, paymentMethod: PAY_BY_HOURLY_RATE });
+          pubsub.publish('onGigCreated', { onGigCreated: {gig}}); 
+          return gig;
       }
     } catch (error) {
       throw new Error(error);
