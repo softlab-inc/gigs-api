@@ -67,7 +67,7 @@ class EmployerService{
      let { email, password } = content.input;
       email = email.trim().toLowerCase();
      let user = await this.models.employer.findOne({where:{email}});
-
+     console.log({user})
        if(!user){
           throw new AuthenticationError('User account not found! try again');
        }
@@ -83,9 +83,8 @@ class EmployerService{
 
   }
   
-
   async employer({user}) {
-    
+
     if (!user) {
        throw new AuthenticationError('You should be signed!');
     }
@@ -94,6 +93,23 @@ class EmployerService{
     return await this.models.employer.findOne({ where:{id} });
 
   }
+
+
+  async employerCreateGig({ input, user,pubsub }) {
+    if (!user) {
+       throw new AuthenticationError('You should be signed!');
+    }
+
+    try {
+      pubsub.publish('onGigCreated', { onGigCreated: {id:1,...input,employerId:user.id,paymentMethod:1,status:0} });
+   return  {id:1,...input,employerId:user.id,paymentMethod:1,status:0}
+    } catch (error) {
+    throw new Error(error)
+    }
+
+  }
+
+
 
   
 

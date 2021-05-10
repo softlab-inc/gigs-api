@@ -80,14 +80,14 @@ class JobSeekerSerivce{
      let user = await this.models.employee.findOne({where:{email}});
 
        if(!user){
-          throw new AuthenticationError('Error signing in');
+          throw new AuthenticationError('Account not found! register');
        }
     
        //comparing the password with the hash stored in the database 
        let valid = await bcrypt.compare(password,user.password);
     
         if(!valid){
-            throw new AuthenticationError('Error signing in')
+            throw new AuthenticationError('Incorrrect password! try gain')
           }
 
     return user;
@@ -137,7 +137,7 @@ class JobSeekerSerivce{
     }
     
     const { id } = user;
-    return await models.employee.findOne({ where:{id} });
+    return await this.models.employee.findOne({ where:{id} });
 
   }
  

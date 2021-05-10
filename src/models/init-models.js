@@ -7,6 +7,7 @@ var _employeeProfession = require("./employeeProfession");
 var _employer = require("./employer");
 var _employerLocation = require("./employerLocation");
 var _gig = require("./gig");
+var _notified = require("./notified");
 var _profession = require("./profession");
 var _rating = require("./rating");
 var _reviews = require("./reviews");
@@ -20,6 +21,7 @@ function initModels(sequelize) {
   var employer = _employer(sequelize, DataTypes);
   var employerLocation = _employerLocation(sequelize, DataTypes);
   var gig = _gig(sequelize, DataTypes);
+  var notified = _notified(sequelize, DataTypes);
   var profession = _profession(sequelize, DataTypes);
   var rating = _rating(sequelize, DataTypes);
   var reviews = _reviews(sequelize, DataTypes);
@@ -46,6 +48,12 @@ function initModels(sequelize) {
   district.hasMany(employerLocation, { foreignKey: "districtId"});
   gig.belongsTo(employer, { foreignKey: "employerId"});
   employer.hasMany(gig, { foreignKey: "employerId"});
+  gig.belongsTo(profession, { foreignKey: "professionId"});
+  profession.hasMany(gig, { foreignKey: "professionId"});
+  notified.belongsTo(gig, { foreignKey: "gigId"});
+  gig.hasMany(notified, { foreignKey: "gigId"});
+  notified.belongsTo(employee, { foreignKey: "employeeId"});
+  employee.hasMany(notified, { foreignKey: "employeeId"});
   reviews.belongsTo(rating, { foreignKey: "ratingId"});
   rating.hasMany(reviews, { foreignKey: "ratingId"});
 
@@ -58,6 +66,7 @@ function initModels(sequelize) {
     employer,
     employerLocation,
     gig,
+    notified,
     profession,
     rating,
     reviews,

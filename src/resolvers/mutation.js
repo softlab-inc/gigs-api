@@ -1,7 +1,4 @@
-const bcrypt = require('bcrypt'); //password increption module
 const jwt = require('jsonwebtoken'); //json web token module
-
-const JWT_SECRETE = require('../utils/tokens');
 
 const { JobSeekerSerivce,EmployerService} = require('../services');
 
@@ -24,7 +21,7 @@ module.exports = {
       await models.profession.bulkCreate(nameArr);
        return 'Professions created successfully'
     } catch (error) {
-      throw new Error(`Duplicated professoin ${error}`);
+      throw new Error(`Duplicated profession values ${error}`);
     }
   
   },
@@ -35,7 +32,7 @@ module.exports = {
       const user = await jobSeekerService.signInJobSeeker({input})
     
       //signing the user and returning the json web token
-      return jwt.sign({id:user.id},JWT_SECRETE);
+      return jwt.sign({id:user.id},process.env.JWT_SECRETE);
   },
   userUpdateStatus: async (parent, { status }, { models, user,pubsub }) => {
     
@@ -59,14 +56,23 @@ module.exports = {
 
     const Employer = await employerService.createEmployer({ input });
 
-    return jwt.sign({ id: Employer.id }, JWT_SECRETE);
+    return jwt.sign({ id: Employer.id }, process.env.JWT_SECRETE);
   },
   signInEmployer: async (parent, { input }, { models }) => {
     const employerService = new EmployerService(models);
 
     const Employer = await employerService.signInEmployer({ input });
 
-    return jwt.sign({ id: Employer.id }, JWT_SECRETE);
+    return jwt.sign({ id: Employer.id }, process.env.JWT_SECRETE);
+  },
+  employerCreateGig: async (parent, { input }, { models, user,pubsub }) => {
+    const employerService = new EmployerService(models);
+    
+     return await employerService.employerCreateGig({ user, input,pubsub });
+
+
+
+
   }
 
   

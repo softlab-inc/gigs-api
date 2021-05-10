@@ -17,6 +17,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: true
     },
+    paymentMethod: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: 0
+    },
     budget: {
       type: DataTypes.DECIMAL(10,2),
       allowNull: true
@@ -25,15 +30,28 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: true
     },
+    hourlyRate: {
+      type: DataTypes.DECIMAL(7,5),
+      allowNull: true
+    },
     status: {
       type: DataTypes.INTEGER,
-      allowNull: true
+      allowNull: true,
+      defaultValue: 0
     },
     employerId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
         model: 'employer',
+        key: 'id'
+      }
+    },
+    professionId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'profession',
         key: 'id'
       }
     }
@@ -55,6 +73,13 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "employerId" },
+        ]
+      },
+      {
+        name: "FKgig79484",
+        using: "BTREE",
+        fields: [
+          { name: "professionId" },
         ]
       },
     ]
