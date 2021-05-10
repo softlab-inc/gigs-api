@@ -19,7 +19,7 @@ module.exports = {
         const { professionId } = payload.onGigCreated;
         const user = getUser(variables.token);
         const notified = await gigService.notifyJobSeeker({ professionId, employeeId:user.id });
-        return notified && true;
+        return notified;
         },
       ),
     

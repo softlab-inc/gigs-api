@@ -102,8 +102,8 @@ class EmployerService{
     }
 
     try {
-        pubsub.publish('onGigCreated', { onGigCreated: {id:1,...input,employerId:user.id,paymentMethod:1,status:0} });
-      return  {id:1,...input,employerId:user.id,paymentMethod:1,status:0}
+        pubsub.publish('onGigCreated', { onGigCreated: {id:1,...input} });
+      return  {id:1,...input}
     } catch (error) {
     throw new Error(error)
     }

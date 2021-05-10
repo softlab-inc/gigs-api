@@ -51,7 +51,7 @@ class GigService {
     
     const employeeData = searchResult.map(data => data.get('employee'));
 
-    return employeeData.length;
+    return employeeData.length && true;
   }
    
 }
