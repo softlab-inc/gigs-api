@@ -96,18 +96,9 @@ class EmployerService{
 
   }
 
-
   async employerCreateGig({ input, user, pubsub }) {
     
-    const {
-        name,
-        details,  
-        budget,
-        hourlyRate,
-        duration,
-        professionId,
-        paymentMethod,
-    } = input;
+    const {paymentMethod} = input;
     
     if (!user) {
        throw new AuthenticationError('You should be signed!');
@@ -128,10 +119,6 @@ class EmployerService{
     }
 
   }
-
-
-
-  
 
 }
 

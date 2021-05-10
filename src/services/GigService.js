@@ -9,7 +9,7 @@ class GigService {
   }
 
   async notifyAllJobSeekers({ professionId,id}){
-    const { employeeProfession, notified, gig, employee } = this.models;
+    const { employeeProfession, notified, employee } = this.models;
 
     const searchResults = await employeeProfession.findAll({ where: { professionId }, include: [employee]});
 
@@ -20,11 +20,11 @@ class GigService {
      * notify only those that conform t the criteria
      */
     if (this.isNotifiable(searchResults)) {
-      return await this.notifyAllEmployers(employee, id);
-      //save to the notfiy table
+       let employees = await this.notifyAllEmployers(employee, id);
+       return await notified.bulkCreate(employees)
     } else {
-      return this.notifySomeEmployers(searchResults, id);
-       //save to the notfiify table
+      let employees = this.notifySomeEmployers(searchResults, id);
+      return  await notified.bulkCreate(employees)
     }
 
   }
