@@ -8,7 +8,8 @@ class GigService {
     this.models = models;
   }
 
-  async notifyAllJobSeekers({ professionId,id}){
+  async notifyAllJobSeekers({ professionId, id }) {
+
     const { employeeProfession, notified, employee } = this.models;
 
     const searchResults = await employeeProfession.findAll({ where: { professionId }, include: [employee]});
@@ -28,7 +29,6 @@ class GigService {
     }
 
   }
-
 
   isNotifiable(searchResults) {
     return searchResults.length === EMPTY_LIST;
@@ -53,8 +53,6 @@ class GigService {
 
     return employeeData.length && true;
   }
-   
 }
-
 
 module.exports = GigService;
