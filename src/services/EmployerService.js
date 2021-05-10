@@ -101,7 +101,6 @@ class EmployerService{
     const {paymentMethod} = input;
     
     if (!user) {
-
        throw new AuthenticationError('You should be signed!');
     }
 

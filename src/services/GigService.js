@@ -20,11 +20,11 @@ class GigService {
      * notify only those that conform t the criteria
      */
     if (this.isNotifiable(searchResults)) {
-       let employees = await this.notifyAllEmployers(employee, id);
+       let employees = await this.notifyAllEmployees(employee, id);
        return await notified.bulkCreate(employees)
     } else {
-      let employees = this.notifySomeEmployers(searchResults, id);
-      return  await notified.bulkCreate(employees)
+        let employees = this.notifySomeEmployees(searchResults, id);
+      return await notified.bulkCreate(employees);
     }
 
   }
@@ -34,18 +34,18 @@ class GigService {
     return searchResults.length === EMPTY_LIST;
   }
 
-  notifySomeEmployers(searchResults, id) {
+  notifySomeEmployees(searchResults, id) {
     const employees = searchResults.map(data => ({ employeeId: data.get('employee').id, gigId: id, status: PRIORITY_HIGH }));
     return employees;
   }
 
-  async notifyAllEmployers(employee, id) {
+  async notifyAllEmployees(employee, id) {
     const allEmployees = await employee.findAll({ attributes: ['id'], raw: true });
     return allEmployees.map(data => ({ employeeId: data.id, gigId: id, status: PRIORITY_LOW }));
   }
 
   async notifyJobSeeker({ professionId, employeeId }){
-    const {employeeProfession,notified,employee} = this.models
+    const {employeeProfession,employee} = this.models
 
     const searchResult = await employeeProfession.findAll({ where: { professionId, employeeId }, include: [employee] });
     
