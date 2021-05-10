@@ -95,14 +95,15 @@ class EmployerService{
   }
 
 
-  async employerCreateGig({ input, user,pubsub }) {
+  async employerCreateGig({ input, user, pubsub }) {
+    
     if (!user) {
        throw new AuthenticationError('You should be signed!');
     }
 
     try {
-      pubsub.publish('onGigCreated', { onGigCreated: {id:1,...input,employerId:user.id,paymentMethod:1,status:0} });
-   return  {id:1,...input,employerId:user.id,paymentMethod:1,status:0}
+        pubsub.publish('onGigCreated', { onGigCreated: {id:1,...input,employerId:user.id,paymentMethod:1,status:0} });
+      return  {id:1,...input,employerId:user.id,paymentMethod:1,status:0}
     } catch (error) {
     throw new Error(error)
     }
