@@ -79,7 +79,7 @@ module.exports = {
         paymentMethod,
     } = input;
     
-    console.log(input);
+
 
     const gig = await employerService.employerCreateGig({ user, input, pubsub });
     
