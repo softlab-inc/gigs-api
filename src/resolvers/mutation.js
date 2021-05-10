@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken'); //json web token module
 
-const { JobSeekerSerivce,EmployerService} = require('../services');
+const { JobSeekerSerivce,EmployerService,GigService} = require('../services');
 
 module.exports = {
   createJobSeeker:async (parent,{input},{models,pubsub}) => {
@@ -67,11 +67,15 @@ module.exports = {
   },
   employerCreateGig: async (parent, { input }, { models, user,pubsub }) => {
     const employerService = new EmployerService(models);
+    const gigService = new GigService(models);
     
-     return await employerService.employerCreateGig({ user, input,pubsub });
+    const gig = await employerService.employerCreateGig({ user, input, pubsub });
+    
+    const notificationResult = await gigService.notifyAllJobSeekers(gig)
 
+    console.log({notificationResult})
 
-
+    return gig;
 
   }
 

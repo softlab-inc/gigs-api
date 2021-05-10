@@ -20,9 +20,13 @@ module.exports = {
       const { professionId } = payload.onGigCreated;
       const user = getUser(variables.token);
       
-      const notified = await gigService.notifyJobSeekers({professionId, user} )
+      // const notifyAll = await gigService.notifyAllJobSeekers({ professionId });
+     
 
-      console.log({notified})
+      const notified = await gigService.notifyJobSeeker({ professionId, user });
+
+
+    
       //extract professionId from payload
       //look up from profession table for employer with same profession
       //if true notifed them of a gig else nothing is notified
