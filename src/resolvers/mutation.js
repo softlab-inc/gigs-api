@@ -68,12 +68,14 @@ module.exports = {
   employerCreateGig: async (parent, { input }, { models, user,pubsub }) => {
     const employerService = new EmployerService(models);
     const gigService = new GigService(models);
-    
-    const gig = await employerService.employerCreateGig({ user, input, pubsub });
-    
-    const notifiedResult = await gigService.notifyAllJobSeekers(gig)
 
-    console.log(notifiedResult);
+    const {} = input;
+    
+    // const gig = await employerService.employerCreateGig({ user, input, pubsub });
+    
+    // const notifiedResult = await gigService.notifyAllJobSeekers(gig);
+
+    // console.log(notifiedResult);
     console.log({ gig });
 
     return gig;

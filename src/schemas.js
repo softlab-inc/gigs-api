@@ -117,9 +117,10 @@ type Profession{
  input EmployerCreateGigInput{
     name:String!
     details:String!
+    paymentMethod:Int!
     budget:Float!
     duration:Int
-    hourly:Float
+    hourlyRate:Float
     status:Int
     professionId:Int!
  }
