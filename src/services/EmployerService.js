@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt'); //password encryption module
 const storeFS = require('../utils/storeFS');
 
-const { AuthenticationError, ForbiddenError } = require('apollo-server-express');
+const { AuthenticationError } = require('apollo-server-express');
 
 const LICENSE_FOLDER = 3
 const PAY_BY_FULL_AMOUNT = 0;
@@ -67,9 +67,10 @@ class EmployerService{
   async signInEmployer(content) {
    
      let { email, password } = content.input;
-      email = email.trim().toLowerCase();
-     let user = await this.models.employer.findOne({where:{email}});
-     console.log({user})
+    email = email.trim().toLowerCase();
+    
+    let user = await this.models.employer.findOne({ where: { email } });
+    
        if(!user){
           throw new AuthenticationError('User account not found! try again');
        }
@@ -106,13 +107,15 @@ class EmployerService{
 
     try {
         if (paymentMethod === PAY_BY_FULL_AMOUNT) {
-          let gig = await this.models.gig.create({ ...input, paymentMethod: PAY_BY_FULL_AMOUNT,employeeId:user.id});
-          pubsub.publish('onGigCreated', { onGigCreated:{gig}});
-          return gig;
+          let gig = await this.models.gig.create({ ...input, paymentMethod: PAY_BY_FULL_AMOUNT, employerId: user.id });
+
+          pubsub.publish('onGigCreated', { onGigCreated:gig.dataValues});
+          return gig.dataValues;
         } else {
-          let gig = await this.models.gig.create({ ...input, paymentMethod: PAY_BY_HOURLY_RATE,employeeId:user.id });
-          pubsub.publish('onGigCreated', { onGigCreated: {gig}}); 
-          return gig;
+          let gig = await this.models.gig.create({ ...input, paymentMethod: PAY_BY_HOURLY_RATE, employerId: user.id });
+
+          pubsub.publish('onGigCreated', { onGigCreated:gig.dataValues}); 
+          return gig.dataValues;
       }
     } catch (error) {
       throw new Error(error);

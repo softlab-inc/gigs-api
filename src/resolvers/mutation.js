@@ -73,9 +73,7 @@ module.exports = {
 
     const gig = await employerService.employerCreateGig({ user, input, pubsub });
     
-    const notifiedResult = await gigService.notifyAllJobSeekers(gig);
-
-    console.log({ notifiedResult });
+    await gigService.notifyAllJobSeekers(gig);
 
     return gig;
   }

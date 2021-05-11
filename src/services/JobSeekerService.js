@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt'); //password encryption module
 const storeFS = require('../utils/storeFS');
 
-const {AuthenticationError,ForbiddenError} = require('apollo-server-express');
+const {AuthenticationError} = require('apollo-server-express');
 
 const PROFILE_FOLDER = 0
 const IDS_FOLDER = 1
@@ -71,6 +71,18 @@ class JobSeekerSerivce{
       throw new Error(error);
     }
 
+  }
+
+  async getNotifications({ employeeId}) {
+    const {gig,notified,} = this.models;
+    let data = await notified.findAll({where:{employeeId}, include: [gig] });
+    return data.map(data => data.get('gig'));
+  }
+
+  async getProfessions({ employeeId }) {
+     const {employeeProfession,profession } = this.models;
+    let data = await employeeProfession.findAll({where:{employeeId}, include: [profession] });
+    return data.map(data => data.get('profession'));
   }
 
   async signInJobSeeker(content) {
