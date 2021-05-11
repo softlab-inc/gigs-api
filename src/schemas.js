@@ -15,6 +15,7 @@ module.exports = gql`
     nationalIdImageUri:String
     status:Int
     hasProfession:[Profession!]
+    hasNotifications:[Notification!]
     pendingGigs:[Gig!]
     completeGigs:[Gig!]
     createdAt:DateTime
@@ -27,8 +28,8 @@ module.exports = gql`
     email:String
     phone:String
     password:String
-    updatedAt:String
-    createdAt:String
+    createdAt:DateTime
+    updatedAt:DateTime
     licenseImageUri:String
     hasLocation:String
   }
@@ -54,8 +55,8 @@ type Gig{
   hourlyRate:Float
   status:Int!
   assignedTo:JobSeeker
-  updatedAt:String!
-  createdAt:String!
+  createdAt:DateTime
+  updatedAt:DateTime
 }
   
 fragment infor on JobSeeker {
@@ -63,7 +64,10 @@ fragment infor on JobSeeker {
 }
 
 type Notification{
-   gig:Gig
+    status:Int!
+    gig:Gig
+    createdAt:DateTime
+    updatedAt:DateTime
 }
 
 type Profession{
@@ -81,7 +85,7 @@ type Profession{
   jobSeekers:[JobSeeker!]
   professions:[Profession!]
   gigs:[Gig!]
-  notifications:[]
+  notifications:[Notification!]
  }
 
 

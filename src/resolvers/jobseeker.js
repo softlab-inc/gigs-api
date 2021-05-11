@@ -1,10 +1,14 @@
+const {JobSeekerSerivce} = require('../services/')
 
 module.exports = {
   hasProfession: async (parent, args, { models }) => {
-    const {employeeProfession,profession } = models;
-    let data = await employeeProfession.findAll({where:{employeeId:parent.id}, include: [profession] });
-    return data.map(data => data.get('profession'));
+  const jobSeekerService = new JobSeekerSerivce(models);
+  return  await jobSeekerService.getProfessions({ employeeId: parent.id });
   },
+  hasNotifications: async (parent, args, { models }) => {
+    const jobSeekerService = new JobSeekerSerivce(models);
+    return await jobSeekerService.getNotifications({ employeeId: parent.id });
+  }
 }
 
 
