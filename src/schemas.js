@@ -62,6 +62,10 @@ fragment infor on JobSeeker {
   email
 }
 
+type Notification{
+   gig:Gig
+}
+
 type Profession{
     id:Int!
     name:String!
@@ -77,7 +81,10 @@ type Profession{
   jobSeekers:[JobSeeker!]
   professions:[Profession!]
   gigs:[Gig!]
+  notifications:[]
  }
+
+
 
  #InputFields
  input CreateJobSeekerInput{
