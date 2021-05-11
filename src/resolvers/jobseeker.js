@@ -10,5 +10,3 @@ module.exports = {
     return await jobSeekerService.getNotifications({ employeeId: parent.id });
   }
 }
-
-
