@@ -47,7 +47,7 @@ class EmployerService{
     
       //saving uploaded files to respective Folders
       licenseImageUri = await getResult(license,LICENSE_FOLDER);
-
+      console.log({ licenseImageUri });
     try {
        const Employer = await employer.create({
                                         fullName,

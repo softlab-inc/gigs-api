@@ -31,7 +31,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: true
     },
-    license: {
+    licenseImageUri: {
       type: DataTypes.TEXT,
       allowNull: true
     }
