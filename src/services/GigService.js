@@ -30,7 +30,6 @@ class GigService {
 
   }
 
-  
   isNotifiable(searchResults) {
     return searchResults.length === EMPTY_LIST;
   }
