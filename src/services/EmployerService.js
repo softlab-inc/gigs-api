@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt'); //password encryption module
 const storeFS = require('../utils/storeFS');
 
-const { AuthenticationError,ForbiddenError } = require('apollo-server-express');
+const { AuthenticationError } = require('apollo-server-express');
 
 const LICENSE_FOLDER = 3
 const PAY_BY_FULL_AMOUNT = 0;
@@ -44,7 +44,7 @@ class EmployerService{
     console.log('user data');
     console.log({ user });
      if(user){
-          throw new ForbiddenError('Email was already used, try again!');
+          throw new Error('Email was already used, try again!');
      }
     
       //saving uploaded files to respective Folders
@@ -63,7 +63,7 @@ class EmployerService{
        return Employer;                                     
     } catch (error) {
       console.log(error);
-      throw new ForbiddenError('Phone number has already been used, try again!');  
+      throw new Error('Phone number has already been used, try again!');  
     }
     
   }
