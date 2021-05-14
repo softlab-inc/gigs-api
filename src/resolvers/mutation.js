@@ -52,11 +52,15 @@ module.exports = {
   },
   createEmployer: async (parent, { input }, { models }) => {
     
-    const employerService = new EmployerService(models);
+    try {
+      const employerService = new EmployerService(models);
 
     const Employer = await employerService.createEmployer({ input });
 
     return jwt.sign({ id: Employer.id }, process.env.JWT_SECRETE);
+    } catch (error) {
+      throw new Error(error)
+    }
   },
   signInEmployer: async (parent, { input }, { models }) => {
     const employerService = new EmployerService(models);
