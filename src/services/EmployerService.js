@@ -41,12 +41,15 @@ class EmployerService{
 
      let user = await this.models.employer.findOne({where:{email}});
 
+    console.log('user data');
+    console.log({ user });
      if(user){
           throw new ForbiddenError('Email was already used, try again!');
      }
     
       //saving uploaded files to respective Folders
-      licenseImageUri = await getResult(license,LICENSE_FOLDER);
+    licenseImageUri = await getResult(license, LICENSE_FOLDER);
+    
 
     try {
        const Employer = await employer.create({
@@ -59,6 +62,7 @@ class EmployerService{
                                         });
        return Employer;                                     
     } catch (error) {
+      console.log(error);
       throw new ForbiddenError('Phone number has already been used, try again!');  
     }
     
