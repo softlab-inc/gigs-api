@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt'); //password encryption module
 const storeFS = require('../utils/storeFS');
 
-const { AuthenticationError} = require('apollo-server-express');
+const { AuthenticationError,ForbiddenError } = require('apollo-server-express');
 
 const LICENSE_FOLDER = 3
 const PAY_BY_FULL_AMOUNT = 0;
@@ -39,15 +39,15 @@ class EmployerService{
 
     let licenseImageUri = '';
 
-     let user = await this.models.employer.findOne({where:{email}});
+     let user = await employer.findOne({where:{email}});
 
      if(user){
-        throw new AuthenticationError('Email was already used, try again!')
+          throw new ForbiddenError('Email was already used, try again!');
      }
     
       //saving uploaded files to respective Folders
     licenseImageUri = await getResult(license, LICENSE_FOLDER);
-    
+
 
     try {
        const Employer = await employer.create({
@@ -60,7 +60,7 @@ class EmployerService{
                                         });
        return Employer;                                     
     } catch (error) {
-      throw new AuthenticationError('Phone number has already been used, try again!');  
+      throw new ForbiddenError('Phone number has already been used, try again!');  
     }
     
   }

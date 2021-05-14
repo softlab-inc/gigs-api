@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt'); //password encryption module
 const storeFS = require('../utils/storeFS');
 
-const {AuthenticationError} = require('apollo-server-express');
+const {AuthenticationError,ForbiddenError} = require('apollo-server-express');
 
 const PROFILE_FOLDER = 0
 const IDS_FOLDER = 1
@@ -42,7 +42,7 @@ class JobSeekerSerivce{
       let user = await this.models.employee.findOne({where:{email}});
 
        if(user){
-          throw new AuthenticationError('Email was already used, try again!');
+          throw new ForbiddenError('Email was already used, try again');
        }
     
       //saving uploaded files to respective Folders
