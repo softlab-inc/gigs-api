@@ -42,7 +42,7 @@ class JobSeekerSerivce{
       let user = await this.models.employee.findOne({where:{email}});
 
        if(user){
-          throw new AuthenticationError('Email was already used try again');
+          throw new AuthenticationError('Email was already used, try again!');
        }
     
       //saving uploaded files to respective Folders
