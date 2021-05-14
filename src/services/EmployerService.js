@@ -42,7 +42,7 @@ class EmployerService{
      let user = await this.models.employer.findOne({where:{email}});
 
      if(user){
-          throw new ForbiddenError('Email was already used try again');
+          throw new ForbiddenError('Email was already used, try again!');
      }
     
       //saving uploaded files to respective Folders
@@ -59,7 +59,7 @@ class EmployerService{
                                         });
        return Employer;                                     
     } catch (error) {
-      throw new ForbiddenError('Phone number has already been used, try again');  
+      throw new ForbiddenError('Phone number has already been used, try again!');  
     }
     
   }
@@ -79,7 +79,7 @@ class EmployerService{
        let valid = await bcrypt.compare(password,user.password);
     
         if(!valid){
-            throw new AuthenticationError('Email or password is wrong! try again')
+            throw new AuthenticationError(`Email and password don't match! try again`)
           }
 
     return user;
