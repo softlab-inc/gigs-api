@@ -16,8 +16,6 @@ const typeDefs = require('./schemas');
 //Providing a resolver to the schema fields
 const resolvers = require('./resolvers');
 
-console.log("Testing jwt secrete");
-console.log(process.env.JWT_SECRETE);
 
 //const pubsub = new PubSub();
 const pubsub = new PubSub(); 
@@ -60,7 +58,6 @@ const app = express();
 
 //Applying Apollo  Graph GL middleware and setting the path
 server.applyMiddleware({ app, path: '/gigs-app/api/v1' });
-
 
 /**
  * Setting up the middlewares of express server 

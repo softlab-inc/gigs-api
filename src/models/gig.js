@@ -54,6 +54,10 @@ module.exports = function(sequelize, DataTypes) {
         model: 'profession',
         key: 'id'
       }
+    },
+    neededBy: {
+      type: DataTypes.DATE,
+      allowNull: true
     }
   }, {
     sequelize,
