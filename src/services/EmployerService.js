@@ -126,17 +126,34 @@ class EmployerService{
     }
 
     try {
-        if (paymentMethod === PAY_BY_FULL_AMOUNT) {
+      if (input.professionId === OTHER_PROFESION) {
+          let professionId = this.employeeCreateProfession(input.other);
+          input.professionId = professionId;
+        
+          if (paymentMethod === PAY_BY_FULL_AMOUNT) {
           let gig = await this.models.gig.create({ ...input, paymentMethod: PAY_BY_FULL_AMOUNT, employerId: user.id });
-
           pubsub.publish('onGigCreated', { onGigCreated:gig.dataValues});
           return gig.dataValues;
         } else {
           let gig = await this.models.gig.create({ ...input, paymentMethod: PAY_BY_HOURLY_RATE, employerId: user.id });
-
           pubsub.publish('onGigCreated', { onGigCreated:gig.dataValues}); 
           return gig.dataValues;
       }
+
+      } else {
+        
+         if (paymentMethod === PAY_BY_FULL_AMOUNT) {
+          let gig = await this.models.gig.create({ ...input, paymentMethod: PAY_BY_FULL_AMOUNT, employerId: user.id });
+          pubsub.publish('onGigCreated', { onGigCreated:gig.dataValues});
+          return gig.dataValues;
+        } else {
+          let gig = await this.models.gig.create({ ...input, paymentMethod: PAY_BY_HOURLY_RATE, employerId: user.id });
+          pubsub.publish('onGigCreated', { onGigCreated:gig.dataValues}); 
+          return gig.dataValues;
+      }
+
+        }
+       
     } catch (error) {
       throw new Error(error);
     }
