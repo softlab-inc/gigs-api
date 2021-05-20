@@ -2,10 +2,12 @@ const bcrypt = require('bcrypt'); //password encryption module
 const storeFS = require('../utils/storeFS');
 
 const { AuthenticationError,ForbiddenError } = require('apollo-server-express');
+const profession = require('../models/profession');
 
 const LICENSE_FOLDER = 3
 const PAY_BY_FULL_AMOUNT = 0;
 const PAY_BY_HOURLY_RATE = 1;
+const OTHER_PROFESION = 31;
 
 /**
  * 
@@ -97,6 +99,23 @@ class EmployerService{
     return await this.models.employer.findOne({ where:{id} });
 
   }
+
+ 
+  //employer creating their own profesion type
+  async employeeCreateProfession(profession) {
+    try {
+    const newProf = await this.models.profession.create({ name: profession });
+    return newProf.dataValues.id;
+    } catch (error) {
+      return await this.findProfessionByName(profession);
+    }
+  }
+
+  async findProfessionByName(name) {
+    const prof = await this.models.profession.findOne({ where: { name } });
+    return prof.dataValues.id;
+  }
+
 
   async employerCreateGig({ input, user, pubsub }) {
     
