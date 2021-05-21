@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken'); //json web token module
 
-const { JobSeekerSerivce,EmployerService,GigService} = require('../services');
+const { JobSeekerSerivce,EmployerService,GigService,NotificationService} = require('../services');
 
 module.exports = {
   createJobSeeker:async (parent,{input},{models,pubsub}) => {
@@ -14,15 +14,15 @@ module.exports = {
   },
   createProfession:async (parent,{input},{models}) => {
      
-    //Mapping the list of names to {name:value}
-    const  nameArr =   input.names.map(name => ({name}));
+      //Mapping the list of names to {name:value}
+      const  nameArr =   input.names.map(name => ({name}));
 
-    try {
-      await models.profession.bulkCreate(nameArr);
-       return 'Professions created successfully'
-    } catch (error) {
-      throw new Error(`Duplicated profession values ${error}`);
-    }
+      try {
+        await models.profession.bulkCreate(nameArr);
+        return 'Professions created successfully'
+      } catch (error) {
+        throw new Error(`Duplicated profession values ${error}`);
+      }
   
   },
   signInJobSeeker:async (parent,{input},{models}) => {
@@ -69,13 +69,26 @@ module.exports = {
     
     const employerService = new EmployerService(models);
 
+    const notificationService = new NotificationService()
+    
     const gigService = new GigService(models);
 
     const gig = await employerService.employerCreateGig({ user, input, pubsub });
     
-    await gigService.notifyAllJobSeekers(gig);
+    const notifiedEmployees = await gigService.notifyAllJobSeekers(gig);
 
+    const messages = notificationService.generateMessages(notifiedEmployees);
+
+    const tickets = notificationService.createChunckOfNotifications(messages);
+ 
+    console.log({tickets})
+   
     return gig;
+  },
+  jobSeekerUpdatePushNotification: async (parent, { pushToken }, { models,user }) => {
+    const jobSeekerService =new JobSeekerSerivce(models);
+    await jobSeekerService.updatePushToken({ user, pushToken });
+    return 'pushToken created successfully';
   }
 
   

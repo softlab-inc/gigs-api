@@ -152,6 +152,18 @@ class JobSeekerSerivce{
     return await this.models.employee.findOne({ where:{id} });
 
   }
+
+  async updatePushToken({ user, pushToken }){
+      if (!user) {
+       throw new AuthenticationError('You should be signed!');
+      }
+     
+  return await this.models.employee.update(
+    { pushToken },
+    { where: {id:user.id} }
+  );
+  
+  }
  
 }
 

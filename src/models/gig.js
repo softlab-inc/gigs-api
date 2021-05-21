@@ -58,6 +58,14 @@ module.exports = function(sequelize, DataTypes) {
     neededBy: {
       type: DataTypes.DATE,
       allowNull: true
+    },
+    hoursPerDay: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    days: {
+      type: DataTypes.INTEGER,
+      allowNull: true
     }
   }, {
     sequelize,
