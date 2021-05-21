@@ -1,11 +1,9 @@
 const { Expo } = require('expo-server-sdk');
 
-// Create a new Expo SDK client
-// optionally providing an access token if you have enabled push security
 let expo = new Expo({ accessToken: process.env.EXPO_ACCESS_TOKEN });
 
 //This service is responsible for sending pushNotifications to the subscribed users
-class GigService{
+class NotificationService{
    
  
   //creating messages you want to send to the clients
@@ -15,20 +13,46 @@ class GigService{
   //send the chunk at once 
 
   generateMessages(employeers) {
+     
+       let messages = [];
 
+      for (let employee of employees) {
 
-  }
+      if (!Expo.isExpoPushToken(employee.pushToken)) {
+        console.error(`Push token ${pushToken} is not a valid Expo push token`);
+        continue;
+      }
+
+        messages.push({
+            to: employee.pushToken,
+            sound: 'default',
+            body: 'New Gig Created',
+            data: { gigId: employee.gigId },
+        });
+
+    }
+    
+    return messages;
+}
 
 
   async createChunckOfNotifications(messages) {
+      let chunks = expo.chunkPushNotifications(messages);
+      let tickets = [];   
+
+        for (let chunk of chunks) {
+          try {
+            let ticketChunk = await expo.sendPushNotificationsAsync(chunk);
+            console.log(ticketChunk);
+            tickets.push(...ticketChunk);
+          } catch (error) {
+            console.error(error);
+          }
+        }
     
-    
+    return tickets;
   }
-
-
-
-    
   
-
-
 }
+
+module.exports = NotificationService;

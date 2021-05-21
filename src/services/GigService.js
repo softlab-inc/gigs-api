@@ -35,13 +35,13 @@ class GigService {
   }
 
   notifySomeEmployees(searchResults, id) {
-    const employees = searchResults.map(data => ({ employeeId: data.get('employee').id, gigId: id, status: PRIORITY_HIGH }));
+    const employees = searchResults.map(data => ({ employeeId: data.get('employee').id, gigId: id, status: PRIORITY_HIGH,pushToken:data.pushToken}));
     return employees;
   }
 
   async notifyAllEmployees(employee, id) {
     const allEmployees = await employee.findAll({ attributes: ['id'], raw: true });
-    return allEmployees.map(data => ({ employeeId: data.id, gigId: id, status: PRIORITY_LOW }));
+    return allEmployees.map(data => ({ employeeId: data.id, gigId: id, status: PRIORITY_LOW,pushToken:data.pushToken}));
   }
 
   async notifyJobSeeker({ professionId, employeeId }){
