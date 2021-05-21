@@ -160,7 +160,7 @@ class JobSeekerSerivce{
      
   return await this.models.employee.update(
     { pushToken },
-    { where: {id} }
+    { where: {id:user.id} }
   );
   
   }

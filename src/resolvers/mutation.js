@@ -68,14 +68,19 @@ module.exports = {
   employerCreateGig: async (parent, { input }, { models, user, pubsub }) => {
     
     const employerService = new EmployerService(models);
-
+    
     const gigService = new GigService(models);
 
     const gig = await employerService.employerCreateGig({ user, input, pubsub });
     
-    await gigService.notifyAllJobSeekers(gig);
+    const notifiedEmployees = await gigService.notifyAllJobSeekers(gig);
 
     return gig;
+  },
+  jobSeekerUpdatePushNotification: async (parent, { pushToken }, { models,user }) => {
+    const jobSeekerService =new JobSeekerSerivce(models);
+    await jobSeekerService.updatePushToken({ user, pushToken });
+    return 'pushToken created successfully';
   }
 
   

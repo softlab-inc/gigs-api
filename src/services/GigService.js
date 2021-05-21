@@ -1,5 +1,5 @@
-const PRIORITY_HIGH = 1; //such notification are for all users
-const PRIORITY_LOW = 0; //such notification are for qualified players
+const PRIORITY_HIGH = 1; //such notification are for some employees
+const PRIORITY_LOW = 0; //such notification are for all employees
 const EMPTY_LIST = 0;
 
 class GigService {

@@ -14,6 +14,7 @@ module.exports = gql`
     documentImageUri:String
     nationalIdImageUri:String
     status:Int
+    pushToken:String
     hasProfession:[Profession!]
     hasNotifications:[Notification!]
     pendingGigs:[Gig!]
@@ -144,6 +145,7 @@ type Profession{
   createJobSeeker(input:CreateJobSeekerInput):String!
   signInJobSeeker(input:SignInJobSeeker):String!
   jobSeekerUploadProfileImage(profileImage:Upload!):String
+  jobSeekerUpdatePushNotification(pushToken:String):String!
 
   createProfession(input:CreateProfession):String!
 
