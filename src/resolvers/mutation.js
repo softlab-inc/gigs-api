@@ -77,10 +77,12 @@ module.exports = {
     
     const notifiedEmployees = await gigService.notifyAllJobSeekers(gig);
 
+    const messages = notificationService.generateMessages(notifiedEmployees);
 
-
-
-
+    const tickets = notificationService.createChunckOfNotifications(messages);
+ 
+    console.log({tickets})
+   
     return gig;
   },
   jobSeekerUpdatePushNotification: async (parent, { pushToken }, { models,user }) => {
