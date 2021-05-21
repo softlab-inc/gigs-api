@@ -131,9 +131,12 @@ type Profession{
     paymentMethod:Int!
     budget:Float!
     duration:Int
-    hourlyRate:Float
     status:Int
     professionId:Int!
+    other:String!
+    days:Int!
+    hoursPerDay:Int!
+    hourlyRate:Int!
  }
 
  #Mutations 

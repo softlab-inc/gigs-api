@@ -2,10 +2,12 @@ const bcrypt = require('bcrypt'); //password encryption module
 const storeFS = require('../utils/storeFS');
 
 const { AuthenticationError,ForbiddenError } = require('apollo-server-express');
+const profession = require('../models/profession');
 
 const LICENSE_FOLDER = 3
 const PAY_BY_FULL_AMOUNT = 0;
 const PAY_BY_HOURLY_RATE = 1;
+const OTHER_PROFESION = 31;
 
 /**
  * 
@@ -98,6 +100,23 @@ class EmployerService{
 
   }
 
+ 
+  //employer creating their own profesion type
+  async employeeCreateProfession(profession) {
+    try {
+    const newProf = await this.models.profession.create({ name: profession });
+    return newProf.dataValues.id;
+    } catch (error) {
+      return await this.findProfessionByName(profession);
+    }
+  }
+
+  async findProfessionByName(name) {
+    const prof = await this.models.profession.findOne({ where: { name } });
+    return prof.dataValues.id;
+  }
+
+
   async employerCreateGig({ input, user, pubsub }) {
     
     const {paymentMethod} = input;
@@ -107,17 +126,33 @@ class EmployerService{
     }
 
     try {
-        if (paymentMethod === PAY_BY_FULL_AMOUNT) {
+      if (input.professionId === OTHER_PROFESION) {
+          let professionId = this.employeeCreateProfession(input.other);
+          input.professionId = professionId;
+          if (paymentMethod === PAY_BY_FULL_AMOUNT) {
           let gig = await this.models.gig.create({ ...input, paymentMethod: PAY_BY_FULL_AMOUNT, employerId: user.id });
-
           pubsub.publish('onGigCreated', { onGigCreated:gig.dataValues});
           return gig.dataValues;
         } else {
           let gig = await this.models.gig.create({ ...input, paymentMethod: PAY_BY_HOURLY_RATE, employerId: user.id });
-
           pubsub.publish('onGigCreated', { onGigCreated:gig.dataValues}); 
           return gig.dataValues;
       }
+
+      } else {
+        
+            if (paymentMethod === PAY_BY_FULL_AMOUNT) {
+              let gig = await this.models.gig.create({ ...input, paymentMethod: PAY_BY_FULL_AMOUNT, employerId: user.id });
+              pubsub.publish('onGigCreated', { onGigCreated:gig.dataValues});
+              return gig.dataValues;
+            } else {
+              let gig = await this.models.gig.create({ ...input, paymentMethod: PAY_BY_HOURLY_RATE, employerId: user.id });
+              pubsub.publish('onGigCreated', { onGigCreated:gig.dataValues}); 
+              return gig.dataValues;
+          }
+
+        }
+       
     } catch (error) {
       throw new Error(error);
     }
