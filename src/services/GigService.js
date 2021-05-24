@@ -15,6 +15,7 @@ class GigService {
     const searchResults = await employeeProfession.findAll({ where: { professionId }, include: [employee]});
 
     const gigResult  = await gig.findOne({where:{id}});
+    const {name,details} = gigResult.dataValues;
 
     /**
      * if no employer is notified
@@ -23,10 +24,10 @@ class GigService {
      * notify only those that conform t the criteria
      */
     if (this.isNotifiable(searchResults)) {
-       let employees = await this.notifyAllEmployees(employee, id);
+       let employees = await this.notifyAllEmployees(employee, id,name,details);
        return await notified.bulkCreate(employees);
     } else {
-        let employees = this.notifySomeEmployees(searchResults, id);
+        let employees = this.notifySomeEmployees(searchResults, id,name,details);
       return await notified.bulkCreate(employees);
     }
 
@@ -36,14 +37,14 @@ class GigService {
     return searchResults.length === EMPTY_LIST;
   }
 
-  notifySomeEmployees(searchResults, id) {
-    const employees = searchResults.map(data => ({ employeeId: data.get('employee').id, gigId: id, status: PRIORITY_HIGH,pushToken:data.pushToken}));
+  notifySomeEmployees(searchResults, id,name,details) {
+    const employees = searchResults.map(data => ({ employeeId: data.get('employee').id, gigId: id, status: PRIORITY_HIGH,pushToken:data.pushToken,name,details}));
     return employees;
   }
 
-  async notifyAllEmployees(employee, id) {
+  async notifyAllEmployees(employee, id,name,details) {
     const allEmployees = await employee.findAll({ attributes: ['id'], raw: true });
-    return allEmployees.map(data => ({ employeeId: data.id, gigId: id, status: PRIORITY_LOW,pushToken:data.pushToken}));
+    return allEmployees.map(data => ({ employeeId: data.id, gigId: id, status: PRIORITY_LOW,pushToken:data.pushToken,name,details}));
   }
 
   async notifyJobSeeker({ professionId, employeeId }){
