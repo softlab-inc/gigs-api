@@ -77,20 +77,20 @@ module.exports = {
     
     const notifiedEmployees = await gigService.notifyAllJobSeekers(gig);
 
-    const messages = notificationService.generateMessages(notifiedEmployees);
+    console.log({notifiedEmployees});
 
-    const tickets = notificationService.createChunckOfNotifications(messages);
- 
-    console.log({tickets})
+    const messages = notificationService.generateMessages(notifiedEmployees);
+    console.log({messages});
+    const tickets =await notificationService.createChunckOfNotifications(messages);
+    console.log({tickets});
    
     return gig;
   },
-  jobSeekerUpdatePushNotification: async (parent, { pushToken }, { models,user }) => {
+  jobSeekerUpdatePushNotification: async (parent, {pushToken}, {models,user}) => {
     const jobSeekerService =new JobSeekerSerivce(models);
     await jobSeekerService.updatePushToken({ user, pushToken });
     return 'pushToken created successfully';
   }
-
   
 }
 

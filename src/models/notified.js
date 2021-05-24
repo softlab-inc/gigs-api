@@ -33,6 +33,14 @@ module.exports = function(sequelize, DataTypes) {
     pushToken: {
       type: DataTypes.TEXT,
       allowNull: true
+    },
+    name: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
+    details: {
+      type: DataTypes.TEXT,
+      allowNull: true
     }
   }, {
     sequelize,

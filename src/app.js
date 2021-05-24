@@ -10,13 +10,12 @@ const { PubSub } = require('graphql-subscriptions')
 require('dotenv').config();
 const getUser = require('../src/utils/getUser');
 
+console.log(process.env.EXPO_ACCESS_TOKEN)
 
 //Constructing a schema, using the GraphGL schema query language
 const typeDefs = require('./schemas');
 //Providing a resolver to the schema fields
 const resolvers = require('./resolvers');
-
-
 
 //const pubsub = new PubSub();
 const pubsub = new PubSub(); 
