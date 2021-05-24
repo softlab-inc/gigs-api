@@ -23,32 +23,36 @@ class GigService {
      * else 
      * notify only those that conform t the criteria
      */
-    if (this.isNotifiable(searchResults)) {
-       let employees = await this.notifyAllEmployees(employee, id,name,details);
-       return await notified.bulkCreate(employees);
+  if (this.isNotifiable(searchResults)) {
+       let employees = await this.notifyAllEmployees(employee,id,name,details);
+       await notified.bulkCreate(employees);
+       return employees;
     } else {
-        let employees = this.notifySomeEmployees(searchResults, id,name,details);
-      return await notified.bulkCreate(employees);
+        let employees = this.notifySomeEmployees(searchResults,id,name,details);
+        await notified.bulkCreate(employees);
+        return employees;
     }
-
   }
 
   isNotifiable(searchResults) {
     return searchResults.length === EMPTY_LIST;
   }
 
-  notifySomeEmployees(searchResults, id,name,details) {
-    const employees = searchResults.map(data => ({ employeeId: data.get('employee').id, gigId: id, status: PRIORITY_HIGH,pushToken:data.pushToken,name,details}));
+  notifySomeEmployees(searchResults,id,name,details) {
+    console.log(searchResults.map(data => data.get('employee')));
+    const employees = searchResults.map(data => ({ employeeId: data.get('employee').id, gigId: id, status: PRIORITY_HIGH,pushToken:data.get('employee').pushToken,name,details}));
     return employees;
   }
 
-  async notifyAllEmployees(employee, id,name,details) {
+  async notifyAllEmployees(employee,id,name,details) {
     const allEmployees = await employee.findAll({ attributes: ['id'], raw: true });
-    return allEmployees.map(data => ({ employeeId: data.id, gigId: id, status: PRIORITY_LOW,pushToken:data.pushToken,name,details}));
+    allEmployees.map(data => ({ employeeId: data.id, gigId: id, status: PRIORITY_LOW,pushToken:data.pushToken,name,details}));
+    return allEmployees;
   }
 
   async notifyJobSeeker({ professionId, employeeId }){
-    const {employeeProfession,employee} = this.models
+
+    const {employeeProfession,employee} = this.models;
 
     const searchResult = await employeeProfession.findAll({ where: { professionId, employeeId }, include: [employee] });
     
@@ -56,6 +60,7 @@ class GigService {
 
     return employeeData.length && true;
   }
+
 }
 
 module.exports = GigService;

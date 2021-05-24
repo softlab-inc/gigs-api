@@ -2,18 +2,19 @@ const { Expo } = require('expo-server-sdk');
 
 let expo = new Expo({ accessToken: process.env.EXPO_ACCESS_TOKEN });
 
+console.log({accessToken: process.env.EXPO_ACCESS_TOKEN });
+
 //This service is responsible for sending pushNotifications to the subscribed users
 class NotificationService{
    
- 
   //creating messages you want to send to the clients
   //checking if all notification Appeal to be valide
   //construct a message to be sent 
   //Align all notification into one chunck and to be sent and notification with similar content shall be compressed 
   //send the chunk at once 
 
-  generateMessages(employeers) {
-       console.log({employeers})
+  generateMessages(employees) {
+       console.log({employees})
        let messages = [];
 
       for (let employee of employees) {
@@ -23,10 +24,11 @@ class NotificationService{
         continue;
       }
 
-        messages.push({
+      messages.push({
             to: employee.pushToken,
             sound: 'default',
-            body: 'New Gig Created',
+            title:employee.name,
+            body: employee.details,
             data: { gigId: employee.gigId },
         });
 
@@ -39,7 +41,7 @@ class NotificationService{
   async createChunckOfNotifications(messages) {
       let chunks = expo.chunkPushNotifications(messages);
       let tickets = [];   
-
+      console.log({chunks});
         for (let chunk of chunks) {
           try {
             let ticketChunk = await expo.sendPushNotificationsAsync(chunk);
