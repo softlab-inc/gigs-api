@@ -16,7 +16,10 @@ const typeDefs = require('./schemas');
 //Providing a resolver to the schema fields
 const resolvers = require('./resolvers');
 
-
+(async ()=> {
+      const gigResult  = await models.gig.findOne({where:{id:1}});
+      console.log({name:gigResult.dataValues.name,details:gigResult.dataValues.details})
+})();
 
 //const pubsub = new PubSub();
 const pubsub = new PubSub(); 

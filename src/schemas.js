@@ -53,8 +53,10 @@ type Gig{
   paymentMethod:Int!
   budget:Float
   duration:Int
+  days:Int
   hourlyRate:Float
-  status:Int!
+  status:Int
+  hoursPerDay:Int
   assignedTo:JobSeeker
   createdAt:DateTime
   updatedAt:DateTime
@@ -88,7 +90,6 @@ type Profession{
   gigs:[Gig!]
   notifications:[Notification!]
  }
-
 
 
  #InputFields

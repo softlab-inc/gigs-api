@@ -13,7 +13,7 @@ class NotificationService{
   //send the chunk at once 
 
   generateMessages(employeers) {
-     
+       console.log({employeers})
        let messages = [];
 
       for (let employee of employees) {
@@ -33,7 +33,7 @@ class NotificationService{
     }
     
     return messages;
-}
+  }
 
 
   async createChunckOfNotifications(messages) {
