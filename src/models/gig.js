@@ -66,6 +66,10 @@ module.exports = function(sequelize, DataTypes) {
     days: {
       type: DataTypes.INTEGER,
       allowNull: true
+    },
+    location: {
+      type: DataTypes.TEXT,
+      allowNull: true
     }
   }, {
     sequelize,

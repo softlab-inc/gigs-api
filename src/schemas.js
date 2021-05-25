@@ -57,6 +57,7 @@ type Gig{
   hourlyRate:Float
   status:Int
   hoursPerDay:Int
+  location:String
   assignedTo:JobSeeker
   createdAt:DateTime
   updatedAt:DateTime
@@ -137,6 +138,7 @@ type Profession{
     professionId:Int!
     other:String!
     days:Int!
+    location:String!
     hoursPerDay:Int!
     hourlyRate:Int!
  }
