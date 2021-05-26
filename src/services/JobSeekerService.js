@@ -26,6 +26,25 @@ class JobSeekerSerivce{
   constructor(models) {
       this.models = models;
    }
+ 
+  async getAllNotifications({ user }) {
+    this.isAuthenticatic(user);
+    return await  this.models.notified.findAll({where:{employeeId:user.id}})
+ }
+  
+  isAuthenticatic(user) {
+   if(!user){
+          throw new AuthenticationError('Account not found! register');
+       }
+  }
+
+  async getReadNotifications({employeeId}) {
+    return await this.models.notified.findAll({where:{employeeId,isRead:1}})
+  }
+  
+  async getUnReadNotifications({employeeId}) {
+    return await this.models.notified.findAll({where:{employeeId,isRead:0}})
+  }
 
   async createJobSeeker(content) {
     let { fullName, email, phone, password, document, nationalId, professionId, other } = content.input;
@@ -91,9 +110,7 @@ class JobSeekerSerivce{
       email = email.trim().toLowerCase();
      let user = await this.models.employee.findOne({where:{email}});
 
-       if(!user){
-          throw new AuthenticationError('Account not found! register');
-       }
+       this.isAuthenticatic(user);
     
        //comparing the password with the hash stored in the database 
        let valid = await bcrypt.compare(password,user.password);
@@ -144,9 +161,7 @@ class JobSeekerSerivce{
   
   async jobSeeker({user}) {
     
-    if (!user) {
-       throw new AuthenticationError('You should be signed!');
-    }
+    this.isAuthenticatic(user);
     
     const { id } = user;
     return await this.models.employee.findOne({ where:{id} });

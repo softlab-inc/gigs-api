@@ -17,6 +17,8 @@ module.exports = gql`
     pushToken:String
     hasProfession:[Profession!]
     hasNotifications:[Notification!]
+    readNotifications:[Notification!]
+    unReadNotifications:[Notification!]
     pendingGigs:[Gig!]
     completeGigs:[Gig!]
     createdAt:DateTime
@@ -70,6 +72,7 @@ fragment infor on JobSeeker {
 type Notification{
     status:Int!
     gig:Gig
+    isRead:Int
     createdAt:DateTime
     updatedAt:DateTime
 }
@@ -89,7 +92,9 @@ type Profession{
   jobSeekers:[JobSeeker!]
   professions:[Profession!]
   gigs:[Gig!]
-  notifications:[Notification!]
+  # notifications:[Notification!]
+  # readNotifications:[Notification!]
+  # unReadNotifications:[Notification!]
  }
 
 

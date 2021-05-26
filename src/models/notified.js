@@ -41,6 +41,11 @@ module.exports = function(sequelize, DataTypes) {
     details: {
       type: DataTypes.TEXT,
       allowNull: true
+    },
+    isRead: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: 0
     }
   }, {
     sequelize,
