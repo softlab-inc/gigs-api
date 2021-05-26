@@ -70,6 +70,7 @@ fragment infor on JobSeeker {
 type Notification{
     status:Int!
     gig:Gig
+    isRead:Int
     createdAt:DateTime
     updatedAt:DateTime
 }
