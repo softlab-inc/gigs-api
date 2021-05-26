@@ -2,8 +2,6 @@ const { Expo } = require('expo-server-sdk');
 
 let expo = new Expo({ accessToken: process.env.EXPO_ACCESS_TOKEN });
 
-console.log({accessToken: process.env.EXPO_ACCESS_TOKEN });
-
 //This service is responsible for sending pushNotifications to the subscribed users
 class NotificationService{
    
@@ -12,7 +10,6 @@ class NotificationService{
   //construct a message to be sent 
   //Align all notification into one chunck and to be sent and notification with similar content shall be compressed 
   //send the chunk at once 
-
   generateMessages(employees) {
        console.log({employees})
        let messages = [];
@@ -56,7 +53,7 @@ class NotificationService{
   }
 
 
-  
+
   
 }
 

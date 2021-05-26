@@ -4,13 +4,13 @@ const logger = require('morgan');
 const models = require('./models');
 const path = require('path');
 const cors = require('cors');
+const bodyParser = require('body-parser')
 const helmet = require('helmet');
 const { ApolloServer} = require('apollo-server-express');
 const { PubSub } = require('graphql-subscriptions')
 require('dotenv').config();
 const getUser = require('../src/utils/getUser');
 
-console.log(process.env.EXPO_ACCESS_TOKEN)
 
 //Constructing a schema, using the GraphGL schema query language
 const typeDefs = require('./schemas');
@@ -63,11 +63,21 @@ server.applyMiddleware({ app, path: '/gigs-app/api/v1' });
  * Setting up the middlewares of express server 
  */
 app.use(express.json());
+app.use(bodyParser.json({
+  limit: '50mb'
+}));
+
+app.use(bodyParser.urlencoded({
+  limit: '50mb',
+  parameterLimit: 100000,
+  extended: true 
+}));
 app.use(express.urlencoded({extended: false}));
 app.use(logger('dev'));
 app.use(cookieParser());
 app.use(cors());
 app.use(helmet());
+
 
 /**
  * Exporsing static files where all uploads shall be stored
