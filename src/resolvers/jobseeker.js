@@ -13,7 +13,7 @@ module.exports = {
     const jobSeekerService = new JobSeekerSerivce(models);
     return await jobSeekerService.getUnReadNotifications({ employeeId: parent.id })
   },
-  readNotifications: async (paretns, args, { models }) => {
+  readNotifications: async (parent, args, { models }) => {
       const jobSeekerService = new JobSeekerSerivce(models);
       return await jobSeekerService.getReadNotifications({employeeId: parent.id })
   }
