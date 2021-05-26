@@ -17,6 +17,8 @@ module.exports = gql`
     pushToken:String
     hasProfession:[Profession!]
     hasNotifications:[Notification!]
+    readNotifications:[Notification!]
+    unReadNotifications:[Notification!]
     pendingGigs:[Gig!]
     completeGigs:[Gig!]
     createdAt:DateTime
@@ -90,9 +92,9 @@ type Profession{
   jobSeekers:[JobSeeker!]
   professions:[Profession!]
   gigs:[Gig!]
-  notifications:[Notification!]
-  readNotifications:[Notification!]
-  unReadNotifications:[Notification!]
+  # notifications:[Notification!]
+  # readNotifications:[Notification!]
+  # unReadNotifications:[Notification!]
  }
 
 
