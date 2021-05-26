@@ -16,16 +16,18 @@ module.exports = {
     return await employerService.employer({ user });
   },
   notifications: async (parent, args, { models, user }) => {
-         const jobSeekerService = new JobSeekerSerivce(models);
-         
+    const jobSeekerService = new JobSeekerSerivce(models);
+    return await jobSeekerService.getAllNotifications({ user });
+
   },
-  readNotifications: async (parent, args, { models }) => {
-          const jobSeekerService = new JobSeekerSerivce(models);
-          
+  readNotifications: async (parent, args, { models,user }) => {
+    const jobSeekerService = new JobSeekerSerivce(models);
+    return await jobSeekerService.getReadNotifications({user})
+
   },
-  unReadNotifications: async (parent, args, { models }) => {
-          const jobSeekerService = new JobSeekerSerivce(models);
-          
+  unReadNotifications: async (parent, args, { models,user }) => {
+    const jobSeekerService = new JobSeekerSerivce(models);
+    return await jobSeekerService.getUnReadNotifications({user})
   }
 
 

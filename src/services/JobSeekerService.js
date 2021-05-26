@@ -29,6 +29,7 @@ class JobSeekerSerivce{
  
   async getAllNotifications({ user }) {
     this.isAuthenticatic(user);
+    return await  this.models.notified.findAll({where:{employeeId:user.id}})
  }
   
   isAuthenticatic(user) {
@@ -38,11 +39,14 @@ class JobSeekerSerivce{
   }
 
   async getReadNotifications({user}) {
-     this.isAuthenticatic(user);
+    this.isAuthenticatic(user);
+    return await this.models.notified({where:{employeeId:user.id,isRead:1}})
+    
   }
   
   async getUnReadNotifications({user}) {
-     this.isAuthenticatic(user);
+    this.isAuthenticatic(user);
+    return await this.models.notified.findAll({where:{employeeId:user.id,isRead:0}})
   }
 
   async createJobSeeker(content) {
