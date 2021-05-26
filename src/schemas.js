@@ -91,6 +91,8 @@ type Profession{
   professions:[Profession!]
   gigs:[Gig!]
   notifications:[Notification!]
+  readNotifications:[Notification!]
+  unReadNotifications:[Notification!]
  }
 
 

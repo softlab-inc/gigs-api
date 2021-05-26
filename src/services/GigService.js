@@ -8,6 +8,7 @@ class GigService {
     this.models = models;
   }
 
+
   async notifyAllJobSeekers({ professionId, id }) {
 
     const { employeeProfession, notified, employee,gig } = this.models;
