@@ -172,6 +172,11 @@ class EmployerService{
     return message;
   }
 
+  async getChats({user}) {
+    this.isAuthenticatic(user);
+    return await this.models.chat({where:{employerId:user.id}})
+  }
+
 }
 
 module.exports = EmployerService;

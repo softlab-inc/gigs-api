@@ -181,12 +181,17 @@ class JobSeekerSerivce{
   }
  
   async jobSeekerSendMessage({ content, employerId, user, pubsub }) {
-    console.log({ content, employerId, user, pubsub});
+
     this.isAuthenticatic(user);
     
     const message = await this.models.chat.create({ content, employerId, employeeId: user.id });
     pubsub.publish('onJobSeekerSentMessage',{onJobSeekerSentMessage:message.dataValues})
     return message;
+  }
+
+   async getChats({user}) {
+    this.isAuthenticatic(user);
+    return await this.models.chat({where:{employeeId:user.id}})
   }
   
  
