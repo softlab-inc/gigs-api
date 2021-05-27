@@ -34,7 +34,7 @@ class JobSeekerSerivce{
   
   isAuthenticatic(user) {
    if(!user){
-          throw new AuthenticationError('Account not found! register');
+          throw new AuthenticationError('Account not found! Please register');
        }
   }
 
@@ -180,8 +180,10 @@ class JobSeekerSerivce{
   
   }
  
-  async jobSeekerSendMessage({ content,employerId, user,pubsub }) {
+  async jobSeekerSendMessage({ content, employerId, user, pubsub }) {
+    console.log({ content, employerId, user, pubsub});
     this.isAuthenticatic(user);
+    
     const message = await this.models.chat.create({ content, employerId, employeeId: user.id });
     pubsub.publish('onJobSeekerSentMessage',{onJobSeekerSentMessage:message.dataValues})
     return message;
