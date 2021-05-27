@@ -174,7 +174,6 @@ type Profession{
   jobSeekerSendMessage(content:String!,employerId:Int!):Chat
   employerSendMessage(content:String!,employeeId:Int!):Chat
  
-
 }
 
 #Subscriptions
