@@ -1,4 +1,6 @@
 var DataTypes = require("sequelize").DataTypes;
+var _accepted = require("./accepted");
+var _chat = require("./chat");
 var _district = require("./district");
 var _employee = require("./employee");
 var _employeeGig = require("./employeeGig");
@@ -13,6 +15,8 @@ var _rating = require("./rating");
 var _reviews = require("./reviews");
 
 function initModels(sequelize) {
+  var accepted = _accepted(sequelize, DataTypes);
+  var chat = _chat(sequelize, DataTypes);
   var district = _district(sequelize, DataTypes);
   var employee = _employee(sequelize, DataTypes);
   var employeeGig = _employeeGig(sequelize, DataTypes);
@@ -26,26 +30,26 @@ function initModels(sequelize) {
   var rating = _rating(sequelize, DataTypes);
   var reviews = _reviews(sequelize, DataTypes);
 
+  accepted.belongsTo(employee, { foreignKey: "employeeId"});
+  employee.hasMany(accepted, { foreignKey: "employeeId"});
+  accepted.belongsTo(employer, { foreignKey: "employerId"});
+  employer.hasMany(accepted, { foreignKey: "employerId"});
+  chat.belongsTo(employee, { foreignKey: "employeeId"});
+  employee.hasMany(chat, { foreignKey: "employeeId"});
+  chat.belongsTo(employer, { foreignKey: "employerId"});
+  employer.hasMany(chat, { foreignKey: "employerId"});
   employeeGig.belongsTo(reviews, { foreignKey: "reviewsId"});
   reviews.hasMany(employeeGig, { foreignKey: "reviewsId"});
   employeeGig.belongsTo(gig, { foreignKey: "gigId"});
   gig.hasMany(employeeGig, { foreignKey: "gigId"});
   employeeGig.belongsTo(employee, { foreignKey: "employeeId"});
   employee.hasMany(employeeGig, { foreignKey: "employeeId"});
-  employeeLocation.belongsTo(district, { foreignKey: "districtId"});
-  district.hasMany(employeeLocation, { foreignKey: "districtId"});
-  employeeLocation.belongsTo(employee, { foreignKey: "employeeId"});
-  employee.hasMany(employeeLocation, { foreignKey: "employeeId"});
   employeeProfession.belongsTo(profession, { foreignKey: "professionId"});
   employee.belongsToMany(profession, { through: employeeProfession, foreignKey: "employeeId", otherKey: "professionId" });
   profession.hasMany(employeeProfession, { foreignKey: "professionId"});
   employeeProfession.belongsTo(employee, { foreignKey: "employeeId"});
   profession.belongsToMany(employee, { through: employeeProfession, foreignKey: "professionId", otherKey: "employeeId" });
   employee.hasMany(employeeProfession, { foreignKey: "employeeId"});
-  employerLocation.belongsTo(employer, { foreignKey: "employerId"});
-  employer.hasMany(employerLocation, { foreignKey: "employerId"});
-  employerLocation.belongsTo(district, { foreignKey: "districtId"});
-  district.hasMany(employerLocation, { foreignKey: "districtId"});
   gig.belongsTo(employer, { foreignKey: "employerId"});
   employer.hasMany(gig, { foreignKey: "employerId"});
   gig.belongsTo(profession, { foreignKey: "professionId"});
@@ -58,6 +62,8 @@ function initModels(sequelize) {
   rating.hasMany(reviews, { foreignKey: "ratingId"});
 
   return {
+    accepted,
+    chat,
     district,
     employee,
     employeeGig,

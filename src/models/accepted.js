@@ -2,50 +2,48 @@
 
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('employer', {
+  return sequelize.define('accepted', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
+    pushToken: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
     fullName: {
       type: DataTypes.STRING(60),
       allowNull: true
     },
-    companyName: {
-      type: DataTypes.STRING(30),
-      allowNull: true
-    },
-    email: {
-      type: DataTypes.STRING(50),
-      allowNull: true,
-      unique: "email"
-    },
-    phone: {
-      type: DataTypes.STRING(15),
-      allowNull: true,
-      unique: "phone"
-    },
-    password: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
-    licenseImageUri: {
-      type: DataTypes.TEXT,
-      allowNull: true
-    },
-    status: {
+    isRead: {
       type: DataTypes.INTEGER,
       allowNull: true
     },
-    pushToken: {
-      type: DataTypes.TEXT,
+    employeeId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'employee',
+        key: 'id'
+      }
+    },
+    employerId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'employer',
+        key: 'id'
+      }
+    },
+    phone: {
+      type: DataTypes.STRING(15),
       allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'employer',
+    tableName: 'accepted',
     timestamps: true,
     indexes: [
       {
@@ -57,19 +55,17 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "phone",
-        unique: true,
+        name: "FKaccepted19704",
         using: "BTREE",
         fields: [
-          { name: "phone" },
+          { name: "employeeId" },
         ]
       },
       {
-        name: "email",
-        unique: true,
+        name: "FKaccepted7198",
         using: "BTREE",
         fields: [
-          { name: "email" },
+          { name: "employerId" },
         ]
       },
     ]

@@ -25,6 +25,15 @@ module.exports = gql`
     updatedAt:DateTime
   }
 
+  type Chat{
+    id:Int!
+    content:String!
+    jobSeeker:JobSeeker
+    employer:Employer
+    createdAt:DateTime!
+    updatedAt:DateTime!
+  }
+
   type Employer{
     id:Int!
     fullName:String
@@ -65,10 +74,6 @@ type Gig{
   updatedAt:DateTime
 }
   
-fragment infor on JobSeeker {
-  email
-}
-
 type Notification{
     status:Int!
     gig:Gig
@@ -92,6 +97,8 @@ type Profession{
   jobSeekers:[JobSeeker!]
   professions:[Profession!]
   gigs:[Gig!]
+  employerChats:[Chat!]
+  jobSeekerChats:[Chat!]
   # notifications:[Notification!]
   # readNotifications:[Notification!]
   # unReadNotifications:[Notification!]
@@ -163,12 +170,19 @@ type Profession{
   signInEmployer(input:SignInEmployerInput):String!
 
   employerCreateGig(input:EmployerCreateGigInput):Gig
+
+  jobSeekerSendMessage(content:String!,employerId:Int!):Chat
+  employerSendMessage(content:String!,employeeId:Int!):Chat
+ 
 }
 
 #Subscriptions
 type Subscription{
   onGigCreated(token:String!):Gig!
+  onAcceptGig(token:String!):Gig!
   onStatusChange:JobSeeker!
+  onJobSeekerSentMessage(token:String!):Chat!
+  onEmployerSentMessage(token:String!):Chat!
 }
 
   `;

@@ -40,7 +40,6 @@ class GigService {
   }
 
   notifySomeEmployees(searchResults,id,name,details) {
-    console.log(searchResults.map(data => data.get('employee')));
     const employees = searchResults.map(data => ({ employeeId: data.get('employee').id, gigId: id, status: PRIORITY_HIGH,pushToken:data.get('employee').pushToken,name,details}));
     return employees;
   }
