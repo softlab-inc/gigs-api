@@ -97,7 +97,7 @@ type Profession{
   jobSeekers:[JobSeeker!]
   professions:[Profession!]
   gigs:[Gig!]
-  employerChats(empleeId:Int!):[Chat!]
+  employerChats(employeeId:Int!):[Chat!]
   jobSeekerChats(employerId:Int!):[Chat!]
   # notifications:[Notification!]
   # readNotifications:[Notification!]
