@@ -29,9 +29,9 @@ module.exports = {
       look up from profession table for employer with same profession
       if true notifed them of a gig else nothing is notified
        */
-    subscribe:withFilter((_, __, { pubsub}) => pubsub.asyncIterator('onJobSeekerSentMessage'),async ({onGigCreated}, {token},{models} ) => {
+    subscribe:withFilter((_, __, { pubsub}) => pubsub.asyncIterator('onJobSeekerSentMessage'),async ({onJobSeekerSentMessage}, {token},{models} ) => {
         const gigService = new GigService(models);
-        const { employerId } = onGigCreated;
+        const { employeeId } = onJobSeekerSentMessage;
         const user = getUser(token);
         
         return true;
@@ -44,9 +44,9 @@ module.exports = {
       look up from profession table for employer with same profession
       if true notifed them of a gig else nothing is notified
        */
-    subscribe:withFilter((_, __, { pubsub}) => pubsub.asyncIterator('onEmployerSentMessage'),async ({onGigCreated}, {token},{models} ) => {
+    subscribe:withFilter((_, __, { pubsub}) => pubsub.asyncIterator('onEmployerSentMessage'),async ({onEmployerSentMessage}, {token},{models} ) => {
         const gigService = new GigService(models);
-        const { employeeId } = onGigCreated;
+        const { employerId } = onEmployerSentMessage;
         const user = getUser(token);
 
         return true;
