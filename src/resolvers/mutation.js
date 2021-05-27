@@ -80,7 +80,7 @@ module.exports = {
     console.log({notifiedEmployees});
 
     const messages = notificationService.generateMessages(notifiedEmployees);
-    console.log({messages});
+
     const tickets =await notificationService.createChunckOfNotifications(messages);
     console.log({tickets});
    
@@ -90,7 +90,14 @@ module.exports = {
     const jobSeekerService =new JobSeekerSerivce(models);
     await jobSeekerService.updatePushToken({ user, pushToken });
     return 'pushToken created successfully';
-  }
+  },
+  jobSeekerSendMessage: async (parent, { content, employeeId }, { models, user }) => {
+       const jobSeekerService =new JobSeekerSerivce(models);
+  },
+  employerSendMessage: async (parent, { content, employeeId }, { models, user }) => {
+       const employerService = new EmployerService(models);
+  },
+
   
 }
 
