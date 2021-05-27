@@ -19,19 +19,11 @@ module.exports = function(sequelize, DataTypes) {
     },
     districtId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'district',
-        key: 'id'
-      }
+      allowNull: false
     },
     employeeId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'employee',
-        key: 'id'
-      }
+      allowNull: false
     }
   }, {
     sequelize,
@@ -44,20 +36,6 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "id" },
-        ]
-      },
-      {
-        name: "FKemployeeLo205672",
-        using: "BTREE",
-        fields: [
-          { name: "districtId" },
-        ]
-      },
-      {
-        name: "FKemployeeLo723546",
-        using: "BTREE",
-        fields: [
-          { name: "employeeId" },
         ]
       },
     ]
