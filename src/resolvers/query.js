@@ -10,13 +10,13 @@ module.exports = {
     const employerService = new EmployerService(models);
     return await employerService.employer({ user });
   },
-  employerChats: async (parent, args, { models,user }) => {
+  employerChats: async (parent, {employeeId}, { models,user }) => {
     const employerService = new EmployerService(models);
-    return await employerService.getChats({user})
+    return await employerService.getChats({ user, employeeId });
   },
-  jobSeekerChats: async(parent, args, { models,user }) => {
+  jobSeekerChats: async(parent, {employerId}, { models,user }) => {
     const jobSeekerService = new JobSeekerSerivce(models);
-    return await jobSeekerService.getChats({user})
+    return await jobSeekerService.getChats({ user,employerId });
    },
   // notifications: async (parent, args, { models, user }) => {
   //   const jobSeekerService = new JobSeekerSerivce(models);

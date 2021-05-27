@@ -172,9 +172,9 @@ class EmployerService{
     return message;
   }
 
-  async getChats({user}) {
+  async getChats({user,employeeId}) {
     this.isAuthenticatic(user);
-    return await this.models.chat.findAll({where:{employerId:user.id}})
+    return await this.models.chat.findAll({where:{employerId:user.id,employeeId},order: [['createdAt', 'DESC']]})
   }
 
 }

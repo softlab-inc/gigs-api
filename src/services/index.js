@@ -4,5 +4,3 @@ const GigService = require("./GigService");
 const NotificationService = require("./NotificationService");
 
 module.exports = {JobSeekerSerivce,EmployerService,GigService,NotificationService}
-
-
