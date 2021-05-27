@@ -22,7 +22,36 @@ module.exports = {
         return notified;
         },
       ),
-    
+  },
+  onJobSeekerSentMessage:  {
+    /**
+       extract employeeId from payload
+      look up from profession table for employer with same profession
+      if true notifed them of a gig else nothing is notified
+       */
+    subscribe:withFilter((_, __, { pubsub}) => pubsub.asyncIterator('onJobSeekerSentMessage'),async ({onGigCreated}, {token},{models} ) => {
+        const gigService = new GigService(models);
+        const { employerId } = onGigCreated;
+        const user = getUser(token);
+        
+        return true;
+        },
+      ),
+  },
+  onEmployerSentMessage: {
+    /**
+       extract employeeId from payload
+      look up from profession table for employer with same profession
+      if true notifed them of a gig else nothing is notified
+       */
+    subscribe:withFilter((_, __, { pubsub}) => pubsub.asyncIterator('onEmployerSentMessage'),async ({onGigCreated}, {token},{models} ) => {
+        const gigService = new GigService(models);
+        const { employeeId } = onGigCreated;
+        const user = getUser(token);
+
+        return true;
+        },
+      ),
   },
 
   }
