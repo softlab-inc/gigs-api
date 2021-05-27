@@ -159,6 +159,18 @@ class EmployerService{
 
   }
 
+    isAuthenticatic(user) {
+   if(!user){
+          throw new AuthenticationError('Account not found! register');
+       }
+  }
+
+  async employerSendMessage({ content,employeeId, user, pubsub }) {
+    this.isAuthenticatic(user);
+    const message = await this.models.chat.create({content,employeeId,employeeId:user.id});
+    pubsub.publish('onEmployerSentMessage',{onEmployerSentMessage:message.dataValues})  
+  }
+
 }
 
 module.exports = EmployerService;
