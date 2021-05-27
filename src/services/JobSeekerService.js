@@ -191,7 +191,7 @@ class JobSeekerSerivce{
 
    async getChats({user}) {
     this.isAuthenticatic(user);
-    return await this.models.chat({where:{employeeId:user.id}})
+    return await this.models.chat.findAll({where:{employeeId:user.id}})
   }
   
  
