@@ -184,7 +184,7 @@ class JobSeekerSerivce{
     this.isAuthenticatic(user);
     const message = await this.models.chat.create({ content, employerId, employeeId: user.id });
     pubsub.publish('onJobSeekerSentMessage',{onJobSeekerSentMessage:message.dataValues})
-
+    return message;
   }
   
  

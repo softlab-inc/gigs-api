@@ -92,10 +92,12 @@ module.exports = {
     return 'pushToken created successfully';
   },
   jobSeekerSendMessage: async (parent, { content, employerId }, { models, user, pubsub }) => {
-       const jobSeekerService = new JobSeekerSerivce(models);
+    const jobSeekerService = new JobSeekerSerivce(models);
+    return await jobSeekerService.jobSeekerSendMessage(content,employerId,user,pubsub)
   },
   employerSendMessage: async (parent, { content, employeeId }, { models, user, pubsub }) => {
-       const employerService = new EmployerService(models);
+    const employerService = new EmployerService(models);
+    return await employerService.employerSendMessage(content, employeeId, user, pubsub);
   },
 
   
