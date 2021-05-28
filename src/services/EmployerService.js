@@ -188,6 +188,18 @@ class EmployerService{
     
   }
 
+  async getCreatedGigs({user}) {
+    this.isAuthenticatic(user);
+    let gig = await this.models.gig.findAll({ where: { employerId: user.id } });
+    console.log({ gig });
+    return gig;
+  }
+
+  async getCreatedGig({user}) {
+    this.isAuthenticatic(user);
+    return await this.models.gig.findOne({where:{employerId: user.id}})
+  }
+
 
 
 }

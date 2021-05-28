@@ -104,11 +104,11 @@ type Profession{
   type Query{
   jobSeeker:JobSeeker
   employer:Employer
-  gig:Gig
   employers:[Employer!]
   jobSeekers:[JobSeeker!]
   professions:[Profession!]
-  gigs:[Gig!]
+  gig:Gig
+  createdGigs:[Gig!]
   employerChats(employeeId:Int!):[Chat!]
   jobSeekerChats(employerId:Int!):[Chat!]
   # notifications:[Notification!]

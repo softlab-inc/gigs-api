@@ -196,7 +196,7 @@ class JobSeekerSerivce{
 
   async acceptGig({args,user}) {
     this.isAuthenticatic(user);
-    return {onAcceptGig:{id:3,pushToken:'testing',fullName:'raymond'}}
+    return {onAcceptGig:{id:1,pushToken:'testing',fullName:'raymond',employerId:1}}
   }
   
 
