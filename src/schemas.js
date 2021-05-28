@@ -58,6 +58,9 @@ type Accepted{
   pushToken:String!
   fullName:String!
   isRead:String!
+  employee:JobSeeker
+  employer:Employer
+  gig:Gig
   createdAt:String!
   updatedAt:String!
 }
@@ -185,6 +188,8 @@ type Profession{
   employerSendMessage(content:String!,employeeId:Int!):Chat
 
   sendEmail(email:String!):String!
+
+  gigAccepted(pushToken:String!,employeeId:Int!,fullName:String!,gigId:Int!):Accepted
  
 }
 
