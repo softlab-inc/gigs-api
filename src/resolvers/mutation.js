@@ -105,13 +105,11 @@ module.exports = {
   
     return await employerService.employerSendMessage({content, employeeId, user, pubsub});
   },
-
   sendEmail: async (parent, { email }, context) => {
     const result  =  new MailerService();
     return  await result.sendMail(email);
   }
 
-  
 }
 
 

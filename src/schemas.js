@@ -53,6 +53,15 @@ type Location{
   latitude:String
 }
 
+type Accepted{
+  id:Int!
+  pushToken:String!
+  fullName:String!
+  isRead:String!
+  createdAt:String!
+  updatedAt:String!
+}
+
 type District{
   id:Int!
   name:String
