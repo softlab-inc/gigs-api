@@ -40,6 +40,7 @@ module.exports = gql`
     email:String
     phone:String
     password:String
+    pushToken:String
     createdAt:DateTime
     updatedAt:DateTime
     licenseImageUri:String
@@ -86,7 +87,6 @@ type Profession{
     id:Int!
     name:String!
 }
-
 
   #Queries
   type Query{
