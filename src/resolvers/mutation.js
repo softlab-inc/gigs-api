@@ -109,7 +109,14 @@ module.exports = {
     const result  =  new MailerService();
     return  await result.sendMail(email);
   },
-  
+  gigAccepted: async (parent, args, { models,user,pubsub }) => {
+    const jobSeekerService = new JobSeekerSerivce(models);
+    const accepted = await jobSeekerService.acceptGig({ args, user, pubsub });
+    console.log({accepted})
+    pubsub.publish('onAcceptGig', accepted);
+    return accepted.onAcceptGig;
+
+  } 
 
 }
 

@@ -170,33 +170,39 @@ type Profession{
  #Mutations 
   type Mutation{
   createJobSeeker(input:CreateJobSeekerInput):String!
+
   signInJobSeeker(input:SignInJobSeeker):String!
+
   jobSeekerUploadProfileImage(profileImage:Upload!):String
+
   jobSeekerUpdatePushNotification(pushToken:String):String!
+
   employerUpdatePushNotification(pushToken:String):String!
 
   createProfession(input:CreateProfession):String!
 
   userUpdateStatus(status:Int!):JobSeeker
  
-  createEmployer(input:CreateEmployerInput):String
+  createEmployer(input:CreateEmployerInput):String!
+
   signInEmployer(input:SignInEmployerInput):String!
 
   employerCreateGig(input:EmployerCreateGigInput):Gig
 
   jobSeekerSendMessage(content:String!,employerId:Int!):Chat
+
   employerSendMessage(content:String!,employeeId:Int!):Chat
 
   sendEmail(email:String!):String!
 
-  gigAccepted(pushToken:String!,employeeId:Int!,fullName:String!,gigId:Int!):Accepted
+  gigAccepted(pushToken:String!,employerId:Int!,fullName:String!,gigId:Int!):Accepted
  
 }
 
 #Subscriptions
 type Subscription{
   onGigCreated(token:String!):Gig!
-  onAcceptGig(token:String!):Gig!
+  onAcceptGig(token:String!):Accepted!
   onStatusChange:JobSeeker!
   onJobSeekerSentMessage(token:String!):Chat!
   onEmployerSentMessage(token:String!):Chat!

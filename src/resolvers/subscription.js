@@ -53,6 +53,16 @@ module.exports = {
         },
       ),
   },
+   onAcceptGig: {
+    
+    subscribe:withFilter((_, __, { pubsub}) => pubsub.asyncIterator('onAcceptGig'),async ({onAcceptGig}, {token},{models} ) => {
+        const { employerId } = onAcceptGig;
+        const user = getUser(token);
+        // return user.id == employerId;
+      return true;
+        },
+      ),
+  },
 
   }
   
