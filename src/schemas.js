@@ -54,8 +54,8 @@ type Location{
 }
 
 type District{
- id:Int!
-name:String
+  id:Int!
+  name:String
 }
 
 type Gig{
