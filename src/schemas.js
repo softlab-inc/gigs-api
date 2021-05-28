@@ -40,6 +40,7 @@ module.exports = gql`
     email:String
     phone:String
     password:String
+    pushToken:String
     createdAt:DateTime
     updatedAt:DateTime
     licenseImageUri:String
@@ -53,8 +54,8 @@ type Location{
 }
 
 type District{
- id:Int!
-name:String
+  id:Int!
+  name:String
 }
 
 type Gig{
@@ -87,7 +88,6 @@ type Profession{
     name:String!
 }
 
-
   #Queries
   type Query{
   jobSeeker:JobSeeker
@@ -97,8 +97,8 @@ type Profession{
   jobSeekers:[JobSeeker!]
   professions:[Profession!]
   gigs:[Gig!]
-  employerChats:[Chat!]
-  jobSeekerChats:[Chat!]
+  employerChats(employeeId:Int!):[Chat!]
+  jobSeekerChats(employerId:Int!):[Chat!]
   # notifications:[Notification!]
   # readNotifications:[Notification!]
   # unReadNotifications:[Notification!]
@@ -161,6 +161,7 @@ type Profession{
   signInJobSeeker(input:SignInJobSeeker):String!
   jobSeekerUploadProfileImage(profileImage:Upload!):String
   jobSeekerUpdatePushNotification(pushToken:String):String!
+  employerUpdatePushNotification(pushToken:String):String!
 
   createProfession(input:CreateProfession):String!
 
@@ -173,6 +174,8 @@ type Profession{
 
   jobSeekerSendMessage(content:String!,employerId:Int!):Chat
   employerSendMessage(content:String!,employeeId:Int!):Chat
+
+  sendEmail(email:String!):String!
  
 }
 

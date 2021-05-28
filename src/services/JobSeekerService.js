@@ -189,10 +189,12 @@ class JobSeekerSerivce{
     return message;
   }
 
-   async getChats({user}) {
+   async getChats({user,employerId}) {
     this.isAuthenticatic(user);
-    return await this.models.chat.findAll({where:{employeeId:user.id}})
+    return await this.models.chat.findAll({where:{employeeId:user.id,employerId},order: [['createdAt', 'DESC']]})
   }
+  
+
   
  
 }
