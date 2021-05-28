@@ -161,6 +161,7 @@ type Profession{
   signInJobSeeker(input:SignInJobSeeker):String!
   jobSeekerUploadProfileImage(profileImage:Upload!):String
   jobSeekerUpdatePushNotification(pushToken:String):String!
+  employerUpdatePushNotification(pushToken:String):String!
 
   createProfession(input:CreateProfession):String!
 

@@ -91,6 +91,11 @@ module.exports = {
     await jobSeekerService.updatePushToken({ user, pushToken });
     return 'pushToken created successfully';
   },
+  employerUpdatePushNotification: async (parent, {pushToken}, {models,user}) => {
+    const employerService = new EmployerService(models);
+    await employerService.updatePushToken({ user, pushToken });
+    return 'pushToken created successfully';
+  },
   jobSeekerSendMessage: async (parent, { content, employerId }, { models, user, pubsub }) => {
     const jobSeekerService = new JobSeekerSerivce(models);
     return await jobSeekerService.jobSeekerSendMessage({content,employerId,user,pubsub})

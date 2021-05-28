@@ -177,6 +177,19 @@ class EmployerService{
     return await this.models.chat.findAll({where:{employerId:user.id,employeeId},order: [['createdAt', 'DESC']]})
   }
 
+  async updatePushToken({ user, pushToken }){
+    
+    this.isAuthenticatic(user);
+
+    return await this.models.employer.update(
+      { pushToken },
+      { where: {id:user.id} }
+    );
+    
+  }
+
+
+
 }
 
 module.exports = EmployerService;
