@@ -108,7 +108,7 @@ module.exports = {
 
   sendEmail: async (parent, { email }, context) => {
     const result  =  new MailerService();
-    return result.sendMail(email);
+    return  await result.sendMail(email);
   }
 
   
