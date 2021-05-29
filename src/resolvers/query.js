@@ -17,7 +17,16 @@ module.exports = {
   jobSeekerChats: async(parent, {employerId}, { models,user }) => {
     const jobSeekerService = new JobSeekerSerivce(models);
     return await jobSeekerService.getChats({ user,employerId });
-   },
+  },
+  gig: async (parent, args, { models, user }) => {
+    const employerService = new EmployerService(models);
+    return await employerService.getCreatedGig({ user });
+  },
+  createdGigs: async (parent, args, { models, user }) => {
+    const employerService = new EmployerService(models);
+    return await employerService.getCreatedGigs({ user });
+  },
+
   // notifications: async (parent, args, { models, user }) => {
   //   const jobSeekerService = new JobSeekerSerivce(models);
   //   return await jobSeekerService.getAllNotifications({ user });

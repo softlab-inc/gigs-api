@@ -53,6 +53,18 @@ type Location{
   latitude:String
 }
 
+type Accepted{
+  id:Int!
+  pushToken:String!
+  fullName:String!
+  isRead:String!
+  employee:JobSeeker
+  employer:Employer
+  gig:Gig
+  createdAt:String!
+  updatedAt:String!
+}
+
 type District{
   id:Int!
   name:String
@@ -92,11 +104,11 @@ type Profession{
   type Query{
   jobSeeker:JobSeeker
   employer:Employer
-  gig:Gig
   employers:[Employer!]
   jobSeekers:[JobSeeker!]
   professions:[Profession!]
-  gigs:[Gig!]
+  gig:Gig
+  createdGigs:[Gig!]
   employerChats(employeeId:Int!):[Chat!]
   jobSeekerChats(employerId:Int!):[Chat!]
   # notifications:[Notification!]
@@ -158,31 +170,39 @@ type Profession{
  #Mutations 
   type Mutation{
   createJobSeeker(input:CreateJobSeekerInput):String!
+
   signInJobSeeker(input:SignInJobSeeker):String!
+
   jobSeekerUploadProfileImage(profileImage:Upload!):String
+
   jobSeekerUpdatePushNotification(pushToken:String):String!
+
   employerUpdatePushNotification(pushToken:String):String!
 
   createProfession(input:CreateProfession):String!
 
   userUpdateStatus(status:Int!):JobSeeker
  
-  createEmployer(input:CreateEmployerInput):String
+  createEmployer(input:CreateEmployerInput):String!
+
   signInEmployer(input:SignInEmployerInput):String!
 
   employerCreateGig(input:EmployerCreateGigInput):Gig
 
   jobSeekerSendMessage(content:String!,employerId:Int!):Chat
+
   employerSendMessage(content:String!,employeeId:Int!):Chat
 
   sendEmail(email:String!):String!
+
+  gigAccepted(employerId:Int!,fullName:String!,gigId:Int!):Accepted
  
 }
 
 #Subscriptions
 type Subscription{
   onGigCreated(token:String!):Gig!
-  onAcceptGig(token:String!):Gig!
+  onAcceptGig(token:String!):Accepted!
   onStatusChange:JobSeeker!
   onJobSeekerSentMessage(token:String!):Chat!
   onEmployerSentMessage(token:String!):Chat!

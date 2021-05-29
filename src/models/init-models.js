@@ -34,6 +34,8 @@ function initModels(sequelize) {
   employee.hasMany(accepted, { foreignKey: "employeeId"});
   accepted.belongsTo(employer, { foreignKey: "employerId"});
   employer.hasMany(accepted, { foreignKey: "employerId"});
+  accepted.belongsTo(gig, { foreignKey: "gigId"});
+  gig.hasMany(accepted, { foreignKey: "gigId"});
   chat.belongsTo(employee, { foreignKey: "employeeId"});
   employee.hasMany(chat, { foreignKey: "employeeId"});
   chat.belongsTo(employer, { foreignKey: "employerId"});

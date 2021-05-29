@@ -19,7 +19,8 @@ module.exports = function(sequelize, DataTypes) {
     },
     isRead: {
       type: DataTypes.INTEGER,
-      allowNull: true
+      allowNull: true,
+      defaultValue: 0
     },
     employeeId: {
       type: DataTypes.INTEGER,
@@ -37,9 +38,13 @@ module.exports = function(sequelize, DataTypes) {
         key: 'id'
       }
     },
-    phone: {
-      type: DataTypes.STRING(15),
-      allowNull: true
+    gigId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'gig',
+        key: 'id'
+      }
     }
   }, {
     sequelize,
@@ -66,6 +71,13 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "employerId" },
+        ]
+      },
+      {
+        name: "FKaccepted69561",
+        using: "BTREE",
+        fields: [
+          { name: "gigId" },
         ]
       },
     ]

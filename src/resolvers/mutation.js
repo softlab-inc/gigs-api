@@ -105,13 +105,24 @@ module.exports = {
   
     return await employerService.employerSendMessage({content, employeeId, user, pubsub});
   },
-
   sendEmail: async (parent, { email }, context) => {
     const result  =  new MailerService();
-    return result.sendMail(email);
-  }
+    return  await result.sendMail(email);
+  },
+  gigAccepted: async (parent, args, { models,user,pubsub }) => {
+    const jobSeekerService = new JobSeekerSerivce(models);
+    const accepted = await jobSeekerService.acceptGig({ args, user, pubsub });
+    console.log({ accepted });
+    console.log([{ ...accepted.dataValues }]);
+    const notificationService = new NotificationService();
+    let messages = notificationService.generateAcceptedMessages([{ ...accepted.dataValues }]);
+    console.log({messages})
+    let tickets = await notificationService.createChunckOfNotifications(messages);
+    console.log({ tickets });
+    pubsub.publish('onAcceptGig', {onAcceptGig:accepted});
+    return accepted;
+  } 
 
-  
 }
 
 

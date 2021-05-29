@@ -10,8 +10,38 @@ class NotificationService{
   //construct a message to be sent 
   //Align all notification into one chunck and to be sent and notification with similar content shall be compressed 
   //send the chunk at once 
+   
+  generateAcceptedMessages(data) {
+
+    let messages = [];
+
+    for (let accepted of data) {
+
+      if (!Expo.isExpoPushToken(accepted.pushToken)) {
+        console.error(`Push token ${accepted.pushToken} is not a valid Expo push token`);
+        continue;
+      }
+
+      messages.push({
+      to: accepted.pushToken,
+      sound: 'default',
+      title: "Gig Accepted",
+      body: `${accepted.fullName} has accepted to the Gig you created`,
+      data: { gigId: accepted.gigId },
+      });
+      
+    }
+     
+    return messages;
+
+  }
+
+ 
+ 
+
+
   generateMessages(employees) {
-       console.log({employees})
+
        let messages = [];
 
       for (let employee of employees) {
@@ -24,8 +54,8 @@ class NotificationService{
       messages.push({
             to: employee.pushToken,
             sound: 'default',
-            title:employee.name,
-            body: employee.details,
+            title:"Gig created",
+            body: `${employee.name}  -   ${employee.details}`,
             data: { gigId: employee.gigId },
         });
 
@@ -51,6 +81,8 @@ class NotificationService{
     
     return tickets;
   }
+
+
 
 
 
