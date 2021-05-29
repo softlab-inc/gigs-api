@@ -195,7 +195,7 @@ type Profession{
 
   sendEmail(email:String!):String!
 
-  gigAccepted(pushToken:String!,employerId:Int!,fullName:String!,gigId:Int!):Accepted
+  gigAccepted(employerId:Int!,fullName:String!,gigId:Int!):Accepted
  
 }
 

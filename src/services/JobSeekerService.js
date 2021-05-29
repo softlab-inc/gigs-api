@@ -194,12 +194,16 @@ class JobSeekerSerivce{
     return await this.models.chat.findAll({where:{employeeId:user.id,employerId},order: [['createdAt', 'DESC']]})
   }
 
+  async getGetEmployer({id}) {
+    return await this.models.employer.findOne({where:id})
+  }
+
   async acceptGig({args,user}) {
     this.isAuthenticatic(user);
-    return {onAcceptGig:{id:1,pushToken:'testing',fullName:'raymond',employerId:1}}
+    let employer = await this.getGetEmployer({ id: args.employerId });
+    return await this.models.accepted.create({...args, pushToken: employer.dataValues.pushToken,employeeId:user.id });
   }
   
-
   
  
 }

@@ -15,19 +15,19 @@ class NotificationService{
 
     let messages = [];
 
-    for (let employee of employees) {
+    for (let accepted of data) {
 
-      if (!Expo.isExpoPushToken(employee.pushToken)) {
-        console.error(`Push token ${pushToken} is not a valid Expo push token`);
+      if (!Expo.isExpoPushToken(accepted.pushToken)) {
+        console.error(`Push token ${accepted.pushToken} is not a valid Expo push token`);
         continue;
       }
 
       messages.push({
-      to: data.pushToken,
+      to: accepted.pushToken,
       sound: 'default',
       title: "Gig Accepted",
-      body: `${data.fullName} has accepted to the Gig you created`,
-      data: { gigId: data.gigId },
+      body: `${accepted.fullName} has accepted to the Gig you created`,
+      data: { gigId: accepted.gigId },
       });
       
     }
@@ -35,6 +35,10 @@ class NotificationService{
     return messages;
 
   }
+
+ 
+ 
+
 
   generateMessages(employees) {
 
@@ -50,8 +54,8 @@ class NotificationService{
       messages.push({
             to: employee.pushToken,
             sound: 'default',
-            title:employee.name,
-            body: employee.details,
+            title:"Gig created",
+            body: `${employee.name}  -   ${employee.details}`,
             data: { gigId: employee.gigId },
         });
 

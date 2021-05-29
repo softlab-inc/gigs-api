@@ -112,10 +112,15 @@ module.exports = {
   gigAccepted: async (parent, args, { models,user,pubsub }) => {
     const jobSeekerService = new JobSeekerSerivce(models);
     const accepted = await jobSeekerService.acceptGig({ args, user, pubsub });
-    console.log({accepted})
-    pubsub.publish('onAcceptGig', accepted);
-    return accepted.onAcceptGig;
-
+    console.log({ accepted });
+    console.log([{ ...accepted.dataValues }]);
+    const notificationService = new NotificationService();
+    let messages = notificationService.generateAcceptedMessages([{ ...accepted.dataValues }]);
+    console.log({messages})
+    let tickets = await notificationService.createChunckOfNotifications(messages);
+    console.log({ tickets });
+    pubsub.publish('onAcceptGig', {onAcceptGig:accepted});
+    return accepted;
   } 
 
 }
