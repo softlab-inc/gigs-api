@@ -37,6 +37,7 @@ module.exports = gql`
   type Employer{
     id:Int!
     fullName:String
+    companyName:String
     email:String
     phone:String
     password:String
