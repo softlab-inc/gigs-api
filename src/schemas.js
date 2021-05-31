@@ -83,6 +83,7 @@ type Gig{
   hoursPerDay:Int
   location:String
   assignedTo:JobSeeker
+  createdBy:Employer
   createdAt:DateTime
   updatedAt:DateTime
 }
