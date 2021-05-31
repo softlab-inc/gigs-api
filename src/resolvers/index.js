@@ -5,6 +5,7 @@ const JobSeeker = require('./jobseeker');
 const Subscription = require('./subscription');
 const Notification = require('./notification');
 const Chat = require('./chat');
+const Gig = require('./gig');
 
 /**
  * This module is responsible for exposion the Resolvers as Javascript objects
@@ -16,6 +17,7 @@ module.exports={
   JobSeeker,
   Notification,
   Chat,
+  Gig,
   DateTime:GraphQLDateTime,
 }
 

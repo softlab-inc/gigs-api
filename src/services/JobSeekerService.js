@@ -150,7 +150,7 @@ class JobSeekerSerivce{
        throw new AuthenticationError('You should be signed!');
   }
     
-      const id = user.id;
+    const id = user.id;
 
     let profileImagUri = '';
     profileImagUri = await getResult(profileImage, PROFILE_FOLDER);
@@ -203,6 +203,8 @@ class JobSeekerSerivce{
     let employer = await this.getGetEmployer({ id: args.employerId });
     return await this.models.accepted.create({...args, pushToken: employer.dataValues.pushToken,employeeId:user.id });
   }
+
+ 
   
   
  

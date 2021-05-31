@@ -82,7 +82,8 @@ module.exports = {
     const messages = notificationService.generateMessages(notifiedEmployees);
 
     const tickets =await notificationService.createChunckOfNotifications(messages);
-    console.log({tickets});
+    
+    console.log({ tickets });
    
     return gig;
   },
@@ -116,7 +117,7 @@ module.exports = {
     console.log([{ ...accepted.dataValues }]);
     const notificationService = new NotificationService();
     let messages = notificationService.generateAcceptedMessages([{ ...accepted.dataValues }]);
-    console.log({messages})
+    console.log({ messages });
     let tickets = await notificationService.createChunckOfNotifications(messages);
     console.log({ tickets });
     pubsub.publish('onAcceptGig', {onAcceptGig:accepted});
