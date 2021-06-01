@@ -46,6 +46,7 @@ module.exports = gql`
     updatedAt:DateTime
     licenseImageUri:String
     hasLocation:String
+    hasAccepted:[Accepted!]
   }
 
 type Location{
@@ -84,6 +85,7 @@ type Gig{
   hoursPerDay:Int
   location:String
   # assignedTo:[JobSeeker]
+  profession:Profession
   createdBy:Employer
   createdAt:DateTime
   updatedAt:DateTime

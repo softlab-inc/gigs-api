@@ -139,7 +139,7 @@ class EmployerService{
           return gig.dataValues;
       }
 
-      } else {
+      } else { 
         
             if (paymentMethod === PAY_BY_FULL_AMOUNT) {
               let gig = await this.models.gig.create({ ...input, paymentMethod: PAY_BY_FULL_AMOUNT, employerId: user.id });
