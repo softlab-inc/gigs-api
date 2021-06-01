@@ -5,8 +5,8 @@ const { AuthenticationError,ForbiddenError } = require('apollo-server-express');
 const profession = require('../models/profession');
 
 const LICENSE_FOLDER = 3
-const PAY_BY_FULL_AMOUNT = 0;
-const PAY_BY_HOURLY_RATE = 1;
+const PAY_BY_FULL_AMOUNT = 0; //employers shall pay full amount
+const PAY_BY_HOURLY_RATE = 1;//employers shall pay full hourly rate 
 const OTHER_PROFESION = 31;
 
 /**
