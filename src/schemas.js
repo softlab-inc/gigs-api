@@ -45,8 +45,8 @@ module.exports = gql`
     createdAt:DateTime
     updatedAt:DateTime
     licenseImageUri:String
-    hasLocation:String
     hasAccepted:[Accepted!]
+    unReadHasAccepted:[Accepted!]
   }
 
 type Location{
@@ -63,8 +63,8 @@ type Accepted{
   employee:JobSeeker
   employer:Employer
   gig:Gig
-  createdAt:String!
-  updatedAt:String!
+  createdAt:DateTime!
+  updatedAt:DateTime!
 }
 
 type District{
