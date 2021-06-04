@@ -185,23 +185,33 @@ class JobSeekerSerivce{
     this.isAuthenticatic(user);
     
     const message = await this.models.chat.create({ content, employerId, employeeId: user.id });
-    pubsub.publish('onJobSeekerSentMessage',{onJobSeekerSentMessage:message.dataValues})
+    pubsub.publish('onJobSeekerSentMessage', { onJobSeekerSentMessage: message.dataValues });
     return message;
   }
 
    async getChats({user,employerId}) {
     this.isAuthenticatic(user);
-    return await this.models.chat.findAll({where:{employeeId:user.id,employerId},order: [['createdAt', 'DESC']]})
+     return await this.models.chat.findAll({ where: { employeeId: user.id, employerId }, order: [['createdAt', 'DESC']] });
   }
 
   async getGetEmployer({id}) {
-    return await this.models.employer.findOne({where:id})
+    return await this.models.employer.findOne({ where: id });
+  }
+
+  async hasAcceptedAlready({ gigId,employeeId }) {
+    return await this.models.accepted.findOne({ where: { gigId, employeeId } });
   }
 
   async acceptGig({args,user}) {
     this.isAuthenticatic(user);
     let employer = await this.getGetEmployer({ id: args.employerId });
-    return await this.models.accepted.create({...args, pushToken: employer.dataValues.pushToken,employeeId:user.id });
+    
+    if (await this.hasAcceptedAlready({ gigId: args.gigId, employeeId: user.id })) {
+      throw new Error('Employer notified already');
+    } else {
+       await this.models.accepted.create({...args, pushToken: employer.dataValues.pushToken,employeeId:user.id });
+    }
+    
   }
 
  
