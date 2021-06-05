@@ -122,7 +122,10 @@ module.exports = {
     console.log({ tickets });
     pubsub.publish('onAcceptGig', {onAcceptGig:accepted});
     return accepted;
-  } 
+  },
+  uploadFiletoS3: async (parent, { file }, context) => {
+    
+  }
 
 }
 

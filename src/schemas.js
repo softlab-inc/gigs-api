@@ -200,6 +200,8 @@ type Profession{
   sendEmail(email:String!):String!
 
   gigAccepted(employerId:Int!,fullName:String!,gigId:Int!):Accepted
+
+  uploadFiletoS3(file:Upload):String
  
 }
 
