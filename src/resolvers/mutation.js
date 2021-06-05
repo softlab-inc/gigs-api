@@ -124,7 +124,7 @@ module.exports = {
     return accepted;
   },
   uploadFiletoS3: async (parent, { file }, context) => {
-    
+       
   }
 
 }
