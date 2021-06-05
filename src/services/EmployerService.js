@@ -82,7 +82,7 @@ class EmployerService{
        let valid = await bcrypt.compare(password,user.password);
     
         if(!valid){
-            throw new AuthenticationError(`Email and password don't match! try again`)
+            throw new AuthenticationError(`Wrong password for this email, try again`)
           }
 
     return user;

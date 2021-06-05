@@ -209,7 +209,7 @@ class JobSeekerSerivce{
     if (await this.hasAcceptedAlready({ gigId: args.gigId, employeeId: user.id })) {
       throw new Error('Employer notified already');
     } else {
-       await this.models.accepted.create({...args, pushToken: employer.dataValues.pushToken,employeeId:user.id });
+      return  await this.models.accepted.create({...args, pushToken: employer.dataValues.pushToken,employeeId:user.id });
     }
     
   }
