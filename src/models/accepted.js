@@ -45,6 +45,10 @@ module.exports = function(sequelize, DataTypes) {
         model: 'gig',
         key: 'id'
       }
+    },
+    phone: {
+      type: DataTypes.STRING(15),
+      allowNull: true
     }
   }, {
     sequelize,
