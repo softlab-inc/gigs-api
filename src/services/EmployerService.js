@@ -3,6 +3,7 @@ const storeFS = require('../utils/storeFS');
 
 const { AuthenticationError,ForbiddenError } = require('apollo-server-express');
 const profession = require('../models/profession');
+const {AWS3Service} = require('./');
 
 const LICENSE_FOLDER = 3
 const PAY_BY_FULL_AMOUNT = 0; //employers shall pay full amount
@@ -47,9 +48,10 @@ class EmployerService{
           throw new ForbiddenError('Email was already used, try again!');
      }
     
-      //saving uploaded files to respective Folders
-    licenseImageUri = await getResult(license, LICENSE_FOLDER);
-
+    //   //saving uploaded files to respective Folders
+    // licenseImageUri = await getResult(license, LICENSE_FOLDER);
+    let result = await AWS3Service.handleFileUpload(license);
+    licenseImageUri = result.Location;
 
     try {
        const Employer = await employer.create({
