@@ -6,7 +6,7 @@ const {AuthenticationError,ForbiddenError} = require('apollo-server-express');
 
 const PROFILE_FOLDER = 0;
 const IDS_FOLDER = 1;
-const DOCS_FOLDER = 2;
+const DOCS_FOLDER = 2
 
 /**
  * 
@@ -59,10 +59,16 @@ class JobSeekerSerivce{
     let  documentImageUri='';
     let nationalIdImageUri = '';
       
-      let user = await this.models.employee.findOne({where:{email}});
+    let user = await this.models.employee.findOne({ where: { email } });
+    
+    let user2 = await this.models.employee.findOne({ where: { phone } });
 
        if(user){
-          throw new ForbiddenError('Email was already used, try again');
+          throw new ForbiddenError('Email has already been used, try again another!');
+       }
+    
+       if(user2){
+          throw new ForbiddenError('Phone number has already been used, try again another!');
        }
     
       //saving uploaded files to respective Folders
