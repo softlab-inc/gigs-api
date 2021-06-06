@@ -5,7 +5,6 @@ const { AuthenticationError,ForbiddenError } = require('apollo-server-express');
 const profession = require('../models/profession');
 const AWS3Service  = require('./AWS3Service');
 
-
 const LICENSE_FOLDER = 3
 const PAY_BY_FULL_AMOUNT = 0; //employers shall pay full amount
 const PAY_BY_HOURLY_RATE = 1;//employers shall pay full hourly rate 

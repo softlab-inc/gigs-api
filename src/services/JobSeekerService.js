@@ -4,9 +4,9 @@ const AWS3Service  = require('./AWS3Service');
 
 const {AuthenticationError,ForbiddenError} = require('apollo-server-express');
 
-const PROFILE_FOLDER = 0
-const IDS_FOLDER = 1
-const DOCS_FOLDER = 2
+const PROFILE_FOLDER = 0;
+const IDS_FOLDER = 1;
+const DOCS_FOLDER = 2;
 
 /**
  * 
