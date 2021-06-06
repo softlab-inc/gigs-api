@@ -18,7 +18,7 @@ module.exports = {
       //Mapping the list of names to {name:value}
       const  nameArr =   input.names.map(name => ({name}));
 
-      try {
+      try { 
         await models.profession.bulkCreate(nameArr);
         return 'Professions created successfully'
       } catch (error) { 
