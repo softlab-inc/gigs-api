@@ -36,8 +36,7 @@ class NotificationService{
 
   }
 
- 
- 
+
 
 
   generateMessages(employees) {

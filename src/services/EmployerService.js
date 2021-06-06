@@ -45,7 +45,7 @@ class EmployerService{
      let user = await employer.findOne({where:{email}});
 
      if(user){
-          throw new ForbiddenError('Email was already used, try again!');
+          throw new ForbiddenError('Email has already been used, try again with another!');
      }
     
     //   //saving uploaded files to respective Folders
