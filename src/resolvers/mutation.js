@@ -127,7 +127,7 @@ module.exports = {
   uploadFiletoS3: async (parent, { file }, context) => {
     const result = await AWS3Service.handleFileUpload(file);
     const { Location } = result;
-    return Location; 
+    return Location;
   }
 
 }
