@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt'); //password encryption module
 const storeFS = require('../utils/storeFS');
-const {AWS3Service} = require('../services')
+const { AWS3Service } = require('./');
 
 const {AuthenticationError,ForbiddenError} = require('apollo-server-express');
 
@@ -66,8 +66,15 @@ class JobSeekerSerivce{
        }
     
       //saving uploaded files to respective Folders
-      nationalIdImageUri = await getResult(nationalId,IDS_FOLDER);
-      documentImageUri = await getResult(document,DOCS_FOLDER);
+      // nationalIdImageUri = await getResult(nationalId,IDS_FOLDER);
+      // documentImageUri = await getResult(document,DOCS_FOLDER);
+
+      //uploading images to Amazon S3
+    let result = await AWS3Service.handleFileUpload(nationalId);
+    nationalIdImageUri = result.Location;
+
+    result = await AWS3Service.handleFileUpload(nationalId);
+    documentImageUri = result.Location;
       
      try {
        const JobSeeker = await employee.create({
@@ -154,6 +161,7 @@ class JobSeekerSerivce{
     const id = user.id;
 
     let profileImagUri = '';
+
     profileImagUri = await getResult(profileImage, PROFILE_FOLDER);
     
     await this.models.employee.update({ profileImagUri }, { where: { id} });
