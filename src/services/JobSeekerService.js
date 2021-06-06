@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt'); //password encryption module
 const storeFS = require('../utils/storeFS');
-const { AWS3Service } = require('./');
+const AWS3Service  = require('./AWS3Service');
 
 const {AuthenticationError,ForbiddenError} = require('apollo-server-express');
 
