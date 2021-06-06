@@ -20,7 +20,7 @@ module.exports = {
       try {
         await models.profession.bulkCreate(nameArr);
         return 'Professions created successfully'
-      } catch (error) {
+      } catch (error) { 
         throw new Error(`Duplicated profession values ${error}`);
       }
   
@@ -124,7 +124,9 @@ module.exports = {
     return accepted;
   },
   uploadFiletoS3: async (parent, { file }, context) => {
-    console.log({ AWS3Service,file });
+    const result = await AWS3Service.handleFileUpload(file);
+    const { Location } = result;
+    return Location; 
   }
 
 }
