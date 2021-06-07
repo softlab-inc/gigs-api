@@ -14,7 +14,6 @@ module.exports = {
                                                       
   },
   createProfession:async (parent,{input},{models}) => {
-     
       //Mapping the list of names to {name:value}
       const  nameArr =   input.names.map(name => ({name}));
 
@@ -47,9 +46,9 @@ module.exports = {
   jobSeekerUploadProfileImage: async (parent,{profileImage},{models,user})=> {
     const jobSeekerService = new JobSeekerSerivce(models);
 
-    const profileImagUri = jobSeekerService.uploadProfileImage({ user, profileImage });
+    const newUser = jobSeekerService.uploadProfileImage({ user, profileImage });
 
-    return profileImagUri;
+    return newUser;
   },
   createEmployer: async (parent, { input }, { models }) => {
     

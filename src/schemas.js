@@ -177,7 +177,7 @@ type Profession{
 
   signInJobSeeker(input:SignInJobSeeker):String!
 
-  jobSeekerUploadProfileImage(profileImage:Upload!):String
+  jobSeekerUploadProfileImage(profileImage:Upload!):JobSeeker
 
   jobSeekerUpdatePushNotification(pushToken:String):String!
 

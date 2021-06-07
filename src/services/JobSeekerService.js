@@ -172,8 +172,9 @@ class JobSeekerSerivce{
     let result = await AWS3Service.handleFileUpload(profileImage);
     profileImagUri = result.Location;
     
-    await this.models.employee.update({ profileImagUri }, { where: { id} });
-    return profileImagUri;
+    await this.models.employee.update({ profileImagUri }, { where: { id } });
+    
+    return await this.employee.findOne({ where: { id } });
   }
   
   async jobSeeker({user}) {
