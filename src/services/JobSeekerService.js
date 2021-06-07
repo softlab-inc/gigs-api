@@ -170,12 +170,12 @@ class JobSeekerSerivce{
 
     // profileImagUri = await getResult(profileImage, PROFILE_FOLDER);
     let result = await AWS3Service.handleFileUpload(profileImage);
-    
+
     profileImagUri = result.Location;
     
     await this.models.employee.update({ profileImagUri }, { where: { id } });
     
-    return await this.employee.findOne({ where: { id } });
+    return await this.models.employee.findOne({ where: { id } });
   }
   
   async jobSeeker({user}) {
@@ -183,6 +183,7 @@ class JobSeekerSerivce{
     this.isAuthenticatic(user);
     
     const { id } = user;
+
     return await this.models.employee.findOne({ where:{id} });
 
   }
