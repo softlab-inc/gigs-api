@@ -234,6 +234,13 @@ class JobSeekerSerivce{
     
   }
 
+
+  async jobSeekerUpdateData({ user, args }) {
+    
+
+
+  }
+
  
   
   

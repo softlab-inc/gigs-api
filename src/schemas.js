@@ -202,6 +202,8 @@ type Profession{
   gigAccepted(employerId:Int!,fullName:String!,gigId:Int!):Accepted
 
   uploadFiletoS3(file:Upload):String
+
+  jobSeekerUpdateData(phone:String,bio:String):JobSeeker
  
 }
 

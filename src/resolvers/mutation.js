@@ -127,6 +127,9 @@ module.exports = {
     const result = await AWS3Service.handleFileUpload(file);
     const { Location } = result;
     return Location;
+  },
+  jobSeekerUpdateData: async (parent, { phone, bio }, { models, user }) => {
+    
   }
 
 }
