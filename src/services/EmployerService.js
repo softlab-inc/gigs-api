@@ -109,16 +109,15 @@ class EmployerService{
      let result = await this.findProfessionByName(profession);
     
     if (result) {
-      return result;
+      return result.dataValues.id;
      }else{
       const newProf = await this.models.profession.create({ name: profession });
-    return newProf.dataValues.id;
+      return newProf.dataValues.id;
      }
   }
 
   async findProfessionByName(name) {
-    const prof = await this.models.profession.findOne({ where: { name } });
-    return prof.dataValues.id;
+   return await this.models.profession.findOne({ where: { name } });
   }
 
 
@@ -132,8 +131,9 @@ class EmployerService{
 
     try {
       if (input.professionId === OTHER_PROFESION) {
-          let professionId = this.employeeCreateProfession(input.other);
-          input.professionId = professionId;
+          let professionId =await this.employeeCreateProfession(input.other);
+        input.professionId = professionId;
+        console.log({ input });
           if (paymentMethod === PAY_BY_FULL_AMOUNT) {
           let gig = await this.models.gig.create({ ...input, paymentMethod: PAY_BY_FULL_AMOUNT, employerId: user.id });
           pubsub.publish('onGigCreated', { onGigCreated:gig.dataValues});
@@ -159,7 +159,7 @@ class EmployerService{
         }
        
     } catch (error) {
-      throw new Error(error);
+      throw new Error(error); 
     }
 
   }

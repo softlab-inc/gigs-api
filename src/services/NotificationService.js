@@ -43,7 +43,10 @@ class NotificationService{
 
        let messages = [];
 
-      for (let employee of employees) {
+    for (let employee of employees) {
+        
+        
+      if (employee["pushToken"] == null)  continue;
 
       if (!Expo.isExpoPushToken(employee.pushToken)) {
         console.error(`Push token ${pushToken} is not a valid Expo push token`);

@@ -74,13 +74,13 @@ module.exports = {
     const gigService = new GigService(models);
 
     const gig = await employerService.employerCreateGig({ user, input, pubsub });
-    
+    console.log({gig})
     const notifiedEmployees = await gigService.notifyAllJobSeekers(gig);
 
     console.log({notifiedEmployees});
 
     const messages = notificationService.generateMessages(notifiedEmployees);
-
+    console.log({messages})
     const tickets =await notificationService.createChunckOfNotifications(messages);
     
     console.log({ tickets });
