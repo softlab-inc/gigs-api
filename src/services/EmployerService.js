@@ -154,7 +154,7 @@ class EmployerService{
               let gig = await this.models.gig.create({ ...input, paymentMethod: PAY_BY_HOURLY_RATE, employerId: user.id });
               pubsub.publish('onGigCreated', { onGigCreated:gig.dataValues}); 
               return gig.dataValues;
-          }
+          } 
 
         }
        
