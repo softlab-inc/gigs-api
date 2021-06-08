@@ -129,7 +129,11 @@ module.exports = {
     return Location;
   },
   jobSeekerUpdateData: async (parent, { phone, bio }, { models, user }) => {
-    
+    const jobSeekerService = new JobSeekerSerivce(models);
+
+    const newUser = await jobSeekerService.jobSeekerUpdateData({ phone, bio,user });
+     
+    return newUser;
   }
 
 }

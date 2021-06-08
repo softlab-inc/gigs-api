@@ -34,6 +34,7 @@ class JobSeekerSerivce{
  }
   
   isAuthenticatic(user) {
+    console.log({ user });
    if(!user){
           throw new AuthenticationError('Account not found! Please register');
        }
@@ -234,11 +235,11 @@ class JobSeekerSerivce{
     
   }
 
-
-  async jobSeekerUpdateData({ user, args }) {
-    
-
-
+  async jobSeekerUpdateData({ user, phone,bio}) {
+    console.log({ user, phone, bio });
+    this.isAuthenticatic(user);
+    await this.models.employee.update({phone, bio},{where:{id:user.id}})
+    return await this.jobSeeker({user});
   }
 
  
