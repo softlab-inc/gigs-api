@@ -17,6 +17,8 @@ class NotificationService{
 
     for (let accepted of data) {
 
+      if (employee["pushToken"] == null)  continue;
+
       if (!Expo.isExpoPushToken(accepted.pushToken)) {
         console.error(`Push token ${accepted.pushToken} is not a valid Expo push token`);
         continue;
@@ -27,7 +29,8 @@ class NotificationService{
       sound: 'default',
       title: "Gig Accepted",
       body: `${accepted.fullName} has accepted to the Gig you created`,
-      data: { gigId: accepted.gigId },
+        ata: { gigId: accepted.gigId },
+       priority: 'high',
       });
       
     }
@@ -59,6 +62,7 @@ class NotificationService{
             title:"Gig created",
             body: `${employee.name}  -   ${employee.details}`,
             data: { gigId: employee.gigId },
+            priority: 'high',
         });
 
     }
