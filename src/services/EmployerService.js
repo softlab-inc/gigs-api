@@ -105,12 +105,15 @@ class EmployerService{
  
   //employer creating their own profesion type
   async employeeCreateProfession(profession) {
-    try {
-    const newProf = await this.models.profession.create({ name: profession });
+   
+     let result = await this.findProfessionByName(profession);
+    
+    if (result) {
+      return result;
+     }else{
+      const newProf = await this.models.profession.create({ name: profession });
     return newProf.dataValues.id;
-    } catch (error) {
-      return await this.findProfessionByName(profession);
-    }
+     }
   }
 
   async findProfessionByName(name) {
