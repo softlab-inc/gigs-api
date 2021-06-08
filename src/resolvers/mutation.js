@@ -40,7 +40,7 @@ module.exports = {
     
     const newUser = await jobSeekerService.userUpdateStatus({ user, pubsub, status });
 
-    return newUser;
+    return newUser; 
 
   },
   jobSeekerUploadProfileImage: async (parent,{profileImage},{models,user})=> {
