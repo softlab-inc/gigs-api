@@ -134,7 +134,7 @@ module.exports = {
     const newUser = await jobSeekerService.jobSeekerUpdateData({ phone, bio,user });
      
     return newUser;
-  }
+  } 
 
 }
 
