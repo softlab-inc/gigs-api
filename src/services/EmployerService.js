@@ -51,7 +51,7 @@ class EmployerService{
     //   //saving uploaded files to respective Folders
     // licenseImageUri = await getResult(license, LICENSE_FOLDER);
     let result = await AWS3Service.handleFileUpload(license);
-    licenseImageUri = result.Location;
+    licenseImageUri = result.Location;  //let {Location:licenseImageUri} = result; best way of doing this.
 
     try {
        const Employer = await employer.create({
