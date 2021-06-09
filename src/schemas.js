@@ -216,7 +216,7 @@ type Subscription{
   onEmployerSentMessage(token:String!):Chat!
 }
 
-  `;
+`;
 
 
 
