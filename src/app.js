@@ -40,7 +40,7 @@ const server = new ApolloServer({
       console.log({user});
       console.log('====================================');
     
-    return {models,user,pubsub}
+      return { models, user, pubsub };
     }
     
   },
@@ -58,7 +58,7 @@ const server = new ApolloServer({
 const app = express();
 
 //Applying Apollo  Graph GL middleware and setting the path
-server.applyMiddleware({ app, path: '/gigs-app/api/v1' });
+server.applyMiddleware({ app, path: '/gigs-app/api/v1'});
 
 /**
  * Setting up the middlewares of express server 
