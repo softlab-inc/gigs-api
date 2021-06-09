@@ -89,13 +89,11 @@ module.exports = {
   },
   jobSeekerUpdatePushNotification: async (parent, {pushToken}, {models,user}) => {
     const jobSeekerService =new JobSeekerSerivce(models);
-    await jobSeekerService.updatePushToken({ user, pushToken });
-    return 'pushToken created successfully';
+    return await jobSeekerService.updatePushToken({ user, pushToken });
   },
   employerUpdatePushNotification: async (parent, {pushToken}, {models,user}) => {
     const employerService = new EmployerService(models);
-    await employerService.updatePushToken({ user, pushToken });
-    return 'pushToken created successfully';
+    return await employerService.updatePushToken({ user, pushToken });
   },
   jobSeekerSendMessage: async (parent, { content, employerId }, { models, user, pubsub }) => {
     const jobSeekerService = new JobSeekerSerivce(models);
@@ -103,7 +101,6 @@ module.exports = {
   },
   employerSendMessage: async (parent, { content, employeeId }, { models, user, pubsub }) => {
     const employerService = new EmployerService(models);
-  
     return await employerService.employerSendMessage({content, employeeId, user, pubsub});
   },
   sendEmail: async (parent, { email }, context) => {

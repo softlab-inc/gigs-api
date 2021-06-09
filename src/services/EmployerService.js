@@ -186,11 +186,12 @@ class EmployerService{
     
     this.isAuthenticatic(user);
 
-    return await this.models.employer.update(
+     await this.models.employer.update(
       { pushToken },
       { where: {id:user.id} }
     );
-    
+
+    return await this.employer({ user });
   }
 
   async getCreatedGigs({user}) {

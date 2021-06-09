@@ -34,7 +34,6 @@ class JobSeekerSerivce{
  }
   
   isAuthenticatic(user) {
-    console.log({ user });
    if(!user){
           throw new AuthenticationError('Account not found! Please register');
        }
@@ -189,15 +188,18 @@ class JobSeekerSerivce{
 
   }
 
-  async updatePushToken({ user, pushToken }){
+  async updatePushToken({ user, pushToken }) {
+    
       if (!user) {
        throw new AuthenticationError('You should be signed!');
       }
      
-  return await this.models.employee.update(
-    { pushToken },
-    { where: {id:user.id} }
-  );
+    await this.models.employee.update(
+      { pushToken },
+      { where: {id:user.id} }
+    );
+
+    return await this.jobSeeker({user});
   
   }
  
@@ -226,7 +228,6 @@ class JobSeekerSerivce{
   async acceptGig({args,user}) {
     this.isAuthenticatic(user);
     let employer = await this.getGetEmployer({ id: args.employerId });
-    
     if (await this.hasAcceptedAlready({ gigId: args.gigId, employeeId: user.id })) {
       throw new Error('Employer notified already');
     } else {
