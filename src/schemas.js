@@ -181,7 +181,7 @@ type Profession{
 
   jobSeekerUpdatePushNotification(pushToken:String):JobSeeker
 
-  employerUpdatePushNotification(pushToken:String):JobSeeker
+  employerUpdatePushNotification(pushToken:String):Employer
 
   createProfession(input:CreateProfession):String!
 
