@@ -105,7 +105,7 @@ module.exports = {
   },
   sendEmail: async (parent, { email }, context) => {
     const result  =  new MailerService();
-    return  await result.sendMail(email);
+    return  await result.sendMail(email); 
   },
   gigAccepted: async (parent, args, { models,user,pubsub }) => {
     const jobSeekerService = new JobSeekerSerivce(models);
