@@ -179,9 +179,9 @@ type Profession{
 
   jobSeekerUploadProfileImage(profileImage:Upload!):JobSeeker
 
-  jobSeekerUpdatePushNotification(pushToken:String):String!
+  jobSeekerUpdatePushNotification(pushToken:String):JobSeeker
 
-  employerUpdatePushNotification(pushToken:String):String!
+  employerUpdatePushNotification(pushToken:String):JobSeeker
 
   createProfession(input:CreateProfession):String!
 
