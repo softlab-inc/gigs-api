@@ -59,9 +59,9 @@ class JobSeekerSerivce{
     let  documentImageUri='';
     let nationalIdImageUri = '';
       
-    let user = await this.models.employee.findOne({ where: { email } });
+    let user = await employee.findOne({ where: { email } });
     
-    let user2 = await this.models.employee.findOne({ where: { phone } });
+    let user2 = await employee.findOne({ where: { phone } });
 
        if(user){
           throw new ForbiddenError('Email has already been used, try again another!');

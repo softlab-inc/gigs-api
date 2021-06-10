@@ -14,10 +14,10 @@ module.exports = {
       look up from profession table for employer with same profession
       if true notifed them of a gig else nothing is notified
        */
-    subscribe:withFilter((_, __, { pubsub}) => pubsub.asyncIterator('onGigCreated'),async (payload, variables,{models} ) => {
+    subscribe:withFilter((_, __, { pubsub}) => pubsub.asyncIterator('onGigCreated'),async (payload, {token},{models} ) => {
         const gigService = new GigService(models);
         const { professionId } = payload.onGigCreated;
-        const user = getUser(variables.token);
+        const user = getUser(token);
         const notified = await gigService.notifyJobSeeker({ professionId, employeeId:user.id });
         return notified;
         },
@@ -66,9 +66,6 @@ module.exports = {
     onTestSubscription: {
     
       subscribe: withFilter((_, __, { pubsub }) => pubsub.asyncIterator('onTestSubscription'), async ({ onTestSubscription }, {token},{models} ) => {
-        
-        console.log({onTestSubscription,token})
-        
         return onTestSubscription==token;
         },
       ),

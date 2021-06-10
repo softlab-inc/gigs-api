@@ -17,7 +17,7 @@ class NotificationService{
 
     for (let accepted of data) {
 
-      if (employee["pushToken"] == null)  continue;
+      if (accepted["pushToken"] == null)  continue;
 
       if (!Expo.isExpoPushToken(accepted.pushToken)) {
         console.error(`Push token ${accepted.pushToken} is not a valid Expo push token`);
