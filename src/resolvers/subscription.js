@@ -65,14 +65,14 @@ module.exports = {
   },
     onTestSubscription: {
     
-    subscribe:withFilter((_, __, { pubsub}) => pubsub.asyncIterator('onTestSubscription'),async ({ onTestSubscription:{token:subToken}}, {token},{models} ) => {
+      subscribe: withFilter((_, __, { pubsub }) => pubsub.asyncIterator('onTestSubscription'), async ({ onTestSubscription }, {token},{models} ) => {
         
-        console.log({subToken,token})
-   
-        return true;
+        console.log({onTestSubscription,token})
+        
+        return onTestSubscription==token;
         },
       ),
   },
 
-  }
+  } 
   

@@ -134,11 +134,11 @@ module.exports = {
   },
   testSubScription: async (parent, { token }, { models, user, pubsub }) => {
     
-    console.log('token');
+    console.log({token});
     pubsub.publish('onTestSubscription', { onTestSubscription: token });
     return token;
   }
 
 }
-
+ 
 
