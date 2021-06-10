@@ -63,6 +63,16 @@ module.exports = {
         },
       ),
   },
+    onTestSubscription: {
+    
+    subscribe:withFilter((_, __, { pubsub}) => pubsub.asyncIterator('onTestSubscription'),async ({ onTestSubscription:{token:subToken}}, {token},{models} ) => {
+        
+        console.log({subToken,token})
+   
+        return true;
+        },
+      ),
+  },
 
   }
   

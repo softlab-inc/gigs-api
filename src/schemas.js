@@ -204,6 +204,8 @@ type Profession{
   uploadFiletoS3(file:Upload):String
 
   jobSeekerUpdateData(phone:String,bio:String):JobSeeker
+
+  testSubScription(token:String!):String!
  
 }
 
@@ -214,6 +216,7 @@ type Subscription{
   onStatusChange:JobSeeker!
   onJobSeekerSentMessage(token:String!):Chat!
   onEmployerSentMessage(token:String!):Chat!
+  onTestSubscription(token:String!):String!
 }
 
 `;

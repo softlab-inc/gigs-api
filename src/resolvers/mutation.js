@@ -131,7 +131,13 @@ module.exports = {
     const newUser = await jobSeekerService.jobSeekerUpdateData({ phone, bio,user });
      
     return newUser; 
-  } 
+  },
+  testSubScription: async (parent, { token }, { models, user, pubsub }) => {
+    
+    console.log('token');
+    pubsub.publish('onTestSubscription', { onTestSubscription: token });
+    return token;
+  }
 
 }
 
