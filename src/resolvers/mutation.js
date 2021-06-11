@@ -137,7 +137,7 @@ module.exports = {
     pubsub.publish('onTestSubscription', { onTestSubscription: token });
     return token;
   },
-  employerHire: async (parent, { gigId, employeeId }, { models, pubsub, user }) => {
+   employerHireJobSeeker: async (parent, { gigId, employeeId }, { models, pubsub, user }) => {
     const employerService = new EmployerService(models);
     const employee = await employerService.employerHire({ gigId, employeeId,user });
     // pubsub.publish('onJobSeekerHired', { onJobSeekerHired: { employeeId } });

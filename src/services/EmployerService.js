@@ -204,27 +204,30 @@ class EmployerService{
     return await this.models.gig.findOne({where:{employerId: user.id}})
   }
 
-  async isHiredForJob({ employeeId, gigId }) {
-    let result = await this.models.employeeGig.findOne({ where: { employeeId, gigId } });
+  async isJobSeekerHiredForJob({ employeeId, gigId }) {
+    return await this.models.employeeGig.findOne({ where: { employeeId, gigId } });
   }
 
   async employerHire({ gigId, employeeId,user }){
     this.isAuthenticatic(user);
+
     const { employee:employeeModel,gig:gigModel } = this.models;
-  //updated the emploeeGig table
-  //send a token to the notified jobSeeker {
-     /**
-      * Fetch the some jobSeeker infor and some gigInfor and append a notification message
-      * then the Client
-      * 
-      */
+     
+    if (this.isJobSeekerHiredForJob({ employeeId, gigId })) {
+      throw new ForbiddenError('Job Seeker Already hired for job!');
+    } else {
+      const employee = await employeeModel.findOne({ where: { id: employeeId } });
+
+      const gig = await gigModel.findOne({ where: { id: gigId } });
+
+      //gnerate message to send
+      console.log({ ...employee, ...gig });
+
+    }
     
-    const employee = await employeeModel.findOne({ where: { id: employeeId } });
+    
 
-    const gig = await gigModel.findOne({ where: { id: gigId } });
-
-
-
+    
   }
 
 
