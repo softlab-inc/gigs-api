@@ -58,7 +58,7 @@ class NotificationService{
       sound: 'default',
       title: "Your hired",
       body: `Dear ${hired.fullName} you have been hired for ${hired.name} role`,
-        data: { gigId: hired.gigId },
+        data: { gigId: hired.gigId,toScreen:'Gigs'},
        priority: 'high',
       });
       
@@ -90,7 +90,7 @@ class NotificationService{
             sound: 'default',
             title:"Gig created",
             body: `${employee.name}  -   ${employee.details}`,
-            data: { gigId: employee.gigId },
+            data: { gigId: employee.gigId,toScreen:'Notifications' },
             priority: 'high',
         });
 
