@@ -211,9 +211,9 @@ class EmployerService{
   async employerHire({ gigId, employeeId,user }){
     this.isAuthenticatic(user);
 
-    const { employee:employeeModel,gig:gigModel } = this.models;
+    const { employee:employeeModel,gig:gigModel,employeeGig } = this.models;
      
-    if (this.isJobSeekerHiredForJob({ employeeId, gigId })) {
+    if (await this.isJobSeekerHiredForJob({ employeeId, gigId })) {
       throw new ForbiddenError('Job Seeker Already hired for job!');
     } else {
       const employee = await employeeModel.findOne({ where: { id: employeeId } });
@@ -221,8 +221,11 @@ class EmployerService{
       const gig = await gigModel.findOne({ where: { id: gigId } });
 
       //gnerate message to send
-      console.log({ ...employee, ...gig });
+      const employeeAndGig = { ...employee.dataValues, ...gig.dataValues,employeeId, gigId}
+      
+      await employeeGig.create({ employeeId, gigId });
 
+      return employeeAndGig;
     }
     
     

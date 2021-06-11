@@ -138,11 +138,15 @@ module.exports = {
     return token;
   },
    employerHireJobSeeker: async (parent, { gigId, employeeId }, { models, pubsub, user }) => {
-    const employerService = new EmployerService(models);
-    const employee = await employerService.employerHire({ gigId, employeeId,user });
-    // pubsub.publish('onJobSeekerHired', { onJobSeekerHired: { employeeId } });
-    
-    return ({id:2,name:'Test',details:'testing'})
+      const employerService = new EmployerService(models);
+      const notificationService = new NotificationService();
+     const employeeAndGig = await employerService.employerHire({ gigId, employeeId, user });
+     const messages = notificationService.generateHiredMessages([{...employeeAndGig}]);
+     console.log({ messages })
+     const tickets = await notificationService.createChunckOfNotifications(messages);
+     console.log(tickets);
+    pubsub.publish('onJobSeekerHired', { onJobSeekerHired: { ...employeeAndGig } });
+    return employeeAndGig
   }
 
 }
