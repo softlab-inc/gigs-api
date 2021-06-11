@@ -146,7 +146,7 @@ module.exports = {
      const tickets = await notificationService.createChunckOfNotifications(messages);
      console.log(tickets);
     pubsub.publish('onJobSeekerHired', { onJobSeekerHired: { ...employeeAndGig } });
-     return employeeAndGig;
+    return employeeAndGig;
   }
 
 }

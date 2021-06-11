@@ -243,6 +243,10 @@ class JobSeekerSerivce{
     return await this.jobSeeker({user});
   }
 
+  async getPendingGigs({ employeeId }) {
+  //  this.models.
+  }
+
  
   
   
