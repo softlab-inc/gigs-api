@@ -17,8 +17,8 @@ module.exports = {
       const jobSeekerService = new JobSeekerSerivce(models);
       return await jobSeekerService.getReadNotifications({employeeId: parent.id })
   },
-  pendingGigs: async (parent, args, { models }) => {
-  let data = await models.employeeGig.findAll({ where: { employeeId: 3 },include:[models.gig] ,});
-  return  data.map(data => ({ ...data.get('gig'), status: data.status }));
+  pendingGigs: async ({id}, args, { models }) => {
+  let data = await models.employeeGig.findAll({ where: { employeeId: id },include:[models.gig] ,});
+  return  data.map(data => ({ ...data.get('gig').dataValues, status: data.status }));
   } 
 }
