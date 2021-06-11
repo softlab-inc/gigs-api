@@ -204,8 +204,13 @@ class EmployerService{
     return await this.models.gig.findOne({where:{employerId: user.id}})
   }
 
-  async emploherHire({ gigId, employeeId }) => {
-    
+  async isHiredForJob({ employeeId, gigId }) {
+    let result = await this.models.employeeGig.findOne({ where: { employeeId, gigId } });
+  }
+
+  async employerHire({ gigId, employeeId,user }){
+    this.isAuthenticatic(user);
+    const { employee:employeeModel,gig:gigModel } = this.models;
   //updated the emploeeGig table
   //send a token to the notified jobSeeker {
      /**
@@ -213,6 +218,13 @@ class EmployerService{
       * then the Client
       * 
       */
+    
+    const employee = await employeeModel.findOne({ where: { id: employeeId } });
+
+    const gig = await gigModel.findOne({ where: { id: gigId } });
+
+
+
   }
 
 
