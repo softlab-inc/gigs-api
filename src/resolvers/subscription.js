@@ -54,7 +54,6 @@ module.exports = {
       ),
   },
    onAcceptGig: {
-    
     subscribe:withFilter((_, __, { pubsub}) => pubsub.asyncIterator('onAcceptGig'),async ({onAcceptGig}, {token},{models} ) => {
         const { employerId } = onAcceptGig;
       const user = getUser(token);
@@ -64,7 +63,6 @@ module.exports = {
       ),
   },
     onTestSubscription: {
-    
       subscribe: withFilter((_, __, { pubsub }) => pubsub.asyncIterator('onTestSubscription'), async ({ onTestSubscription }, {token},{models} ) => {
         return onTestSubscription==token;
         },

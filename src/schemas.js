@@ -84,7 +84,7 @@ type Gig{
   status:Int
   hoursPerDay:Int
   location:String
-  # assignedTo:[JobSeeker]
+  assignedTo:[JobSeeker]
   profession:Profession
   createdBy:Employer
   createdAt:DateTime
