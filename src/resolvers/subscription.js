@@ -56,9 +56,18 @@ module.exports = {
    onAcceptGig: {
     subscribe:withFilter((_, __, { pubsub}) => pubsub.asyncIterator('onAcceptGig'),async ({onAcceptGig}, {token},{models} ) => {
         const { employerId } = onAcceptGig;
-      const user = getUser(token);
-      console.log({ user, employerId });
-        return user.id == employerId;
+      const {id} = getUser(token);
+      console.log({ id, employerId });
+        return id == employerId;
+        },
+      ),
+  },
+   onJobSeekerHired: {
+    subscribe:withFilter((_, __, { pubsub}) => pubsub.asyncIterator('onJobSeekerHired'),async ({onJobSeekerHired}, {token},{models} ) => {
+        const { employeeId } = onJobSeekerHired;
+      const {id} = getUser(token);
+      console.log({ user, employeeId });
+        return id == employeeId;
         },
       ),
   },

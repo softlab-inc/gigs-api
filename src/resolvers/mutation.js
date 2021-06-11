@@ -136,6 +136,10 @@ module.exports = {
     console.log({token});
     pubsub.publish('onTestSubscription', { onTestSubscription: token });
     return token;
+  },
+  employerHire: async (parent, { gigId, employeeId }, { models,pubsub }) => {
+    pubsub.publish('onJobSeekerHired', { onJobSeekerHired: { employeeId } });
+    
   }
 
 }

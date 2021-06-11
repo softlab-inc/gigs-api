@@ -29,7 +29,36 @@ class NotificationService{
       sound: 'default',
       title: "Gig Accepted",
       body: `${accepted.fullName} has accepted to the Gig you created`,
-        ata: { gigId: accepted.gigId },
+        data: { gigId: accepted.gigId,toScreen:'Notifications' },
+       priority: 'high',
+      });
+      
+    }
+     
+    return messages;
+
+  }
+
+
+  generateHiredMessages(data) {
+
+    let messages = [];
+
+    for (let hired of data) {
+
+      if (hired["pushToken"] == null)  continue;
+
+      if (!Expo.isExpoPushToken(hired.pushToken)) {
+        console.error(`Push token ${hired.pushToken} is not a valid Expo push token`);
+        continue;
+      }
+
+      messages.push({
+      to: hired.pushToken,
+      sound: 'default',
+      title: "Your hired",
+      body: `Dear ${hired.fullName} you have been hired for ${hired.name} role`,
+        data: { gigId: hired.gigId },
        priority: 'high',
       });
       

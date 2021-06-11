@@ -204,6 +204,16 @@ class EmployerService{
     return await this.models.gig.findOne({where:{employerId: user.id}})
   }
 
+  async emploherHire({ gigId, employeeId }) => {
+    
+  //updated the emploeeGig table
+  //send a token to the notified jobSeeker {
+     /**
+      * Fetch the some jobSeeker infor and some gigInfor and append a notification message
+      * then the Client
+      * 
+      */
+  }
 
 
 }

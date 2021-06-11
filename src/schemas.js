@@ -55,6 +55,7 @@ type Location{
   latitude:String
 }
 
+
 type Accepted{
   id:Int!
   pushToken:String!
@@ -206,6 +207,8 @@ type Profession{
   jobSeekerUpdateData(phone:String,bio:String):JobSeeker
 
   testSubScription(token:String!):String!
+
+  employerHire(gigId:Int,employeeId:Int!):Gig
  
 }
 
@@ -217,6 +220,7 @@ type Subscription{
   onJobSeekerSentMessage(token:String!):Chat!
   onEmployerSentMessage(token:String!):Chat!
   onTestSubscription(token:String!):String!
+  onJobSeekerHired(token:String!):Gig!
 }
 
 `;
