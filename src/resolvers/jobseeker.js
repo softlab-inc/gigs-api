@@ -20,5 +20,5 @@ module.exports = {
   pendingGigs: async (parent, args, { models }) => {
   let data = await models.employeeGig.findAll({ where: { employeeId: 3 },include:[models.gig] ,});
   return  data.map(data => ({ ...data.get('gig'), status: data.status }));
-  }
+  } 
 }
