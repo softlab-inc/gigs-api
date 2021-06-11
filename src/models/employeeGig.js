@@ -15,7 +15,8 @@ module.exports = function(sequelize, DataTypes) {
     },
     status: {
       type: DataTypes.INTEGER,
-      allowNull: true
+      allowNull: true,
+      defaultValue: 0
     },
     likeCount: {
       type: DataTypes.INTEGER,
