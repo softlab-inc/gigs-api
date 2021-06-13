@@ -4,7 +4,6 @@ const logger = require('morgan');
 const models = require('./models');
 const path = require('path');
 const cors = require('cors');
-const bodyParser = require('body-parser')
 const helmet = require('helmet');
 const { ApolloServer} = require('apollo-server-express');
 const { PubSub } = require('graphql-subscriptions')
@@ -65,16 +64,16 @@ server.applyMiddleware({ app, path: '/gigs-app/api/v1'});
 /**
  * Setting up the middlewares of express server 
  */
-app.use(express.json());
-app.use(bodyParser.json({
-  limit: '50mb'
-}));
 
-app.use(bodyParser.urlencoded({
-  limit: '50mb',
-  parameterLimit: 100000,
-  extended: true 
-}));
+/**
+ 
+  json: {limit: '50mb', extended: true},
+  urlencoded: {limit: '50mb', extended: true}
+ 
+ 
+ */
+app.use(express.json({ limit: '50mb', extended: true }));
+app.use(express.urlencoded({ limit: '50mb', parameterLimit: 100000, extended: true }));
 app.use(express.urlencoded({extended: false}));
 app.use(logger('dev'));
 app.use(cookieParser());
