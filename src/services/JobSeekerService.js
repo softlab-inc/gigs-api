@@ -237,7 +237,6 @@ class JobSeekerSerivce{
   }
 
   async jobSeekerUpdateData({ user, phone,bio}) {
-    console.log({ user, phone, bio });
     this.isAuthenticatic(user);
     await this.models.employee.update({phone, bio},{where:{id:user.id}})
     return await this.jobSeeker({user});
