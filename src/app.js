@@ -74,7 +74,6 @@ server.applyMiddleware({ app, path: '/gigs-app/api/v1'});
  */
 app.use(express.json({ limit: '50mb', extended: true }));
 app.use(express.urlencoded({ limit: '50mb', parameterLimit: 100000, extended: true }));
-app.use(express.urlencoded({extended: false}));
 app.use(logger('dev'));
 app.use(cookieParser());
 app.use(cors());
