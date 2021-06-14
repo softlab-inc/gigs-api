@@ -65,8 +65,7 @@ module.exports = {
    onJobSeekerHired: {
     subscribe:withFilter((_, __, { pubsub}) => pubsub.asyncIterator('onJobSeekerHired'),async ({onJobSeekerHired}, {token},{models} ) => {
         const { employeeId } = onJobSeekerHired;
-      const {id} = getUser(token);
-      console.log({ id, employeeId });
+        const {id} = getUser(token);
         return id == employeeId;
         },
       ),

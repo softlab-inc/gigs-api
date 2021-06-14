@@ -46,6 +46,7 @@ module.exports = gql`
     updatedAt:DateTime
     licenseImageUri:String
     hasAccepted:[Accepted!]
+    recentHires:[JobSeeker!]
     unReadHasAccepted:[Accepted!]
   }
 
@@ -120,7 +121,6 @@ type Profession{
   # readNotifications:[Notification!]
   # unReadNotifications:[Notification!]
  }
-
 
  #InputFields
  input CreateJobSeekerInput{
@@ -209,7 +209,6 @@ type Profession{
   testSubScription(token:String!):String!
 
   employerHireJobSeeker(gigId:Int,employeeId:Int!):Gig
- 
 }
 
 #Subscriptions
