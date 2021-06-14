@@ -228,10 +228,16 @@ class EmployerService{
       return employeeAndGig;
     }
     
-    
-
-    
   }
+
+  async getRecentHires({ user, employerId }) {
+    this.isAuthenticatic(user);
+    const gigs = await this.models.gig.findAll({ where: {employerId}, attributes: ['id'] });
+    const gigIds = gigs.map(data => (data.dataValues.id ));
+    console.log(gigIds);
+    const employees = await this.models.employeeGig.findAll({ where: { gigId: [gigIds]},include:['employee'] });
+    return employees.map(data => data.get('employee').dataValues)
+}
 
 
 }

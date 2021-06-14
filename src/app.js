@@ -21,12 +21,7 @@ const pubsub = new PubSub();
 
 (async () => {
   
-  const gigs = await models.gig.findAll({ where: {employerId: 3}, attributes: ['id'] });
-  const gigIds = gigs.map(data => (data.dataValues.id ));
-  console.log(gigIds);
-  const employees = await models.employeeGig.findAll({ where: { gigId: [gigIds]},include:['employee'] });
-  const recentHires = employees.map(data => data.get('employee').dataValues)
-  console.log({recentHires})
+ 
 })();
 
 /**
