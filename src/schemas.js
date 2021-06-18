@@ -209,6 +209,8 @@ type Profession{
   testSubScription(token:String!):String!
 
   employerHireJobSeeker(gigId:Int,employeeId:Int!):Gig
+  
+  employeeUpdateGigStatus(gigId:Int):Gig
 }
 
 #Subscriptions
