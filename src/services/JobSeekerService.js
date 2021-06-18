@@ -247,7 +247,9 @@ class JobSeekerSerivce{
   }
 
   
-  async updateGigStatus({ user, gigid }) {
+  async updateGigStatus({ user, gigId ,status}) {
+    this.isAuthenticatic(user);
+    const gigId = await this.models.employeeGig.update({ where: { gigId, employeeId: user.id } }, { status });
     
   }
   
