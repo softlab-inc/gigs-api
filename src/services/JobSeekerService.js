@@ -243,14 +243,17 @@ class JobSeekerSerivce{
   }
 
   async getPendingGigs({ employeeId }) {
-  //  this.models.
+
+    let data = await models.employeeGig.findAll({ where: { employeeId },include:[models.gig] ,});
+  return  data.map(data => ({ ...data.get('gig').dataValues, status: data.status }));
   }
 
   
   async updateGigStatus({ user, gigId ,status}) {
     this.isAuthenticatic(user);
     const gigId = await this.models.employeeGig.update({ where: { gigId, employeeId: user.id } }, { status });
-    
+    return await 
+
   }
   
   
