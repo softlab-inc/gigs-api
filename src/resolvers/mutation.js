@@ -147,7 +147,10 @@ module.exports = {
      console.log(tickets);
     pubsub.publish('onJobSeekerHired', { onJobSeekerHired: { ...employeeAndGig } });
     return employeeAndGig;
-  }
+  },
+  employeeUpdateGigStatus: (parent, { gigId, status }, { models, user }=> {
+      const jobSeekerService = new JobSeekerSerivce(models); 
+  })
 
 }
  

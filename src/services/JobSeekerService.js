@@ -246,7 +246,10 @@ class JobSeekerSerivce{
   //  this.models.
   }
 
- 
+  
+  async updateGigStatus({ user, gigid }) {
+    
+  }
   
   
  
