@@ -252,7 +252,6 @@ class JobSeekerSerivce{
     this.isAuthenticatic(user);
     const gigId = await this.models.employeeGig.update({ where: { gigId, employeeId: user.id } }, { status });
     return await this.getPendingGigs({ employeeId: user.id });
-
   }
   
   
