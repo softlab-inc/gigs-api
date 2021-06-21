@@ -148,7 +148,7 @@ module.exports = {
     pubsub.publish('onJobSeekerHired', { onJobSeekerHired: { ...employeeAndGig } });
     return employeeAndGig;
   },
-  employeeUpdateGigStatus: (parent, { gigId, status }, { models, user })=> {
+  employeeUpdateGigStatus: async (parent, { gigId, status }, { models, user })=> {
   const jobSeekerService = new JobSeekerSerivce(models);
   await jobSeekerService.updateGigStatus({user,gigId,status})
 }

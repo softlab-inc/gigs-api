@@ -233,7 +233,6 @@ class JobSeekerSerivce{
     } else {
       return  await this.models.accepted.create({...args, pushToken: employer.dataValues.pushToken,employeeId:user.id });
     }
-    
   }
 
   async jobSeekerUpdateData({ user, phone,bio}) {
@@ -247,15 +246,12 @@ class JobSeekerSerivce{
   return  data.map(data => ({ ...data.get('gig').dataValues, status: data.status }));
   }
 
-  
   async updateGigStatus({ user, gigId ,status}) {
     this.isAuthenticatic(user);
-    const gigId = await this.models.employeeGig.update({ where: { gigId, employeeId: user.id } }, { status });
+    await this.models.employeeGig.update({ where: { gigId, employeeId: user.id } }, { status });
     return await this.getPendingGigs({ employeeId: user.id });
   }
-  
-  
- 
+
 }
 
 module.exports = JobSeekerSerivce;
