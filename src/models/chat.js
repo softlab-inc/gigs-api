@@ -28,6 +28,14 @@ module.exports = function(sequelize, DataTypes) {
         model: 'employer',
         key: 'id'
       }
+    },
+    from: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    to: {
+      type: DataTypes.INTEGER,
+      allowNull: true
     }
   }, {
     sequelize,
