@@ -25,6 +25,12 @@ module.exports = gql`
     updatedAt:DateTime
   }
 
+  type JobSeekerChats {
+    _id:Int!
+
+
+  }
+
   type Chat{
     id:Int!
     content:String!
@@ -108,18 +114,18 @@ type Profession{
 
   #Queries
   type Query{
-  jobSeeker:JobSeeker
-  employer:Employer
-  employers:[Employer!]
-  jobSeekers:[JobSeeker!]
-  professions:[Profession!]
-  gig:Gig
-  createdGigs:[Gig!]
-  employerChats(employeeId:Int!):[Chat!]
-  jobSeekerChats(employerId:Int!):[Chat!]
-  # notifications:[Notification!]
-  # readNotifications:[Notification!]
-  # unReadNotifications:[Notification!]
+      jobSeeker:JobSeeker
+      employer:Employer
+      employers:[Employer!]
+      jobSeekers:[JobSeeker!]
+      professions:[Profession!]
+      gig:Gig
+      createdGigs:[Gig!]
+      employerChats(employeeId:Int!):[Chat!]
+      jobSeekerChats(employerId:Int!):[Chat!]
+      # notifications:[Notification!]
+      # readNotifications:[Notification!]
+      # unReadNotifications:[Notification!]
  }
 
  #InputFields
@@ -174,43 +180,43 @@ type Profession{
 
  #Mutations 
   type Mutation{
-  createJobSeeker(input:CreateJobSeekerInput):String!
+    createJobSeeker(input:CreateJobSeekerInput):String!
 
-  signInJobSeeker(input:SignInJobSeeker):String!
+    signInJobSeeker(input:SignInJobSeeker):String!
 
-  jobSeekerUploadProfileImage(profileImage:Upload!):JobSeeker
+    jobSeekerUploadProfileImage(profileImage:Upload!):JobSeeker
 
-  jobSeekerUpdatePushNotification(pushToken:String):JobSeeker
+    jobSeekerUpdatePushNotification(pushToken:String):JobSeeker
 
-  employerUpdatePushNotification(pushToken:String):Employer
+    employerUpdatePushNotification(pushToken:String):Employer
 
-  createProfession(input:CreateProfession):String!
+    createProfession(input:CreateProfession):String!
 
-  userUpdateStatus(status:Int!):JobSeeker
- 
-  createEmployer(input:CreateEmployerInput):String!
+    userUpdateStatus(status:Int!):JobSeeker
+  
+    createEmployer(input:CreateEmployerInput):String!
 
-  signInEmployer(input:SignInEmployerInput):String!
+    signInEmployer(input:SignInEmployerInput):String!
 
-  employerCreateGig(input:EmployerCreateGigInput):Gig
+    employerCreateGig(input:EmployerCreateGigInput):Gig
 
-  jobSeekerSendMessage(content:String!,employerId:Int!):Chat
+    jobSeekerSendMessage(content:String!,employerId:Int!):Chat
 
-  employerSendMessage(content:String!,employeeId:Int!):Chat
+    employerSendMessage(content:String!,employeeId:Int!):Chat
 
-  sendEmail(email:String!):String!
+    sendEmail(email:String!):String!
 
-  gigAccepted(employerId:Int!,fullName:String!,gigId:Int!):Accepted
+    gigAccepted(employerId:Int!,fullName:String!,gigId:Int!):Accepted
 
-  uploadFiletoS3(file:Upload):String
+    uploadFiletoS3(file:Upload):String
 
-  jobSeekerUpdateData(phone:String,bio:String):JobSeeker
+    jobSeekerUpdateData(phone:String,bio:String):JobSeeker
 
-  testSubScription(token:String!):String!
+    testSubScription(token:String!):String!
 
-  employerHireJobSeeker(gigId:Int!,employeeId:Int!):Gig
+    employerHireJobSeeker(gigId:Int!,employeeId:Int!):Gig
 
-  employeeUpdateGigStatus(gigId:Int!,status:Int!):Gig
+    employeeUpdateGigStatus(gigId:Int!,status:Int!):Gig
 }
 
 #Subscriptions
