@@ -32,7 +32,6 @@ module.exports = gql`
   }
 
   type Chat{
-    id:Int!
     _id:Int
     text:String
     user:User
