@@ -25,17 +25,20 @@ module.exports = gql`
     updatedAt:DateTime
   }
 
-  type JobSeekerChats {
-    _id:Int!
-
-
+  type User{
+    _id:Int
+    name:String
+    avatar:String
   }
 
   type Chat{
     id:Int!
+    _id:Int
+    text:String
+    user:User
     content:String!
-    jobSeeker:JobSeeker
-    employer:Employer
+    # jobSeeker:JobSeeker
+    # employer:Employer
     createdAt:DateTime!
     updatedAt:DateTime!
   }
