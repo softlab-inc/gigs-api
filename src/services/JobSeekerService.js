@@ -41,7 +41,7 @@ class JobSeekerSerivce{
 
   async getReadNotifications({employeeId}) {
     return await this.models.notified.findAll({where:{employeeId,isRead:1}})
-  }
+  } 
   
   async getUnReadNotifications({employeeId}) {
     return await this.models.notified.findAll({where:{employeeId,isRead:0}})
