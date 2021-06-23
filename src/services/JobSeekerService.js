@@ -217,7 +217,7 @@ class JobSeekerSerivce{
      return await this.models.chat.findAll({ where: { employeeId: user.id, employerId }, order: [['createdAt', 'DESC']] });
   }
 
-  async getGetEmployer({id}) {
+  async getEmployer({id}) {
     return await this.models.employer.findOne({ where: id });
   }
 
@@ -233,7 +233,7 @@ class JobSeekerSerivce{
 
   async acceptGig({args,user}) {
     this.isAuthenticatic(user);
-    let employer = await this.getGetEmployer({ id: args.employerId });
+    let employer = await this.getEmployer({ id: args.employerId });
     if (await this.hasAcceptedAlready({ gigId: args.gigId, employeeId: user.id })) {
       throw new Error('Employer notified already');
     } else {
