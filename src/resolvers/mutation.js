@@ -100,12 +100,8 @@ module.exports = {
      return await jobSeekerService.jobSeekerSendMessage({content,employerId,user,pubsub})
   },
   employerSendMessage: async (parent, { content, employeeId }, { models, user, pubsub }) => {
-    // const employerService = new EmployerService(models);
-    // console.log({ employerService });
-    console.log({ content, employeeId }); 
-
-    return { _id: 1, createdAt: new Date(), text: 'just testing if tis is working just fine', user: { _id: 3, name: 'Raymond Kalumba Joseph' } };
-    // return await employerService.employerSendMessage({content, employeeId, user, pubsub});
+     const employerService = new EmployerService(models);
+    return await employerService.employerSendMessage({content, employeeId, user, pubsub});
   },
   sendEmail: async (parent, { email }, context) => {
     const result  =  new MailerService();

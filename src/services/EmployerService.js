@@ -179,9 +179,9 @@ class EmployerService{
     this.isAuthenticatic(user);
     const employer = await this.getEmployer({ id: user.id })
     const { fullName } = employer.dataValues;
-    const message = await this.models.chat.create({content,employeeId,employerId:user.id});
-    pubsub.publish('onEmployerSentMessage', { onEmployerSentMessage: message.dataValues });
-    return message;
+    const message = await this.models.chat.create({content,employeeId,employerId:user.id,fullName,from:user.id,to:employeeId});
+    pubsub.publish('onEmployerSentMessage', { onEmployerSentMessage: { _id:message.dataValues.id,text:message.dataValues.content,...message.dataValues }});
+    return { _id:message.dataValues.id,text:message.dataValues.content,...message.dataValues };
   }
 
   async getChats({user,employeeId}) {
