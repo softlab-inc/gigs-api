@@ -35,9 +35,6 @@ module.exports = gql`
     _id:Int
     text:String
     user:User
-    content:String!
-    # jobSeeker:JobSeeker
-    # employer:Employer
     createdAt:DateTime!
     updatedAt:DateTime!
   }

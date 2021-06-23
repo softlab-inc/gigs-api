@@ -204,12 +204,12 @@ class JobSeekerSerivce{
   }
  
   async jobSeekerSendMessage({ content, employerId, user, pubsub }) {
-
     this.isAuthenticatic(user);
-    
-    const message = await this.models.chat.create({ content, employerId, employeeId: user.id });
-    pubsub.publish('onJobSeekerSentMessage', { onJobSeekerSentMessage: message.dataValues });
-    return message;
+    const jobSeeker = await this.getGetJobSeeker({ id: user.id });
+    const { fullName } = jobSeeker.dataValues;
+    const message = await this.models.chat.create({ content, employerId, employeeId: user.id,fullName,from:user.id,to:employerId});
+    pubsub.publish('onJobSeekerSentMessage', { onJobSeekerSentMessage:{ _id:message.dataValues.id,text:message.dataValues.content,...message.dataValues }});
+    return { _id:message.dataValues.id,text:message.dataValues.content,...message.dataValues };
   }
 
    async getChats({user,employerId}) {
@@ -220,6 +220,12 @@ class JobSeekerSerivce{
   async getGetEmployer({id}) {
     return await this.models.employer.findOne({ where: id });
   }
+
+  async getGetJobSeeker({id}) {
+    return await this.models.employee.findOne({ where: id });
+  }
+
+
 
   async hasAcceptedAlready({ gigId,employeeId }) {
     return await this.models.accepted.findOne({ where: { gigId, employeeId } });
