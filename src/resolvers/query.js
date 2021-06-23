@@ -16,7 +16,11 @@ module.exports = {
   },
   jobSeekerChats: async(parent, {employerId}, { models,user }) => {
     const jobSeekerService = new JobSeekerSerivce(models);
-    return await jobSeekerService.getChats({ user,employerId });
+
+    let chats = await jobSeekerService.getChats({ user, employerId });
+    
+    return chats.map(data => ({_id:data.id,text:data.content,...data.dataValues}))
+
   },
   gig: async (parent, args, { models, user }) => {
     const employerService = new EmployerService(models);
