@@ -85,7 +85,7 @@ module.exports = {
     
     console.log({ tickets });
    
-    return gig;
+    return gig; 
   },
   jobSeekerUpdatePushNotification: async (parent, {pushToken}, {models,user}) => {
     const jobSeekerService =new JobSeekerSerivce(models);
