@@ -12,14 +12,15 @@ module.exports = {
   },
   employerChats: async (parent, {employeeId}, { models,user }) => {
     const employerService = new EmployerService(models);
-    return await employerService.getChats({ user, employeeId });
+    let chats = await employerService.getChats({ user, employeeId });
+    return chats.map(data => ({ _id: data.id, text: data.content, ...data.dataValues }));
   },
   jobSeekerChats: async(parent, {employerId}, { models,user }) => {
     const jobSeekerService = new JobSeekerSerivce(models);
 
     let chats = await jobSeekerService.getChats({ user, employerId });
     
-    return chats.map(data => ({_id:data.id,text:data.content,...data.dataValues}))
+    return chats.map(data => ({ _id: data.id, text: data.content, ...data.dataValues }));
 
   },
   gig: async (parent, args, { models, user }) => {
