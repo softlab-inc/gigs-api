@@ -24,17 +24,10 @@ module.exports = {
       ),
   },
   onJobSeekerSentMessage:  {
-    /**
-       extract employeeId from payload
-      look up from profession table for employer with same profession
-      if true notifed them of a gig else nothing is notified
-       */
     subscribe:withFilter((_, __, { pubsub}) => pubsub.asyncIterator('onJobSeekerSentMessage'),async ({onJobSeekerSentMessage}, {token},{models} ) => {
-        const gigService = new GigService(models);
-        const { employeeId } = onJobSeekerSentMessage;
-        const user = getUser(token);
-        
-        return true;
+        const { employerId } = onJobSeekerSentMessage;
+        const {id}= getUser(token);
+        return id ==employerId;
         },
       ),
   },
@@ -45,11 +38,9 @@ module.exports = {
       if true notifed them of a gig else nothing is notified
        */
     subscribe:withFilter((_, __, { pubsub}) => pubsub.asyncIterator('onEmployerSentMessage'),async ({onEmployerSentMessage}, {token},{models} ) => {
-        const gigService = new GigService(models);
-        const { employerId } = onEmployerSentMessage;
-        const user = getUser(token);
-
-        return true;
+        const { employeeId } = onEmployerSentMessage;
+        const {id}= getUser(token);
+        return employeeId ==id;
         },
       ),
   },
@@ -57,7 +48,6 @@ module.exports = {
     subscribe:withFilter((_, __, { pubsub}) => pubsub.asyncIterator('onAcceptGig'),async ({onAcceptGig}, {token},{models} ) => {
         const { employerId } = onAcceptGig;
       const {id} = getUser(token);
-      console.log({ id, employerId });
         return id == employerId;
         },
       ),

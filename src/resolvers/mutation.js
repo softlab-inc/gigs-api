@@ -101,7 +101,7 @@ module.exports = {
   },
   employerSendMessage: async (parent, { content, employeeId }, { models, user, pubsub }) => {
      const employerService = new EmployerService(models);
-    return await employerService.employerSendMessage({content, employeeId, user, pubsub});
+     return await employerService.employerSendMessage({content, employeeId, user, pubsub});
   },
   sendEmail: async (parent, { email }, context) => {
     const result  =  new MailerService();
@@ -127,13 +127,10 @@ module.exports = {
   },
   jobSeekerUpdateData: async (parent, { phone, bio }, { models, user }) => {
     const jobSeekerService = new JobSeekerSerivce(models);
-
     const newUser = await jobSeekerService.jobSeekerUpdateData({ phone, bio,user });
-     
     return newUser; 
   },
   testSubScription: async (parent, { token }, { models, user, pubsub }) => {
-    console.log({token});
     pubsub.publish('onTestSubscription', { onTestSubscription: token });
     return token;
   },
