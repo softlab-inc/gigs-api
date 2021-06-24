@@ -40,7 +40,7 @@ module.exports = {
     subscribe:withFilter((_, __, { pubsub}) => pubsub.asyncIterator('onEmployerSentMessage'),async ({onEmployerSentMessage}, {token},{models} ) => {
         const { employeeId } = onEmployerSentMessage;
         const {id}= getUser(token);
-        return employeeId ==id;
+        return employeeId == id;
         },
       ),
   },
