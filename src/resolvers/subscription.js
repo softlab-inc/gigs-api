@@ -35,7 +35,7 @@ module.exports = {
     /**
        extract employeeId from payload
       look up from profession table for employer with same profession
-      if true notifed them of a gig else nothing is notified
+      if one found  (true) then notifed them of a gig else nothing is notified
        */
     subscribe:withFilter((_, __, { pubsub}) => pubsub.asyncIterator('onEmployerSentMessage'),async ({onEmployerSentMessage}, {token},{models} ) => {
         const { employeeId } = onEmployerSentMessage;
