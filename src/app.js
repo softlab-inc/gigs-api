@@ -9,6 +9,7 @@ const { ApolloServer} = require('apollo-server-express');
 const { PubSub } = require('graphql-subscriptions')
 require('dotenv').config();
 const getUser = require('../src/utils/getUser');
+require('events').EventEmitter.prototype._maxListeners = 100;
 
 
 //Constructing a schema, using the GraphGL schema query language

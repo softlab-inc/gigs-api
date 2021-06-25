@@ -27,7 +27,7 @@ module.exports = {
     subscribe:withFilter((_, __, { pubsub}) => pubsub.asyncIterator('onJobSeekerSentMessage'),async ({onJobSeekerSentMessage}, {token},{models} ) => {
         const { employerId } = onJobSeekerSentMessage;
         const {id}= getUser(token);
-        return id ==employerId;
+        return id == employerId;
         },
       ),
   },
