@@ -221,12 +221,19 @@ type Profession{
 #Subscriptions
 type Subscription{
   onGigCreated(token:String!):Gig!
+  
   onAcceptGig(token:String!):Accepted!
+  
   onStatusChange:JobSeeker!
+  
   onJobSeekerSentMessage(token:String!):Chat!
+  
   onEmployerSentMessage(token:String!):Chat!
+  
   onTestSubscription(token:String!):String!
+  
   onJobSeekerHired(token:String!):Gig!
+  
 }
 
 `;

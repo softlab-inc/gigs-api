@@ -213,7 +213,7 @@ class JobSeekerSerivce{
   }
 
    async getChats({user,employerId}) {
-    this.isAuthenticatic(user);
+     this.isAuthenticatic(user);
      return await this.models.chat.findAll({ where: { employeeId: user.id, employerId }, order: [['createdAt', 'DESC']] });
   }
 
@@ -224,7 +224,6 @@ class JobSeekerSerivce{
   async getGetJobSeeker({id}) {
     return await this.models.employee.findOne({ where: id });
   }
-
 
 
   async hasAcceptedAlready({ gigId,employeeId }) {
@@ -254,7 +253,7 @@ class JobSeekerSerivce{
 
   async updateGigStatus({ user, gigId ,status}) {
     this.isAuthenticatic(user);
-    await this.models.employeeGig.update({ where: { gigId, employeeId: user.id } }, { status });
+    await this.models.employeeGig.update( { status },{ where: { gigId, employeeId: user.id } });
     return await this.getPendingGigs({ employeeId: user.id });
   }
 

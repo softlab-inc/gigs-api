@@ -10,7 +10,7 @@ const Employer = require('./employer');
 const Accepted = require('./accepted');
 
 /**
- * This module is responsible for exposion the Resolvers as Javascript objects
+ * This module is responsible for exposing the Resolvers as Javascript objects
  */
 module.exports={
   Mutation,

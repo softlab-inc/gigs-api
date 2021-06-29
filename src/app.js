@@ -84,7 +84,6 @@ app.use(cookieParser());
 app.use(cors());
 app.use(helmet());
 
-
 /**
  * Exporsing static files where all uploads shall be stored
  */
