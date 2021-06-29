@@ -253,11 +253,13 @@ class JobSeekerSerivce{
 
   async updateGigStatus({ user, gigId ,status}) {
     this.isAuthenticatic(user);
-    await this.models.employeeGig.update( { status },{ where: { gigId, employeeId: user.id } });
+    await this.models.employeeGig.update({ status }, { where: { gigId, employeeId: user.id } });
     return await this.getPendingGigs({ employeeId: user.id });
   }
 
 }
+
+
 
 module.exports = JobSeekerSerivce;
 

@@ -215,25 +215,25 @@ type Profession{
 
     employerHireJobSeeker(gigId:Int!,employeeId:Int!):Gig
 
-    employeeUpdateGigStatus(gigId:Int!,status:Int!):Gig
+    employeeUpdateGigStatus(gigId:Int!,status:Int!):[Gig!]
 }
 
 #Subscriptions
 type Subscription{
   onGigCreated(token:String!):Gig!
-  
+
   onAcceptGig(token:String!):Accepted!
-  
+
   onStatusChange:JobSeeker!
-  
+
   onJobSeekerSentMessage(token:String!):Chat!
-  
+
   onEmployerSentMessage(token:String!):Chat!
-  
+
   onTestSubscription(token:String!):String!
-  
+
   onJobSeekerHired(token:String!):Gig!
-  
+
 }
 
 `;

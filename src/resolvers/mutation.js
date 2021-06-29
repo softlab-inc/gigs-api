@@ -147,9 +147,26 @@ module.exports = {
   },
   employeeUpdateGigStatus: async (parent, { gigId, status }, { models, user })=> {
   const jobSeekerService = new JobSeekerSerivce(models);
-  await jobSeekerService.updateGigStatus({user,gigId,status})
+  return await jobSeekerService.updateGigStatus({user,gigId,status})
 }
 
 }
  
+
+/**
+ 
+   id
+      name
+      status
+      days
+      budget
+      createdBy{
+        id
+        fullName
+      }
+      updatedAt
+      createdAt
+ 
+ 
+ */
 
