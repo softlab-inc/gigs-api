@@ -10,7 +10,7 @@ module.exports = {
       name: name,
       avatar: null,
     };
-    } else  {
+    } else {
        return {
       _id: from,
       name: name,
