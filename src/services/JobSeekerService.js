@@ -257,7 +257,7 @@ class JobSeekerSerivce{
     return await this.getPendingGigs({ employeeId: user.id });
   }
 
-}
+} 
 
 
 
