@@ -1,11 +1,22 @@
 
 module.exports = {
-  user: async ({  from,fullName:name}, args, {user}) => {
+  user: async ({  from,to,fullName:name}, args, {user:{id}}) => {
   
-    return {
+    console.log({ from,to, name,id });
+     
+    if (to == from) {
+      return {
       _id: (name.length+from),
       name: name,
       avatar: null,
     };
+    } else  {
+       return {
+      _id: from,
+      name: name,
+      avatar: null,
+    };
+    }
+
   }
 }  
