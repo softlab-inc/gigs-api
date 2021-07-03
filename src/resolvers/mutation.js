@@ -140,7 +140,7 @@ module.exports = {
   },
   employerUpdateData: async (parent, { phone}, { models, user }) => {
    const employerService = new EmployerService(models);
-    const newUser = await employerService.jobSeekerUpdateData({ phone,user });
+    const newUser = await employerService.employerUpdateData({ phone,user });
     return newUser; 
   },
   testSubScription: async (parent, { token }, { models, user, pubsub }) => {
