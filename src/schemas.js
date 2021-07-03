@@ -185,6 +185,8 @@ type Profession{
 
     jobSeekerUploadProfileImage(profileImage:Upload!):JobSeeker
 
+    employerUploadProfileImage(profileImage:Upload!):Employer
+
     jobSeekerUpdatePushNotification(pushToken:String):JobSeeker
 
     employerUpdatePushNotification(pushToken:String):Employer
