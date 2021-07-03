@@ -178,8 +178,8 @@ class EmployerService{
   async employerSendMessage({ content,employeeId, user, pubsub }) {
     this.isAuthenticatic(user);
     const employer = await this.getEmployer({ id: user.id })
-    const { fullName } = employer.dataValues;
-    const message = await this.models.chat.create({content,employeeId,employerId:user.id,fullName,from:user.id,to:employeeId});
+    const { fullName,profileImagUri} = employer.dataValues;
+    const message = await this.models.chat.create({content,employeeId,avatar:profileImagUri,employerId:user.id,fullName,from:user.id,to:employeeId});
     pubsub.publish('onEmployerSentMessage', { onEmployerSentMessage: { _id:message.dataValues.id,text:message.dataValues.content,...message.dataValues }});
     return { _id:message.dataValues.id,text:message.dataValues.content,...message.dataValues };
   }
