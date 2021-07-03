@@ -146,7 +146,7 @@ module.exports = {
   testSubScription: async (parent, { token }, { models, user, pubsub }) => {
     pubsub.publish('onTestSubscription', { onTestSubscription: token });
     return token;
-  },
+  }, 
    employerHireJobSeeker: async (parent, { gigId, employeeId }, { models, pubsub, user }) => {
       const employerService = new EmployerService(models);
       const notificationService = new NotificationService();
