@@ -214,6 +214,8 @@ type Profession{
 
     jobSeekerUpdateData(phone:String,bio:String):JobSeeker
 
+    employerUpdateData(phone:String):Employer
+
     testSubScription(token:String!):String!
 
     employerHireJobSeeker(gigId:Int!,employeeId:Int!):Gig

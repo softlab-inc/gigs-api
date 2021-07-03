@@ -246,7 +246,7 @@ class EmployerService{
 }
 
 
-  async uploadProfileImage({ user, profileImage }) {
+async uploadProfileImage({ user, profileImage }) {
 
   if (!user) {
        throw new AuthenticationError('You should be signed!');
