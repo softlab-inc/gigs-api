@@ -40,6 +40,10 @@ module.exports = function(sequelize, DataTypes) {
     fullName: {
       type: DataTypes.STRING(60),
       allowNull: true
+    },
+    avatar: {
+      type: DataTypes.TEXT,
+      allowNull: true
     }
   }, {
     sequelize,
