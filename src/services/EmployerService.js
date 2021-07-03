@@ -264,7 +264,10 @@ async uploadProfileImage({ user, profileImage }) {
     await this.models.employer.update({ profileImagUri }, { where: { id } });
     
     return await this.models.employer.findOne({ where: { id } });
-  } 
+  }
+  
+
+  
  
   
 
