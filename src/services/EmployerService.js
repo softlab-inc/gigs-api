@@ -267,7 +267,11 @@ async uploadProfileImage({ user, profileImage }) {
   }
   
 
-  
+   async employerUpdateData({ user, phone}) {
+    this.isAuthenticatic(user);
+     await this.models.employer.update({ phone },{where:{id:user.id}})
+    return await this.employer({user});
+  }
  
   
 
