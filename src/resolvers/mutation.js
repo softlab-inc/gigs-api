@@ -163,9 +163,10 @@ module.exports = {
   return await jobSeekerService.updateGigStatus({user,gigId,status})
 }
 
+  
 }
  
-
+ 
 /**
  
    id
