@@ -43,6 +43,7 @@ module.exports = gql`
     id:Int!
     fullName:String
     companyName:String
+    profileImagUri:String
     email:String
     phone:String
     password:String

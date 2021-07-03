@@ -50,6 +50,14 @@ module.exports = {
 
     return newUser;
   },
+  employerUploadProfileImage: async (parent,{profileImage},{models,user})=> {
+     const employerService = new EmployerService(models);
+
+    const newUser = employerService.uploadProfileImage({ user, profileImage });
+
+    return newUser;
+  },
+
   createEmployer: async (parent, { input }, { models }) => {
     
     const employerService = new EmployerService(models);

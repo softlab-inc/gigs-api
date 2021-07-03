@@ -158,6 +158,8 @@ class JobSeekerSerivce{
   
   }
  
+
+  
   async uploadProfileImage({ user, profileImage }) {
 
   if (!user) {
@@ -177,6 +179,8 @@ class JobSeekerSerivce{
     
     return await this.models.employee.findOne({ where: { id } });
   }
+
+
   
   async jobSeeker({user}) {
     

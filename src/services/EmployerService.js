@@ -246,6 +246,29 @@ class EmployerService{
 }
 
 
+  async uploadProfileImage({ user, profileImage }) {
+
+  if (!user) {
+       throw new AuthenticationError('You should be signed!');
+  }
+    
+    const id = user.id;
+
+    let profileImagUri = '';
+
+    // profileImagUri = await getResult(profileImage, PROFILE_FOLDER);
+    let result = await AWS3Service.handleFileUpload(profileImage);
+
+    profileImagUri = result.Location;
+    
+    await this.models.employer.update({ profileImagUri }, { where: { id } });
+    
+    return await this.models.employer.findOne({ where: { id } });
+  }
+ 
+  
+
+
 }
 
 module.exports = EmployerService;
