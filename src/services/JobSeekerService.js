@@ -55,7 +55,7 @@ class JobSeekerSerivce{
     const { employee, employeeProfession,profession } = this.models;
   
     //hashing the user password
-    const hashed = await bcrypt.hash(password, 10);
+    const hashed =  bcrypt.hash(password, 10);
     let  documentImageUri='';
     let nationalIdImageUri = '';
       
@@ -159,7 +159,7 @@ class JobSeekerSerivce{
   }
  
 
-  
+
   async uploadProfileImage({ user, profileImage }) {
 
   if (!user) {
