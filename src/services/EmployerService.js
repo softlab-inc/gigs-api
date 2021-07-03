@@ -180,8 +180,8 @@ class EmployerService{
     const employer = await this.getEmployer({ id: user.id })
     const { fullName,profileImagUri} = employer.dataValues;
     const message = await this.models.chat.create({content,employeeId,avatar:profileImagUri,employerId:user.id,fullName,from:user.id,to:employeeId});
-    pubsub.publish('onEmployerSentMessage', { onEmployerSentMessage: { _id:message.dataValues.id,text:message.dataValues.content,...message.dataValues }});
-    return { _id:message.dataValues.id,text:message.dataValues.content,...message.dataValues };
+    pubsub.publish('onEmployerSentMessage', { onEmployerSentMessage: { _id:message.dataValues.id,text:message.dataValues.content,avatar:message.dataValues.avatar,...message.dataValues }});
+    return { _id:message.dataValues.id,text:message.dataValues.content,avatar:message.dataValues.avatar,...message.dataValues };
   }
 
   async getChats({user,employeeId}) {

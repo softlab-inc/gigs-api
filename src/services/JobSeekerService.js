@@ -210,8 +210,8 @@ class JobSeekerSerivce{
   async jobSeekerSendMessage({ content, employerId, user, pubsub }) {
     this.isAuthenticatic(user);
     const jobSeeker = await this.getGetJobSeeker({ id: user.id });
-    const { fullName,profileImagUri } = jobSeeker.dataValues;
-    const message = await this.models.chat.create({ content, employerId,avatar:profileImagUri, employeeId: user.id,fullName,from:user.id,to:employerId});
+    const { fullName, profileImagUri } = jobSeeker.dataValues;
+    const message = await this.models.chat.create({ content, employerId,avatar:profileImagUri,employeeId: user.id,fullName,from:user.id,to:employerId});
     pubsub.publish('onJobSeekerSentMessage', { onJobSeekerSentMessage:{ _id:message.dataValues.id,text:message.dataValues.content,...message.dataValues }});
     return { _id:message.dataValues.id,text:message.dataValues.content,...message.dataValues };
   }
