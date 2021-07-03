@@ -181,14 +181,14 @@ class EmployerService{
     const { fullName,profileImagUri} = employer.dataValues;
     const message = await this.models.chat.create({content,employeeId,avatar:profileImagUri,employerId:user.id,fullName,from:user.id,to:employeeId});
     pubsub.publish('onEmployerSentMessage', { onEmployerSentMessage: { _id:message.dataValues.id,text:message.dataValues.content,avatar:message.dataValues.avatar,...message.dataValues }});
-    return { _id:message.dataValues.id,text:message.dataValues.content,avatar:message.dataValues.avatar,...message.dataValues };
+    return { _id:message.dataValues.id,text:message.dataValues.content,...message.dataValues };
   }
 
   async getChats({user,employeeId}) {
     this.isAuthenticatic(user);
     return await this.models.chat.findAll({where:{employerId:user.id,employeeId},order: [['createdAt', 'DESC']]})
   }
-
+ 
   async updatePushToken({ user, pushToken }){
     
     this.isAuthenticatic(user);
