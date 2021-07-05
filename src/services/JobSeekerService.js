@@ -56,9 +56,9 @@ class JobSeekerSerivce{
   
     //hashing the user password
     const hashed = await bcrypt.hash(password, 10);
-    
+
     let  documentImageUri='';
-    let nationalIdImageUri = '';
+    let nationalIdImageUri = ''; 
       
     let user = await employee.findOne({ where: { email } });
     
