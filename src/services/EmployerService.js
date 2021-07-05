@@ -64,7 +64,7 @@ class EmployerService{
                                         });
        return Employer;                                     
     } catch (error) {
-      throw new ForbiddenError('Phone number has already been used, try again!');  
+      throw new ForbiddenError(`${error}`);  
     }
     
   }
