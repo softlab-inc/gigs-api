@@ -38,7 +38,7 @@ class EmployerService{
     const { employer } = this.models;
     
     //hashing the user password
-    const hashed = bcrypt.hash(password, 10);
+    const hashed =await bcrypt.hash(password, 10);
 
     let licenseImageUri = '';
 
