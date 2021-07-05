@@ -68,7 +68,7 @@ class EmployerService{
     }
     
   }
-
+ 
   async signInEmployer(content) {
    
      let { email, password } = content.input;
