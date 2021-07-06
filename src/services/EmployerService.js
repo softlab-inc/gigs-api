@@ -35,7 +35,7 @@ class EmployerService{
     
      email = email.trim().toLowerCase();
 
-    const { employer } = this.models;
+     const { employer } = this.models;
     
     //hashing the user password
     const hashed =await bcrypt.hash(password, 10);
