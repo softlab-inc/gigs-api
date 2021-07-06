@@ -129,18 +129,9 @@ module.exports = {
     return accepted;
   },
   uploadFiletoS3: async (parent, { file }, context) => {
-    console.log({file});
-
-    const { createReadStream, filename, mimetype } = await file;
-    const _buffer = createReadStream();
-
-
-    const streamSize = await findStreamSize(_buffer);
-
-    console.log({ streamSize });
-   
-   return 'testing file upload to server...'
-    
+    const result = await AWS3Service.handleFileUpload(file);
+    const { Location } = result;
+    return Location;    
   },
   jobSeekerUpdateData: async (parent, { phone, bio }, { models, user }) => {
     const jobSeekerService = new JobSeekerSerivce(models);
