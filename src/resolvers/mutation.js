@@ -133,31 +133,13 @@ module.exports = {
 
     const { createReadStream, filename, mimetype } = await file;
     const _buffer = createReadStream();
-    let res_chunk = await _buffer;
-    console.log({ res_chunk });
-    
-     let array = []
 
-   await _buffer.on('data', (chunck) => {
-      array.push(chunck)
-      console.log({ chunck });
-    });
 
-    let chunk = [];
+    const streamSize = await findStreamSize(_buffer);
 
-    stream.on('data', data => chunk.push(data))
-    .on('end', () => {
-        const buffer = Buffer.concat(chunk);
-        const conLength = buffer.length;
-        // Execute the request here, sending the whole buffer, not the stream
-        // needle(/*...*/)
-      
-      console.log({onLength,chunk})
-      
-      return 'testing file uploading...';
-    });
+    console.log({ streamSize });
    
-
+   return 'testing file upload to server...'
     
   },
   jobSeekerUpdateData: async (parent, { phone, bio }, { models, user }) => {
@@ -194,6 +176,22 @@ module.exports = {
 }
  
  
+
+function findStreamSize(_buffer) {
+  chunk = []
+  
+  return new Promise((resolve, reject) =>
+  _buffer.on('data', data => chunk.push(data))
+    .on('end', () => {
+      const buffer = Buffer.concat(chunk);
+      resolve(buffer.length);
+    })
+    .on('error', error => reject(error))
+    
+    
+  )
+  
+}
 /**
  
    id
