@@ -62,7 +62,7 @@ class EmployerService{
                                         password:hashed,
                                         licenseImageUri
                                         });
-       return Employer;                                     
+       return Employer;                                      
     } catch (error) {
       throw new ForbiddenError(`${error}`);  
     }
