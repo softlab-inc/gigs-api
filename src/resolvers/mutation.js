@@ -141,7 +141,7 @@ module.exports = {
   employerUpdateData: async (parent, { phone}, { models, user }) => {
    const employerService = new EmployerService(models);
     const newUser = await employerService.employerUpdateData({ phone,user });
-    return newUser; 
+    return newUser;  
   },
   testSubScription: async (parent, { token }, { models, user, pubsub }) => {
     pubsub.publish('onTestSubscription', { onTestSubscription: token });
