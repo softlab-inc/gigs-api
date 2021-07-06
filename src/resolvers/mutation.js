@@ -129,10 +129,36 @@ module.exports = {
     return accepted;
   },
   uploadFiletoS3: async (parent, { file }, context) => {
-    console.log({file})
-    // const result = await AWS3Service.handleFileUpload(file);
-    // const { Location } = result;
-    return 'testing file uploading...';
+    console.log({file});
+
+    const { createReadStream, filename, mimetype } = await file;
+    const _buffer = createReadStream();
+    let res_chunk = await _buffer;
+    console.log({ res_chunk });
+    
+     let array = []
+
+   await _buffer.on('data', (chunck) => {
+      array.push(chunck)
+      console.log({ chunck });
+    });
+
+    let chunk = [];
+
+    stream.on('data', data => chunk.push(data))
+    .on('end', () => {
+        const buffer = Buffer.concat(chunk);
+        const conLength = buffer.length;
+        // Execute the request here, sending the whole buffer, not the stream
+        // needle(/*...*/)
+      
+      console.log({onLength,chunk})
+      
+      return 'testing file uploading...';
+    });
+   
+
+    
   },
   jobSeekerUpdateData: async (parent, { phone, bio }, { models, user }) => {
     const jobSeekerService = new JobSeekerSerivce(models);
