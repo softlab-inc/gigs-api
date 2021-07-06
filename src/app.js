@@ -20,10 +20,7 @@ const resolvers = require('./resolvers');
 //const pubsub = new PubSub();
 const pubsub = new PubSub(); 
 
-(async () => {
-  
- 
-})();
+
 
 /**
  * Integrating the APOLLO_SERVER to server our Graph GL API
@@ -64,7 +61,16 @@ const server = new ApolloServer({
 const app = express();
 
 //Applying Apollo  Graph GL middleware and setting the path
-server.applyMiddleware({ app, path: '/gigs-app/api/v1'});
+server.applyMiddleware({
+  app, path: '/gigs-app/api/v1',
+  cors: {
+    origin: true,
+    credentials: true,
+  },
+  bodyParserConfig: {
+    limit:"50mb"
+  }
+});
 
 /**
  * Setting up the middlewares of express server 
