@@ -177,21 +177,7 @@ module.exports = {
  
  
 
-function findStreamSize(_buffer) {
-  chunk = []
-  
-  return new Promise((resolve, reject) =>
-  _buffer.on('data', data => chunk.push(data))
-    .on('end', () => {
-      const buffer = Buffer.concat(chunk);
-      resolve(buffer.length);
-    })
-    .on('error', error => reject(error))
-    
-    
-  )
-  
-}
+
 /**
  
    id
