@@ -239,6 +239,8 @@ type Subscription{
 
   onJobSeekerHired(token:String!):Gig!
 
+  
+
 }
 
 `;

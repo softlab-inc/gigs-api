@@ -129,9 +129,10 @@ module.exports = {
     return accepted;
   },
   uploadFiletoS3: async (parent, { file }, context) => {
-    const result = await AWS3Service.handleFileUpload(file);
-    const { Location } = result;
-    return Location;
+    console.log({file})
+    // const result = await AWS3Service.handleFileUpload(file);
+    // const { Location } = result;
+    return 'testing file uploading...';
   },
   jobSeekerUpdateData: async (parent, { phone, bio }, { models, user }) => {
     const jobSeekerService = new JobSeekerSerivce(models);
