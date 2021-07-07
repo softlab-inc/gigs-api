@@ -275,6 +275,13 @@ async uploadProfileImage({ user, profileImage }) {
      await this.models.employer.update({ phone },{where:{id:user.id}})
     return await this.employer({user});
   }
+
+  async updateReadNotifications({ user }) {
+      this.isAuthenticatic(user);
+      const result = await models.accepted.findAll({ where: { isRead: 0, employerId: user.id } });
+      let iDs = result.map(data => data.dataValues.id);
+      await models.accepted.update({isRead:1},{where:{id:{[Op.in]: [iDs]}}})
+  }
  
   
 
