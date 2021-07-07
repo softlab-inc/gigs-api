@@ -245,8 +245,8 @@ class EmployerService{
     this.isAuthenticatic(user);
     const gigs = await this.models.gig.findAll({ where: {employerId}, attributes: ['id'],order: [['createdAt', 'DESC']]});
     const gigIds = gigs.map(data => (data.dataValues.id )); //[...new Set(names)]
-    const employees = await this.models.employeeGig.findAll({ where: { gigId: {[Op.in]: gigIds}},include:['employee'] });
-    return employees.map(data => data.get('employee').dataValues)
+    const employees = await this.models.employeeGig.findAll({ where: { gigId: {[Op.in]: gigIds}},include:['employee']});
+    return employees.map(data => data.get('employee').dataValues);
 }
 
 async uploadProfileImage({ user, profileImage }) {
