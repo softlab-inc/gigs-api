@@ -126,7 +126,7 @@ type Profession{
       getGig(id:Int!):Gig!
       # notifications:[Notification!]
       # readNotifications:[Notification!]
-      # unReadNotifications:[Notification!]
+      # unReadNotifications:[Notification!] 
  }
 
  #InputFields
