@@ -15,7 +15,8 @@ module.exports = {
     let chats = await employerService.getChats({ user, employeeId });
     return chats.map(data => ({ _id: data.id, text: data.content, ...data.dataValues }));
   },
-  jobSeekerChats: async(parent, {employerId}, { models,user }) => {
+  jobSeekerChats: async (parent, { employerId }, { models, user }) => {
+     console.log(JobSeekerSerivce)
     const jobSeekerService = new JobSeekerSerivce(models);
 
     let chats = await jobSeekerService.getChats({ user, employerId });

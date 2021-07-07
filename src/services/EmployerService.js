@@ -278,14 +278,11 @@ async uploadProfileImage({ user, profileImage }) {
 
   async updateReadNotifications({ user }) {
       this.isAuthenticatic(user);
-      const result = await models.accepted.findAll({ where: { isRead: 0, employerId: user.id } });
+      const result = await this.models.accepted.findAll({ where: { isRead: 0, employerId: user.id } });
       let iDs = result.map(data => data.dataValues.id);
-      await models.accepted.update({isRead:1},{where:{id:{[Op.in]: [iDs]}}})
+      await this.models.accepted.update({isRead:1},{where:{id:{[Op.in]: [iDs]}}})
   }
  
-  
-
-
 }
 
 module.exports = EmployerService;

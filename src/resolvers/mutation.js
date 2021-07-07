@@ -24,11 +24,11 @@ module.exports = {
         throw new Error(`Duplicated profession values ${error}`);
       }
   
-  },
+  },  
   signInJobSeeker:async (parent,{input},{models}) => {
 
       const jobSeekerService = new JobSeekerSerivce(models)
-     
+      
       const user = await jobSeekerService.signInJobSeeker({input})
     
       //signing the user and returning the json web token
