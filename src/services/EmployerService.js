@@ -249,7 +249,7 @@ class EmployerService{
     return [...new Set(employees.map(data => data.get('employee').dataValues))];
 }
 
-async uploadProfileImage({ user, profileImage }) {
+async uploadProfileImage({ user, profileImage }) { 
 
     if (!user) {
         throw new AuthenticationError('You should be signed!');
