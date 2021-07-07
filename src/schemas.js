@@ -123,6 +123,7 @@ type Profession{
       createdGigs:[Gig!]
       employerChats(employeeId:Int!):[Chat!]
       jobSeekerChats(employerId:Int!):[Chat!]
+      getGig(id:Int!):Gig!
       # notifications:[Notification!]
       # readNotifications:[Notification!]
       # unReadNotifications:[Notification!]

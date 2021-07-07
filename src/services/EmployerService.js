@@ -245,12 +245,11 @@ class EmployerService{
     return employees.map(data => data.get('employee').dataValues)
 }
 
-
 async uploadProfileImage({ user, profileImage }) {
 
-  if (!user) {
-       throw new AuthenticationError('You should be signed!');
-  }
+    if (!user) {
+        throw new AuthenticationError('You should be signed!');
+    }
     
     const id = user.id;
 
