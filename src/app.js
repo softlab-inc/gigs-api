@@ -78,13 +78,13 @@ server.applyMiddleware({
 
 
 
-(async () => {
+// (async () => {
    
-  const result = await models.notified.findAll({where:{status:0}});
+//   const result = await models.notified.findAll({where:{status:0}});
   
-  console.log(result);
+//   console.log(result);
 
-})();
+// })();
 
 /**
  
