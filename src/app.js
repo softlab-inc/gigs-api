@@ -76,6 +76,16 @@ server.applyMiddleware({
  * Setting up the middlewares of express server 
  */
 
+
+
+(async () => {
+   
+  const result = await models.notified.findAll({where:{status:0}});
+  
+  console.log(result);
+
+})();
+
 /**
  
   json: {limit: '50mb', extended: true},

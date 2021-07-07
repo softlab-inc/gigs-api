@@ -3,7 +3,11 @@ const storeFS = require('../utils/storeFS');
 
 const { AuthenticationError,ForbiddenError } = require('apollo-server-express');
 const profession = require('../models/profession');
-const AWS3Service  = require('./AWS3Service');
+const AWS3Service = require('./AWS3Service');
+
+const Sequelize = require('sequelize');
+
+const  Op = Sequelize.Op;
 
 const LICENSE_FOLDER = 3
 const PAY_BY_FULL_AMOUNT = 0; //employers shall pay full amount
@@ -240,8 +244,8 @@ class EmployerService{
   async getRecentHires({ user, employerId }) {
     this.isAuthenticatic(user);
     const gigs = await this.models.gig.findAll({ where: {employerId}, attributes: ['id'],order: [['createdAt', 'DESC']]});
-    const gigIds = gigs.map(data => (data.dataValues.id ));
-    const employees = await this.models.employeeGig.findAll({ where: { gigId: [gigIds]},include:['employee'] });
+    const gigIds = gigs.map(data => (data.dataValues.id )); //[...new Set(names)]
+    const employees = await this.models.employeeGig.findAll({ where: { gigId: {[Op.in]: gigIds}},include:['employee'] });
     return employees.map(data => data.get('employee').dataValues)
 }
 

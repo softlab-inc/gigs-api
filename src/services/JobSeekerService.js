@@ -222,6 +222,8 @@ class JobSeekerSerivce{
      return await this.models.chat.findAll({ where: { employeeId: user.id, employerId }, order: [['createdAt', 'DESC']] });
   }
 
+  
+
   async getEmployer({id}) {
     return await this.models.employer.findOne({ where: id });
   }
