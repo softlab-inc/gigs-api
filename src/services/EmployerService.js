@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt'); //password encryption module
 const storeFS = require('../utils/storeFS');
 
 const { AuthenticationError,ForbiddenError } = require('apollo-server-express');
-const profession = require('../models/profession');
+
 const AWS3Service = require('./AWS3Service');
 
 const Sequelize = require('sequelize');

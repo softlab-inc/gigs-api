@@ -181,6 +181,11 @@ type Profession{
 
  #Mutations 
   type Mutation{
+    
+    jobSeekerUpdateReadNotifications:String!
+
+    employerUpdateReadNotifications:String!
+
     createJobSeeker(input:CreateJobSeekerInput):String!
 
     signInJobSeeker(input:SignInJobSeeker):String!
@@ -241,7 +246,6 @@ type Subscription{
   onJobSeekerHired(token:String!):Gig!
 
   
-
 }
 
 `;

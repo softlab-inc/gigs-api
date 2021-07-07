@@ -11,7 +11,6 @@ require('dotenv').config();
 const getUser = require('../src/utils/getUser');
 require('events').EventEmitter.prototype._maxListeners = 100;
 
-
 //Constructing a schema, using the GraphGL schema query language
 const typeDefs = require('./schemas');
 //Providing a resolver to the schema fields
