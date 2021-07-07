@@ -119,7 +119,7 @@ class JobSeekerSerivce{
     return data.map(data => data.get('profession'));
   }
 
-  async signInJobSeeker(content) {
+  async signInJobSeeker(content) { 
   
     let { email, password } = content.input;
       email = email.trim().toLowerCase();
