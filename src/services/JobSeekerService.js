@@ -110,7 +110,7 @@ class JobSeekerSerivce{
   async getNotifications({ employeeId}) {
     const {gig,notified,} = this.models;
     let data = await notified.findAll({where:{employeeId}, include: [gig],order: [['createdAt', 'DESC']] });
-    return data.map(data => data.get('gig'));
+    return data.map(data => ({...data.get('gig').dataValues,status:data.status}));
   }
 
   async getProfessions({ employeeId }) {
