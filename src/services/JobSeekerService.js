@@ -2,6 +2,10 @@ const bcrypt = require('bcrypt'); //password encryption module
 const storeFS = require('../utils/storeFS');
 const AWS3Service  = require('./AWS3Service');
 
+const Sequelize = require('sequelize');
+
+const Op = Sequelize.Op;
+
 const {AuthenticationError,ForbiddenError} = require('apollo-server-express');
 
 const PROFILE_FOLDER = 0;
@@ -262,6 +266,17 @@ class JobSeekerSerivce{
     await this.models.employeeGig.update({ status }, { where: { gigId, employeeId: user.id } });
     return await this.getPendingGigs({ employeeId: user.id });
   } 
+
+  async updateReadNotifications({ user }) {
+    
+     this.isAuthenticatic(user);
+
+    const result = await models.notified.findAll({ where: { status: 0, employeeId: user.id } });
+  
+    let iDs =   result.map(data => data.dataValues.id)
+
+   return await models.notified.update({status:1},{where:{id:{[Op.in]: [iDs]}}})
+  }
 
 } 
 

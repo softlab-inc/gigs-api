@@ -80,9 +80,11 @@ server.applyMiddleware({
 
 // (async () => {
    
-//   const result = await models.notified.findAll({where:{status:0}});
+//   const result = await models.notified.findAll({ where: { status: 0, employeeId: 4 } });
   
-//   console.log(result);
+//   let iDs =   result.map(data => data.dataValues.id)
+
+//   await models.notified.update({status:1},{where:{id:{[Op.in]: [ids]}}})
 
 // })();
 
