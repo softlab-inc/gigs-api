@@ -243,7 +243,7 @@ class EmployerService{
 
   async getRecentHires({ user, employerId }) {
     this.isAuthenticatic(user);
-  const gigs = await this.models.gig.findAll({ where: {employerId}, attributes: ['id'],order: [['createdAt', 'DESC']]});
+  const gigs = await this.models.gig.findAll({ where: {employerId}, attributes: ['id'],order: [['createdAt', 'DESC']]}); 
   const gigIds = gigs.map(data => (data.dataValues.id )); 
   const employees = await this.models.employeeGig.findAll({ where: { gigId: {[Op.in]: gigIds}},include:['employee'],group:['employeeId']});
   return employees.map(data => data.get('employee').dataValues);

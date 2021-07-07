@@ -223,7 +223,6 @@ class JobSeekerSerivce{
   }
 
   
-
   async getEmployer({id}) {
     return await this.models.employer.findOne({ where: id });
   }
