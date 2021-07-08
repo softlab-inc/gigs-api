@@ -30,7 +30,7 @@ class JobSeekerSerivce{
        }
   }
 
-  async getNotifications({ employeeId}) {
+  async getNotifications({ employeeId}) { 
     const {gig,notified,} = this.models;
     let data = await notified.findAll({where:{employeeId}, include: [gig],order: [['createdAt', 'DESC']] });
     return data.map(data => ({...data.get('gig').dataValues,...data}));
