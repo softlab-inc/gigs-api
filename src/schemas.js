@@ -71,7 +71,7 @@ type Accepted{
   employee:JobSeeker
   employer:Employer
   gig:Gig
-  createdAt:DateTime!
+  createdAt:DateTime! 
   updatedAt:DateTime!
 }
 
