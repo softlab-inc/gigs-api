@@ -251,7 +251,7 @@ class JobSeekerSerivce{
   }
 
   async getPendingGigs({ employeeId }) {
-  let data = await this.models.employeeGig.findAll({ where: { employeeId },include:[this.models.gig] ,});
+  let data = await this.models.employeeGig.findAll({ where: { employeeId },include:[this.models.gig]});
   return  data.map(data => ({ ...data.get('gig').dataValues, status: data.status }));
   }
 

@@ -9,16 +9,16 @@ module.exports = {
     const jobSeekerService = new JobSeekerSerivce(models);
     return await jobSeekerService.getNotifications({ employeeId: parent.id });
   },
-  unReadNotifications: async (parent, args, { models, }) => {
+  unReadNotifications: async (parent, args, { models,user }) => {
     const jobSeekerService = new JobSeekerSerivce(models);
-    return await jobSeekerService.getUnReadNotifications({ employeeId: parent.id })
+    return await jobSeekerService.getUnReadNotifications({ employeeId: user.id })
   },
   readNotifications: async (parent, args, { models }) => {
       const jobSeekerService = new JobSeekerSerivce(models);
-      return await jobSeekerService.getReadNotifications({employeeId: parent.id })
+      return await jobSeekerService.getReadNotifications({employeeId: user.id })
   },
-  pendingGigs: async ({ id }, args, { models }) => {
+  pendingGigs: async (parent, args, { models,user }) => {
     const jobSeekerService = new JobSeekerSerivce(models);
-    return await jobSeekerService.getPendingGigs({ employeeId: id });
+    return await jobSeekerService.getPendingGigs({ employeeId: user.id });
   }  
 }
