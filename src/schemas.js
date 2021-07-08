@@ -67,7 +67,7 @@ type Accepted{
   id:Int!
   pushToken:String!
   fullName:String!
-  isRead:String!
+  isRead:Int!
   employee:JobSeeker
   employer:Employer
   gig:Gig
