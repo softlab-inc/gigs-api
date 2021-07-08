@@ -1,24 +1,24 @@
 const {JobSeekerSerivce} = require('../services/')
 
 module.exports = {
-  hasProfession: async (parent, args, { models }) => {
+  hasProfession: async ({id}, args, { models }) => {
   const jobSeekerService = new JobSeekerSerivce(models);
-  return  await jobSeekerService.getProfessions({ employeeId: parent.id });
+  return  await jobSeekerService.getProfessions({ employeeId:id });
   },
-  hasNotifications: async (parent, args, { models }) => {
+  hasNotifications: async ({id}, args, { models }) => {
     const jobSeekerService = new JobSeekerSerivce(models);
-    return await jobSeekerService.getNotifications({ employeeId: parent.id });
+    return await jobSeekerService.getNotifications({ employeeId: id });
   },
-  unReadNotifications: async (parent, args, { models,user }) => {
+  unReadNotifications: async ({id}, args, { models }) => {
     const jobSeekerService = new JobSeekerSerivce(models);
-    return await jobSeekerService.getUnReadNotifications({ employeeId: user.id })
+    return await jobSeekerService.getUnReadNotifications({ employeeId: id })
   },
-  readNotifications: async (parent, args, { models }) => {
+  readNotifications: async ({id}, args, { models}) => {
       const jobSeekerService = new JobSeekerSerivce(models);
-      return await jobSeekerService.getReadNotifications({employeeId: user.id })
+      return await jobSeekerService.getReadNotifications({employeeId: id })
   },
-  pendingGigs: async (parent, args, { models,user }) => {
+  pendingGigs: async ({id}, args, { models}) => {
     const jobSeekerService = new JobSeekerSerivce(models);
-    return await jobSeekerService.getPendingGigs({ employeeId: user.id });
+    return await jobSeekerService.getPendingGigs({ employeeId: id});
   }  
 }

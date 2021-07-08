@@ -252,7 +252,7 @@ class JobSeekerSerivce{
 
   async getPendingGigs({ employeeId }) {
   let data = await this.models.employeeGig.findAll({ where: { employeeId },include:[this.models.gig]});
-  return  data.map(data => ({ ...data.get('gig').dataValues, status: data.status }));
+  return  data.map(data => ({ ...data.get('gig').dataValues,...data.dataValues }));
   }
 
   async updateGigStatus({ user, gigId ,status}) {
@@ -261,7 +261,7 @@ class JobSeekerSerivce{
     return await this.getPendingGigs({ employeeId: user.id });
   } 
 
-  async updateReadNotifications({ user }) {
+  async updateReadNotifications({ user }) { 
     this.isAuthenticatic(user);
     const result = await this.models.notified.findAll({ where: { isRead: 0, employeeId: user.id } });
     let iDs = result.map(data => data.dataValues.id);
