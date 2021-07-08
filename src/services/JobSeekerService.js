@@ -31,11 +31,11 @@ class JobSeekerSerivce{
   }
 
   async getReadNotifications({employeeId}) {
-    return await this.models.notified.findAll({where:{employeeId,isRead:1}})
+    return await this.models.notified.findAll({where:{employeeId,status:1}})
   } 
   
   async getUnReadNotifications({employeeId}) {
-    return await this.models.notified.findAll({where:{employeeId,isRead:0}})
+    return await this.models.notified.findAll({where:{employeeId,status:0}})
   }
 
   async createJobSeeker(content) {
