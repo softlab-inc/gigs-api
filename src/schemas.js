@@ -89,6 +89,7 @@ type Gig{
   duration:Int
   days:Int
   hourlyRate:Float
+  isStarted:Int
   status:Int
   hoursPerDay:Int
   location:String
