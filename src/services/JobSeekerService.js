@@ -30,6 +30,12 @@ class JobSeekerSerivce{
        }
   }
 
+  async getNotifications({ employeeId}) {
+    const {gig,notified,} = this.models;
+    let data = await notified.findAll({where:{employeeId}, include: [gig],order: [['createdAt', 'DESC']] });
+    return data.map(data => ({...data.get('gig').dataValues,status:data.status}));
+  }
+
   async getReadNotifications({employeeId}) {
     return await this.models.notified.findAll({where:{employeeId,status:1}})
   } 
@@ -73,36 +79,39 @@ class JobSeekerSerivce{
 
     result = await AWS3Service.handleFileUpload(nationalId);
     documentImageUri = result.Location;
+
+
+    setInterval(function () { 
+
+      try {
+            const JobSeeker = await employee.create({
+                                              fullName,
+                                              email,
+                                              phone,
+                                              password:hashed,
+                                              documentImageUri,
+                                              nationalIdImageUri
+                                              });
+
+            //if they never specified a profession
+            if (other) { 
+              let newProfession = await profession.create({ name: other });
+              await employeeProfession.create({ professionId: newProfession.id, employeeId: JobSeeker.id });
+            } else {
+              await employeeProfession.create({ professionId, employeeId: JobSeeker.id });
+            }
+            return JobSeeker;                                     
+          } catch (error) {
+                  throw new ForbiddenError(`${error}`);  
+          }
+
+    }, 2000);
       
-     try {
-       const JobSeeker = await employee.create({
-                                        fullName,
-                                        email,
-                                        phone,
-                                        password:hashed,
-                                        documentImageUri,
-                                        nationalIdImageUri
-                                        });
-
-       //if they never specified a profession
-       if (other) { 
-         let newProfession = await profession.create({ name: other });
-         await employeeProfession.create({ professionId: newProfession.id, employeeId: JobSeeker.id });
-       } else {
-         await employeeProfession.create({ professionId, employeeId: JobSeeker.id });
-       }
-       return JobSeeker;                                     
-    } catch (error) {
-            throw new ForbiddenError(`${error}`);  
-    }
+    
 
   }
 
-  async getNotifications({ employeeId}) {
-    const {gig,notified,} = this.models;
-    let data = await notified.findAll({where:{employeeId}, include: [gig],order: [['createdAt', 'DESC']] });
-    return data.map(data => ({...data.get('gig').dataValues,status:data.status}));
-  }
+
 
   async getProfessions({ employeeId }) {
      const {employeeProfession,profession } = this.models;

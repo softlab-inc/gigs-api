@@ -57,7 +57,10 @@ class EmployerService{
     let result = await AWS3Service.handleFileUpload(license);
     licenseImageUri = result.Location;  //let {Location:licenseImageUri} = result; best way of doing this.
 
-    try {
+
+     setInterval(function(){ 
+
+       try {
        const Employer = await employer.create({
                                         fullName,
                                         companyName,
@@ -70,6 +73,10 @@ class EmployerService{
     } catch (error) {
       throw new ForbiddenError(`${error}`);  
     }
+       
+      }, 2000);
+
+    
     
   }
  
