@@ -81,7 +81,7 @@ class JobSeekerSerivce{
     documentImageUri = result.Location;
 
 
-    setInterval(function () { 
+    setInterval(async ()=> { 
 
       try {
             const JobSeeker = await employee.create({
