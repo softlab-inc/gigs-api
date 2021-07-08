@@ -264,8 +264,13 @@ class JobSeekerSerivce{
   async updateReadNotifications({ user }) {
     this.isAuthenticatic(user);
     const result = await this.models.notified.findAll({ where: { isRead: 0, employeeId: user.id } });
-    let iDs =   result.map(data => data.dataValues.id)
-    return await this.models.notified.update({ isRead: 1 }, { where: { id: { [Op.in]: [iDs] } } });
+    let iDs = result.map(data => data.dataValues.id);
+    if (iDs.length == 0) {
+      return 
+    }else{
+     return  await this.models.notified.update({ isRead: 1 }, { where: { id: { [Op.in]: [iDs] } } })
+    }
+
   }
  
 
