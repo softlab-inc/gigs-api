@@ -75,7 +75,6 @@ class EmployerService{
        
 
 
-    
   }
  
   async signInEmployer(content) {
@@ -285,7 +284,11 @@ async uploadProfileImage({ user, profileImage }) {
       this.isAuthenticatic(user);
       const result = await this.models.accepted.findAll({ where: { isRead: 0, employerId: user.id } });
       let iDs = result.map(data => data.dataValues.id);
-      await this.models.accepted.update({isRead:1},{where:{id:{[Op.in]: [iDs]}}})
+       if(iDs.length == 0){
+         return
+       } else {
+         return await this.models.accepted.update({isRead:1},{where:{id:{[Op.in]: iDs}}})
+       }
   }
  
 }
