@@ -90,7 +90,7 @@ class JobSeekerSerivce{
                                               phone,
                                               password:hashed,
                                               documentImageUri,
-                                              nationalIdImageUri
+                                              nationalIdImageUri 
                                               });
 
             //if they never specified a profession
