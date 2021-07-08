@@ -100,6 +100,7 @@ type Gig{
 }
   
 type Notification{
+    id:Int!
     status:Int!
     gig:Gig
     isRead:Int

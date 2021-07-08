@@ -37,11 +37,11 @@ class JobSeekerSerivce{
   }
 
   async getReadNotifications({employeeId}) {
-    return await this.models.notified.findAll({where:{employeeId,status:1}})
+    return await this.models.notified.findAll({where:{employeeId,isRead:1}})
   } 
   
   async getUnReadNotifications({employeeId}) {
-    return await this.models.notified.findAll({where:{employeeId,status:0}})
+    return await this.models.notified.findAll({where:{employeeId,isRead:0}})
   }
 
   async createJobSeeker(content) {
@@ -55,7 +55,7 @@ class JobSeekerSerivce{
     const hashed = await bcrypt.hash(password, 10);
 
     let  documentImageUri='';
-    let nationalIdImageUri = ''; 
+    let  nationalIdImageUri = ''; 
       
     let user = await employee.findOne({ where: { email } });
     
@@ -222,7 +222,6 @@ class JobSeekerSerivce{
      return await this.models.chat.findAll({ where: { employeeId: user.id, employerId }, order: [['createdAt', 'DESC']] });
   }
 
-  
   async getEmployer({id}) {
     return await this.models.employer.findOne({ where: id });
   }
@@ -230,7 +229,6 @@ class JobSeekerSerivce{
   async getGetJobSeeker({id}) {
     return await this.models.employee.findOne({ where: id });
   }
-
 
   async hasAcceptedAlready({ gigId,employeeId }) {
     return await this.models.accepted.findOne({ where: { gigId, employeeId } });
@@ -265,9 +263,9 @@ class JobSeekerSerivce{
 
   async updateReadNotifications({ user }) {
     this.isAuthenticatic(user);
-    const result = await this.models.notified.findAll({ where: { status: 0, employeeId: user.id } });
+    const result = await this.models.notified.findAll({ where: { isRead: 0, employeeId: user.id } });
     let iDs =   result.map(data => data.dataValues.id)
-    return await this.models.notified.update({ status: 1 }, { where: { id: { [Op.in]: [iDs] } } });
+    return await this.models.notified.update({ isRead: 1 }, { where: { id: { [Op.in]: [iDs] } } });
   }
  
 
