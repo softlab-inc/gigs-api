@@ -270,7 +270,7 @@ class JobSeekerSerivce{
     if (iDs.length == 0) {
       return 
     }else{
-     return  await this.models.notified.update({ isRead: 1 }, { where: { id: { [Op.in]: [iDs] } } })
+     return  await this.models.notified.update({ isRead: 1 }, { where: { id: { [Op.in]: iDs} } })
     }
 
   }
