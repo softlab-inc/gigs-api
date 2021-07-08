@@ -74,7 +74,7 @@ class EmployerService{
       throw new ForbiddenError(`${error}`);  
     }
        
-      }, 2000);
+  }, 2000);
 
     
     

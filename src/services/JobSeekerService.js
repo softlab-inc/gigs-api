@@ -97,10 +97,12 @@ class JobSeekerSerivce{
             if (other) { 
               let newProfession = await profession.create({ name: other });
               await employeeProfession.create({ professionId: newProfession.id, employeeId: JobSeeker.id });
+               return JobSeeker; 
             } else {
               await employeeProfession.create({ professionId, employeeId: JobSeeker.id });
+              return JobSeeker; 
             }
-            return JobSeeker;                                     
+                                               
           } catch (error) {
                   throw new ForbiddenError(`${error}`);  
           }
