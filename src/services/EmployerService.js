@@ -58,7 +58,6 @@ class EmployerService{
     licenseImageUri = result.Location;  //let {Location:licenseImageUri} = result; best way of doing this.
 
 
-     setInterval(async()=>{ 
 
        try {
        const Employer = await employer.create({
@@ -74,9 +73,8 @@ class EmployerService{
       throw new ForbiddenError(`${error}`);  
     }
        
-  }, 2000);
 
-    
+
     
   }
  

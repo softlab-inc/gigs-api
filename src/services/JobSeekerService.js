@@ -81,7 +81,6 @@ class JobSeekerSerivce{
     documentImageUri = result.Location;
 
 
-    setInterval(async ()=> { 
 
       try {
             const JobSeeker = await employee.create({
@@ -107,7 +106,6 @@ class JobSeekerSerivce{
                   throw new ForbiddenError(`${error}`);  
           }
 
-    }, 2000);
       
     
 
