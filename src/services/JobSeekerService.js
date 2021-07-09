@@ -67,7 +67,7 @@ class JobSeekerSerivce{
    
     if (user) {
           console.log('About to through error')
-          throw new Error()
+      throw 'Email has already been used, try again another!';
        }
     
       //uploading images to Amazon S3
@@ -100,7 +100,7 @@ class JobSeekerSerivce{
          
        } catch (error) {
        
-         throw new Error(`Email has already been used, try again another!`);
+         throw new Error(`${error}`);
        }
                                                
   }
