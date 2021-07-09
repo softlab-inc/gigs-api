@@ -55,16 +55,23 @@ class JobSeekerSerivce{
     const hashed = await bcrypt.hash(password, 10);
 
     let  documentImageUri='';
-    let  nationalIdImageUri = ''; 
+    let nationalIdImageUri = '';
+    
+    console.log({fullName, email, phone, password, document, nationalId, professionId, other});
+
+
       
     let user = await employee.findOne({ where: { email } });
-    
-    let user2 = await employee.findOne({ where: { phone } });
 
-       if(user){
+     if(user){
           throw new ForbiddenError('Email has already been used, try again another!');
        }
     
+    console.log('checking if email exists',{user})
+    
+    let user2 = await employee.findOne({ where: { phone } });
+
+    console.log('checking if phone exists', { user2 });
        if(user2){
           throw new ForbiddenError('Phone number has already been used, try again another!');
        }
@@ -73,6 +80,7 @@ class JobSeekerSerivce{
       // nationalIdImageUri = await getResult(nationalId,IDS_FOLDER);
       // documentImageUri = await getResult(document,DOCS_FOLDER);
 
+    console.log("if all good.....")
       //uploading images to Amazon S3
     let result = await AWS3Service.handleFileUpload(nationalId);
     nationalIdImageUri = result.Location;
@@ -80,7 +88,7 @@ class JobSeekerSerivce{
     result = await AWS3Service.handleFileUpload(nationalId);
     documentImageUri = result.Location;
 
-
+    console.log("all errors skipped");
 
       try {
             const JobSeeker = await employee.create({
@@ -102,7 +110,8 @@ class JobSeekerSerivce{
               return JobSeeker; 
             }
                                                
-          } catch (error) {
+      } catch (error) {
+           console.log("onserver error",{error})
                   throw new ForbiddenError(`${error}`);  
           }
 
