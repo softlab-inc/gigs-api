@@ -47,20 +47,21 @@ class JobSeekerSerivce{
   async createJobSeeker(content) {
 
     try {
+
     let { fullName, email, phone, password, document, nationalId, professionId, other } = content.input;
       
     
-     email = email.trim().toLowerCase();
+      email = email.trim().toLowerCase();
 
     const { employee, employeeProfession,profession } = this.models; 
   
     //hashing the user password
     const hashed = await bcrypt.hash(password, 10);
 
-    let  documentImageUri='';
-    let  nationalIdImageUri = ''; 
+      let  documentImageUri='';
+      let  nationalIdImageUri = ''; 
       
-    let user = await employee.findOne({ where: { email } });
+      let user = await employee.findOne({ where: { email } });
       this.isEmailUsed(user);
     let user2 = await employee.findOne({ where: { phone } });
     this.isPhoneNumberUsed(user2);
@@ -98,7 +99,7 @@ class JobSeekerSerivce{
             }
                                                
           } catch (error) {
-                  throw  error  
+                  console.log({error})
           }
 
       
@@ -110,17 +111,13 @@ class JobSeekerSerivce{
 
   isPhoneNumberUsed(user2) {
     if (user2) {
-      throw 'Phone number has already been used, try again another!';
-    }else{
-      console.log('Nothing to return')
+     throw new Error('Phone number has already been used, try again another!');
     }
   }
 
   isEmailUsed(user) {
     if (user) {
-      throw 'Email has already been used, try again another!';
-    }else{
-      console.log('Nothing to return')
+      throw new Error('Email has already been used, try again another!');
     }
   }
 
