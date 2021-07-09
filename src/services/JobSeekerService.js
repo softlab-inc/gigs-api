@@ -6,7 +6,7 @@ const Sequelize = require('sequelize');
 
 const Op = Sequelize.Op;
 
-const {AuthenticationError,ForbiddenError} = require('apollo-server-express');
+const { AuthenticationError,ForbiddenError } = require('apollo-server-express');
 
 const PROFILE_FOLDER = 0;
 const IDS_FOLDER = 1;
@@ -63,23 +63,23 @@ class JobSeekerSerivce{
       
       let user = await employee.findOne({ where: { email } });
       this.isEmailUsed(user);
-    let user2 = await employee.findOne({ where: { phone } });
-    this.isPhoneNumberUsed(user2);
+      let user2 = await employee.findOne({ where: { phone } });
+      this.isPhoneNumberUsed(user2);
      
       //saving uploaded files to respective Folders
       // nationalIdImageUri = await getResult(nationalId,IDS_FOLDER);
       // documentImageUri = await getResult(document,DOCS_FOLDER);
 
       //uploading images to Amazon S3
-    let result = await AWS3Service.handleFileUpload(nationalId);
-    nationalIdImageUri = result.Location;
+        let result = await AWS3Service.handleFileUpload(nationalId);
+        nationalIdImageUri = result.Location;
 
-    result = await AWS3Service.handleFileUpload(nationalId);
-    documentImageUri = result.Location;
+        result = await AWS3Service.handleFileUpload(nationalId);
+        documentImageUri = result.Location;
 
 
 
-            const JobSeeker = await employee.create({
+          const JobSeeker = await employee.create({
                                               fullName,
                                               email,
                                               phone,
@@ -111,13 +111,13 @@ class JobSeekerSerivce{
 
   isPhoneNumberUsed(user2) {
     if (user2) {
-     throw new Error('Phone number has already been used, try again another!');
+     throw new  AuthenticationError('Phone number has already been used, try again another!');
     }
   }
 
   isEmailUsed(user) {
     if (user) {
-      throw new Error('Email has already been used, try again another!');
+      throw new  AuthenticationError('Email has already been used, try again another!');
     }
   }
 
