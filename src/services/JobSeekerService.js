@@ -66,15 +66,16 @@ class JobSeekerSerivce{
     console.log({user:user.dataValues})
    
     if (user) {
-          throw new AuthenticationError('Email has already been used, try again another!');
+          console.log('About to through error')
+          throw new Error()
        }
     
       //uploading images to Amazon S3
-      let result = await AWS3Service.handleFileUpload(nationalId);
-      nationalIdImageUri = result.Location;
+      // let result = await AWS3Service.handleFileUpload(nationalId);
+      nationalIdImageUri = "result.Location";
 
-      result = await AWS3Service.handleFileUpload(nationalId);
-      documentImageUri = result.Location;
+      // result = await AWS3Service.handleFileUpload(nationalId);
+      documentImageUri = "result.Location";
 
    
       
@@ -98,8 +99,8 @@ class JobSeekerSerivce{
           }
          
        } catch (error) {
-         console.log('On error ')
-         throw new Error(`${error}`);
+       
+         throw new Error(`Email has already been used, try again another!`);
        }
                                                
   }
