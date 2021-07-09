@@ -31,7 +31,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     password: {
-      type: DataTypes.TEXT,
+      type: DataTypes.TEXT, 
       allowNull: true
     },
     profileImagUri: {
