@@ -60,14 +60,14 @@ class JobSeekerSerivce{
       
       // let user = await employee.findOne({ where: { email } });
     
-    // if (!user) {
-    //      //uploading images to Amazon S3
-    //     let result = await AWS3Service.handleFileUpload(nationalId);
-    //     nationalIdImageUri = result.Location;
+    if (!user) {
+         //uploading images to Amazon S3
+        let result = await AWS3Service.handleFileUpload(nationalId);
+        nationalIdImageUri = result.Location;
 
-    //     result = await AWS3Service.handleFileUpload(document);
-    //     documentImageUri = result.Location;
-    //     }
+        result = await AWS3Service.handleFileUpload(document);
+        documentImageUri = result.Location;
+        }
 
         
          let JobSeeker = await employee.create({
