@@ -8,9 +8,15 @@ module.exports = {
 
       const jobSeekerSerivce = new JobSeekerSerivce(models);
 
-      const JobSeeker = await jobSeekerSerivce.createJobSeeker({ input });
+        try {
+          const JobSeeker = await jobSeekerSerivce.createJobSeeker({ input });
 
-      return jwt.sign({id: JobSeeker.id},process.env.JWT_SECRETE);
+          return jwt.sign({id: JobSeeker.id},process.env.JWT_SECRETE);
+        } catch (error) {
+           
+          console.log({ error });
+            throw new Error(`Duplicated email ${error}`);
+        }
                                                       
   },
   createProfession:async (parent,{input},{models}) => {

@@ -100,7 +100,7 @@ class JobSeekerSerivce{
                                                
           } catch (error) {
                   console.log({error});
-                  return
+                
           }
 
       
