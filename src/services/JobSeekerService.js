@@ -77,7 +77,6 @@ class JobSeekerSerivce{
         documentImageUri = result.Location;
 
 
-
           const JobSeeker = await employee.create({
                                               fullName,
                                               email,

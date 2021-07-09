@@ -4,7 +4,7 @@ const { JobSeekerSerivce,EmployerService,GigService,NotificationService,MailerSe
 
 
 module.exports = {
-  createJobSeeker:async (parent,{input},{models,pubsub}) => {
+  createJobSeeker:async (parent,{input},{models}) => {
 
       const jobSeekerSerivce = new JobSeekerSerivce(models);
 
