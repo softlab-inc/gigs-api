@@ -62,13 +62,12 @@ class JobSeekerSerivce{
 
       
     let user = await employee.findOne({ where: { email } });
-
+    console.log('checking if email exists',{user})
      if(user){
-          throw new AuthenticationError('Email has already been used, try again another!');
+          throw new Error('Email has already been used, try again another!');
        }
     
-    console.log('checking if email exists',{user})
-    
+  
     let user2 = await employee.findOne({ where: { phone } });
 
     console.log('checking if phone exists', { user2 });
@@ -112,7 +111,7 @@ class JobSeekerSerivce{
                                                
       } catch (error) {
            console.log("onserver error",{error})
-                  throw new AuthenticationError(`${error}`);  
+                  throw new Error(`${error}`);  
           }
 
       
