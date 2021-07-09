@@ -29,13 +29,10 @@ module.exports = {
 
       const jobSeekerService = new JobSeekerSerivce(models)
       
-      try {
       const user = await jobSeekerService.signInJobSeeker({input})
+    
       //signing the user and returning the json web token
       return jwt.sign({id:user.id},process.env.JWT_SECRETE);
-      } catch (error) {
-         throw new Error(`${error}`);
-      }
   },
   userUpdateStatus: async (parent, { status }, { models, user,pubsub }) => {
     

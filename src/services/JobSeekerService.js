@@ -57,39 +57,21 @@ class JobSeekerSerivce{
     let  documentImageUri='';
     let nationalIdImageUri = '';
     
-    console.log({fullName, email, phone, password, document, nationalId, professionId, other});
-
-
-      
     let user = await employee.findOne({ where: { email } });
-
+    return return 'testing okay...'
     console.log('checking if email exists',{user})
      if(user){
-          throw new ForbiddenError('Email has already been used, try again another!');
+          throw new AuthenticationError('Email has already been used, try again another!');
        }
     
-    let user2 = await employee.findOne({ where: { phone } });
-
-    console.log('checking if phone exists', { user2 });
-       if(user2){
-          throw new ForbiddenError('Phone number has already been used, try again another!');
-       }
-    
-      //saving uploaded files to respective Folders
-      // nationalIdImageUri = await getResult(nationalId,IDS_FOLDER);
-      // documentImageUri = await getResult(document,DOCS_FOLDER);
-
       //uploading images to Amazon S3
-    let result = await AWS3Service.handleFileUpload(nationalId);
-    nationalIdImageUri = result.Location;
+      let result = await AWS3Service.handleFileUpload(nationalId);
+      nationalIdImageUri = result.Location;
 
-    result = await AWS3Service.handleFileUpload(nationalId);
-    documentImageUri = result.Location;
+      result = await AWS3Service.handleFileUpload(nationalId);
+      documentImageUri = result.Location;
 
-
-
-      try {
-            const JobSeeker = await employee.create({
+      const JobSeeker = await employee.create({
                                               fullName,
                                               email,
                                               phone,
@@ -99,23 +81,15 @@ class JobSeekerSerivce{
                                               });
 
             //if they never specified a profession
-            if (other) { 
+        if (other) { 
               let newProfession = await profession.create({ name: other });
               await employeeProfession.create({ professionId: newProfession.id, employeeId: JobSeeker.id });
                return JobSeeker; 
-            } else {
+          } else {
               await employeeProfession.create({ professionId, employeeId: JobSeeker.id });
               return JobSeeker; 
-            }
-                                               
-      } catch (error) {
-                 console.log("If all fails")
-                  throw new ForbiddenError(`${error}`);  
           }
-
-      
-    
-
+                                               
   }
 
 
