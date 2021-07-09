@@ -69,7 +69,6 @@ class JobSeekerSerivce{
         documentImageUri = result.Location;
         }
 
-       try {
         
          let JobSeeker = await employee.create({
                                               fullName,
@@ -85,9 +84,7 @@ class JobSeekerSerivce{
 
          return JobSeeker;
          
-       } catch (error) {
-         console.log(error)
-       }
+      
 
 
         
