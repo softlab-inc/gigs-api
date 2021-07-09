@@ -61,10 +61,7 @@ class JobSeekerSerivce{
 
     let user = await employee.findOne({ where: { email } });
    
-     
-       
     if (user) {
-         return 'Test has run okay'
           throw new AuthenticationError('Email has already been used, try again another!');
        }
     
