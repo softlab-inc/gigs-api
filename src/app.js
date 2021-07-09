@@ -102,10 +102,10 @@ app.use(function (req, res, next) {
 
 //All other requests are not implemented
 app.use((err, req, res, next) => {
-    res.status(err.status || 503);
+    res.status(err.status || 400);
     res.json({
         error: {
-            code: err.status || 503,
+            code: err.status || 400,
             message: err
         }
     });
