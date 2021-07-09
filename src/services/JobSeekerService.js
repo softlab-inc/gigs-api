@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt'); //password encryption module
 const storeFS = require('../utils/storeFS');
-const AWS3Service  = require('./AWS3Service');
+const AWS3Service = require('./AWS3Service');
+const constomValidationError = require('../utils/modelValidation');
 
 const Sequelize = require('sequelize');
 
@@ -69,8 +70,7 @@ class JobSeekerSerivce{
         documentImageUri = result.Location;
         }
 
-        
-         let JobSeeker = await employee.create({
+           let JobSeeker = await employee.create({
                                               fullName,
                                               email,
                                               phone,
@@ -81,16 +81,12 @@ class JobSeekerSerivce{
 
          await this.attachUserToProfile(other, profession, employeeProfession, JobSeeker, professionId);
                                                    
-
          return JobSeeker;
-         
-      
-
 
         
   }
 
-
+  
 
   async attachUserToProfile(other, profession, employeeProfession, JobSeeker, professionId) {
     if (other) {

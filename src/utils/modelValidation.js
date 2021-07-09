@@ -3,7 +3,7 @@
 
 function constomValidationError(e) {
   const messages = {};
-  if (e instanceof ValidationError) {
+  if (e instanceof SequelizeUniqueConstraintError) {
     e.errors.forEach((error) => {
       let message;
       switch (error.validatorKey) {

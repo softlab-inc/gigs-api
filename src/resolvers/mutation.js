@@ -7,15 +7,8 @@ module.exports = {
   createJobSeeker:async (parent,{input},{models}) => {
 
       const jobSeekerSerivce = new JobSeekerSerivce(models);
-
-      try {
-         const JobSeeker = await jobSeekerSerivce.createJobSeeker({ input });
-
-        return jwt.sign({id: JobSeeker.id},process.env.JWT_SECRETE);
-      } catch (error) {
-        console.log(error)
-        return ''
-      }
+      const JobSeeker = await jobSeekerSerivce.createJobSeeker({ input });
+      return jwt.sign({id: JobSeeker.id},process.env.JWT_SECRETE);
                                                       
   },
   createProfession:async (parent,{input},{models}) => {
