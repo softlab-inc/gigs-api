@@ -56,14 +56,18 @@ class JobSeekerSerivce{
 
     let  documentImageUri='';
     let nationalIdImageUri = '';
+
+     try {
     
     console.log({fullName, email, phone, password, document, nationalId, professionId, other});
 
     let user = await employee.findOne({ where: { email } });
+
+    console.log({user:user.dataValues})
    
-    // if (user) {
-    //       throw new AuthenticationError('Email has already been used, try again another!');
-    //    }
+    if (user) {
+          throw new AuthenticationError('Email has already been used, try again another!');
+       }
     
       //uploading images to Amazon S3
       let result = await AWS3Service.handleFileUpload(nationalId);
@@ -73,7 +77,7 @@ class JobSeekerSerivce{
       documentImageUri = result.Location;
 
    
-       try {
+      
             const JobSeeker = await employee.create({
                                               fullName,
                                               email,
@@ -94,7 +98,8 @@ class JobSeekerSerivce{
           }
          
        } catch (error) {
-         throw new Error('Email has already been used, try again another!');
+         console.log('On error ')
+         throw new Error(`${error}`);
        }
                                                
   }
