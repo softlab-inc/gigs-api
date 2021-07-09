@@ -72,7 +72,9 @@ class JobSeekerSerivce{
       result = await AWS3Service.handleFileUpload(nationalId);
       documentImageUri = result.Location;
 
-      const JobSeeker = await employee.create({
+   
+       try {
+            const JobSeeker = await employee.create({
                                               fullName,
                                               email,
                                               phone,
@@ -90,6 +92,10 @@ class JobSeekerSerivce{
               await employeeProfession.create({ professionId, employeeId: JobSeeker.id });
               return JobSeeker; 
           }
+         
+       } catch (error) {
+         throw new Error('Email has already been used, try again another!');
+       }
                                                
   }
 
