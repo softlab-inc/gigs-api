@@ -62,24 +62,23 @@ class JobSeekerSerivce{
 
       
     let user = await employee.findOne({ where: { email } });
+
     console.log('checking if email exists',{user})
      if(user){
-          throw new Error('Email has already been used, try again another!');
+          throw new ForbiddenError('Email has already been used, try again another!');
        }
     
-  
     let user2 = await employee.findOne({ where: { phone } });
 
     console.log('checking if phone exists', { user2 });
        if(user2){
-          throw new AuthenticationError('Phone number has already been used, try again another!');
+          throw new ForbiddenError('Phone number has already been used, try again another!');
        }
     
       //saving uploaded files to respective Folders
       // nationalIdImageUri = await getResult(nationalId,IDS_FOLDER);
       // documentImageUri = await getResult(document,DOCS_FOLDER);
 
-    console.log("if all good.....")
       //uploading images to Amazon S3
     let result = await AWS3Service.handleFileUpload(nationalId);
     nationalIdImageUri = result.Location;
@@ -87,7 +86,7 @@ class JobSeekerSerivce{
     result = await AWS3Service.handleFileUpload(nationalId);
     documentImageUri = result.Location;
 
-    console.log("all errors skipped");
+
 
       try {
             const JobSeeker = await employee.create({
@@ -110,8 +109,8 @@ class JobSeekerSerivce{
             }
                                                
       } catch (error) {
-           console.log("onserver error",{error})
-                  throw new Error(`${error}`);  
+                 console.log("If all fails")
+                  throw new ForbiddenError(`${error}`);  
           }
 
       
