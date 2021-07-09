@@ -7,7 +7,7 @@ const AWS = require('aws-sdk');
 
 const { v4: uuidv4 } = require('uuid');
 
-// console.log(`${process.env.AWS_ACCESS_KEY_ID} ${process.env.AWS_ACCESS_KEY_SECRET} ${process.env.AWS_S3_REGION } ${process.env.AWS_S3_BUCKET}`)
+
 
 //AWS config info
  AWS.config.update({

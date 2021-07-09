@@ -177,20 +177,4 @@ module.exports = {
  
 
 
-/**
- 
-   id
-      name
-      status
-      days
-      budget
-      createdBy{
-        id
-        fullName
-      }
-      updatedAt
-      createdAt
- 
- 
- */
 
