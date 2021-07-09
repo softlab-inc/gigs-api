@@ -46,10 +46,8 @@ class JobSeekerSerivce{
 
   async createJobSeeker(content) {
 
-
     let { fullName, email, phone, password, document, nationalId, professionId, other } = content.input;
       
-    
       email = email.trim().toLowerCase();
 
     const { employee, employeeProfession,profession } = this.models; 
@@ -73,7 +71,7 @@ class JobSeekerSerivce{
         let result = await AWS3Service.handleFileUpload(nationalId);
         nationalIdImageUri = result.Location;
 
-        result = await AWS3Service.handleFileUpload(nationalId);
+        result = await AWS3Service.handleFileUpload(document);
         documentImageUri = result.Location;
 
 
