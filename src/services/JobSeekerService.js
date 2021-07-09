@@ -59,23 +59,19 @@ class JobSeekerSerivce{
       let  nationalIdImageUri = ''; 
       
       let user = await employee.findOne({ where: { email } });
-      this.isEmailUsed(user);
-      let user2 = await employee.findOne({ where: { phone } });
-      this.isPhoneNumberUsed(user2);
-     
-      //saving uploaded files to respective Folders
-      // nationalIdImageUri = await getResult(nationalId,IDS_FOLDER);
-      // documentImageUri = await getResult(document,DOCS_FOLDER);
-
-      //uploading images to Amazon S3
+    
+    if (!user) {
+         //uploading images to Amazon S3
         let result = await AWS3Service.handleFileUpload(nationalId);
         nationalIdImageUri = result.Location;
 
         result = await AWS3Service.handleFileUpload(document);
         documentImageUri = result.Location;
+        }
 
-
-          let JobSeeker = await employee.create({
+       try {
+        
+         let JobSeeker = await employee.create({
                                               fullName,
                                               email,
                                               phone,
@@ -87,8 +83,15 @@ class JobSeekerSerivce{
          await this.attachUserToProfile(other, profession, employeeProfession, JobSeeker, professionId);
                                                    
 
-        return JobSeeker;
-    
+         return JobSeeker;
+         
+       } catch (error) {
+         console.log(error)
+         throw error
+       }
+
+
+        
   }
 
 
