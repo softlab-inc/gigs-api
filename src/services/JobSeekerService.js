@@ -55,30 +55,30 @@ class JobSeekerSerivce{
     const hashed = await bcrypt.hash(password, 10);
 
     let  documentImageUri='';
-    let nationalIdImageUri = '';
-
-     try {
-    
-    console.log({fullName, email, phone, password, document, nationalId, professionId, other});
-
-    let user = await employee.findOne({ where: { email } });
-
-    console.log({user:user.dataValues})
-   
-    if (user) {
-          console.log('About to through error')
-      throw 'Email has already been used, try again another!';
-       }
-    
-      //uploading images to Amazon S3
-      // let result = await AWS3Service.handleFileUpload(nationalId);
-      nationalIdImageUri = "result.Location";
-
-      // result = await AWS3Service.handleFileUpload(nationalId);
-      documentImageUri = "result.Location";
-
-   
+    let  nationalIdImageUri = ''; 
       
+    let user = await employee.findOne({ where: { email } });
+    
+    let user2 = await employee.findOne({ where: { phone } });
+
+       this.isEmailUsed(user);
+    
+       this.isPhoneNumberUsed(user2);
+    
+      //saving uploaded files to respective Folders
+      // nationalIdImageUri = await getResult(nationalId,IDS_FOLDER);
+      // documentImageUri = await getResult(document,DOCS_FOLDER);
+
+      //uploading images to Amazon S3
+    let result = await AWS3Service.handleFileUpload(nationalId);
+    nationalIdImageUri = result.Location;
+
+    result = await AWS3Service.handleFileUpload(nationalId);
+    documentImageUri = result.Location;
+
+
+
+      try {
             const JobSeeker = await employee.create({
                                               fullName,
                                               email,
@@ -89,23 +89,37 @@ class JobSeekerSerivce{
                                               });
 
             //if they never specified a profession
-        if (other) { 
+            if (other) { 
               let newProfession = await profession.create({ name: other });
               await employeeProfession.create({ professionId: newProfession.id, employeeId: JobSeeker.id });
                return JobSeeker; 
-          } else {
+            } else {
               await employeeProfession.create({ professionId, employeeId: JobSeeker.id });
               return JobSeeker; 
-          }
-         
-       } catch (error) {
-       
-         throw new Error(`${error}`);
-       }
+            }
                                                
+          } catch (error) {
+                  throw new ForbiddenError(`${error}`);  
+          }
+
+      
+    
+
   }
 
 
+
+  isPhoneNumberUsed(user2) {
+    if (user2) {
+      throw new ForbiddenError('Phone number has already been used, try again another!');
+    }
+  }
+
+  isEmailUsed(user) {
+    if (user) {
+      throw new ForbiddenError('Email has already been used, try again another!');
+    }
+  }
 
   async getProfessions({ employeeId }) {
      const {employeeProfession,profession } = this.models;
