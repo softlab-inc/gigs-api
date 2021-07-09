@@ -77,7 +77,7 @@ class JobSeekerSerivce{
         documentImageUri = result.Location;
 
 
-          const JobSeeker = await employee.create({
+          let JobSeeker = await employee.create({
                                               fullName,
                                               email,
                                               phone,
@@ -111,6 +111,7 @@ class JobSeekerSerivce{
   }
 
   isEmailUsed(user) {
+    console.log(AuthenticationError);
     if (user) {
       throw new  AuthenticationError('Email has already been used, try again another!');
     }

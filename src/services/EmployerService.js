@@ -85,7 +85,6 @@ class EmployerService{
     let user = await this.models.employer.findOne({ where: { email } });
     
     if (!user) {
-      console.log('about to throw error message',user);
           throw new AuthenticationError('User account not found! try again');
        }
     
