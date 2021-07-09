@@ -46,7 +46,6 @@ class JobSeekerSerivce{
 
   async createJobSeeker(content) {
 
-    try {
 
     let { fullName, email, phone, password, document, nationalId, professionId, other } = content.input;
       
@@ -88,26 +87,23 @@ class JobSeekerSerivce{
                                               nationalIdImageUri 
                                               });
 
-            //if they never specified a profession
-            if (other) { 
-              let newProfession = await profession.create({ name: other });
-              await employeeProfession.create({ professionId: newProfession.id, employeeId: JobSeeker.id });
-               return JobSeeker; 
-            } else {
-              await employeeProfession.create({ professionId, employeeId: JobSeeker.id });
-              return JobSeeker; 
-            }
-                                               
-          } catch (error) {
-          throw error;       
-          }
+         await this.attachUserToProfile(other, profession, employeeProfession, JobSeeker, professionId);
+                                                   
 
-      
+        return JobSeeker;
     
-
   }
 
 
+
+  async attachUserToProfile(other, profession, employeeProfession, JobSeeker, professionId) {
+    if (other) {
+      let newProfession = await profession.create({ name: other });
+      await employeeProfession.create({ professionId: newProfession.id, employeeId: JobSeeker.id });
+    } else {
+      await employeeProfession.create({ professionId, employeeId: JobSeeker.id });
+    }
+  }
 
   isPhoneNumberUsed(user2) {
     if (user2) {
