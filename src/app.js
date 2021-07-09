@@ -17,7 +17,7 @@ const typeDefs = require('./schemas');
 //Providing a resolver to the schema fields
 const resolvers = require('./resolvers');
 
-//const pubsub = new PubSub();
+
 const pubsub = new PubSub(); 
 
 
