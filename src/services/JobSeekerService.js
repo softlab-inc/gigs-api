@@ -98,7 +98,7 @@ class JobSeekerSerivce{
             }
                                                
           } catch (error) {
-                  throw new ForbiddenError(`${error}`);  
+                  throw  error  
           }
 
       
