@@ -58,7 +58,7 @@ class JobSeekerSerivce{
     let nationalIdImageUri = '';
     
     let user = await employee.findOne({ where: { email } });
-    return return 'testing okay...'
+    return  'testing okay...'
     console.log('checking if email exists',{user})
      if(user){
           throw new AuthenticationError('Email has already been used, try again another!');
