@@ -68,7 +68,9 @@ class JobSeekerSerivce{
 
         result = await AWS3Service.handleFileUpload(document);
         documentImageUri = result.Location;
-        } 
+    } else {
+         throw new Error('Employer notified already');
+    }
 
            let JobSeeker = await employee.create({
                                               fullName,

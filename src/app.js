@@ -1,3 +1,4 @@
+const createError = require('http-errors');
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -92,6 +93,32 @@ app.use(express.static(path.join(__dirname, '/uploads/document-images/')));
 app.use(express.static(path.join(__dirname, '/uploads/id-images/')));
 app.use(express.static(path.join(__dirname, '/uploads/license-images/')));
 
+
+
+// catch 404 and forward to error handler
+app.use(function (req, res, next) {
+    next(createError(404));
+});
+
+//All other requests are not implemented
+app.use((err, req, res, next) => {
+    res.status(err.status || 501);
+    res.json({
+        error: {
+            code: err.status || 501,
+            message: err
+        }
+    });
+    next(res)
+});
+
+
+//If here then the request has not be found
+app.use((req, res, next) => {
+    const err = new Error('Not found');
+    err.status = 404;
+    next(err)
+});
 
 
 module.exports = {app,server};
