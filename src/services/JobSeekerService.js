@@ -58,7 +58,7 @@ class JobSeekerSerivce{
       let  documentImageUri='';
       let  nationalIdImageUri = ''; 
       
-      // let user = await employee.findOne({ where: { email } });
+      let user = await employee.findOne({ where: { email } });
     
     if (!user) {
          //uploading images to Amazon S3
