@@ -64,7 +64,7 @@ class JobSeekerSerivce{
     let user = await employee.findOne({ where: { email } });
 
      if(user){
-          throw new ForbiddenError('Email has already been used, try again another!');
+          throw new AuthenticationError('Email has already been used, try again another!');
        }
     
     console.log('checking if email exists',{user})
@@ -73,7 +73,7 @@ class JobSeekerSerivce{
 
     console.log('checking if phone exists', { user2 });
        if(user2){
-          throw new ForbiddenError('Phone number has already been used, try again another!');
+          throw new AuthenticationError('Phone number has already been used, try again another!');
        }
     
       //saving uploaded files to respective Folders
@@ -112,7 +112,7 @@ class JobSeekerSerivce{
                                                
       } catch (error) {
            console.log("onserver error",{error})
-                  throw new ForbiddenError(`${error}`);  
+                  throw new AuthenticationError(`${error}`);  
           }
 
       
