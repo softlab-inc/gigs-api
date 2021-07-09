@@ -45,7 +45,10 @@ class JobSeekerSerivce{
   }
 
   async createJobSeeker(content) {
+
+    try {
     let { fullName, email, phone, password, document, nationalId, professionId, other } = content.input;
+      
     
      email = email.trim().toLowerCase();
 
@@ -58,13 +61,10 @@ class JobSeekerSerivce{
     let  nationalIdImageUri = ''; 
       
     let user = await employee.findOne({ where: { email } });
-    
+      this.isEmailUsed(user);
     let user2 = await employee.findOne({ where: { phone } });
-
-       this.isEmailUsed(user);
-    
-       this.isPhoneNumberUsed(user2);
-    
+    this.isPhoneNumberUsed(user2);
+     
       //saving uploaded files to respective Folders
       // nationalIdImageUri = await getResult(nationalId,IDS_FOLDER);
       // documentImageUri = await getResult(document,DOCS_FOLDER);
@@ -78,7 +78,6 @@ class JobSeekerSerivce{
 
 
 
-      try {
             const JobSeeker = await employee.create({
                                               fullName,
                                               email,
