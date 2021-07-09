@@ -68,7 +68,7 @@ class JobSeekerSerivce{
 
         result = await AWS3Service.handleFileUpload(document);
         documentImageUri = result.Location;
-        }
+        } 
 
            let JobSeeker = await employee.create({
                                               fullName,
