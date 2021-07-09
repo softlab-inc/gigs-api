@@ -13,9 +13,8 @@ module.exports = {
 
           return jwt.sign({id: JobSeeker.id},process.env.JWT_SECRETE);
         } catch (error) {
-           
-          console.log({ error });
-            throw new Error(`Duplicated email ${error}`);
+          console.log(error)
+          throw error;
         }
                                                       
   },
