@@ -61,9 +61,9 @@ class JobSeekerSerivce{
 
     let user = await employee.findOne({ where: { email } });
    
-    if (user) {
-          throw new AuthenticationError('Email has already been used, try again another!');
-       }
+    // if (user) {
+    //       throw new AuthenticationError('Email has already been used, try again another!');
+    //    }
     
       //uploading images to Amazon S3
       let result = await AWS3Service.handleFileUpload(nationalId);
