@@ -110,13 +110,17 @@ class JobSeekerSerivce{
 
   isPhoneNumberUsed(user2) {
     if (user2) {
-      throw new ForbiddenError('Phone number has already been used, try again another!');
+      throw 'Phone number has already been used, try again another!';
+    }else{
+      console.log('Nothing to return')
     }
   }
 
   isEmailUsed(user) {
     if (user) {
-      throw new ForbiddenError('Email has already been used, try again another!');
+      throw 'Email has already been used, try again another!';
+    }else{
+      console.log('Nothing to return')
     }
   }
 
