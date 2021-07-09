@@ -48,19 +48,12 @@ class EmployerService{
 
      let user = await employer.findOne({where:{email}});
 
-     if(user){
-          throw new ForbiddenError('Email has already been used, try again with another!');
+     if(!user){
+       let result = await AWS3Service.handleFileUpload(license);
+      licenseImageUri = result.Location;
      }
-    
-    //   //saving uploaded files to respective Folders
-    // licenseImageUri = await getResult(license, LICENSE_FOLDER);
-    let result = await AWS3Service.handleFileUpload(license);
-    licenseImageUri = result.Location;  //let {Location:licenseImageUri} = result; best way of doing this.
 
-
-
-       try {
-       const Employer = await employer.create({
+       let Employer = await employer.create({
                                         fullName,
                                         companyName,
                                         email,
@@ -69,11 +62,6 @@ class EmployerService{
                                         licenseImageUri
                                         });
        return Employer;                                      
-    } catch (error) {
-      throw new ForbiddenError(`${error}`);  
-    }
-       
-
 
   }
  

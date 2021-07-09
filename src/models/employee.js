@@ -25,6 +25,12 @@ module.exports = function(sequelize, DataTypes) {
                 msg: 'Oops. Looks like you already have an account with this email address. Please try to login.',
                 fields: [sequelize.fn('lower', sequelize.col('email'))]
       },
+      validate: {
+        isEmail: {
+          args: true,
+          msg: 'The email you entered is invalid or is already in our system.'
+        },
+      }
     },     
     phone: {
       type: DataTypes.STRING(15),
