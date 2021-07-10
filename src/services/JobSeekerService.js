@@ -1,13 +1,14 @@
 const bcrypt = require('bcrypt'); //password encryption module
 const storeFS = require('../utils/storeFS');
 const AWS3Service = require('./AWS3Service');
-const constomValidationError = require('../utils/modelValidation');
+
+
 
 const Sequelize = require('sequelize');
 
 const Op = Sequelize.Op;
 
-const { AuthenticationError,ForbiddenError } = require('apollo-server-express');
+const { AuthenticationError,ForbiddenError, ApolloError, } = require('apollo-server-express');
 
 const PROFILE_FOLDER = 0;
 const IDS_FOLDER = 1;
@@ -69,7 +70,8 @@ class JobSeekerSerivce{
         result = await AWS3Service.handleFileUpload(document);
         documentImageUri = result.Location;
     } else {
-         throw new Error('Employer notified already');
+        throw new AuthenticationError('Oops. Looks like you already have an account with this email address. Please try to login.');
+      
     }
 
            let JobSeeker = await employee.create({

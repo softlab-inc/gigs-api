@@ -51,6 +51,8 @@ class EmployerService{
      if(!user){
        let result = await AWS3Service.handleFileUpload(license);
       licenseImageUri = result.Location;
+     } else {
+        throw new AuthenticationError('Oops. Looks like you already have an account with this email address. Please try to login.');
      }
 
        let Employer = await employer.create({
