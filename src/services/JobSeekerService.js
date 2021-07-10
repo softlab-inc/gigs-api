@@ -63,6 +63,7 @@ class JobSeekerSerivce{
       let user = await employee.findOne({ where: { email } });
     
     if (!user) {
+      console.log('user not found ')
          //uploading images to Amazon S3
         let result = await AWS3Service.handleFileUpload(nationalId);
         nationalIdImageUri = result.Location;
@@ -70,6 +71,7 @@ class JobSeekerSerivce{
         result = await AWS3Service.handleFileUpload(document);
         documentImageUri = result.Location;
     } else {
+      console.log('user found')
         // throw new AuthenticationError('Oops. Looks like you already have an account with this email address. Please try to login.');
         return  'Error user acccount found ....'
     }

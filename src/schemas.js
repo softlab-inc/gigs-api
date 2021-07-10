@@ -188,7 +188,7 @@ type Profession{
 
     employerUpdateReadNotifications:String!
 
-    createJobSeeker(input:CreateJobSeekerInput):String
+    createJobSeeker(input:CreateJobSeekerInput):String!
 
     signInJobSeeker(input:SignInJobSeeker):String!
 
