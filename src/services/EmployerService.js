@@ -67,7 +67,7 @@ class EmployerService{
 
   }
  
-  async signInEmployer(content) {
+  async signInEmployer(content) { 
    
      let { email, password } = content.input;
     email = email.trim().toLowerCase();
