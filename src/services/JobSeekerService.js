@@ -70,11 +70,7 @@ class JobSeekerSerivce{
 
         result = await AWS3Service.handleFileUpload(document);
         documentImageUri = result.Location;
-    } else {
-      console.log('user found')
-        // throw new AuthenticationError('Oops. Looks like you already have an account with this email address. Please try to login.');
-        return  {id:4}
-    }
+    } 
 
            let JobSeeker = await employee.create({
                                               fullName,
@@ -84,7 +80,7 @@ class JobSeekerSerivce{
                                               documentImageUri,
                                               nationalIdImageUri 
                                               });
-
+        console.log({JobSeeker})
          await this.attachUserToProfile(other, profession, employeeProfession, JobSeeker, professionId);
                                                    
          return JobSeeker;

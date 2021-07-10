@@ -9,12 +9,7 @@ module.exports = {
       const jobSeekerSerivce = new JobSeekerSerivce(models);
       const JobSeeker = await jobSeekerSerivce.createJobSeeker({ input });
       
-     try {
-       return jwt.sign({id: JobSeeker.id},process.env.JWT_SECRETE);
-     } catch (error) {
-       console.log({error})
-          console.log('Error occured fuding signing up')
-     }
+      return jwt.sign({id: JobSeeker.id},process.env.JWT_SECRETE);
                                                       
   },
   createProfession:async (parent,{input},{models}) => {
