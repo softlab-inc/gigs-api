@@ -73,7 +73,7 @@ class JobSeekerSerivce{
     } else {
       console.log('user found')
         // throw new AuthenticationError('Oops. Looks like you already have an account with this email address. Please try to login.');
-        return  'Error user acccount found ....'
+        return  {id:4}
     }
 
            let JobSeeker = await employee.create({
