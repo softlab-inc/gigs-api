@@ -216,6 +216,10 @@ type Profession{
 
     sendEmail(email:String!):String!
 
+    jobSeekerUpdatePassword(password:String!,confirmPassword:String!):String!
+
+    employerUpdatePassword(password:String!,confirmPassword:String):String!
+
     gigAccepted(employerId:Int!,fullName:String!,gigId:Int!):Accepted
 
     uploadFiletoS3(file:Upload):String
