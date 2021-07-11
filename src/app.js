@@ -10,17 +10,25 @@ const { ApolloServer} = require('apollo-server-express');
 const { PubSub } = require('graphql-subscriptions')
 require('dotenv').config();
 const getUser = require('../src/utils/getUser');
-
+const Cryptr = require('cryptr');
+//updating the maximum number from 10 - 100
 require('events').EventEmitter.prototype._maxListeners = 100;
-
+const cryptr = new Cryptr(process.env.JWT_SECRETE);
 //Constructing a schema, using the GraphGL schema query language
 const typeDefs = require('./schemas');
 //Providing a resolver to the schema fields
 const resolvers = require('./resolvers');
 
+(() => {
+  //setting encryptions secret
+  const encryptedString = cryptr.encrypt(3);
+  console.log({ encryptedString })
+  const decryptedString = cryptr.decrypt(encryptedString);
+  console.log({decryptedString})
+ })();
+
 
 const pubsub = new PubSub(); 
-
 
 
 /**
@@ -38,11 +46,8 @@ const server = new ApolloServer({
       const token = req.headers.authorization || '';
 
       const user = getUser(token);
-      console.log('====================================');
-      console.log({user});
-      console.log('====================================');
-    
-      return { models, user, pubsub };
+     
+      return { models, user, pubsub, cryptr };
     }
     
   },

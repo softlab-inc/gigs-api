@@ -2,13 +2,11 @@ const jwt = require('jsonwebtoken'); //json web token module
 
 const { JobSeekerSerivce,EmployerService,GigService,NotificationService,MailerService,AWS3Service} = require('../services');
 
-
 module.exports = {
   createJobSeeker:async (parent,{input},{models}) => {
 
       const jobSeekerSerivce = new JobSeekerSerivce(models);
       const JobSeeker = await jobSeekerSerivce.createJobSeeker({ input });
-      
       return jwt.sign({id: JobSeeker.id},process.env.JWT_SECRETE);
                                                       
   },

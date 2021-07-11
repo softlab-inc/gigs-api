@@ -74,7 +74,7 @@ class JobSeekerSerivce{
       throw new AuthenticationError('Oops. Looks like you already have an account with this email address. Please try to login.');
     }
 
-           let JobSeeker = await employee.create({
+    let JobSeeker = await employee.create({
                                               fullName,
                                               email,
                                               phone,
@@ -83,13 +83,11 @@ class JobSeekerSerivce{
                                               nationalIdImageUri 
                                               });
 
-         await this.attachUserToProfile(other, profession, employeeProfession, JobSeeker, professionId);
+    await this.attachUserToProfile(other, profession, employeeProfession, JobSeeker, professionId);
                                                    
-         return JobSeeker;  
+    return JobSeeker;  
       
   }
-
-  
 
   async attachUserToProfile(other, profession, employeeProfession, JobSeeker, professionId) {
     if (other) {

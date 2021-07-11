@@ -229,6 +229,8 @@ type Profession{
     employerHireJobSeeker(gigId:Int!,employeeId:Int!):Gig
 
     employeeUpdateGigStatus(gigId:Int!,status:Int!):[Gig!]
+
+    
 }
 
 #Subscriptions
