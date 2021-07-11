@@ -180,6 +180,10 @@ module.exports = {
     await jobSeekerService.updateReadNotifications({ user });
     return 'Notifications update successfully...';
   },
+  jobSeekerUpdatePassword: async (parent, { id ,password,confirmPassword}, { models,cryptr }) => {
+      const jobSeekerService = new JobSeekerSerivce(models);
+      await jobSeekerService.updatePassword({ id, password, confirmPassword,cryptr  });
+  }
 
   
 }

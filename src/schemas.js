@@ -216,9 +216,9 @@ type Profession{
 
     sendEmail(email:String!,isEmployer:Boolean!):String!
 
-    jobSeekerUpdatePassword(password:String!,confirmPassword:String!):String!
+    jobSeekerUpdatePassword(password:String!,confirmPassword:String!,id:String!):String!
 
-    employerUpdatePassword(password:String!,confirmPassword:String):String!
+    employerUpdatePassword(password:String!,confirmPassword:String,id:String!):String!
 
     gigAccepted(employerId:Int!,fullName:String!,gigId:Int!):Accepted
 
@@ -253,7 +253,6 @@ type Subscription{
 
   onJobSeekerHired(token:String!):Gig!
 
-  
 }
 
 `;

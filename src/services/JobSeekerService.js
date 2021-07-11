@@ -278,7 +278,22 @@ class JobSeekerSerivce{
     return encryptedString;
   }
  
+  async updatePassword({ id, password, confirmPassword,cryptr }) {
+    const userId = Number(cryptr.decrypt(id));
+    
+    if (isNaN(userId)) {
+       return `Request is not authenticated, we can't update your password now`
+     }else{
+          if (password == confirmPassword) {
+          const hashed = await bcrypt.hash(password, 10);
+          await this.models.employee.update({ password: hashed }, { where: { id: userId } });
+          return 'Password has been update sccessfully'
+        } else {
+          return `Passwords provided don't match!! Plese try again`
+        }
+     }
 
+  }
 
 } 
 
