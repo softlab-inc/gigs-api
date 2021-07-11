@@ -270,6 +270,13 @@ class JobSeekerSerivce{
     }
 
   }
+
+   async findByEmail({ email,cryptr }) {
+    const user = await this.models.employee.findOne({ where: { email } });
+    this.isAuthenticatic(user);
+    const encryptedString = cryptr.encrypt(user.dataValues.id);
+    return encryptedString;
+  }
  
 
 
