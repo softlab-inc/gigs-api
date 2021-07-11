@@ -108,9 +108,20 @@ module.exports = {
      const employerService = new EmployerService(models);
      return await employerService.employerSendMessage({content, employeeId, user, pubsub});
   },
-  sendEmail: async (parent, { email }, context) => {
-    const result  =  new MailerService();
-    return  await result.sendMail(email); 
+  sendEmail: async (parent, { email,isEmployer }, {models}) => {
+    const result = new MailerService();
+    const employerService = new EmployerService(models);
+    const jobSeekerService = new JobSeekerSerivce(models);
+    
+    let id=''
+
+    if (isEmployer) {
+     id =  await employerService.findByEmail({email})
+    } else {
+      id = await jobSeekerService.findByEmail({email})
+    }
+    
+    return  await result.sendMail({email,id}); 
   },
   gigAccepted: async (parent, args, { models,user,pubsub }) => {
     const jobSeekerService = new JobSeekerSerivce(models);
@@ -152,7 +163,7 @@ module.exports = {
      console.log({ messages })
      const tickets = await notificationService.createChunckOfNotifications(messages);
      console.log(tickets);
-    pubsub.publish('onJobSeekerHired', { onJobSeekerHired: { ...employeeAndGig } });
+     pubsub.publish('onJobSeekerHired', { onJobSeekerHired: { ...employeeAndGig } });
     return employeeAndGig;
   },
   employeeUpdateGigStatus: async (parent, { gigId, status }, { models, user })=> {

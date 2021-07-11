@@ -3,7 +3,7 @@ const nodemailer = require('nodemailer');
 
 class MailerService{
   
-   async sendMail({user,cryptr}) {
+   async sendMail({email,id}) {
      
      try {
     // create reusable transporter object using the default SMTP transport
