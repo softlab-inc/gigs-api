@@ -108,7 +108,7 @@ module.exports = {
      const employerService = new EmployerService(models);
      return await employerService.employerSendMessage({content, employeeId, user, pubsub});
   },
-  sendEmail: async (parent, { email,isEmployer }, {models}) => {
+  sendEmail: async (parent, { email,isEmployer }, {models,cryptr}) => {
     const result = new MailerService();
     const employerService = new EmployerService(models);
     const jobSeekerService = new JobSeekerSerivce(models);

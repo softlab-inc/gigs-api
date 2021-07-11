@@ -27,8 +27,7 @@ class MailerService{
         <body>
         <h5> <i>Click</i> the  link in the description to updated your password </h5>
         
-        <p> This link will redirect you to a web page where you are required to update your password from</p>
-        <i><a href="url">http://gigsapp.com/support/?id=${id}</a></i>
+        <a href="http://gigsapp.com/support/?id=${id}">This link will redirect you to a web page where you are required to update your password from</a>
       </body>
     </html>
       
