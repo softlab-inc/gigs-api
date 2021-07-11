@@ -280,6 +280,15 @@ async uploadProfileImage({ user, profileImage }) {
          return await this.models.accepted.update({isRead:1},{where:{id:{[Op.in]: iDs}}})
        }
   }
+
+
+  async findByEmail({ email,cryptr }) {
+    const user = await this.models.employer.findOne({ where: { email } });
+    this.isAuthenticatic(user);
+    const encryptedString = cryptr.encrypt(user.dataValues.id);
+    return encryptedString;
+  }
+
  
 }
 

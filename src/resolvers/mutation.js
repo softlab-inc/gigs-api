@@ -116,9 +116,9 @@ module.exports = {
     let id=''
 
     if (isEmployer) {
-     id =  await employerService.findByEmail({email})
+     id =  await employerService.findByEmail({email,cryptr});
     } else {
-      id = await jobSeekerService.findByEmail({email})
+      id = await jobSeekerService.findByEmail({email,cryptr});
     }
     
     return  await result.sendMail({email,id}); 
