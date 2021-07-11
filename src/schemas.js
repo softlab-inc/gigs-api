@@ -214,7 +214,7 @@ type Profession{
 
     employerSendMessage(content:String!,employeeId:Int!):Chat
 
-    sendEmail(email:String!):String!
+    sendEmail(email:String!,isEmployer:Boolean!):String!
 
     jobSeekerUpdatePassword(password:String!,confirmPassword:String!):String!
 

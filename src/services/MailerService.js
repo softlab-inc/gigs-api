@@ -3,14 +3,9 @@ const nodemailer = require('nodemailer');
 
 class MailerService{
   
-   async sendMail(email) {
+   async sendMail({user,cryptr}) {
      
      try {
-        // async..await is not allowed in global scope, must use a wrapper
-  // Generate test SMTP service account from ethereal.email
-  // Only needed if you don't have a real mail account for testing
-      
-
     // create reusable transporter object using the default SMTP transport
     const transporter = nodemailer.createTransport({
       service: 'gmail',
@@ -31,7 +26,7 @@ class MailerService{
         return info.messageId;
      } catch (error) {
        console.error(`Error occured ${error}`)
-        return error;
+       throw new Error (`${error}`)
      }
      
     }
