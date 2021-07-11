@@ -218,7 +218,7 @@ type Profession{
 
     jobSeekerUpdatePassword(password:String!,confirmPassword:String!,id:String!):String!
 
-    employerUpdatePassword(password:String!,confirmPassword:String,id:String!):String!
+    employerUpdatePassword(password:String!,confirmPassword:String!,id:String!):String!
 
     gigAccepted(employerId:Int!,fullName:String!,gigId:Int!):Accepted
 
