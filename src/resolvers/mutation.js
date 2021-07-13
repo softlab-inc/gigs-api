@@ -167,31 +167,28 @@ module.exports = {
     return employeeAndGig;
   },
   employeeUpdateGigStatus: async (parent, { gigId, status }, { models, user })=> {
-  const jobSeekerService = new JobSeekerSerivce(models);
-  return await jobSeekerService.updateGigStatus({user,gigId,status})
+      const jobSeekerService = new JobSeekerSerivce(models);
+      return await jobSeekerService.updateGigStatus({user,gigId,status})
   },
   employerUpdateReadNotifications: async (parent, args, { user, models }) => {
-    const employerService = new EmployerService(models);
-    await employerService.updateReadNotifications({ user });
-    return 'Notifications update successfully...';
+      const employerService = new EmployerService(models);
+      await employerService.updateReadNotifications({ user });
+      return 'Notifications update successfully...';
   },
   jobSeekerUpdateReadNotifications: async (parent, args, { user, models }) => {
-    const jobSeekerService = new JobSeekerSerivce(models);
-    await jobSeekerService.updateReadNotifications({ user });
-    return 'Notifications update successfully...';
+      const jobSeekerService = new JobSeekerSerivce(models);
+      await jobSeekerService.updateReadNotifications({ user });
+      return 'Notifications update successfully...';
   },
   jobSeekerUpdatePassword: async (parent, { id ,password,confirmPassword}, { models,cryptr }) => {
       const jobSeekerService = new JobSeekerSerivce(models);
       return await jobSeekerService.updatePassword({ id, password, confirmPassword,cryptr  });
   },
   employerUpdatePassword: async (parent, { id, password, confirmPassword }, { models, cryptr }) => {
-    const employerService = new EmployerService(models);
-    return await  employerService.updatePassword({id, password, confirmPassword,cryptr})
+      const employerService = new EmployerService(models);
+      return await  employerService.updatePassword({id, password, confirmPassword,cryptr})
   }
 
-
-
-  
 }
  
  

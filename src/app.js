@@ -19,14 +19,6 @@ const typeDefs = require('./schemas');
 //Providing a resolver to the schema fields
 const resolvers = require('./resolvers');
 
-// (() => {
-//   //setting encryptions secret
-//   const encryptedString = cryptr.encrypt(3);
-
-//   console.log({ encryptedString })
-//   const decryptedString = cryptr.decrypt(encryptedString);
-//   console.log({decryptedString})
-//  })();
 
 
 const pubsub = new PubSub(); 
