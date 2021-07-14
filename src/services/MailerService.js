@@ -15,6 +15,11 @@ class MailerService{
       }
     });
        
+       console.log({
+        user: process.env.MAILER_USER,
+        pass: process.env.MAILER_PASSWORD
+       })
+       
     // send mail with defined transport object
     let info = await transporter.sendMail({
       from: process.env.MAILER_USER, // sender address
@@ -35,7 +40,7 @@ class MailerService{
     });
         return info.messageId;
      } catch (error) {
-       console.error(`Error occured ${error}`)
+       console.error(error);
        throw new Error (`${error}`)
      }
      

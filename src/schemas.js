@@ -23,7 +23,7 @@ module.exports = gql`
     completeGigs:[Gig!]
     createdAt:DateTime
     updatedAt:DateTime
-  }
+  } 
 
   type User{
     _id:Int
