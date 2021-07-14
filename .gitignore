@@ -68,3 +68,4 @@ typings/
 npm-debug.*
 package-lock.json
 yarn.lock
+/test
