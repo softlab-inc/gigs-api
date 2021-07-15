@@ -1,5 +1,5 @@
 const nodemailer = require('nodemailer');
-const  sendinBlue = require('nodemailer-sendinblue-transport');
+
 
 class MailerService{
   
