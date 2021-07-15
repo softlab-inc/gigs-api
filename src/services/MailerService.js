@@ -1,5 +1,5 @@
 const nodemailer = require('nodemailer');
-
+const  sendinBlue = require('nodemailer-sendinblue-transport');
 
 class MailerService{
   
@@ -8,10 +8,10 @@ class MailerService{
      try {
     // create reusable transporter object using the default SMTP transport
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      service: 'SendinBlue',
       auth: {
         user: process.env.MAILER_USER,
-        pass: process.env.MAILER_PASSWORD
+        pass: 'OWsNK6RDUyrJbpBt'
       }
     });
        
@@ -22,7 +22,7 @@ class MailerService{
        
     // send mail with defined transport object
     let info = await transporter.sendMail({
-      from: process.env.MAILER_USER, // sender address
+      from: process.env.MAILER_USER,// sender address
       to: email, // list of receivers
       subject: "Forgot password", // Subject line
       text: "use this infor to update your password", // plain text body
