@@ -11,14 +11,9 @@ class MailerService{
       service: 'SendinBlue',
       auth: {
         user: process.env.MAILER_USER,
-        pass: 'OWsNK6RDUyrJbpBt'
+        pass: process.env.MAILER_PASSWORD
       }
     });
-       
-       console.log({
-        user: process.env.MAILER_USER,
-        pass: process.env.MAILER_PASSWORD
-       })
        
     // send mail with defined transport object
     let info = await transporter.sendMail({
