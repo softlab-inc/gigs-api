@@ -253,7 +253,7 @@ class JobSeekerSerivce{
   return  data.map(data => ({ ...data.dataValues,...data.get('gig').dataValues }));
   }
 
-  async updateGigStatus({ user, gigId ,status}) {
+  async updateGigStatus({ user, gigId ,status}){
     this.isAuthenticatic(user);
     await this.models.employeeGig.update({ isStarted:status }, { where: { gigId, employeeId: user.id } });
     return await this.getPendingGigs({ employeeId: user.id });

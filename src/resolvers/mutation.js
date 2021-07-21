@@ -115,12 +115,12 @@ module.exports = {
     
     let id=''
 
-    if (isEmployer) {
+    if (isEmployer){
      id =  await employerService.findByEmail({email,cryptr});
-    } else {
+    }else {
       id = await jobSeekerService.findByEmail({email,cryptr});
     }
-    
+
     return  await result.sendMail({email,id}); 
   },
   gigAccepted: async (parent, args, { models,user,pubsub }) => {
