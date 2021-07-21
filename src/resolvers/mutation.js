@@ -7,8 +7,7 @@ module.exports = {
 
       const jobSeekerSerivce = new JobSeekerSerivce(models);
       const JobSeeker = await jobSeekerSerivce.createJobSeeker({ input });
-      return jwt.sign({id: JobSeeker.id},process.env.JWT_SECRETE);
-                                                      
+      return jwt.sign({id: JobSeeker.id},process.env.JWT_SECRETE);                                              
   },
   createProfession:async (parent,{input},{models}) => {
       //Mapping the list of names to {name:value}
@@ -24,9 +23,9 @@ module.exports = {
   },  
   signInJobSeeker:async (parent,{input},{models}) => {
 
-      const jobSeekerService = new JobSeekerSerivce(models)
+    const jobSeekerService = new JobSeekerSerivce(models);
       
-      const user = await jobSeekerService.signInJobSeeker({input})
+    const user = await jobSeekerService.signInJobSeeker({ input });
     
       //signing the user and returning the json web token
       return jwt.sign({id:user.id},process.env.JWT_SECRETE);
@@ -158,17 +157,17 @@ module.exports = {
    employerHireJobSeeker: async (parent, { gigId, employeeId }, { models, pubsub, user }) => {
       const employerService = new EmployerService(models);
       const notificationService = new NotificationService();
-     const employeeAndGig = await employerService.employerHire({ gigId, employeeId, user });
-     const messages = notificationService.generateHiredMessages([{...employeeAndGig}]);
-     console.log({ messages })
-     const tickets = await notificationService.createChunckOfNotifications(messages);
-     console.log(tickets);
-     pubsub.publish('onJobSeekerHired', { onJobSeekerHired: { ...employeeAndGig } });
-    return employeeAndGig;
+      const employeeAndGig = await employerService.employerHire({ gigId, employeeId, user });
+      const messages = notificationService.generateHiredMessages([{...employeeAndGig}]);
+      console.log({ messages });
+      const tickets = await notificationService.createChunckOfNotifications(messages);
+      console.log(tickets);
+      pubsub.publish('onJobSeekerHired', { onJobSeekerHired: { ...employeeAndGig } });
+      return employeeAndGig;
   },
   employeeUpdateGigStatus: async (parent, { gigId, status }, { models, user })=> {
       const jobSeekerService = new JobSeekerSerivce(models);
-      return await jobSeekerService.updateGigStatus({user,gigId,status})
+      return await jobSeekerService.updateGigStatus({ user, gigId, status });
   },
   employerUpdateReadNotifications: async (parent, args, { user, models }) => {
       const employerService = new EmployerService(models);

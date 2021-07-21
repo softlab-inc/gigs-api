@@ -210,9 +210,9 @@ type Profession{
 
     employerCreateGig(input:EmployerCreateGigInput):Gig
 
-    jobSeekerSendMessage(content:String!,employerId:Int!):[Chat!]
+    jobSeekerSendMessage(content:String!,employerId:Int!):Chat!
 
-    employerSendMessage(content:String!,employeeId:Int!):[Chat!]
+    employerSendMessage(content:String!,employeeId:Int!):Chat!
 
     sendEmail(email:String!,isEmployer:Boolean!):String!
 
@@ -234,7 +234,6 @@ type Profession{
 
     employeeUpdateGigStatus(gigId:Int!,status:Int!):[Gig!]
 
-    
 }
 
 #Subscriptions
@@ -245,9 +244,9 @@ type Subscription{
 
   onStatusChange:JobSeeker!
 
-  onJobSeekerSentMessage(token:String!):[Chat!]
+  onJobSeekerSentMessage(token:String!):Chat!
 
-  onEmployerSentMessage(token:String!):[Chat!]
+  onEmployerSentMessage(token:String!):Chat!
 
   onTestSubscription(token:String!):String!
 

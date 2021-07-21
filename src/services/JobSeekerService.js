@@ -201,21 +201,19 @@ class JobSeekerSerivce{
       { pushToken },
       { where: {id:user.id} }
     );
-
     return await this.jobSeeker({user});
-  
   }
  
-  async jobSeekerSendMessage({ content, employerId, user, pubsub }) {
+  async jobSeekerSendMessage({ content, employerId, user, pubsub }){
     this.isAuthenticatic(user);
     const jobSeeker = await this.getGetJobSeeker({ id: user.id });
     const { fullName, profileImagUri } = jobSeeker.dataValues;
-    const message = await this.models.chat.create({ content, employerId,avatar:profileImagUri,employeeId: user.id,fullName,from:user.id,to:employerId});
+    const message = await this.models.chat.create({ content, employerId, avatar: profileImagUri, employeeId: user.id, fullName, from: user.id, to: employerId });
     pubsub.publish('onJobSeekerSentMessage', { onJobSeekerSentMessage:{ _id:message.dataValues.id,text:message.dataValues.content,...message.dataValues }});
     return { _id:message.dataValues.id,text:message.dataValues.content,...message.dataValues };
   }
 
-   async getChats({user,employerId}) {
+   async getChats({user,employerId}){
      this.isAuthenticatic(user);
      return await this.models.chat.findAll({ where: { employeeId: user.id, employerId }, order: [['createdAt', 'DESC']] });
   }
