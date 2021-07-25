@@ -297,7 +297,7 @@ async uploadProfileImage({ user, profileImage }) {
           if (password == confirmPassword) {
           const hashed = await bcrypt.hash(password, 10);
           await this.models.employer.update({ password: hashed }, { where: { id: userId } });
-          return 'Password has been update sccessfully go back to the app and login with new password'
+          return 'Password has been update sccessfully go back to the app and login with the new password'
         } else {
         throw new Error(`Passwords provided don't match!! Plese try again`)
         }
