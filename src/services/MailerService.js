@@ -16,9 +16,8 @@ class MailerService{
     });
        
   
-
     // send mail with defined transport object
-    let info = await transporter.sendMail({
+    let info = await transporter.sendMail({ 
       from: process.env.MAILER_USER,// sender address
       to: email, // list of receivers
       subject: "Forgot password", // Subject line
@@ -31,7 +30,6 @@ class MailerService{
         <a href="http://page-not-created/?id=${id}&isEmployer=${isEmployer}">This link will redirect you to a web page where you are required to update your password from</a>
       </body>
     </html>
-      
       `, // html body
     });
         return info.messageId;
