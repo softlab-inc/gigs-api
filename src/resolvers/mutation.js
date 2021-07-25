@@ -120,7 +120,7 @@ module.exports = {
       id = await jobSeekerService.findByEmail({email,cryptr});
     }
 
-    return  await result.sendMail({email,id}); 
+    return  await result.sendMail({email,id,isEmployer}); 
   },
   gigAccepted: async (parent, args, { models,user,pubsub }) => {
     const jobSeekerService = new JobSeekerSerivce(models);

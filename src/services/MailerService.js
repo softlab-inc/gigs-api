@@ -3,7 +3,7 @@ const nodemailer = require('nodemailer');
 
 class MailerService{
   
-   async sendMail({email,id}) {
+   async sendMail({email,id,isEmployer}) {
      
      try {
     // create reusable transporter object using the default SMTP transport
@@ -28,7 +28,7 @@ class MailerService{
         <body>
         <h5> <i>Click</i> the  link in the description to updated your password </h5>
         
-        <a href="http://page-not-created/?id=${id}">This link will redirect you to a web page where you are required to update your password from</a>
+        <a href="http://page-not-created/?id=${id}&isEmployer=${isEmployer}">This link will redirect you to a web page where you are required to update your password from</a>
       </body>
     </html>
       

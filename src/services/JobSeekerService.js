@@ -278,6 +278,7 @@ class JobSeekerSerivce{
  
   async updatePassword({ id, password, confirmPassword,cryptr }) {
     const userId = Number(cryptr.decrypt(id));
+    console.log(userId);
     if (isNaN(userId)) {
        throw new Error(`Request is not authenticated, we can't update your password now`)
      }else{
