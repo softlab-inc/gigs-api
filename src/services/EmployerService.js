@@ -292,14 +292,14 @@ async uploadProfileImage({ user, profileImage }) {
    async updatePassword({ id, password, confirmPassword,cryptr }) {
     const userId = Number(cryptr.decrypt(id));
     if (isNaN(userId)) {
-       return `Request is not authenticated, we can't update your password now`
+      throw new Error(`Request is not authenticated, we can't update your password now`)
      }else{
           if (password == confirmPassword) {
           const hashed = await bcrypt.hash(password, 10);
           await this.models.employer.update({ password: hashed }, { where: { id: userId } });
           return 'Password has been update sccessfully go back to the app and login with new password'
         } else {
-          return `Passwords provided don't match!! Plese try again`
+        throw new Error(`Passwords provided don't match!! Plese try again`)
         }
      }
 
