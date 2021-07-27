@@ -27,8 +27,8 @@ class NotificationService{
       messages.push({
       to: accepted.pushToken,
       sound: 'default',
-      title: "Gig Accepted",
-      body: `${accepted.fullName} has accepted to the Gig you created`,
+      title: "GiG Accepted",
+      body: `${accepted.fullName} has accepted to the GiG you created`,
         data: { gigId: accepted.gigId,toScreen:'Notifications' },
        priority: 'high',
       });
@@ -56,7 +56,7 @@ class NotificationService{
       messages.push({
       to: hired.pushToken,
       sound: 'default',
-      title: "Your hired",
+      title: "You are hired",
       body: `Dear ${hired.fullName} you have been hired for ${hired.name} role`,
       data: { gigId: hired.gigId,toScreen:'Gigs'},
       priority: 'high',
@@ -88,7 +88,7 @@ class NotificationService{
       messages.push({
             to: employee.pushToken,
             sound: 'default',
-            title:"Gig created",
+            title:"GiG created",
             body: `${employee.name}  -   ${employee.details}`,
             data: { gigId: employee.gigId,toScreen:'Notifications' },
             priority: 'high',
