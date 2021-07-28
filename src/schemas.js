@@ -38,6 +38,14 @@ module.exports = gql`
     createdAt:DateTime!
     updatedAt:DateTime!
   }
+  
+  type Messages{
+    id:Int!
+    status:Int!
+    profileImagUri:String!
+    fullName:String!
+     
+  }
 
   type Employer{
     id:Int!
