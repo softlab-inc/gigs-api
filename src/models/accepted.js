@@ -22,7 +22,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true,
       defaultValue: 0
     },
-    hasAccepted:{
+    hasAccepted:{//hasAccepted -> wasHired for job
     type:DataTypes.INTEGER,
     allowNull: true,
     defaultValue:0
