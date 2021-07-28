@@ -128,7 +128,7 @@ type Profession{
       getGig(id:Int!):Gig!
       jobSeekerNotifications:[Notification!]
       employerNotifications:[Accepted!]
-       recentHires:[JobSeeker!]
+      recentHires:[JobSeeker!]
       # notifications:[Notification!]
       # readNotifications:[Notification!]
       # unReadNotifications:[Notification!] 
