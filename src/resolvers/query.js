@@ -38,7 +38,8 @@ module.exports = {
     return await jobSeekerService.getAllNotifications({ user });
   },
   recentHires: async (parent,args, { models, user }) => {
-    
+     const employerService = new EmployerService(models);
+     return await employerService.getRecentHires({user})
   }
   
   // notifications: async (parent, args, { models, user }) => {
