@@ -34,7 +34,7 @@ class JobSeekerSerivce{
 
   async getNotifications({ employeeId}) { 
     const {gig,notified,} = this.models;
-    let data = await notified.findAll({ where: { employeeId }, include: [gig], order: [['createdAt', 'DESC']] });
+    let data = await notified.findAll({ where: { employeeId }, include: [gig], order: [['createdAt', 'DESC']],limit: 20 });
     return data.map(data => ({...data.get('gig').dataValues,...data.dataValues}));
   }
 
@@ -215,7 +215,7 @@ class JobSeekerSerivce{
 
    async getChats({user,employerId}){
      this.isAuthenticatic(user);
-     return await this.models.chat.findAll({ where: { employeeId: user.id, employerId }, order: [['createdAt', 'DESC']] });
+     return await this.models.chat.findAll({ where: { employeeId: user.id, employerId }, order: [['createdAt', 'DESC']],limit: 40 });
   }
 
   async getEmployer({id}) {
