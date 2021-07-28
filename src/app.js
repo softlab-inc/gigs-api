@@ -24,15 +24,6 @@ const resolvers = require('./resolvers');
 const pubsub = new PubSub(); 
 
 
-(async () => {
-        
-       let data =  await models.chat.findAll({ where: { employerId: 3 },include:['employee'],group:['employeeId']});
-       data =  data.map(data => ({...data.get('employee').dataValues,...data.dataValues}))
-       console.log(data)
-           
-       
-})();
-
 
 /**
  * Integrating the APOLLO_SERVER to server our Graph GL API
