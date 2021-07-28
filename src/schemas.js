@@ -137,6 +137,8 @@ type Profession{
       jobSeekerNotifications:[Notification!]
       employerNotifications:[Accepted!]
       recentHires:[JobSeeker!]
+      employerMessages:[Messages!]
+      jobSeekerMessages:[Messages!]
  }
 
  #InputFields
