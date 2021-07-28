@@ -30,6 +30,11 @@ module.exports = {
     return await employerService.getCreatedGigs({ user });
   },
   getGig: async (parent,{id}, { models }) => models.gig.findOne({where:id}) ,
+  employerNotifications:async(parent,args, { models, user }) => {
+      
+    
+  }
+  
   // notifications: async (parent, args, { models, user }) => {
   //   const jobSeekerService = new JobSeekerSerivce(models);
   //   return await jobSeekerService.getAllNotifications({ user });

@@ -126,6 +126,9 @@ type Profession{
       employerChats(employeeId:Int!):[Chat!]
       jobSeekerChats(employerId:Int!):[Chat!]
       getGig(id:Int!):Gig!
+      employerNotifications:[Notification!]
+      jobSeekerNotifications:[Notification!]
+      
       # notifications:[Notification!]
       # readNotifications:[Notification!]
       # unReadNotifications:[Notification!] 
