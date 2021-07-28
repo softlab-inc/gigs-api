@@ -309,7 +309,7 @@ async uploadProfileImage({ user, profileImage }) {
   
   async getMessageSenders({user}){
       this.isAuthenticatic(user);
-      return await this.models.chat.findAll({where:{from:user.id}})
+    return await this.models.chat.findAll({ where: { from: user.id } });
   }
  
 }
