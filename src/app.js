@@ -26,9 +26,8 @@ const pubsub = new PubSub();
 
 (async () => {
         
-       let data =  await models.chat.findAll({ where: { employeeId: 3 },include:['employer'],group:['employerId']});
-       
-       data =  data.map(data => ({...data.get('employer').dataValues,...data.dataValues}))
+       let data =  await models.chat.findAll({ where: { employerId: 3 },include:['employee'],group:['employeeId']});
+       data =  data.map(data => ({...data.get('employee').dataValues,...data.dataValues}))
        console.log(data)
            
        

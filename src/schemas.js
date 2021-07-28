@@ -42,9 +42,8 @@ module.exports = gql`
   type Messages{
     id:Int!
     status:Int!
-    profileImagUri:String!
+    profileImagUri:String
     fullName:String!
-     
   }
 
   type Employer{
