@@ -309,7 +309,8 @@ async uploadProfileImage({ user, profileImage }) {
   
   async getMessageSenders({user}){
       this.isAuthenticatic(user);
-    return await this.models.chat.findAll({ where: { from: user.id } });
+    let data =  await this.models.chat.findAll({ where: { employeeId: user.id  },include:['employer'],group:['employerId']});
+    return data.map(data => ({ ...data.get('employer').dataValues, ...data.dataValues }));
   }
  
 }
