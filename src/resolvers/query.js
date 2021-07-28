@@ -33,6 +33,9 @@ module.exports = {
   employerNotifications:async(parent,args, { models, user }) => {
       
     
+  },
+  jobSeekerNotifications:async(parent,args, { models}) => {
+  
   }
   
   // notifications: async (parent, args, { models, user }) => {
