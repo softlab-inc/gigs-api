@@ -39,7 +39,13 @@ module.exports = {
      const employerService = new EmployerService(models);
      return await employerService.getRecentHires({user})
   },
-  employerMessages: async (parent,args, { models, user }) => await models.chat.findAll({where:{from:user.id}}),
-  jobSeekerMessages: async (parent, args, { models, user }) => await models.chat.findAll({ where: { from: user.id }}),
+  employerMessages: async (parent,args, { models, user }) => {
+     const employerService = new EmployerService(models);
+     return await employerService.getMessageSenders({user})
+  },
+  jobSeekerMessages: async (parent, args, { models, user }) => {
+    const jobSeekerService = new JobSeekerSerivce(models);
+    return await jobSeekerService.getMessageSenders({ user });
+  },
 
 }
