@@ -44,6 +44,7 @@ module.exports = gql`
     status:Int!
     profileImagUri:String
     fullName:String!
+    chats:[Chat!]
   }
 
   type Employer{
