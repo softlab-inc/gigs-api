@@ -201,7 +201,7 @@ class EmployerService{
 
   async getCreatedGigs({user}) {
     this.isAuthenticatic(user);
-    return await this.models.gig.findAll({ where: { employerId: user.id } });;
+    return await this.models.gig.findAll({ where: { employerId: user.id },order: [['createdAt', 'DESC']] });;
   }
 
   async getCreatedGig({user}) {
