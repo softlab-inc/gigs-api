@@ -296,9 +296,7 @@ class JobSeekerSerivce{
   async getMessageSenders({user}){ 
      this.isAuthenticatic(user);
     let data =  await this.models.chat.findAll({ where: { employeeId: user.id  },include:['employer'],group:['employerId']});
-    
-     return  data.map(data => ({ ...data.dataValues,...data.get('employer').dataValues }));
-
+    return  data.map(data => ({ ...data.dataValues,...data.get('employer').dataValues }));
   }
 
 } 
