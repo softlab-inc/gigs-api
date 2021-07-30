@@ -1,5 +1,4 @@
 module.exports = {
-chats:({employeeId,employerId},args, { models,user }) => {
-   return {id:2}
-}
+chats:async ({employeeId,employerId},args, { models,user }) => await models.chat.findAll({ where: { employeeId, employerId }, order: [['createdAt', 'DESC']],limit: 40 }),
+
 };
