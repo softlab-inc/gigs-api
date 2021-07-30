@@ -311,6 +311,8 @@ async uploadProfileImage({ user, profileImage }) {
     this.isAuthenticatic(user);
     let data =  await this.models.chat.findAll({ where: { employerId: user.id  },include:['employee'],group:['employeeId']});
     return data.map(data => ({  ...data.dataValues,...data.get('employee').dataValues }));
+    
+    
   }
  
 }
