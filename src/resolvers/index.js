@@ -8,6 +8,7 @@ const Chat = require('./chat');
 const Gig = require('./gig');
 const Employer = require('./employer');
 const Accepted = require('./accepted');
+const Messages = require('./messages');
 
 /**
  * This module is responsible for exposing the Resolvers as Javascript objects
@@ -22,6 +23,7 @@ module.exports={
   Gig,
   Employer,
   Accepted,
+  Messages,
   DateTime:GraphQLDateTime, 
 }
 
