@@ -45,7 +45,7 @@ module.exports = gql`
     profileImagUri:String
     fullName:String!
     employerId:Int!
-    employeeId:int!
+    employeeId:Int!
     chats:[Chat!]
   }
 
