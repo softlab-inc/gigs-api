@@ -125,7 +125,7 @@ const server = new ApolloServer({
     }
     
   },
-  subscriptions: {
+  subscriptions: { 
     path: '/subscriptions',
     onConnect: (connectionParams, webSocket, context) => {
         console.log('Client connected');
