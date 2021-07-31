@@ -20,6 +20,86 @@ const typeDefs = require('./schemas');
 const resolvers = require('./resolvers');
 
 
+  let testMessages = [
+    {
+      "id": 9,
+      "status": 0,
+      "profileImagUri": "https://gigs-app-uploads.s3.amazonaws.com/c7a0fb6d-0537-4629-aad1-6ae3853b17b8/picture-1626871839112.jpg",
+      "fullName": "Golazo P",
+      "chats": [
+        {
+          "_id": 33,
+          "text": "It's now received",
+          "user": {
+            "_id": 22,
+            "name": "Shankiline Aturinde",
+            "avatar": "https://gigs-app-uploads.s3.amazonaws.com/ce479b79-a844-4fb0-bc39-4be3099a9173/picture-1623311110384.jpg"
+          },
+          "createdAt": "2021-07-26T11:54:39.000Z",
+          "updatedAt": "2021-07-26T11:54:39.000Z"
+        },
+        {
+          "_id": 32,
+          "text": "Yea",
+          "user": {
+            "_id": 22,
+            "name": "Shankiline Aturinde",
+            "avatar": "https://gigs-app-uploads.s3.amazonaws.com/ce479b79-a844-4fb0-bc39-4be3099a9173/picture-1623311110384.jpg"
+          },
+          "createdAt": "2021-07-26T11:54:27.000Z",
+          "updatedAt": "2021-07-26T11:54:27.000Z"
+        },
+        {
+          "_id": 31,
+          "text": "Received message?",
+          "user": {
+            "_id": 17,
+            "name": "Golazo P",
+            "avatar": "https://gigs-app-uploads.s3.amazonaws.com/c7a0fb6d-0537-4629-aad1-6ae3853b17b8/picture-1626871839112.jpg"
+          },
+          "createdAt": "2021-07-26T08:09:26.000Z",
+          "updatedAt": "2021-07-26T08:09:26.000Z"
+        },
+        {
+          "_id": 30,
+          "text": "Hello",
+          "user": {
+            "_id": 17,
+            "name": "Golazo P",
+            "avatar": "https://gigs-app-uploads.s3.amazonaws.com/c7a0fb6d-0537-4629-aad1-6ae3853b17b8/picture-1626871839112.jpg"
+          },
+          "createdAt": "2021-07-26T08:09:17.000Z",
+          "updatedAt": "2021-07-26T08:09:17.000Z"
+        },
+        {
+          "_id": 29,
+          "text": "Please let me know when you receive this",
+          "user": {
+            "_id": 17,
+            "name": "Golazo P",
+            "avatar": "https://gigs-app-uploads.s3.amazonaws.com/c7a0fb6d-0537-4629-aad1-6ae3853b17b8/picture-1626871839112.jpg"
+          },
+          "createdAt": "2021-07-26T07:41:53.000Z",
+          "updatedAt": "2021-07-26T07:41:53.000Z"
+        },
+        {
+          "_id": 28,
+          "text": "Hi Ms. Shankline",
+          "user": {
+            "_id": 17,
+            "name": "Golazo P",
+            "avatar": "https://gigs-app-uploads.s3.amazonaws.com/c7a0fb6d-0537-4629-aad1-6ae3853b17b8/picture-1626871839112.jpg"
+          },
+          "createdAt": "2021-07-26T07:41:35.000Z",
+          "updatedAt": "2021-07-26T07:41:35.000Z"
+        },
+        ]
+      }
+      ]
+       
+       
+       console.log({testMessages})
+
 
 const pubsub = new PubSub(); 
 
