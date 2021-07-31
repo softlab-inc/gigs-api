@@ -47,5 +47,9 @@ module.exports = {
     const jobSeekerService = new JobSeekerSerivce(models);
     return await jobSeekerService.getMessageSenders({ user });
   },
+  pendingGigs: async (parent, args, { models,user}) => {
+    const jobSeekerService = new JobSeekerSerivce(models);
+    return await jobSeekerService.getPendingGigs({ employeeId: user.id});
+  }  
 
 }

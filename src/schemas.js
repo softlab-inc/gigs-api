@@ -141,6 +141,7 @@ type Profession{
       recentHires:[JobSeeker!]
       employerMessages:[Messages!]
       jobSeekerMessages:[Messages!]
+      pendingGigs:[Gig!]
  }
 
  #InputFields
