@@ -29,7 +29,7 @@ const pubsub = new PubSub();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({ req,connection }) => {
+  context: ({ req,connection }) => { 
     
     if (connection) {
       return {connection,pubsub,models};
