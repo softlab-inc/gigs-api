@@ -251,9 +251,15 @@ class JobSeekerSerivce{
   return  data.map(data => ({ ...data.dataValues,...data.get('gig').dataValues }));
   }
   async getRecentEmployers({ employeeId }) {
-  let data = await this.models.employeeGig.findAll({ where: { employeeId },order: [['id', 'DESC']],group:['gigId']});
-  
-  
+
+  let gigIds = await this.models.employeeGig.findAll({ where: {employeeId:3},attributes: ['gigId'], raw: true,group:['gigId'],order: [['id', 'DESC']]})
+    gigIds = gigIds.map((data)=> (data.gigId) )
+   
+    let data = await this.models.gig.findAll({ where: {id:gigIds[0]},include:[this.models.employer],group:['employerId']})
+   
+    let employers = data.map(data => data.get('employer'))
+
+    return employers
   
   }
 

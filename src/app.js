@@ -22,18 +22,6 @@ const resolvers = require('./resolvers');
 const pubsub = new PubSub(); 
 
 
-
-(async ()=> {
-
-  let gigIds = await models.employeeGig.findAll({ where: {employeeId:3},attributes: ['gigId'], raw: true,group:['gigId'],order: [['id', 'DESC']]})
-      gigIds = gigIds.map((data)=> (data.gigId) )
-   
-   let data = await models.gig.findAll({ where: {id:gigIds[0]},include:[models.employer],group:['employerId']})
-   
-    let employers = data.map(data => data.get('employer'))
-    console.log(employers)
-})();
-
 /**
  * Integrating the APOLLO_SERVER to server our Graph GL API
  * Expossed through the context from on point of truth 
