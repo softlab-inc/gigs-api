@@ -19,7 +19,7 @@ module.exports = gql`
     hasNotifications:[Notification!]
     readNotifications:[Notification!]
     unReadNotifications:[Notification!]
-    recentEmployees:[Employer!]
+    recentEmployers:[Employer!]
     pendingGigs:[Gig!]
     completeGigs:[Gig!]
     createdAt:DateTime

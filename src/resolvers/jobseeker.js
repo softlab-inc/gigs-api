@@ -21,8 +21,8 @@ module.exports = {
     const jobSeekerService = new JobSeekerSerivce(models);
     return await jobSeekerService.getPendingGigs({ employeeId: id}); 
   },
-  recentEmployees: async ({id}, args, { models}) => {
+  recentEmployers: async ({id}, args, { models}) => {
     const jobSeekerService = new JobSeekerSerivce(models);
-    return await jobSeekerService.getPendingGigs({ employeeId: id}); 
+    return await jobSeekerService.getRecentEmployers({ employeeId: id}); 
   } 
 }

@@ -250,6 +250,12 @@ class JobSeekerSerivce{
   let data = await this.models.employeeGig.findAll({ where: { employeeId },include:[this.models.gig],order: [['id', 'DESC']]});
   return  data.map(data => ({ ...data.dataValues,...data.get('gig').dataValues }));
   }
+  async getRecentEmployers({ employeeId }) {
+  let data = await this.models.employeeGig.findAll({ where: { employeeId },order: [['id', 'DESC']],group:['gigId']});
+  
+  
+  
+  }
 
   async updateGigStatus({ user, gigId ,status}){
     this.isAuthenticatic(user);
