@@ -52,6 +52,10 @@ module.exports = {
     let result =  await jobSeekerService.getPendingGigs({ employeeId: user.id});
     console.log({result})
     return result;
-  }  
+  },
+  getGetJobSeeker: async (parent, {id}, { models}) => {
+        const jobSeekerService = new JobSeekerSerivce(models);
+        return await jobSeekerService.jobSeeker({ user:{id }});
+  }
 
 }

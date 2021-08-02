@@ -19,6 +19,7 @@ module.exports = gql`
     hasNotifications:[Notification!]
     readNotifications:[Notification!]
     unReadNotifications:[Notification!]
+    recentEmployees:[Employer!]
     pendingGigs:[Gig!]
     completeGigs:[Gig!]
     createdAt:DateTime
@@ -127,6 +128,7 @@ type Profession{
   #Queries
   type Query{
       jobSeeker:JobSeeker
+      getGetJobSeeker(id:Int!):JobSeeker
       employer:Employer
       employers:[Employer!]
       jobSeekers:[JobSeeker!]
