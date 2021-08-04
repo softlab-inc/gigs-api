@@ -158,7 +158,6 @@ class JobSeekerSerivce{
   }
  
 
-
   async uploadProfileImage({ user, profileImage }) {
 
   if (!user) {
