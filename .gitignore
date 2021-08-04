@@ -69,3 +69,4 @@ npm-debug.*
 package-lock.json
 yarn.lock
 /test
+yarn-error.log
