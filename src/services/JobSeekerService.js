@@ -3,7 +3,6 @@ const storeFS = require('../utils/storeFS');
 const AWS3Service = require('./AWS3Service');
 
 
-
 const Sequelize = require('sequelize');
 
 const Op = Sequelize.Op;

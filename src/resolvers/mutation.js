@@ -186,7 +186,7 @@ module.exports = {
   employerUpdatePassword: async (parent, { id, password, confirmPassword }, { models, cryptr }) => {
       const employerService = new EmployerService(models);
       return await  employerService.updatePassword({id, password, confirmPassword,cryptr})
-  }
+  },
 
 }
  

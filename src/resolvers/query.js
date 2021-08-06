@@ -56,6 +56,6 @@ module.exports = {
   getGetJobSeeker: async (parent, {id}, { models}) => {
         const jobSeekerService = new JobSeekerSerivce(models);
         return await jobSeekerService.jobSeeker({ user:{id }});
-  }
+  },
 
 }
