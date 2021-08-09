@@ -60,7 +60,8 @@ const app = express();
 //Applying Apollo  Graph GL middleware and setting the path
 server.applyMiddleware({
   app, path: '/gigs-app/api/v1',
-  cors: {origin: true,credentials: true},
+  cors: {origin: true,credentials: true}
+  ,
   bodyParserConfig: {
     limit:"50mb"
   }
