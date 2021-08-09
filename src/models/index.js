@@ -3,7 +3,7 @@
 const Sequelize = require('sequelize');
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
-console.log({config})
+
 const {initModels} = require('./init-models');
 
 let sequelize;
