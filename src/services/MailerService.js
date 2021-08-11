@@ -27,7 +27,7 @@ class MailerService{
         <body>
         <h5> <i>Click</i> the  link in the description to updated your password </h5>
         
-        <a href="http://page-not-created/?id=${id}&isEmployer=${isEmployer}">This link will redirect you to a web page where you are required to update your password from</a>
+        <a href="https://gigs-app-forgot-password.herokuapp.com/?id=${id}&isEmployer=${isEmployer}">This link will redirect you to a web page where you are required to update your password from</a>
       </body>
     </html>
       `, // html body
