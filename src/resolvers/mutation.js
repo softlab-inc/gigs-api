@@ -3,13 +3,13 @@ const jwt = require('jsonwebtoken'); //json web token module
 const { JobSeekerSerivce,EmployerService,GigService,NotificationService,MailerService,AWS3Service} = require('../services');
 
 module.exports = {
-  createJobSeeker:async (parent,{input},{models}) => {
+  createJobSeeker:async (_,{input},{models}) => {
 
       const jobSeekerSerivce = new JobSeekerSerivce(models);
       const JobSeeker = await jobSeekerSerivce.createJobSeeker({ input });
       return jwt.sign({id: JobSeeker.id},process.env.JWT_SECRETE);                                              
   },
-  createProfession:async (parent,{input},{models}) => {
+  createProfession:async (_,{input},{models}) => {
       //Mapping the list of names to {name:value}
       const  nameArr =   input.names.map(name => ({name}));
 
@@ -21,7 +21,7 @@ module.exports = {
       }
   
   },  
-  signInJobSeeker:async (parent,{input},{models}) => {
+  signInJobSeeker:async (_,{input},{models}) => {
 
     const jobSeekerService = new JobSeekerSerivce(models);
       
@@ -30,7 +30,7 @@ module.exports = {
       //signing the user and returning the json web token
       return jwt.sign({id:user.id},process.env.JWT_SECRETE);
   },
-  userUpdateStatus: async (parent, { status }, { models, user,pubsub }) => {
+  userUpdateStatus: async (_, { status }, { models, user,pubsub }) => {
     
     const jobSeekerService =new JobSeekerSerivce(models);
     
@@ -39,14 +39,14 @@ module.exports = {
     return newUser; 
 
   },
-  jobSeekerUploadProfileImage: async (parent,{profileImage},{models,user})=> {
+  jobSeekerUploadProfileImage: async (_,{profileImage},{models,user})=> {
     const jobSeekerService = new JobSeekerSerivce(models);
 
     const newUser = jobSeekerService.uploadProfileImage({ user, profileImage });
 
     return newUser;
   },
-  employerUploadProfileImage: async (parent,{profileImage},{models,user})=> {
+  employerUploadProfileImage: async (_,{profileImage},{models,user})=> {
      const employerService = new EmployerService(models);
 
     const newUser = employerService.uploadProfileImage({ user, profileImage });
@@ -54,7 +54,7 @@ module.exports = {
     return newUser;
   },
 
-  createEmployer: async (parent, { input }, { models }) => {
+  createEmployer: async (_, { input }, { models }) => {
     
     const employerService = new EmployerService(models);
 
@@ -62,14 +62,14 @@ module.exports = {
 
     return jwt.sign({ id: Employer.id }, process.env.JWT_SECRETE);
   },
-  signInEmployer: async (parent, { input }, { models }) => {
+  signInEmployer: async (_, { input }, { models }) => {
     const employerService = new EmployerService(models);
 
     const Employer = await employerService.signInEmployer({ input });
 
     return jwt.sign({ id: Employer.id }, process.env.JWT_SECRETE);
   },
-  employerCreateGig: async (parent, { input }, { models, user, pubsub }) => {
+  employerCreateGig: async (_, { input }, { models, user, pubsub }) => {
     
     const employerService = new EmployerService(models);
 
@@ -91,23 +91,23 @@ module.exports = {
    
     return gig; 
   },
-  jobSeekerUpdatePushNotification: async (parent, {pushToken}, {models,user}) => {
+  jobSeekerUpdatePushNotification: async (_, {pushToken}, {models,user}) => {
     const jobSeekerService =new JobSeekerSerivce(models);
     return await jobSeekerService.updatePushToken({ user, pushToken });
   },
-  employerUpdatePushNotification: async (parent, {pushToken}, {models,user}) => {
+  employerUpdatePushNotification: async (_, {pushToken}, {models,user}) => {
     const employerService = new EmployerService(models);
     return await employerService.updatePushToken({ user, pushToken });
   },
-  jobSeekerSendMessage: async (parent, { content, employerId }, { models, user, pubsub }) => {
+  jobSeekerSendMessage: async (_, { content, employerId }, { models, user, pubsub }) => {
     const jobSeekerService = new JobSeekerSerivce(models);
      return await jobSeekerService.jobSeekerSendMessage({content,employerId,user,pubsub})
   },
-  employerSendMessage: async (parent, { content, employeeId }, { models, user, pubsub }) => {
+  employerSendMessage: async (_, { content, employeeId }, { models, user, pubsub }) => {
      const employerService = new EmployerService(models);
      return await employerService.employerSendMessage({content, employeeId, user, pubsub});
   },
-  sendEmail: async (parent, { email,isEmployer }, {models,cryptr}) => {
+  sendEmail: async (_, { email,isEmployer }, {models,cryptr}) => {
     const result = new MailerService();
     const employerService = new EmployerService(models);
     const jobSeekerService = new JobSeekerSerivce(models);
@@ -122,7 +122,7 @@ module.exports = {
 
     return  await result.sendMail({email,id,isEmployer}); 
   },
-  gigAccepted: async (parent, args, { models,user,pubsub }) => {
+  gigAccepted: async (_, args, { models,user,pubsub }) => {
     const jobSeekerService = new JobSeekerSerivce(models);
     const accepted = await jobSeekerService.acceptGig({ args, user, pubsub });
     console.log({ accepted });
@@ -135,26 +135,26 @@ module.exports = {
     pubsub.publish('onAcceptGig', {onAcceptGig:accepted});
     return accepted;
   },
-  uploadFiletoS3: async (parent, { file }, context) => {
+  uploadFiletoS3: async (_, { file }, context) => {
     const result = await AWS3Service.handleFileUpload(file);
     const { Location } = result;
     return Location;    
   },
-  jobSeekerUpdateData: async (parent, { phone, bio }, { models, user }) => {
+  jobSeekerUpdateData: async (_, { phone, bio }, { models, user }) => {
     const jobSeekerService = new JobSeekerSerivce(models);
     const newUser = await jobSeekerService.jobSeekerUpdateData({ phone, bio,user });
     return newUser; 
   },
-  employerUpdateData: async (parent, { phone}, { models, user }) => {
+  employerUpdateData: async (_, { phone}, { models, user }) => {
    const employerService = new EmployerService(models);
     const newUser = await employerService.employerUpdateData({ phone,user });
     return newUser;   
   },
-  testSubScription: async (parent, { token }, { models, user, pubsub }) => {
+  testSubScription: async (_, { token }, { models, user, pubsub }) => {
     pubsub.publish('onTestSubscription', { onTestSubscription: token });
     return token;
   }, 
-   employerHireJobSeeker: async (parent, { gigId, employeeId }, { models, pubsub, user }) => {
+   employerHireJobSeeker: async (_, { gigId, employeeId }, { models, pubsub, user }) => {
       const employerService = new EmployerService(models);
       const notificationService = new NotificationService();
       const employeeAndGig = await employerService.employerHire({ gigId, employeeId, user });
@@ -165,25 +165,25 @@ module.exports = {
       pubsub.publish('onJobSeekerHired', { onJobSeekerHired: { ...employeeAndGig } });
       return employeeAndGig;
   },
-  employeeUpdateGigStatus: async (parent, { gigId, status }, { models, user })=> {
+  employeeUpdateGigStatus: async (_, { gigId, status }, { models, user })=> {
       const jobSeekerService = new JobSeekerSerivce(models);
       return await jobSeekerService.updateGigStatus({ user, gigId, status });
   },
-  employerUpdateReadNotifications: async (parent, args, { user, models }) => {
+  employerUpdateReadNotifications: async (_, args, { user, models }) => {
       const employerService = new EmployerService(models);
       await employerService.updateReadNotifications({ user });
       return 'Notifications update successfully...';
   },
-  jobSeekerUpdateReadNotifications: async (parent, args, { user, models }) => {
+  jobSeekerUpdateReadNotifications: async (_, args, { user, models }) => {
       const jobSeekerService = new JobSeekerSerivce(models);
       await jobSeekerService.updateReadNotifications({ user });
       return 'Notifications update successfully...';
   },
-  jobSeekerUpdatePassword: async (parent, { id ,password,confirmPassword}, { models,cryptr }) => {
+  jobSeekerUpdatePassword: async (_, { id ,password,confirmPassword}, { models,cryptr }) => {
       const jobSeekerService = new JobSeekerSerivce(models);
       return await jobSeekerService.updatePassword({ id, password, confirmPassword,cryptr  });
   },
-  employerUpdatePassword: async (parent, { id, password, confirmPassword }, { models, cryptr }) => {
+  employerUpdatePassword: async (_, { id, password, confirmPassword }, { models, cryptr }) => {
       const employerService = new EmployerService(models);
       return await  employerService.updatePassword({id, password, confirmPassword,cryptr})
   },

@@ -1,12 +1,12 @@
 const { JobSeekerSerivce,EmployerService} = require('../services');
 
 module.exports = {
-   jobSeeker: async (_, _, { models, user }) => {
+   jobSeeker: async (_, __, { models, user }) => {
      const jobSeekerService = new JobSeekerSerivce(models);
     return await jobSeekerService.jobSeeker({ user });
   },
-  professions: async (_, _, { models }) => await models.profession.findAll(),
-  employer: async (_, _, { models, user }) => {
+  professions: async (_, __, { models }) => await models.profession.findAll(),
+  employer: async (_, __, { models, user }) => {
     const employerService = new EmployerService(models);
     return await employerService.employer({ user });
   },
@@ -20,33 +20,33 @@ module.exports = {
     let chats = await jobSeekerService.getChats({ user, employerId });
     return chats.map(data => ({ _id: data.id, text: data.content, ...data.dataValues }));
   },
-  gig: async (_, _, { models, user }) => {
+  gig: async (_, __, { models, user }) => {
     const employerService = new EmployerService(models);
     return await employerService.getCreatedGig({ user });
   },
-  createdGigs: async (_, _, { models, user }) => {
+  createdGigs: async (_, __, { models, user }) => {
     const employerService = new EmployerService(models);
     return await employerService.getCreatedGigs({ user });
   },
   getGig: async (_,{id}, { models,user}) => models.gig.findOne({where:id}) ,                                            //hasAccepted -> wasHired for job 
-  employerNotifications:async(_,_, { models, user }) => await models.accepted.findAll({ where: { employerId: user.id,hasAccepted:0 },order: [['createdAt', 'DESC']],limit: 20,}),
-  jobSeekerNotifications:async(_,_, { models,user}) => {
+  employerNotifications:async(_,__, { models, user }) => await models.accepted.findAll({ where: { employerId: user.id,hasAccepted:0 },order: [['createdAt', 'DESC']],limit: 20,}),
+  jobSeekerNotifications:async(_,__, { models,user}) => {
     const jobSeekerService = new JobSeekerSerivce(models);
     return await jobSeekerService.getAllNotifications({ user });
   },
-  recentHires: async (_,_, { models, user }) => {
+  recentHires: async (_,__, { models, user }) => {
      const employerService = new EmployerService(models);
      return await employerService.getRecentHires({user})
   },
-  employerMessages: async (_,_, { models, user }) => {
+  employerMessages: async (_,__, { models, user }) => {
      const employerService = new EmployerService(models);
      return await employerService.getMessageSenders({user})
   },
-  jobSeekerMessages: async (_, _, { models, user }) => {
+  jobSeekerMessages: async (_, __, { models, user }) => {
     const jobSeekerService = new JobSeekerSerivce(models);
     return await jobSeekerService.getMessageSenders({ user });
   },
-  pendingGigs: async (_, _, { models,user}) => {
+  pendingGigs: async (_, __, { models,user}) => {
     const jobSeekerService = new JobSeekerSerivce(models);
     let result =  await jobSeekerService.getPendingGigs({ employeeId: user.id});
     console.log({result})
