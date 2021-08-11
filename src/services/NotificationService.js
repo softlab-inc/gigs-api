@@ -57,7 +57,7 @@ class NotificationService{
       to: hired.pushToken,
       sound: 'default',
       title: "You are hired",
-      body: `Dear ${hired.fullName} you have been hired for ${hired.name} role`,
+      body: `Dear ${hired.fullName} you have been hired for ${hired.name} GiG`,
       data: { gigId: hired.gigId,toScreen:'Gigs'},
       priority: 'high',
       });
