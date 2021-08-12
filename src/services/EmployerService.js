@@ -214,7 +214,7 @@ class EmployerService{
     return await this.models.employeeGig.findOne({ where: { employeeId, gigId } });
   }
 
-  async employerHire({ gigId, employeeId,user }){
+  async employerHire({ gigId, employeeId,user }){ 
     this.isAuthenticatic(user);
 
     const { employee:employeeModel,gig:gigModel,employeeGig } = this.models;
