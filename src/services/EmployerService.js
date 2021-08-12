@@ -210,7 +210,7 @@ class EmployerService{
   }
 
   async isJobSeekerHiredForJob({ employeeId, gigId }) {
-    await this.models.accepted.update({ hasAccepted: 1 }, { where: { employerId, gigId } });
+    await this.models.accepted.update({ hasAccepted: 1 }, { where: { employeeId, gigId } });
     return await this.models.employeeGig.findOne({ where: { employeeId, gigId } });
   }
 
