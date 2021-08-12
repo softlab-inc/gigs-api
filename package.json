@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@graphql-modules/core": "^0.7.17",
+    "@sendgrid/mail": "^7.4.6",
     "apollo-server-express": "^2.19.1",
     "aws-sdk": "^2.922.0",
     "bcrypt": "5.0.0",
