@@ -4,4 +4,4 @@ chats:async ({employeeId,employerId},args, { models,user }) => {
   return chats.map(data => ({ _id: data.id, text: data.content, ...data.dataValues }));
 }, 
 
-};
+}; 
