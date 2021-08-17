@@ -8,7 +8,8 @@
     "dev": "nodemon ./src/bin/www",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\""
+    "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\"",
+    "db:makemigrations": "./node_modules/sequelize-auto-migrations/bin/makemigration.js"
   },
   "dependencies": {
     "@graphql-modules/core": "^0.7.17",
@@ -37,6 +38,7 @@
     "mysql2": "^2.2.5",
     "nodemon": "^2.0.7",
     "sequelize": "^6.3.5",
+    "sequelize-auto-migrations": "github:scimonster/sequelize-auto-migrations#a063aa6535a3f580623581bf866cef2d609531ba",
     "subscriptions-transport-ws": "^0.9.18",
     "uuid": "^8.3.2",
     "uuidv4": "^6.2.8"
