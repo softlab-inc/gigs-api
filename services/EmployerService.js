@@ -23,8 +23,8 @@ class EmployerService {
   async createEmployer(content) {
     let { fullName, email, phone, password, companyName, license } =
       content.input;
-      
-     console.log({fullName, email, phone, password, companyName, license })
+
+    console.log({ fullName, email, phone, password, companyName, license });
 
     email = email.trim().toLowerCase();
 
@@ -36,8 +36,8 @@ class EmployerService {
     let licenseImageUri = "";
 
     const user = await employer.findOne({ where: { email } });
-    
-    console.log({user})
+
+    console.log({ user });
 
     if (!user) {
       const result = await AWS3Service.handleFileUpload(license);
@@ -56,9 +56,9 @@ class EmployerService {
       password: hashed,
       licenseImageUri,
     });
-    
-    console.log(Employer)
-    
+
+    console.log(Employer);
+
     return Employer;
   }
 

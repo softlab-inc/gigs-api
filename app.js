@@ -9,7 +9,7 @@ const helmet = require("helmet");
 const { ApolloServer } = require("apollo-server-express");
 const { PubSub } = require("graphql-subscriptions");
 require("dotenv").config();
-const getUser = require("../src/utils/getUser");
+const getUser = require("./utils/getUser");
 const Cryptr = require("cryptr");
 // updating the maximum number from 10 - 100
 require("events").EventEmitter.prototype._maxListeners = 100;
