@@ -77,7 +77,7 @@ function initModels(sequelize) {
     profession,
     rating,
     reviews,
-    sequelize
+    sequelize,
   };
 }
 module.exports = initModels;
