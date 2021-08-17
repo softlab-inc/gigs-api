@@ -6,7 +6,7 @@ const {
   GigService,
   NotificationService,
   MailerService,
-  AWS3Service
+  AWS3Service,
 } = require("../services");
 
 module.exports = {
@@ -40,7 +40,7 @@ module.exports = {
     const newUser = await jobSeekerService.userUpdateStatus({
       user,
       pubsub,
-      status
+      status,
     });
 
     return newUser;
@@ -88,7 +88,7 @@ module.exports = {
     const gig = await employerService.employerCreateGig({
       user,
       input,
-      pubsub
+      pubsub,
     });
     console.log({ gig });
     const notifiedEmployees = await gigService.notifyAllJobSeekers(gig);
@@ -131,7 +131,7 @@ module.exports = {
       content,
       employerId,
       user,
-      pubsub
+      pubsub,
     });
   },
   employerSendMessage: async (
@@ -144,7 +144,7 @@ module.exports = {
       content,
       employeeId,
       user,
-      pubsub
+      pubsub,
     });
   },
   sendEmail: async (_, { email, isEmployer }, { models, cryptr }) => {
@@ -169,7 +169,7 @@ module.exports = {
     console.log([{ ...accepted.dataValues }]);
     const notificationService = new NotificationService();
     const messages = notificationService.generateAcceptedMessages([
-      { ...accepted.dataValues }
+      { ...accepted.dataValues },
     ]);
     console.log({ messages });
     const tickets = await notificationService.createChunckOfNotifications(
@@ -189,7 +189,7 @@ module.exports = {
     const newUser = await jobSeekerService.jobSeekerUpdateData({
       phone,
       bio,
-      user
+      user,
     });
     return newUser;
   },
@@ -212,10 +212,10 @@ module.exports = {
     const employeeAndGig = await employerService.employerHire({
       gigId,
       employeeId,
-      user
+      user,
     });
     const messages = notificationService.generateHiredMessages([
-      { ...employeeAndGig }
+      { ...employeeAndGig },
     ]);
     console.log({ messages });
     const tickets = await notificationService.createChunckOfNotifications(
@@ -223,7 +223,7 @@ module.exports = {
     );
     console.log(tickets);
     pubsub.publish("onJobSeekerHired", {
-      onJobSeekerHired: { ...employeeAndGig }
+      onJobSeekerHired: { ...employeeAndGig },
     });
     return employeeAndGig;
   },
@@ -251,7 +251,7 @@ module.exports = {
       id,
       password,
       confirmPassword,
-      cryptr
+      cryptr,
     });
   },
   employerUpdatePassword: async (
@@ -264,7 +264,7 @@ module.exports = {
       id,
       password,
       confirmPassword,
-      cryptr
+      cryptr,
     });
-  }
+  },
 };

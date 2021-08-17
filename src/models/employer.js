@@ -8,15 +8,15 @@ module.exports = function (sequelize, DataTypes) {
         autoIncrement: true,
         type: DataTypes.INTEGER,
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
       },
       fullName: {
         type: DataTypes.STRING(60),
-        allowNull: true
+        allowNull: true,
       },
       companyName: {
         type: DataTypes.STRING(30),
-        allowNull: true
+        allowNull: true,
       },
       email: {
         type: DataTypes.STRING(50),
@@ -24,41 +24,41 @@ module.exports = function (sequelize, DataTypes) {
         unique: {
           args: true,
           msg: "Oops. Looks like you already have an account with this email address. Please try to login.",
-          fields: [sequelize.fn("lower", sequelize.col("email"))]
+          fields: [sequelize.fn("lower", sequelize.col("email"))],
         },
         validate: {
           isEmail: {
             args: true,
-            msg: "The email you entered is invalid or is already in our system."
-          }
-        }
+            msg: "The email you entered is invalid or is already in our system.",
+          },
+        },
       },
       phone: {
         type: DataTypes.STRING(15),
         allowNull: true,
-        unique: "phone"
+        unique: "phone",
       },
       password: {
         type: DataTypes.TEXT,
-        allowNull: true
+        allowNull: true,
       },
       licenseImageUri: {
         type: DataTypes.TEXT,
-        allowNull: true
+        allowNull: true,
       },
       profileImagUri: {
         type: DataTypes.TEXT,
-        allowNull: true
+        allowNull: true,
       },
       status: {
         type: DataTypes.INTEGER,
         allowNull: true,
-        defaultValue: 0
+        defaultValue: 0,
       },
       pushToken: {
         type: DataTypes.TEXT,
-        allowNull: true
-      }
+        allowNull: true,
+      },
     },
     {
       sequelize,
@@ -69,21 +69,21 @@ module.exports = function (sequelize, DataTypes) {
           name: "PRIMARY",
           unique: true,
           using: "BTREE",
-          fields: [{ name: "id" }]
+          fields: [{ name: "id" }],
         },
         {
           name: "phone",
           unique: true,
           using: "BTREE",
-          fields: [{ name: "phone" }]
+          fields: [{ name: "phone" }],
         },
         {
           name: "email",
           unique: true,
           using: "BTREE",
-          fields: [{ name: "email" }]
-        }
-      ]
+          fields: [{ name: "email" }],
+        },
+      ],
     }
   );
 };

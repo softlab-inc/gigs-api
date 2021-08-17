@@ -13,7 +13,7 @@ const storeFS = async ({ stream, filename }, dirIndex) => {
     "../uploads/profile-images/",
     "../uploads/id-images/",
     "../uploads/document-images/",
-    "../uploads/license-images/"
+    "../uploads/license-images/",
   ];
   const uploadDir = dirs[dirIndex];
   filename = `${Date.now()}-${filename.trim().toLowerCase()}`;

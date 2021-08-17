@@ -7,7 +7,7 @@ module.exports = {
     return {
       _id: name.length + from,
       name: name,
-      avatar
+      avatar,
     };
-  }
+  },
 };

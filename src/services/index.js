@@ -11,5 +11,5 @@ module.exports = {
   GigService,
   NotificationService,
   MailerService,
-  AWS3Service
+  AWS3Service,
 };

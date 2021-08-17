@@ -46,8 +46,8 @@ const server = new ApolloServer({
     },
     onDisconnect: (webSocket, context) => {
       console.log("Client disconnected");
-    }
-  }
+    },
+  },
 });
 
 const app = express();
@@ -58,8 +58,8 @@ server.applyMiddleware({
   path: "/gigs-app/api/v1",
   cors: { origin: true, credentials: true },
   bodyParserConfig: {
-    limit: "50mb"
-  }
+    limit: "50mb",
+  },
 });
 
 /**
@@ -94,8 +94,8 @@ app.use((err, req, res, next) => {
   res.json({
     error: {
       code: err.status || 400,
-      message: err
-    }
+      message: err,
+    },
   });
   next(res);
 });

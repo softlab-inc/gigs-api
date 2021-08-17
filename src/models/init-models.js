@@ -14,7 +14,7 @@ const _profession = require("./profession");
 const _rating = require("./rating");
 const _reviews = require("./reviews");
 
-function initModels (sequelize) {
+function initModels(sequelize) {
   const accepted = _accepted(sequelize, DataTypes);
   const chat = _chat(sequelize, DataTypes);
   const district = _district(sequelize, DataTypes);
@@ -50,14 +50,14 @@ function initModels (sequelize) {
   employee.belongsToMany(profession, {
     through: employeeProfession,
     foreignKey: "employeeId",
-    otherKey: "professionId"
+    otherKey: "professionId",
   });
   profession.hasMany(employeeProfession, { foreignKey: "professionId" });
   employeeProfession.belongsTo(employee, { foreignKey: "employeeId" });
   profession.belongsToMany(employee, {
     through: employeeProfession,
     foreignKey: "professionId",
-    otherKey: "employeeId"
+    otherKey: "employeeId",
   });
   employee.hasMany(employeeProfession, { foreignKey: "employeeId" });
   gig.belongsTo(employer, { foreignKey: "employerId" });
@@ -85,7 +85,7 @@ function initModels (sequelize) {
     notified,
     profession,
     rating,
-    reviews
+    reviews,
   };
 }
 module.exports = initModels;

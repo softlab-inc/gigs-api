@@ -24,7 +24,7 @@ module.exports = {
   Employer,
   Accepted,
   Messages,
-  DateTime: GraphQLDateTime
+  DateTime: GraphQLDateTime,
 };
 
 // [

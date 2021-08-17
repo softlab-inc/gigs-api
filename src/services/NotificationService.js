@@ -10,7 +10,7 @@ class NotificationService {
   // Align all notification into one chunck and to be sent and notification with similar content shall be compressed
   // send the chunk at once
 
-  generateAcceptedMessages (data) {
+  generateAcceptedMessages(data) {
     const messages = [];
 
     for (const accepted of data) {
@@ -29,14 +29,14 @@ class NotificationService {
         title: "GiG Accepted",
         body: `${accepted.fullName} has accepted to the GiG you created`,
         data: { gigId: accepted.gigId, toScreen: "Notifications" },
-        priority: "high"
+        priority: "high",
       });
     }
 
     return messages;
   }
 
-  generateHiredMessages (data) {
+  generateHiredMessages(data) {
     const messages = [];
 
     for (const hired of data) {
@@ -55,21 +55,23 @@ class NotificationService {
         title: "You are hired",
         body: `Dear ${hired.fullName} you have been hired for ${hired.name} GiG`,
         data: { gigId: hired.gigId, toScreen: "Gigs" },
-        priority: "high"
+        priority: "high",
       });
     }
 
     return messages;
   }
 
-  generateMessages (employees) {
+  generateMessages(employees) {
     const messages = [];
 
     for (const employee of employees) {
       if (employee.pushToken === null) continue;
 
       if (!Expo.isExpoPushToken(employee.pushToken)) {
-        console.error(`Push token ${employee.pushToken} is not a valid Expo push token`);
+        console.error(
+          `Push token ${employee.pushToken} is not a valid Expo push token`
+        );
         continue;
       }
 
@@ -79,14 +81,14 @@ class NotificationService {
         title: "GiG created",
         body: `${employee.name}  -   ${employee.details}`,
         data: { gigId: employee.gigId, toScreen: "Notifications" },
-        priority: "high"
+        priority: "high",
       });
     }
 
     return messages;
   }
 
-  async createChunckOfNotifications (messages) {
+  async createChunckOfNotifications(messages) {
     const chunks = expo.chunkPushNotifications(messages);
     const tickets = [];
     console.log({ chunks });

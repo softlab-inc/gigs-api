@@ -6,7 +6,7 @@ module.exports = {
   onStatusChange: {
     subscribe: (_, __, { pubsub }) => {
       return pubsub.asyncIterator(["onStatusChange"]);
-    }
+    },
   },
   onGigCreated: {
     /**
@@ -22,11 +22,11 @@ module.exports = {
         const user = getUser(token);
         const notified = await gigService.notifyJobSeeker({
           professionId,
-          employeeId: user.id
+          employeeId: user.id,
         });
         return notified;
       }
-    )
+    ),
   },
   onJobSeekerSentMessage: {
     subscribe: withFilter(
@@ -36,7 +36,7 @@ module.exports = {
         const { id } = getUser(token);
         return id === employerId;
       }
-    )
+    ),
   },
   onEmployerSentMessage: {
     /**
@@ -51,7 +51,7 @@ module.exports = {
         const { id } = getUser(token);
         return employeeId === id;
       }
-    )
+    ),
   },
   onAcceptGig: {
     subscribe: withFilter(
@@ -61,7 +61,7 @@ module.exports = {
         const { id } = getUser(token);
         return id === employerId;
       }
-    )
+    ),
   },
   onJobSeekerHired: {
     subscribe: withFilter(
@@ -71,7 +71,7 @@ module.exports = {
         const { id } = getUser(token);
         return id === employeeId;
       }
-    )
+    ),
   },
   onTestSubscription: {
     subscribe: withFilter(
@@ -79,6 +79,6 @@ module.exports = {
       async ({ onTestSubscription }, { token }, { models }) => {
         return onTestSubscription === token;
       }
-    )
-  }
+    ),
+  },
 };

@@ -1,6 +1,4 @@
-const {
-  ForbiddenError
-} = require("apollo-server-express");
+const { ForbiddenError } = require("apollo-server-express");
 
 const MAX_UPLOAD_FILE_SIZE = 1048576;
 
@@ -14,7 +12,7 @@ AWS.config.update({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   secretAccessKey: process.env.AWS_ACCESS_KEY_SECRET,
   region: process.env.AWS_S3_REGION,
-  bucket: process.env.AWS_S3_BUCKET
+  bucket: process.env.AWS_S3_BUCKET,
 });
 
 const s3 = new AWS.S3({ region: process.env.AWS_S3_REGION });
@@ -26,8 +24,8 @@ const s3DefaultParams = {
   Bucket: process.env.AWS_S3_BUCKET,
   Conditions: [
     ["content-length-range", 0, 1024000], // 1 Mb
-    { acl: "public-read" }
-  ]
+    { acl: "public-read" },
+  ],
 };
 
 // the actual upload happens here
@@ -49,7 +47,7 @@ const handleFileUpload = async (file) => {
       {
         ...s3DefaultParams,
         Body: createReadStream(),
-        Key: `${key}/${filename}`
+        Key: `${key}/${filename}`,
       },
       (err, data) => {
         if (err) {

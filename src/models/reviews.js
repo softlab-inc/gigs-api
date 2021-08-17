@@ -8,24 +8,24 @@ module.exports = function (sequelize, DataTypes) {
         autoIncrement: true,
         type: DataTypes.INTEGER,
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
       },
       status: {
         type: DataTypes.INTEGER,
-        allowNull: true
+        allowNull: true,
       },
       message: {
         type: DataTypes.TEXT,
-        allowNull: true
+        allowNull: true,
       },
       ratingId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
           model: "rating",
-          key: "id"
-        }
-      }
+          key: "id",
+        },
+      },
     },
     {
       sequelize,
@@ -36,14 +36,14 @@ module.exports = function (sequelize, DataTypes) {
           name: "PRIMARY",
           unique: true,
           using: "BTREE",
-          fields: [{ name: "id" }]
+          fields: [{ name: "id" }],
         },
         {
           name: "FKreviews610743",
           using: "BTREE",
-          fields: [{ name: "ratingId" }]
-        }
-      ]
+          fields: [{ name: "ratingId" }],
+        },
+      ],
     }
   );
 };

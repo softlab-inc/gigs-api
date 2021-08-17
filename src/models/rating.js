@@ -8,16 +8,16 @@ module.exports = function (sequelize, DataTypes) {
         autoIncrement: true,
         type: DataTypes.INTEGER,
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
       },
       value: {
         type: DataTypes.INTEGER,
-        allowNull: true
+        allowNull: true,
       },
       tag: {
         type: DataTypes.STRING(15),
-        allowNull: true
-      }
+        allowNull: true,
+      },
     },
     {
       sequelize,
@@ -28,9 +28,9 @@ module.exports = function (sequelize, DataTypes) {
           name: "PRIMARY",
           unique: true,
           using: "BTREE",
-          fields: [{ name: "id" }]
-        }
-      ]
+          fields: [{ name: "id" }],
+        },
+      ],
     }
   );
 };

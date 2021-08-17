@@ -6,11 +6,11 @@ module.exports = {
   assignedTo: async ({ id }, args, { models }) => {
     const data = await models.employeeGig.findAll({
       where: { gigId: id },
-      include: [models.employee]
+      include: [models.employee],
     });
     return data.map((data) => ({
       ...data.get("employee").dataValues,
-      status: data.status
+      status: data.status,
     })); // update employee onLine status with gig progress status
-  }
+  },
 };

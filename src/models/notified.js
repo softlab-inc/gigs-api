@@ -8,46 +8,46 @@ module.exports = function (sequelize, DataTypes) {
         autoIncrement: true,
         type: DataTypes.INTEGER,
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
       },
       gigId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
           model: "gig",
-          key: "id"
-        }
+          key: "id",
+        },
       },
       employeeId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
           model: "employee",
-          key: "id"
-        }
+          key: "id",
+        },
       },
       status: {
         type: DataTypes.INTEGER,
         allowNull: true,
-        defaultValue: 0
+        defaultValue: 0,
       },
       pushToken: {
         type: DataTypes.TEXT,
-        allowNull: true
+        allowNull: true,
       },
       name: {
         type: DataTypes.TEXT,
-        allowNull: true
+        allowNull: true,
       },
       details: {
         type: DataTypes.TEXT,
-        allowNull: true
+        allowNull: true,
       },
       isRead: {
         type: DataTypes.INTEGER,
         allowNull: true,
-        defaultValue: 0
-      }
+        defaultValue: 0,
+      },
     },
     {
       sequelize,
@@ -58,19 +58,19 @@ module.exports = function (sequelize, DataTypes) {
           name: "PRIMARY",
           unique: true,
           using: "BTREE",
-          fields: [{ name: "id" }]
+          fields: [{ name: "id" }],
         },
         {
           name: "FKnotified822795",
           using: "BTREE",
-          fields: [{ name: "gigId" }]
+          fields: [{ name: "gigId" }],
         },
         {
           name: "FKnotified98938",
           using: "BTREE",
-          fields: [{ name: "employeeId" }]
-        }
-      ]
+          fields: [{ name: "employeeId" }],
+        },
+      ],
     }
   );
 };

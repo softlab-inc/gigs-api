@@ -6,55 +6,53 @@ const Sequelize = require("sequelize");
 
 const Op = Sequelize.Op;
 
-const {
-  AuthenticationError
-} = require("apollo-server-express");
+const { AuthenticationError } = require("apollo-server-express");
 
 class JobSeekerSerivce {
-  constructor (models) {
+  constructor(models) {
     this.models = models;
   }
 
-  async getAllNotifications ({ user }) {
+  async getAllNotifications({ user }) {
     this.isAuthenticatic(user);
     return await this.models.notified.findAll({
-      where: { employeeId: user.id }
+      where: { employeeId: user.id },
     });
   }
 
-  isAuthenticatic (user) {
+  isAuthenticatic(user) {
     if (!user) {
       throw new AuthenticationError("Account not found! Please register");
     }
   }
 
-  async getNotifications ({ employeeId }) {
+  async getNotifications({ employeeId }) {
     const { gig, notified } = this.models;
     const data = await notified.findAll({
       where: { employeeId },
       include: [gig],
       order: [["createdAt", "DESC"]],
-      limit: 20
+      limit: 20,
     });
     return data.map((data) => ({
       ...data.get("gig").dataValues,
-      ...data.dataValues
+      ...data.dataValues,
     }));
   }
 
-  async getReadNotifications ({ employeeId }) {
+  async getReadNotifications({ employeeId }) {
     return await this.models.notified.findAll({
-      where: { employeeId, isRead: 1 }
+      where: { employeeId, isRead: 1 },
     });
   }
 
-  async getUnReadNotifications ({ employeeId }) {
+  async getUnReadNotifications({ employeeId }) {
     return await this.models.notified.findAll({
-      where: { employeeId, isRead: 0 }
+      where: { employeeId, isRead: 0 },
     });
   }
 
-  async createJobSeeker (content) {
+  async createJobSeeker(content) {
     let {
       fullName,
       email,
@@ -63,7 +61,7 @@ class JobSeekerSerivce {
       document,
       nationalId,
       professionId,
-      other
+      other,
     } = content.input;
 
     email = email.trim().toLowerCase();
@@ -97,7 +95,7 @@ class JobSeekerSerivce {
       phone,
       password: hashed,
       documentImageUri,
-      nationalIdImageUri
+      nationalIdImageUri,
     });
 
     await this.attachUserToProfile(
@@ -111,7 +109,7 @@ class JobSeekerSerivce {
     return JobSeeker;
   }
 
-  async attachUserToProfile (
+  async attachUserToProfile(
     other,
     profession,
     employeeProfession,
@@ -122,17 +120,17 @@ class JobSeekerSerivce {
       const newProfession = await profession.create({ name: other });
       await employeeProfession.create({
         professionId: newProfession.id,
-        employeeId: JobSeeker.id
+        employeeId: JobSeeker.id,
       });
     } else {
       await employeeProfession.create({
         professionId,
-        employeeId: JobSeeker.id
+        employeeId: JobSeeker.id,
       });
     }
   }
 
-  isPhoneNumberUsed (user2) {
+  isPhoneNumberUsed(user2) {
     if (user2) {
       throw new AuthenticationError(
         "Phone number has already been used, try again another!"
@@ -140,7 +138,7 @@ class JobSeekerSerivce {
     }
   }
 
-  isEmailUsed (user) {
+  isEmailUsed(user) {
     console.log(AuthenticationError);
     if (user) {
       throw new AuthenticationError(
@@ -149,16 +147,16 @@ class JobSeekerSerivce {
     }
   }
 
-  async getProfessions ({ employeeId }) {
+  async getProfessions({ employeeId }) {
     const { employeeProfession, profession } = this.models;
     const data = await employeeProfession.findAll({
       where: { employeeId },
-      include: [profession]
+      include: [profession],
     });
     return data.map((data) => data.get("profession"));
   }
 
-  async signInJobSeeker (content) {
+  async signInJobSeeker(content) {
     let { email, password } = content.input;
     email = email.trim().toLowerCase();
     const user = await this.models.employee.findOne({ where: { email } });
@@ -175,7 +173,7 @@ class JobSeekerSerivce {
     return user;
   }
 
-  async userUpdateStatus ({ status, user, pubsub }) {
+  async userUpdateStatus({ status, user, pubsub }) {
     if (!user) {
       throw new AuthenticationError("You should be signed!");
     }
@@ -191,7 +189,7 @@ class JobSeekerSerivce {
     return newUser;
   }
 
-  async uploadProfileImage ({ user, profileImage }) {
+  async uploadProfileImage({ user, profileImage }) {
     if (!user) {
       throw new AuthenticationError("You should be signed!");
     }
@@ -210,7 +208,7 @@ class JobSeekerSerivce {
     return await this.models.employee.findOne({ where: { id } });
   }
 
-  async jobSeeker ({ user }) {
+  async jobSeeker({ user }) {
     this.isAuthenticatic(user);
 
     const { id } = user;
@@ -218,7 +216,7 @@ class JobSeekerSerivce {
     return await this.models.employee.findOne({ where: { id } });
   }
 
-  async updatePushToken ({ user, pushToken }) {
+  async updatePushToken({ user, pushToken }) {
     if (!user) {
       throw new AuthenticationError("You should be signed!");
     }
@@ -230,7 +228,7 @@ class JobSeekerSerivce {
     return await this.jobSeeker({ user });
   }
 
-  async jobSeekerSendMessage ({ content, employerId, user, pubsub }) {
+  async jobSeekerSendMessage({ content, employerId, user, pubsub }) {
     this.isAuthenticatic(user);
     const jobSeeker = await this.getGetJobSeeker({ id: user.id });
     const { fullName, profileImagUri } = jobSeeker.dataValues;
@@ -241,44 +239,44 @@ class JobSeekerSerivce {
       employeeId: user.id,
       fullName,
       from: user.id,
-      to: employerId
+      to: employerId,
     });
     pubsub.publish("onJobSeekerSentMessage", {
       onJobSeekerSentMessage: {
         _id: message.dataValues.id,
         text: message.dataValues.content,
-        ...message.dataValues
-      }
+        ...message.dataValues,
+      },
     });
     return {
       _id: message.dataValues.id,
       text: message.dataValues.content,
-      ...message.dataValues
+      ...message.dataValues,
     };
   }
 
-  async getChats ({ user, employerId }) {
+  async getChats({ user, employerId }) {
     this.isAuthenticatic(user);
     return await this.models.chat.findAll({
       where: { employeeId: user.id, employerId },
       order: [["createdAt", "DESC"]],
-      limit: 40
+      limit: 40,
     });
   }
 
-  async getEmployer ({ id }) {
+  async getEmployer({ id }) {
     return await this.models.employer.findOne({ where: id });
   }
 
-  async getGetJobSeeker ({ id }) {
+  async getGetJobSeeker({ id }) {
     return await this.models.employee.findOne({ where: id });
   }
 
-  async hasAcceptedAlready ({ gigId, employeeId }) {
+  async hasAcceptedAlready({ gigId, employeeId }) {
     return await this.models.accepted.findOne({ where: { gigId, employeeId } });
   }
 
-  async acceptGig ({ args, user }) {
+  async acceptGig({ args, user }) {
     this.isAuthenticatic(user);
     const employer = await this.getEmployer({ id: args.employerId });
     if (
@@ -289,12 +287,12 @@ class JobSeekerSerivce {
       return await this.models.accepted.create({
         ...args,
         pushToken: employer.dataValues.pushToken,
-        employeeId: user.id
+        employeeId: user.id,
       });
     }
   }
 
-  async jobSeekerUpdateData ({ user, phone, bio }) {
+  async jobSeekerUpdateData({ user, phone, bio }) {
     this.isAuthenticatic(user);
     await this.models.employee.update(
       { phone, bio },
@@ -303,25 +301,25 @@ class JobSeekerSerivce {
     return await this.jobSeeker({ user });
   }
 
-  async getPendingGigs ({ employeeId }) {
+  async getPendingGigs({ employeeId }) {
     const data = await this.models.employeeGig.findAll({
       where: { employeeId },
       include: [this.models.gig],
-      order: [["id", "DESC"]]
+      order: [["id", "DESC"]],
     });
     return data.map((data) => ({
       ...data.dataValues,
-      ...data.get("gig").dataValues
+      ...data.get("gig").dataValues,
     }));
   }
 
-  async getRecentEmployers ({ employeeId }) {
+  async getRecentEmployers({ employeeId }) {
     const result = await this.models.employeeGig.findAll({
       where: { employeeId },
       attributes: ["gigId"],
       raw: true,
       group: ["gigId"],
-      order: [["id", "DESC"]]
+      order: [["id", "DESC"]],
     });
 
     const gigIds = result.map((data) => data.gigId);
@@ -329,7 +327,7 @@ class JobSeekerSerivce {
     const data = await this.models.gig.findAll({
       where: { id: { [Op.in]: gigIds } },
       include: [this.models.employer],
-      group: ["employerId"]
+      group: ["employerId"],
     });
 
     const employers = data.map((data) => data.get("employer"));
@@ -337,7 +335,7 @@ class JobSeekerSerivce {
     return employers;
   }
 
-  async updateGigStatus ({ user, gigId, status }) {
+  async updateGigStatus({ user, gigId, status }) {
     this.isAuthenticatic(user);
     await this.models.employeeGig.update(
       { isStarted: status },
@@ -346,10 +344,10 @@ class JobSeekerSerivce {
     return await this.getPendingGigs({ employeeId: user.id });
   }
 
-  async updateReadNotifications ({ user }) {
+  async updateReadNotifications({ user }) {
     this.isAuthenticatic(user);
     const result = await this.models.notified.findAll({
-      where: { isRead: 0, employeeId: user.id }
+      where: { isRead: 0, employeeId: user.id },
     });
     const iDs = result.map((data) => data.dataValues.id);
     if (iDs.length !== 0) {
@@ -360,14 +358,14 @@ class JobSeekerSerivce {
     }
   }
 
-  async findByEmail ({ email, cryptr }) {
+  async findByEmail({ email, cryptr }) {
     const user = await this.models.employee.findOne({ where: { email } });
     this.isAuthenticatic(user);
     const encryptedString = cryptr.encrypt(user.dataValues.id);
     return encryptedString;
   }
 
-  async updatePassword ({ id, password, confirmPassword, cryptr }) {
+  async updatePassword({ id, password, confirmPassword, cryptr }) {
     const userId = Number(cryptr.decrypt(id));
     console.log(userId);
     if (isNaN(userId)) {
@@ -388,18 +386,18 @@ class JobSeekerSerivce {
     }
   }
 
-  async getMessageSenders ({ user }) {
+  async getMessageSenders({ user }) {
     this.isAuthenticatic(user);
 
     let data = await this.models.chat.findAll({
       where: { employeeId: user.id },
       include: ["employer"],
-      group: ["employerId"]
+      group: ["employerId"],
     });
 
     data = data.map((data) => ({
       ...data.dataValues,
-      ...data.get("employer").dataValues
+      ...data.get("employer").dataValues,
     }));
     console.log({ data });
     return data;

@@ -8,24 +8,24 @@ module.exports = function (sequelize, DataTypes) {
         autoIncrement: true,
         type: DataTypes.INTEGER,
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
       },
       longitude: {
         type: DataTypes.DECIMAL(10, 6),
-        allowNull: true
+        allowNull: true,
       },
       latitude: {
         type: DataTypes.DECIMAL(10, 6),
-        allowNull: true
+        allowNull: true,
       },
       employerId: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
       },
       districtId: {
         type: DataTypes.INTEGER,
-        allowNull: false
-      }
+        allowNull: false,
+      },
     },
     {
       sequelize,
@@ -36,9 +36,9 @@ module.exports = function (sequelize, DataTypes) {
           name: "PRIMARY",
           unique: true,
           using: "BTREE",
-          fields: [{ name: "id" }]
-        }
-      ]
+          fields: [{ name: "id" }],
+        },
+      ],
     }
   );
 };

@@ -8,44 +8,44 @@ module.exports = function (sequelize, DataTypes) {
         autoIncrement: true,
         type: DataTypes.INTEGER,
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
       },
       content: {
         type: DataTypes.TEXT,
-        allowNull: true
+        allowNull: true,
       },
       employeeId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
           model: "employee",
-          key: "id"
-        }
+          key: "id",
+        },
       },
       employerId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
           model: "employer",
-          key: "id"
-        }
+          key: "id",
+        },
       },
       from: {
         type: DataTypes.INTEGER,
-        allowNull: true
+        allowNull: true,
       },
       to: {
         type: DataTypes.INTEGER,
-        allowNull: true
+        allowNull: true,
       },
       fullName: {
         type: DataTypes.STRING(60),
-        allowNull: true
+        allowNull: true,
       },
       avatar: {
         type: DataTypes.TEXT,
-        allowNull: true
-      }
+        allowNull: true,
+      },
     },
     {
       sequelize,
@@ -56,19 +56,19 @@ module.exports = function (sequelize, DataTypes) {
           name: "PRIMARY",
           unique: true,
           using: "BTREE",
-          fields: [{ name: "id" }]
+          fields: [{ name: "id" }],
         },
         {
           name: "FKchat560094",
           using: "BTREE",
-          fields: [{ name: "employeeId" }]
+          fields: [{ name: "employeeId" }],
         },
         {
           name: "FKchat572600",
           using: "BTREE",
-          fields: [{ name: "employerId" }]
-        }
-      ]
+          fields: [{ name: "employerId" }],
+        },
+      ],
     }
   );
 };

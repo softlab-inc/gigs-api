@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt"); // password encryption module
 
 const {
   AuthenticationError,
-  ForbiddenError
+  ForbiddenError,
 } = require("apollo-server-express");
 
 const AWS3Service = require("./AWS3Service");
@@ -16,11 +16,11 @@ const PAY_BY_HOURLY_RATE = 1; // employers shall pay full hourly rate
 const OTHER_PROFESION = 31;
 
 class EmployerService {
-  constructor (models) {
+  constructor(models) {
     this.models = models;
   }
 
-  async createEmployer (content) {
+  async createEmployer(content) {
     let { fullName, email, phone, password, companyName, license } =
       content.input;
 
@@ -50,12 +50,12 @@ class EmployerService {
       email,
       phone,
       password: hashed,
-      licenseImageUri
+      licenseImageUri,
     });
     return Employer;
   }
 
-  async signInEmployer (content) {
+  async signInEmployer(content) {
     let { email, password } = content.input;
     email = email.trim().toLowerCase();
 
@@ -75,7 +75,7 @@ class EmployerService {
     return user;
   }
 
-  async employer ({ user }) {
+  async employer({ user }) {
     if (!user) {
       throw new AuthenticationError("You should be signed!");
     }
@@ -85,7 +85,7 @@ class EmployerService {
   }
 
   // employer creating their own profesion type
-  async employeeCreateProfession (profession) {
+  async employeeCreateProfession(profession) {
     const result = await this.findProfessionByName(profession);
 
     if (result) {
@@ -96,11 +96,11 @@ class EmployerService {
     }
   }
 
-  async findProfessionByName (name) {
+  async findProfessionByName(name) {
     return await this.models.profession.findOne({ where: { name } });
   }
 
-  async employerCreateGig ({ input, user, pubsub }) {
+  async employerCreateGig({ input, user, pubsub }) {
     const { paymentMethod } = input;
 
     if (!user) {
@@ -116,7 +116,7 @@ class EmployerService {
           const gig = await this.models.gig.create({
             ...input,
             paymentMethod: PAY_BY_FULL_AMOUNT,
-            employerId: user.id
+            employerId: user.id,
           });
           pubsub.publish("onGigCreated", { onGigCreated: gig.dataValues });
           return gig.dataValues;
@@ -124,7 +124,7 @@ class EmployerService {
           const gig = await this.models.gig.create({
             ...input,
             paymentMethod: PAY_BY_HOURLY_RATE,
-            employerId: user.id
+            employerId: user.id,
           });
           pubsub.publish("onGigCreated", { onGigCreated: gig.dataValues });
           return gig.dataValues;
@@ -134,7 +134,7 @@ class EmployerService {
           const gig = await this.models.gig.create({
             ...input,
             paymentMethod: PAY_BY_FULL_AMOUNT,
-            employerId: user.id
+            employerId: user.id,
           });
           pubsub.publish("onGigCreated", { onGigCreated: gig.dataValues });
           return gig.dataValues;
@@ -142,7 +142,7 @@ class EmployerService {
           const gig = await this.models.gig.create({
             ...input,
             paymentMethod: PAY_BY_HOURLY_RATE,
-            employerId: user.id
+            employerId: user.id,
           });
           pubsub.publish("onGigCreated", { onGigCreated: gig.dataValues });
           return gig.dataValues;
@@ -153,17 +153,17 @@ class EmployerService {
     }
   }
 
-  isAuthenticatic (user) {
+  isAuthenticatic(user) {
     if (!user) {
       throw new AuthenticationError("Account not found! register");
     }
   }
 
-  async getEmployer ({ id }) {
+  async getEmployer({ id }) {
     return await this.models.employer.findOne({ where: id });
   }
 
-  async employerSendMessage ({ content, employeeId, user, pubsub }) {
+  async employerSendMessage({ content, employeeId, user, pubsub }) {
     this.isAuthenticatic(user);
     const employer = await this.getEmployer({ id: user.id });
     const { fullName, profileImagUri } = employer.dataValues;
@@ -174,32 +174,32 @@ class EmployerService {
       employerId: user.id,
       fullName,
       from: user.id,
-      to: employeeId
+      to: employeeId,
     });
     pubsub.publish("onEmployerSentMessage", {
       onEmployerSentMessage: {
         _id: message.dataValues.id,
         text: message.dataValues.content,
         avatar: message.dataValues.avatar,
-        ...message.dataValues
-      }
+        ...message.dataValues,
+      },
     });
     return {
       _id: message.dataValues.id,
       text: message.dataValues.content,
-      ...message.dataValues
+      ...message.dataValues,
     };
   }
 
-  async getChats ({ user, employeeId }) {
+  async getChats({ user, employeeId }) {
     this.isAuthenticatic(user);
     return await this.models.chat.findAll({
       where: { employerId: user.id, employeeId },
-      order: [["createdAt", "DESC"]]
+      order: [["createdAt", "DESC"]],
     });
   }
 
-  async updatePushToken ({ user, pushToken }) {
+  async updatePushToken({ user, pushToken }) {
     this.isAuthenticatic(user);
 
     await this.models.employer.update(
@@ -210,30 +210,30 @@ class EmployerService {
     return await this.employer({ user });
   }
 
-  async getCreatedGigs ({ user }) {
+  async getCreatedGigs({ user }) {
     this.isAuthenticatic(user);
     return await this.models.gig.findAll({
       where: { employerId: user.id },
-      order: [["createdAt", "DESC"]]
+      order: [["createdAt", "DESC"]],
     });
   }
 
-  async getCreatedGig ({ user }) {
+  async getCreatedGig({ user }) {
     this.isAuthenticatic(user);
     return await this.models.gig.findOne({ where: { employerId: user.id } });
   }
 
-  async isJobSeekerHiredForJob ({ employeeId, gigId }) {
+  async isJobSeekerHiredForJob({ employeeId, gigId }) {
     await this.models.accepted.update(
       { hasAccepted: 1 },
       { where: { employeeId, gigId } }
     );
     return await this.models.employeeGig.findOne({
-      where: { employeeId, gigId }
+      where: { employeeId, gigId },
     });
   }
 
-  async employerHire ({ gigId, employeeId, user }) {
+  async employerHire({ gigId, employeeId, user }) {
     this.isAuthenticatic(user);
 
     const { employee: employeeModel, gig: gigModel, employeeGig } = this.models;
@@ -242,7 +242,7 @@ class EmployerService {
       throw new ForbiddenError("Job Seeker Already hired for job!");
     } else {
       const employee = await employeeModel.findOne({
-        where: { id: employeeId }
+        where: { id: employeeId },
       });
 
       const gig = await gigModel.findOne({ where: { id: gigId } });
@@ -252,7 +252,7 @@ class EmployerService {
         ...employee.dataValues,
         ...gig.dataValues,
         employeeId,
-        gigId
+        gigId,
       };
 
       await employeeGig.create({ employeeId, gigId });
@@ -261,24 +261,24 @@ class EmployerService {
     }
   }
 
-  async getRecentHires ({ user }) {
+  async getRecentHires({ user }) {
     this.isAuthenticatic(user);
     const employerId = user.id;
     const gigs = await this.models.gig.findAll({
       where: { employerId },
       attributes: ["id"],
-      order: [["createdAt", "DESC"]]
+      order: [["createdAt", "DESC"]],
     });
     const gigIds = gigs.map((data) => data.dataValues.id);
     const employees = await this.models.employeeGig.findAll({
       where: { gigId: { [Op.in]: gigIds } },
       include: ["employee"],
-      group: ["employeeId"]
+      group: ["employeeId"],
     });
     return employees.map((data) => data.get("employee").dataValues);
   }
 
-  async uploadProfileImage ({ user, profileImage }) {
+  async uploadProfileImage({ user, profileImage }) {
     if (!user) {
       throw new AuthenticationError("You should be signed!");
     }
@@ -297,16 +297,16 @@ class EmployerService {
     return await this.models.employer.findOne({ where: { id } });
   }
 
-  async employerUpdateData ({ user, phone }) {
+  async employerUpdateData({ user, phone }) {
     this.isAuthenticatic(user);
     await this.models.employer.update({ phone }, { where: { id: user.id } });
     return await this.employer({ user });
   }
 
-  async updateReadNotifications ({ user }) {
+  async updateReadNotifications({ user }) {
     this.isAuthenticatic(user);
     const result = await this.models.accepted.findAll({
-      where: { isRead: 0, employerId: user.id }
+      where: { isRead: 0, employerId: user.id },
     });
     const iDs = result.map((data) => data.dataValues.id);
     if (iDs.length !== 0) {
@@ -317,14 +317,14 @@ class EmployerService {
     }
   }
 
-  async findByEmail ({ email, cryptr }) {
+  async findByEmail({ email, cryptr }) {
     const user = await this.models.employer.findOne({ where: { email } });
     this.isAuthenticatic(user);
     const encryptedString = cryptr.encrypt(user.dataValues.id);
     return encryptedString;
   }
 
-  async updatePassword ({ id, password, confirmPassword, cryptr }) {
+  async updatePassword({ id, password, confirmPassword, cryptr }) {
     const userId = Number(cryptr.decrypt(id));
     if (isNaN(userId)) {
       throw new Error(
@@ -344,16 +344,16 @@ class EmployerService {
     }
   }
 
-  async getMessageSenders ({ user }) {
+  async getMessageSenders({ user }) {
     this.isAuthenticatic(user);
     const data = await this.models.chat.findAll({
       where: { employerId: user.id },
       include: ["employee"],
-      group: ["employeeId"]
+      group: ["employeeId"],
     });
     return data.map((data) => ({
       ...data.dataValues,
-      ...data.get("employee").dataValues
+      ...data.get("employee").dataValues,
     }));
   }
 }

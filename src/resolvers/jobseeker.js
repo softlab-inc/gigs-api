@@ -24,5 +24,5 @@ module.exports = {
   recentEmployers: async ({ id }, args, { models }) => {
     const jobSeekerService = new JobSeekerSerivce(models);
     return await jobSeekerService.getRecentEmployers({ employeeId: id });
-  }
+  },
 };

@@ -10,8 +10,8 @@ module.exports = function (sequelize, DataTypes) {
         primaryKey: true,
         references: {
           model: "profession",
-          key: "id"
-        }
+          key: "id",
+        },
       },
       employeeId: {
         type: DataTypes.INTEGER,
@@ -19,9 +19,9 @@ module.exports = function (sequelize, DataTypes) {
         primaryKey: true,
         references: {
           model: "employee",
-          key: "id"
-        }
-      }
+          key: "id",
+        },
+      },
     },
     {
       sequelize,
@@ -32,19 +32,19 @@ module.exports = function (sequelize, DataTypes) {
           name: "PRIMARY",
           unique: true,
           using: "BTREE",
-          fields: [{ name: "professionId" }, { name: "employeeId" }]
+          fields: [{ name: "professionId" }, { name: "employeeId" }],
         },
         {
           name: "FKemployeePr917718",
           using: "BTREE",
-          fields: [{ name: "professionId" }]
+          fields: [{ name: "professionId" }],
         },
         {
           name: "FKemployeePr607259",
           using: "BTREE",
-          fields: [{ name: "employeeId" }]
-        }
-      ]
+          fields: [{ name: "employeeId" }],
+        },
+      ],
     }
   );
 };

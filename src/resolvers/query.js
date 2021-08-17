@@ -18,7 +18,7 @@ module.exports = {
     return chats.map((data) => ({
       _id: data.id,
       text: data.content,
-      ...data.dataValues
+      ...data.dataValues,
     }));
   },
   jobSeekerChats: async (_, { employerId }, { models, user }) => {
@@ -27,7 +27,7 @@ module.exports = {
     return chats.map((data) => ({
       _id: data.id,
       text: data.content,
-      ...data.dataValues
+      ...data.dataValues,
     }));
   },
   gig: async (_, __, { models, user }) => {
@@ -44,7 +44,7 @@ module.exports = {
     await models.accepted.findAll({
       where: { employerId: user.id, hasAccepted: 0 },
       order: [["createdAt", "DESC"]],
-      limit: 20
+      limit: 20,
     }),
   jobSeekerNotifications: async (_, __, { models, user }) => {
     const jobSeekerService = new JobSeekerSerivce(models);
@@ -64,12 +64,14 @@ module.exports = {
   },
   pendingGigs: async (_, __, { models, user }) => {
     const jobSeekerService = new JobSeekerSerivce(models);
-    const result = await jobSeekerService.getPendingGigs({ employeeId: user.id });
+    const result = await jobSeekerService.getPendingGigs({
+      employeeId: user.id,
+    });
     console.log({ result });
     return result;
   },
   getGetJobSeeker: async (_, { id }, { models }) => {
     const jobSeekerService = new JobSeekerSerivce(models);
     return await jobSeekerService.jobSeeker({ user: { id } });
-  }
+  },
 };

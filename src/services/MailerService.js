@@ -1,7 +1,7 @@
 const sgMail = require("@sendgrid/mail");
 
 class MailerService {
-  async sendMail ({ email, id, isEmployer }) {
+  async sendMail({ email, id, isEmployer }) {
     sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
 
     const msg = {
@@ -17,7 +17,7 @@ class MailerService {
                 <a href="https://gigs-app-forgot-password.herokuapp.com/?id=${id}&isEmployer=${isEmployer}">This link will redirect you to a web page where you are required to update your password from</a>
               </body>
             </html>
-          `
+          `,
     };
 
     try {

@@ -8,55 +8,55 @@ module.exports = function (sequelize, DataTypes) {
         autoIncrement: true,
         type: DataTypes.INTEGER,
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
       },
       pushToken: {
         type: DataTypes.TEXT,
-        allowNull: true
+        allowNull: true,
       },
       fullName: {
         type: DataTypes.STRING(60),
-        allowNull: true
+        allowNull: true,
       },
       isRead: {
         type: DataTypes.INTEGER,
         allowNull: true,
-        defaultValue: 0
+        defaultValue: 0,
       },
       hasAccepted: {
         // hasAccepted -> wasHired for job
         type: DataTypes.INTEGER,
         allowNull: true,
-        defaultValue: 0
+        defaultValue: 0,
       },
       employeeId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
           model: "employee",
-          key: "id"
-        }
+          key: "id",
+        },
       },
       employerId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
           model: "employer",
-          key: "id"
-        }
+          key: "id",
+        },
       },
       gigId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
           model: "gig",
-          key: "id"
-        }
+          key: "id",
+        },
       },
       phone: {
         type: DataTypes.STRING(15),
-        allowNull: true
-      }
+        allowNull: true,
+      },
     },
     {
       sequelize,
@@ -67,24 +67,24 @@ module.exports = function (sequelize, DataTypes) {
           name: "PRIMARY",
           unique: true,
           using: "BTREE",
-          fields: [{ name: "id" }]
+          fields: [{ name: "id" }],
         },
         {
           name: "FKaccepted19704",
           using: "BTREE",
-          fields: [{ name: "employeeId" }]
+          fields: [{ name: "employeeId" }],
         },
         {
           name: "FKaccepted7198",
           using: "BTREE",
-          fields: [{ name: "employerId" }]
+          fields: [{ name: "employerId" }],
         },
         {
           name: "FKaccepted69561",
           using: "BTREE",
-          fields: [{ name: "gigId" }]
-        }
-      ]
+          fields: [{ name: "gigId" }],
+        },
+      ],
     }
   );
 };

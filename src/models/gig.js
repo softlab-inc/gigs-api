@@ -8,70 +8,70 @@ module.exports = function (sequelize, DataTypes) {
         autoIncrement: true,
         type: DataTypes.INTEGER,
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
       },
       name: {
         type: DataTypes.TEXT,
-        allowNull: true
+        allowNull: true,
       },
       details: {
         type: DataTypes.TEXT,
-        allowNull: true
+        allowNull: true,
       },
       paymentMethod: {
         type: DataTypes.INTEGER,
         allowNull: true,
-        defaultValue: 0
+        defaultValue: 0,
       },
       budget: {
         type: DataTypes.DECIMAL(10, 2),
-        allowNull: true
+        allowNull: true,
       },
       duration: {
         type: DataTypes.INTEGER,
-        allowNull: true
+        allowNull: true,
       },
       hourlyRate: {
         type: DataTypes.DECIMAL(7, 2),
-        allowNull: true
+        allowNull: true,
       },
       status: {
         type: DataTypes.INTEGER,
         allowNull: true,
-        defaultValue: 0
+        defaultValue: 0,
       },
       employerId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
           model: "employer",
-          key: "id"
-        }
+          key: "id",
+        },
       },
       professionId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
           model: "profession",
-          key: "id"
-        }
+          key: "id",
+        },
       },
       neededBy: {
         type: DataTypes.DATE,
-        allowNull: true
+        allowNull: true,
       },
       hoursPerDay: {
         type: DataTypes.INTEGER,
-        allowNull: true
+        allowNull: true,
       },
       days: {
         type: DataTypes.INTEGER,
-        allowNull: true
+        allowNull: true,
       },
       location: {
         type: DataTypes.TEXT,
-        allowNull: true
-      }
+        allowNull: true,
+      },
     },
     {
       sequelize,
@@ -82,19 +82,19 @@ module.exports = function (sequelize, DataTypes) {
           name: "PRIMARY",
           unique: true,
           using: "BTREE",
-          fields: [{ name: "id" }]
+          fields: [{ name: "id" }],
         },
         {
           name: "FKgig622562",
           using: "BTREE",
-          fields: [{ name: "employerId" }]
+          fields: [{ name: "employerId" }],
         },
         {
           name: "FKgig79484",
           using: "BTREE",
-          fields: [{ name: "professionId" }]
-        }
-      ]
+          fields: [{ name: "professionId" }],
+        },
+      ],
     }
   );
 };

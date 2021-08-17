@@ -3,18 +3,18 @@ const PRIORITY_LOW = 0; // such notification are for all employees
 const EMPTY_LIST = 0;
 
 class GigService {
-  constructor (models) {
+  constructor(models) {
     this.models = models;
   }
 
-  async notifyAllJobSeekers ({ professionId, id }) {
+  async notifyAllJobSeekers({ professionId, id }) {
     console.log({ professionId, id });
 
     const { employeeProfession, notified, employee, gig } = this.models;
 
     const searchResults = await employeeProfession.findAll({
       where: { professionId },
-      include: [employee]
+      include: [employee],
     });
 
     // Find gig details
@@ -48,26 +48,26 @@ class GigService {
     }
   }
 
-  isNotifiable (searchResults) {
+  isNotifiable(searchResults) {
     return searchResults.length === EMPTY_LIST;
   }
 
-  notifySomeEmployees (searchResults, id, name, details) {
+  notifySomeEmployees(searchResults, id, name, details) {
     const employees = searchResults.map((data) => ({
       employeeId: data.get("employee").id,
       gigId: id,
       status: PRIORITY_HIGH,
       pushToken: data.get("employee").pushToken,
       name,
-      details
+      details,
     }));
     return employees;
   }
 
-  async notifyAllEmployees (employee, id, name, details) {
+  async notifyAllEmployees(employee, id, name, details) {
     const employees = await employee.findAll({
       attributes: ["id", "pushToken"],
-      raw: true
+      raw: true,
     });
     const allEmployees = employees.map((data) => ({
       employeeId: data.id,
@@ -75,17 +75,17 @@ class GigService {
       status: PRIORITY_LOW,
       pushToken: data.pushToken,
       name,
-      details
+      details,
     }));
     return allEmployees;
   }
 
-  async notifyJobSeeker ({ professionId, employeeId }) {
+  async notifyJobSeeker({ professionId, employeeId }) {
     const { employeeProfession, employee } = this.models;
 
     const searchResult = await employeeProfession.findAll({
       where: { professionId, employeeId },
-      include: [employee]
+      include: [employee],
     });
 
     const employeeData = searchResult.map((data) => data.get("employee"));

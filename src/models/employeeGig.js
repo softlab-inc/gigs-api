@@ -8,50 +8,50 @@ module.exports = function (sequelize, DataTypes) {
         autoIncrement: true,
         type: DataTypes.INTEGER,
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
       },
       imageUrl: {
         type: DataTypes.TEXT,
-        allowNull: true
+        allowNull: true,
       },
       status: {
         type: DataTypes.INTEGER,
         allowNull: true,
-        defaultValue: 0
+        defaultValue: 0,
       },
       likeCount: {
         type: DataTypes.INTEGER,
-        allowNull: true
+        allowNull: true,
       },
       isStarted: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        defaultValue: 0
+        defaultValue: 0,
       },
       reviewsId: {
         type: DataTypes.INTEGER,
         allowNull: true,
         references: {
           model: "reviews",
-          key: "id"
-        }
+          key: "id",
+        },
       },
       gigId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
           model: "gig",
-          key: "id"
-        }
+          key: "id",
+        },
       },
       employeeId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
           model: "employee",
-          key: "id"
-        }
-      }
+          key: "id",
+        },
+      },
     },
     {
       sequelize,
@@ -62,24 +62,24 @@ module.exports = function (sequelize, DataTypes) {
           name: "PRIMARY",
           unique: true,
           using: "BTREE",
-          fields: [{ name: "id" }]
+          fields: [{ name: "id" }],
         },
         {
           name: "FKemployeeGi894008",
           using: "BTREE",
-          fields: [{ name: "reviewsId" }]
+          fields: [{ name: "reviewsId" }],
         },
         {
           name: "FKemployeeGi524747",
           using: "BTREE",
-          fields: [{ name: "gigId" }]
+          fields: [{ name: "gigId" }],
         },
         {
           name: "FKemployeeGi396986",
           using: "BTREE",
-          fields: [{ name: "employeeId" }]
-        }
-      ]
+          fields: [{ name: "employeeId" }],
+        },
+      ],
     }
   );
 };
