@@ -12,23 +12,9 @@ const Sequelize = require("sequelize");
 
 const Op = Sequelize.Op;
 
-const LICENSE_FOLDER = 3;
 const PAY_BY_FULL_AMOUNT = 0; // employers shall pay full amount
 const PAY_BY_HOURLY_RATE = 1; // employers shall pay full hourly rate
 const OTHER_PROFESION = 31;
-
-/**
- *
- * @param {*} uploadFile upload file object containing filename  mimetype encoding and createReadStream() function
- * @param {*} dirIndex  index to the folder locatoin where the image should be stored
- * @returns
- */
-const getResult = async (uploadFile, dirIndex) => {
-  const { filename, createReadStream } = await uploadFile;
-  const stream = createReadStream();
-  const result = await storeFS({ stream, filename }, dirIndex);
-  return result.filename;
-};
 
 class EmployerService {
   constructor (models) {
@@ -324,7 +310,7 @@ class EmployerService {
       where: { isRead: 0, employerId: user.id }
     });
     const iDs = result.map((data) => data.dataValues.id);
-    if (iDs.length == 0) {
+    if (iDs.length === 0) {
 
     } else {
       return await this.models.accepted.update(
@@ -348,7 +334,7 @@ class EmployerService {
         "Request is not authenticated, we can't update your password now"
       );
     } else {
-      if (password == confirmPassword) {
+      if (password === confirmPassword) {
         const hashed = await bcrypt.hash(password, 10);
         await this.models.employer.update(
           { password: hashed },

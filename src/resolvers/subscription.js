@@ -34,7 +34,7 @@ module.exports = {
       async ({ onJobSeekerSentMessage }, { token }, { models }) => {
         const { employerId } = onJobSeekerSentMessage;
         const { id } = getUser(token);
-        return id == employerId;
+        return id === employerId;
       }
     )
   },
@@ -49,7 +49,7 @@ module.exports = {
       async ({ onEmployerSentMessage }, { token }, { models }) => {
         const { employeeId } = onEmployerSentMessage;
         const { id } = getUser(token);
-        return employeeId == id;
+        return employeeId === id;
       }
     )
   },
@@ -59,7 +59,7 @@ module.exports = {
       async ({ onAcceptGig }, { token }, { models }) => {
         const { employerId } = onAcceptGig;
         const { id } = getUser(token);
-        return id == employerId;
+        return id === employerId;
       }
     )
   },
@@ -69,7 +69,7 @@ module.exports = {
       async ({ onJobSeekerHired }, { token }, { models }) => {
         const { employeeId } = onJobSeekerHired;
         const { id } = getUser(token);
-        return id == employeeId;
+        return id === employeeId;
       }
     )
   },
@@ -77,7 +77,7 @@ module.exports = {
     subscribe: withFilter(
       (_, __, { pubsub }) => pubsub.asyncIterator("onTestSubscription"),
       async ({ onTestSubscription }, { token }, { models }) => {
-        return onTestSubscription == token;
+        return onTestSubscription === token;
       }
     )
   }

@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt"); // password encryption module
-const storeFS = require("../utils/storeFS");
+
 const AWS3Service = require("./AWS3Service");
 
 const Sequelize = require("sequelize");
@@ -7,14 +7,8 @@ const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 
 const {
-  AuthenticationError,
-  ForbiddenError,
-  ApolloError
+  AuthenticationError
 } = require("apollo-server-express");
-
-const PROFILE_FOLDER = 0;
-const IDS_FOLDER = 1;
-const DOCS_FOLDER = 2;
 
 class JobSeekerSerivce {
   constructor (models) {
@@ -358,9 +352,7 @@ class JobSeekerSerivce {
       where: { isRead: 0, employeeId: user.id }
     });
     const iDs = result.map((data) => data.dataValues.id);
-    if (iDs.length == 0) {
-
-    } else {
+    if (iDs.length !== 0) {
       return await this.models.notified.update(
         { isRead: 1 },
         { where: { id: { [Op.in]: iDs } } }
@@ -383,7 +375,7 @@ class JobSeekerSerivce {
         "Request is not authenticated, we can't update your password now"
       );
     } else {
-      if (password == confirmPassword) {
+      if (password === confirmPassword) {
         const hashed = await bcrypt.hash(password, 10);
         await this.models.employee.update(
           { password: hashed },
@@ -398,11 +390,13 @@ class JobSeekerSerivce {
 
   async getMessageSenders ({ user }) {
     this.isAuthenticatic(user);
+
     let data = await this.models.chat.findAll({
       where: { employeeId: user.id },
       include: ["employer"],
       group: ["employerId"]
     });
+
     data = data.map((data) => ({
       ...data.dataValues,
       ...data.get("employer").dataValues

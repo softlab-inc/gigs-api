@@ -14,7 +14,7 @@ class NotificationService {
     const messages = [];
 
     for (const accepted of data) {
-      if (accepted.pushToken == null) continue;
+      if (accepted.pushToken === null) continue;
 
       if (!Expo.isExpoPushToken(accepted.pushToken)) {
         console.error(
@@ -40,7 +40,7 @@ class NotificationService {
     const messages = [];
 
     for (const hired of data) {
-      if (hired.pushToken == null) continue;
+      if (hired.pushToken === null) continue;
 
       if (!Expo.isExpoPushToken(hired.pushToken)) {
         console.error(
@@ -66,7 +66,7 @@ class NotificationService {
     const messages = [];
 
     for (const employee of employees) {
-      if (employee.pushToken == null) continue;
+      if (employee.pushToken === null) continue;
 
       if (!Expo.isExpoPushToken(employee.pushToken)) {
         console.error(`Push token ${pushToken} is not a valid Expo push token`);

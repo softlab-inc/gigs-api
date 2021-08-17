@@ -6,7 +6,6 @@ module.exports = {
     await models.accepted.findAll({
       where: { employerId: id, hasAccepted: 0 },
       order: [["createdAt", "DESC"]],
-      order: [["createdAt", "DESC"]],
       limit: 20
     }),
   unReadHasAccepted: async ({ id }, args, { models }) =>

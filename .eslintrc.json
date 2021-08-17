@@ -19,7 +19,6 @@
         "no-restricted-syntax": 0,
         "arrow-parens": 0,
         "no-mixed-operators": 0,
-        "no-underscore-dangle": 1,
         "no-unused-vars": 1,
         "space-before-blocks": 0,
         "no-return-assign": 0,
@@ -27,6 +26,7 @@
         "function-paren-newline": 0,
         "no-console": "off",
         "no-class-assign": "off",
-        "eslint no-underscore-dangle": 0
+        "no-underscore-dangle": "off",
+        "padded-blocks": ["error", "never"]
   }
 }

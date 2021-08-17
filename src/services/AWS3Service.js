@@ -1,5 +1,4 @@
 const {
-  AuthenticationError,
   ForbiddenError
 } = require("apollo-server-express");
 
@@ -66,7 +65,7 @@ const handleFileUpload = async (file) => {
 };
 
 const findStreamSize = (_buffer) => {
-  chunk = [];
+  const chunk = [];
 
   return new Promise((resolve, reject) =>
     _buffer
