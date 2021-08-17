@@ -69,7 +69,7 @@ class NotificationService {
       if (employee.pushToken === null) continue;
 
       if (!Expo.isExpoPushToken(employee.pushToken)) {
-        console.error(`Push token ${pushToken} is not a valid Expo push token`);
+        console.error(`Push token ${employee.pushToken} is not a valid Expo push token`);
         continue;
       }
 

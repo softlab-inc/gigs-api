@@ -23,9 +23,7 @@ const storeFS = async ({ stream, filename }, dirIndex) => {
     stream
       .on("error", (error) => {
         console.log(error);
-        if (stream.truncated)
-        // delete the truncated file
-        { fs.unlinkSync(fileName); }
+        if (stream.truncated) fs.unlinkSync(fileName);
         reject(error);
       })
       .pipe(fs.createWriteStream(fileName))

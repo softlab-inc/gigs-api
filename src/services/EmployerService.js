@@ -1,5 +1,4 @@
 const bcrypt = require("bcrypt"); // password encryption module
-const storeFS = require("../utils/storeFS");
 
 const {
   AuthenticationError,
@@ -310,9 +309,7 @@ class EmployerService {
       where: { isRead: 0, employerId: user.id }
     });
     const iDs = result.map((data) => data.dataValues.id);
-    if (iDs.length === 0) {
-
-    } else {
+    if (iDs.length !== 0) {
       return await this.models.accepted.update(
         { isRead: 1 },
         { where: { id: { [Op.in]: iDs } } }
