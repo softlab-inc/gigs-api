@@ -1,276 +1,275 @@
-const {gql} = require('apollo-server-express');
+const { gql } = require("apollo-server-express");
 
 module.exports = gql`
   scalar DateTime
 
   #Types
-  type JobSeeker{
-    id:Int
-    fullName:String
-    bio:String
-    email:String
-    phone:String
-    profileImagUri:String
-    documentImageUri:String
-    nationalIdImageUri:String
-    status:Int
-    pushToken:String
-    hasProfession:[Profession!]
-    hasNotifications:[Notification!]
-    readNotifications:[Notification!]
-    unReadNotifications:[Notification!]
-    recentEmployers:[Employer!]
-    pendingGigs:[Gig!]
-    completeGigs:[Gig!]
-    createdAt:DateTime
-    updatedAt:DateTime
-  } 
-
-  type User{
-    _id:Int
-    name:String
-    avatar:String
+  type JobSeeker {
+    id: Int
+    fullName: String
+    bio: String
+    email: String
+    phone: String
+    profileImagUri: String
+    documentImageUri: String
+    nationalIdImageUri: String
+    status: Int
+    pushToken: String
+    hasProfession: [Profession!]
+    hasNotifications: [Notification!]
+    readNotifications: [Notification!]
+    unReadNotifications: [Notification!]
+    recentEmployers: [Employer!]
+    pendingGigs: [Gig!]
+    completeGigs: [Gig!]
+    createdAt: DateTime
+    updatedAt: DateTime
   }
 
-  type Chat{
-    _id:Int
-    text:String
-    user:User
-    createdAt:DateTime!
-    updatedAt:DateTime!
-  }
-  
-  type Messages{
-    id:Int!
-    status:Int!
-    profileImagUri:String
-    fullName:String!
-    employerId:Int!
-    employeeId:Int!
-    chats:[Chat!]
+  type User {
+    _id: Int
+    name: String
+    avatar: String
   }
 
-  type Employer{
-    id:Int!
-    fullName:String
-    companyName:String
-    profileImagUri:String
-    email:String
-    phone:String
-    password:String
-    pushToken:String
-    createdAt:DateTime
-    updatedAt:DateTime
-    licenseImageUri:String
-    hasAccepted:[Accepted!]
-    recentHires:[JobSeeker!]
-    unReadHasAccepted:[Accepted!]
+  type Chat {
+    _id: Int
+    text: String
+    user: User
+    createdAt: DateTime!
+    updatedAt: DateTime!
   }
 
-type Location{
-  id:Int!
-  logitude:String
-  latitude:String
-}
+  type Messages {
+    id: Int!
+    status: Int!
+    profileImagUri: String
+    fullName: String!
+    employerId: Int!
+    employeeId: Int!
+    chats: [Chat!]
+  }
 
+  type Employer {
+    id: Int!
+    fullName: String
+    companyName: String
+    profileImagUri: String
+    email: String
+    phone: String
+    password: String
+    pushToken: String
+    createdAt: DateTime
+    updatedAt: DateTime
+    licenseImageUri: String
+    hasAccepted: [Accepted!]
+    recentHires: [JobSeeker!]
+    unReadHasAccepted: [Accepted!]
+  }
 
-type Accepted{
-  id:Int!
-  pushToken:String!
-  fullName:String!
-  isRead:Int!
-  employee:JobSeeker
-  employer:Employer
-  gig:Gig
-  createdAt:DateTime! 
-  updatedAt:DateTime!
-}
+  type Location {
+    id: Int!
+    logitude: String
+    latitude: String
+  }
 
-type District{
-  id:Int!
-  name:String
-}
+  type Accepted {
+    id: Int!
+    pushToken: String!
+    fullName: String!
+    isRead: Int!
+    employee: JobSeeker
+    employer: Employer
+    gig: Gig
+    createdAt: DateTime!
+    updatedAt: DateTime!
+  }
 
-type Gig{
-  id:Int!
-  name:String!
-  details:String
-  paymentMethod:Int!
-  budget:Float
-  duration:Int
-  days:Int
-  hourlyRate:Float
-  isStarted:Int
-  status:Int
-  hoursPerDay:Int
-  location:String
-  assignedTo:[JobSeeker]
-  profession:Profession
-  createdBy:Employer
-  createdAt:DateTime
-  updatedAt:DateTime
-}
-  
-type Notification{
-    id:Int!
-    status:Int!
-    gig:Gig
-    isRead:Int
-    createdAt:DateTime
-    updatedAt:DateTime
-}
+  type District {
+    id: Int!
+    name: String
+  }
 
-type Profession{
-    id:Int!
-    name:String!
-}
+  type Gig {
+    id: Int!
+    name: String!
+    details: String
+    paymentMethod: Int!
+    budget: Float
+    duration: Int
+    days: Int
+    hourlyRate: Float
+    isStarted: Int
+    status: Int
+    hoursPerDay: Int
+    location: String
+    assignedTo: [JobSeeker]
+    profession: Profession
+    createdBy: Employer
+    createdAt: DateTime
+    updatedAt: DateTime
+  }
+
+  type Notification {
+    id: Int!
+    status: Int!
+    gig: Gig
+    isRead: Int
+    createdAt: DateTime
+    updatedAt: DateTime
+  }
+
+  type Profession {
+    id: Int!
+    name: String!
+  }
 
   #Queries
-  type Query{
-      jobSeeker:JobSeeker
-      getGetJobSeeker(id:Int!):JobSeeker
-      employer:Employer
-      employers:[Employer!]
-      jobSeekers:[JobSeeker!]
-      professions:[Profession!]
-      gig:Gig
-      createdGigs:[Gig!]
-      employerChats(employeeId:Int!):[Chat!]
-      jobSeekerChats(employerId:Int!):[Chat!]
-      getGig(id:Int!):Gig!
-      jobSeekerNotifications:[Notification!]
-      employerNotifications:[Accepted!]
-      recentHires:[JobSeeker!]
-      employerMessages:[Messages!]
-      jobSeekerMessages:[Messages!]
-      pendingGigs:[Gig!]
- }
+  type Query {
+    jobSeeker: JobSeeker
+    getGetJobSeeker(id: Int!): JobSeeker
+    employer: Employer
+    employers: [Employer!]
+    jobSeekers: [JobSeeker!]
+    professions: [Profession!]
+    gig: Gig
+    createdGigs: [Gig!]
+    employerChats(employeeId: Int!): [Chat!]
+    jobSeekerChats(employerId: Int!): [Chat!]
+    getGig(id: Int!): Gig!
+    jobSeekerNotifications: [Notification!]
+    employerNotifications: [Accepted!]
+    recentHires: [JobSeeker!]
+    employerMessages: [Messages!]
+    jobSeekerMessages: [Messages!]
+    pendingGigs: [Gig!]
+  }
 
- #InputFields
- input CreateJobSeekerInput{
-   fullName:String!
-    password:String!
-    email:String!
-    phone:String!
-    document:Upload!
-    nationalId:Upload!
-    professionId:Int!
-    other:String
- }
+  #InputFields
+  input CreateJobSeekerInput {
+    fullName: String!
+    password: String!
+    email: String!
+    phone: String!
+    document: Upload!
+    nationalId: Upload!
+    professionId: Int!
+    other: String
+  }
 
- input CreateEmployerInput{
-    fullName:String!
-    companyName:String!
-    email:String!
-    phone:String!
-    password:String!
-    license:Upload!
- }
+  input CreateEmployerInput {
+    fullName: String!
+    companyName: String!
+    email: String!
+    phone: String!
+    password: String!
+    license: Upload!
+  }
 
- input CreateProfession{
-   names:[String!]!
- }
+  input CreateProfession {
+    names: [String!]!
+  }
 
- input SignInJobSeeker{
-   email:String!
-   password:String!
- }
+  input SignInJobSeeker {
+    email: String!
+    password: String!
+  }
 
- input SignInEmployerInput{
-   email:String!
-   password:String!
- }
+  input SignInEmployerInput {
+    email: String!
+    password: String!
+  }
 
- input EmployerCreateGigInput{
-    name:String!
-    details:String!
-    paymentMethod:Int!
-    budget:Float!
-    duration:Int
-    status:Int
-    professionId:Int!
-    other:String!
-    days:Int!
-    location:String!
-    hoursPerDay:Int!
-    hourlyRate:Int!
- }
+  input EmployerCreateGigInput {
+    name: String!
+    details: String!
+    paymentMethod: Int!
+    budget: Float!
+    duration: Int
+    status: Int
+    professionId: Int!
+    other: String!
+    days: Int!
+    location: String!
+    hoursPerDay: Int!
+    hourlyRate: Int!
+  }
 
- #Mutations 
-  type Mutation{
-    
-    jobSeekerUpdateReadNotifications:String!
+  #Mutations
+  type Mutation {
+    jobSeekerUpdateReadNotifications: String!
 
-    employerUpdateReadNotifications:String!
+    employerUpdateReadNotifications: String!
 
-    createJobSeeker(input:CreateJobSeekerInput):String!
+    createJobSeeker(input: CreateJobSeekerInput): String!
 
-    signInJobSeeker(input:SignInJobSeeker):String!
+    signInJobSeeker(input: SignInJobSeeker): String!
 
-    jobSeekerUploadProfileImage(profileImage:Upload!):JobSeeker
+    jobSeekerUploadProfileImage(profileImage: Upload!): JobSeeker
 
-    employerUploadProfileImage(profileImage:Upload!):Employer
+    employerUploadProfileImage(profileImage: Upload!): Employer
 
-    jobSeekerUpdatePushNotification(pushToken:String):JobSeeker
+    jobSeekerUpdatePushNotification(pushToken: String): JobSeeker
 
-    employerUpdatePushNotification(pushToken:String):Employer
+    employerUpdatePushNotification(pushToken: String): Employer
 
-    createProfession(input:CreateProfession):String!
+    createProfession(input: CreateProfession): String!
 
-    userUpdateStatus(status:Int!):JobSeeker
-  
-    createEmployer(input:CreateEmployerInput):String!
+    userUpdateStatus(status: Int!): JobSeeker
 
-    signInEmployer(input:SignInEmployerInput):String!
+    createEmployer(input: CreateEmployerInput): String!
 
-    employerCreateGig(input:EmployerCreateGigInput):Gig
+    signInEmployer(input: SignInEmployerInput): String!
 
-    jobSeekerSendMessage(content:String!,employerId:Int!):Chat!
+    employerCreateGig(input: EmployerCreateGigInput): Gig
 
-    employerSendMessage(content:String!,employeeId:Int!):Chat!
+    jobSeekerSendMessage(content: String!, employerId: Int!): Chat!
 
-    sendEmail(email:String!,isEmployer:Boolean!):String!
+    employerSendMessage(content: String!, employeeId: Int!): Chat!
 
-    jobSeekerUpdatePassword(password:String!,confirmPassword:String!,id:String!):String!
+    sendEmail(email: String!, isEmployer: Boolean!): String!
 
-    employerUpdatePassword(password:String!,confirmPassword:String!,id:String!):String!
+    jobSeekerUpdatePassword(
+      password: String!
+      confirmPassword: String!
+      id: String!
+    ): String!
 
-    gigAccepted(employerId:Int!,fullName:String!,gigId:Int!):Accepted
+    employerUpdatePassword(
+      password: String!
+      confirmPassword: String!
+      id: String!
+    ): String!
 
-    uploadFiletoS3(file:Upload):String
+    gigAccepted(employerId: Int!, fullName: String!, gigId: Int!): Accepted
 
-    jobSeekerUpdateData(phone:String,bio:String):JobSeeker
+    uploadFiletoS3(file: Upload): String
 
-    employerUpdateData(phone:String):Employer
+    jobSeekerUpdateData(phone: String, bio: String): JobSeeker
 
-    testSubScription(token:String!):String!
+    employerUpdateData(phone: String): Employer
 
-    employerHireJobSeeker(gigId:Int!,employeeId:Int!):Gig
+    testSubScription(token: String!): String!
 
-    employeeUpdateGigStatus(gigId:Int!,status:Int!):[Gig!]
+    employerHireJobSeeker(gigId: Int!, employeeId: Int!): Gig
 
-}
+    employeeUpdateGigStatus(gigId: Int!, status: Int!): [Gig!]
+  }
 
-#Subscriptions
-type Subscription{
-  onGigCreated(token:String!):Gig!
+  #Subscriptions
+  type Subscription {
+    onGigCreated(token: String!): Gig!
 
-  onAcceptGig(token:String!):Accepted!
+    onAcceptGig(token: String!): Accepted!
 
-  onStatusChange:JobSeeker!
+    onStatusChange: JobSeeker!
 
-  onJobSeekerSentMessage(token:String!):Chat!
+    onJobSeekerSentMessage(token: String!): Chat!
 
-  onEmployerSentMessage(token:String!):Chat!
+    onEmployerSentMessage(token: String!): Chat!
 
-  onTestSubscription(token:String!):String!
+    onTestSubscription(token: String!): String!
 
-  onJobSeekerHired(token:String!):Gig!
-
-}
-
+    onJobSeekerHired(token: String!): Gig!
+  }
 `;
-
-
-
-

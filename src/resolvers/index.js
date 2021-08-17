@@ -1,19 +1,19 @@
-const Mutation = require('./mutation');
-const Query = require('./query');
-const { GraphQLDateTime } = require('graphql-iso-date');
-const JobSeeker = require('./jobseeker');
-const Subscription = require('./subscription');
-const Notification = require('./notification');
-const Chat = require('./chat');
-const Gig = require('./gig');
-const Employer = require('./employer');
-const Accepted = require('./accepted');
-const Messages = require('./messages');
+const Mutation = require("./mutation");
+const Query = require("./query");
+const { GraphQLDateTime } = require("graphql-iso-date");
+const JobSeeker = require("./jobseeker");
+const Subscription = require("./subscription");
+const Notification = require("./notification");
+const Chat = require("./chat");
+const Gig = require("./gig");
+const Employer = require("./employer");
+const Accepted = require("./accepted");
+const Messages = require("./messages");
 
 /**
  * This module is responsible for exposing the Resolvers as Javascript objects
  */
-module.exports={
+module.exports = {
   Mutation,
   Query,
   Subscription,
@@ -24,15 +24,14 @@ module.exports={
   Employer,
   Accepted,
   Messages,
-  DateTime:GraphQLDateTime, 
-}
-
+  DateTime: GraphQLDateTime
+};
 
 // [
-// "Accounting", 
-// "Administration", 
+// "Accounting",
+// "Administration",
 // "Acting ",
-// "Aviation", 
+// "Aviation",
 // "Aeronautics",
 // "Back-End Developer",
 // "Branding",
@@ -41,10 +40,10 @@ module.exports={
 // "Copyright ",
 // "Customer Service ",
 // "Decorator ",
-// "Executive Assistant", 
+// "Executive Assistant",
 // "Event organizer",
-// "Financial Analyst", 
-// "Front-End Developer", 
+// "Financial Analyst",
+// "Front-End Developer",
 // "Full-Stack Engineer",
 // "Graphic Designer",
 // "Marketing ",
@@ -54,14 +53,10 @@ module.exports={
 // "Project Manager",
 // "Proposal Writing ",
 // "Photography",
-// "Public speaking", 
+// "Public speaking",
 // "Salesperson",
 // "Teaching ",
-// "Training", 
+// "Training",
 // "Web Developer",
 // "Other "
 // ]
-
-
-
-

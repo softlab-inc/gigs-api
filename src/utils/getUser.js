@@ -1,20 +1,18 @@
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 
 /**
- * 
+ *
  * @param {*} token static token used to autheticate the user
- * @returns 
+ * @returns
  */
-const getUser = token => {
-
-  if(token){
+const getUser = (token) => {
+  if (token) {
     try {
-    return jwt.verify(token,process.env.JWT_SECRETE);
-  }catch (error) {
-    throw new Error('Invalid Session');
-  }
+      return jwt.verify(token, process.env.JWT_SECRETE);
+    } catch (error) {
+      throw new Error("Invalid Session");
+    }
   }
 };
-
 
 module.exports = getUser;
