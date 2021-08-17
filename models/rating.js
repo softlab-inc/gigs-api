@@ -23,14 +23,6 @@ module.exports = function (sequelize, DataTypes) {
       sequelize,
       tableName: "rating",
       timestamps: false,
-      indexes: [
-        {
-          name: "PRIMARY",
-          unique: true,
-          using: "BTREE",
-          fields: [{ name: "id" }],
-        },
-      ],
     }
   );
 };

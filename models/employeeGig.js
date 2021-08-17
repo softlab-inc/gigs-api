@@ -59,12 +59,6 @@ module.exports = function (sequelize, DataTypes) {
       timestamps: false,
       indexes: [
         {
-          name: "PRIMARY",
-          unique: true,
-          using: "BTREE",
-          fields: [{ name: "id" }],
-        },
-        {
           name: "FKemployeeGi894008",
           using: "BTREE",
           fields: [{ name: "reviewsId" }],

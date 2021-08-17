@@ -9,7 +9,9 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\"",
-    "db:makemigrations": "./node_modules/sequelize-auto-migrations/bin/makemigration.js"
+    "db:makemigrations": "./node_modules/sequelize-auto-migrations/bin/makemigration.js",
+    "postinstall": "patch-package",
+    "db:migrate": "npx sequelize db:migrate"
   },
   "dependencies": {
     "@graphql-modules/core": "^0.7.17",
