@@ -1,6 +1,6 @@
-const { ForbiddenError } = require("apollo-server-express");
+// const { ForbiddenError } = require("apollo-server-express");
 
-const MAX_UPLOAD_FILE_SIZE = 1048576;
+// const MAX_UPLOAD_FILE_SIZE = 1048576;
 
 const AWS = require("aws-sdk");
 // store each image in it's own unique folder to avoid name duplicates
@@ -62,18 +62,18 @@ const handleFileUpload = async (file) => {
   });
 };
 
-const findStreamSize = (_buffer) => {
-  const chunk = [];
+// const findStreamSize = (_buffer) => {
+//   const chunk = [];
 
-  return new Promise((resolve, reject) =>
-    _buffer
-      .on("data", (data) => chunk.push(data))
-      .on("end", () => {
-        const buffer = Buffer.concat(chunk);
-        resolve(buffer.length);
-      })
-      .on("error", (error) => reject(error))
-  );
-};
+//   return new Promise((resolve, reject) =>
+//     _buffer
+//       .on("data", (data) => chunk.push(data))
+//       .on("end", () => {
+//         const buffer = Buffer.concat(chunk);
+//         resolve(buffer.length);
+//       })
+//       .on("error", (error) => reject(error))
+//   );
+// };
 
 module.exports = { handleFileUpload };
