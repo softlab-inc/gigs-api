@@ -32,7 +32,7 @@ const s3DefaultParams = {
 const handleFileUpload = async (file) => {
   const { createReadStream, filename } = await file;
 
-  const _buffer = createReadStream();
+  // const _buffer = createReadStream();
 
   // const streamSize = await findStreamSize(_buffer);
 
