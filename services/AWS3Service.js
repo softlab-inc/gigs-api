@@ -34,11 +34,11 @@ const handleFileUpload = async (file) => {
 
   const _buffer = createReadStream();
 
-  const streamSize = await findStreamSize(_buffer);
+  // const streamSize = await findStreamSize(_buffer);
 
-  if (streamSize > MAX_UPLOAD_FILE_SIZE) {
-    throw new ForbiddenError("Uploaded file must not exceed 1 Mb");
-  }
+  // if (streamSize > MAX_UPLOAD_FILE_SIZE) {
+  //   throw new ForbiddenError("Uploaded file must not exceed 1 Mb");
+  // }
 
   const key = uuidv4();
 
