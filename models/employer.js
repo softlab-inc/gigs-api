@@ -36,7 +36,6 @@ module.exports = function (sequelize, DataTypes) {
       phone: {
         type: DataTypes.STRING(15),
         allowNull: true,
-        unique: "phone",
       },
       password: {
         type: DataTypes.TEXT,
@@ -65,12 +64,6 @@ module.exports = function (sequelize, DataTypes) {
       tableName: "employer",
       timestamps: true,
       indexes: [
-        {
-          name: "phone",
-          unique: true,
-          using: "BTREE",
-          fields: [{ name: "phone" }],
-        },
         {
           name: "email",
           unique: true,
