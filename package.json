@@ -12,7 +12,7 @@
     "db:makemigrations": "./node_modules/sequelize-auto-migrations/bin/makemigration.js",
     "postinstall": "patch-package",
     "db:migrate": "npx sequelize db:migrate",
-    "db:seed":"npx sequelize db:seed:all"
+    "db:seed": "npx sequelize db:seed:all"
   },
   "dependencies": {
     "@graphql-modules/core": "^0.7.17",
@@ -44,6 +44,7 @@
     "postinstall-postinstall": "^2.1.0",
     "sequelize": "^6.3.5",
     "sequelize-auto-migrations": "github:scimonster/sequelize-auto-migrations#a063aa6535a3f580623581bf866cef2d609531ba",
+    "sequelize-cli": "^6.2.0",
     "subscriptions-transport-ws": "^0.9.18",
     "uuid": "^8.3.2",
     "uuidv4": "^6.2.8"
