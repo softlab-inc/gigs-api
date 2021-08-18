@@ -1,33 +1,18 @@
-const Mutation = require("./mutation");
-const Query = require("./query");
-const { GraphQLDateTime } = require("graphql-iso-date");
-const JobSeeker = require("./jobseeker");
-const Subscription = require("./subscription");
-const Notification = require("./notification");
-const Chat = require("./chat");
-const Gig = require("./gig");
-const Employer = require("./employer");
-const Accepted = require("./accepted");
-const Messages = require("./messages");
+'use strict';
 
-/**
- * This module is responsible for exposing the Resolvers as Javascript objects
- */
 module.exports = {
-  Mutation,
-  Query,
-  Subscription,
-  JobSeeker,
-  Notification,
-  Chat,
-  Gig,
-  Employer,
-  Accepted,
-  Messages,
-  DateTime: GraphQLDateTime,
-};
-
-[
+  up: async (queryInterface, Sequelize) => {
+    /**
+     * Add seed commands here.
+     *
+     * Example:
+     * await queryInterface.bulkInsert('People', [{
+     *   name: 'John Doe',
+     *   isBetaMember: false
+     * }], {});
+    */
+    
+      await queryInterface.bulkInsert('profession',[
 {name:"Accounting"},
 {name:"Administration"},
 {name:"Acting "},
@@ -59,4 +44,20 @@ module.exports = {
 {name:"Training"},
 {name:"Web Developer"},
 {name:"Other "},
-]
+], {});
+    
+  },
+
+  down: async (queryInterface, Sequelize) => {
+    /**
+     * Add commands to revert seed here.
+     *
+     * Example:
+     * await queryInterface.bulkDelete('People', null, {});
+     */
+  }
+};
+
+
+
+

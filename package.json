@@ -11,7 +11,8 @@
     "format": "prettier --write \"**/*.+(js|jsx|json|css|md)\"",
     "db:makemigrations": "./node_modules/sequelize-auto-migrations/bin/makemigration.js",
     "postinstall": "patch-package",
-    "db:migrate": "npx sequelize db:migrate"
+    "db:migrate": "npx sequelize db:migrate",
+    "db:seed":"npx sequelize db:seed:all"
   },
   "dependencies": {
     "@graphql-modules/core": "^0.7.17",
