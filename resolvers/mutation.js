@@ -41,7 +41,7 @@ module.exports = {
       await jobSeekerSerivce.updateProfession({other, professionId,user })
       return "Profession updated successfully";
     } catch (error) {
-      throw new Error(`Duplicated profession value ${error}`);
+      throw new Error(`Duplicated profession value ${error}`); 
     }
   },
   signInJobSeeker: async (_, { input }, { models }) => {
