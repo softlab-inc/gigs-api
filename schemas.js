@@ -231,7 +231,7 @@ module.exports = gql`
 
     jobSeekerUploadProfileImage(profileImage: Upload!): JobSeeker
     
-    updateProfession:JobSeeker
+    updateProfession(professionId:Int!, other:String):JobSeeker
 
     employerUploadProfileImage(profileImage: Upload!): Employer
 
