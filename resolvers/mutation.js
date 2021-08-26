@@ -36,7 +36,7 @@ module.exports = {
   },
   updateProfession: async (_, { other, professionId}, { models,user }) => {
      const jobSeekerSerivce = new JobSeekerSerivce(models);
-     
+
      try {
       await jobSeekerSerivce.updateProfession({other, professionId,user })
       return "Profession updated successfully";
