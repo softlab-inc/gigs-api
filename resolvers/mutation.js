@@ -34,6 +34,16 @@ module.exports = {
       throw new Error(`Duplicated profession values ${error}`);
     }
   },
+  updateProfession: async (_, { other, professionId}, { models,user }) => {
+     const jobSeekerSerivce = new JobSeekerSerivce(models);
+     
+     try {
+      await jobSeekerSerivce.updateProfession({other, professionId,user })
+      return "Profession updated successfully";
+    } catch (error) {
+      throw new Error(`Duplicated profession value ${error}`);
+    }
+  },
   signInJobSeeker: async (_, { input }, { models }) => {
     const jobSeekerService = new JobSeekerSerivce(models);
 
