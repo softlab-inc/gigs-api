@@ -49,7 +49,7 @@ class JobSeekerSerivce {
   async createGoogleJobSeeker(data) {
     const { employee } = this.models;
 
-    const user = await employee.findOne({ where: { email:data.email } });
+    const user = await employee.findOne({ where: { email: data.email } });
 
     if (user) {
       return user;
