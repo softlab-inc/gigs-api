@@ -46,6 +46,18 @@ class JobSeekerSerivce {
     });
   }
 
+  async createGoogleJobSeeker(data) {
+    const { employee } = this.models;
+
+    const user = await employee.findOne({ where: { email:data.email } });
+
+    if (user) {
+      return user;
+    } else {
+      return await employee.create({ ...data });
+    }
+  }
+
   async getUnReadNotifications({ employeeId }) {
     return await this.models.notified.findAll({
       where: { employeeId, isRead: 0 },

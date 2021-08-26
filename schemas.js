@@ -202,14 +202,30 @@ module.exports = gql`
     employerUpdateReadNotifications: String!
 
     createJobSeeker(input: CreateJobSeekerInput): String!
-    
-    createGoogleJobSeeker(email:String!,fullName: String!,profileImagUri:String!):JobSeeker!
-    
-    createGoogleEmployer(email:String!,fullName: String!,profileImagUri:String!):Employer!
-    
-    createNewJobSeeker(email:String!,fullName: String!,profileImagUri:String!):JobSeeker!
-    
-    createNewEmployer(email:String!,fullName: String!,profileImagUri:String!):Employer!
+
+    createGoogleJobSeeker(
+      email: String!
+      fullName: String!
+      profileImagUri: String!
+    ): JobSeeker!
+
+    createGoogleEmployer(
+      email: String!
+      fullName: String!
+      profileImagUri: String!
+    ): Employer!
+
+    createNewJobSeeker(
+      email: String!
+      fullName: String!
+      profileImagUri: String!
+    ): JobSeeker!
+
+    createNewEmployer(
+      email: String!
+      fullName: String!
+      profileImagUri: String!
+    ): Employer!
 
     signInJobSeeker(input: SignInJobSeeker): String!
 
