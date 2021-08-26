@@ -230,8 +230,8 @@ module.exports = gql`
     signInJobSeeker(input: SignInJobSeeker): String!
 
     jobSeekerUploadProfileImage(profileImage: Upload!): JobSeeker
-    
-    updateProfession(professionId:Int!, other:String):JobSeeker
+
+    updateProfession(professionId: Int!, other: String): JobSeeker
 
     employerUploadProfileImage(profileImage: Upload!): Employer
 

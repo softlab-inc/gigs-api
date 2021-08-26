@@ -57,12 +57,12 @@ class JobSeekerSerivce {
       return await employee.create({ ...data });
     }
   }
-  
-  async updateProfession({user,other,professionId}){
-      const { employee, employeeProfession, profession } = this.models;
-      this.isAuthenticatic(user);
-      
-      if (other) {
+
+  async updateProfession({ user, other, professionId }) {
+    const { employeeProfession, profession } = this.models;
+    this.isAuthenticatic(user);
+
+    if (other) {
       const newProfession = await profession.create({ name: other });
       await employeeProfession.create({
         professionId: newProfession.id,
