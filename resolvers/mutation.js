@@ -15,6 +15,11 @@ module.exports = {
     const JobSeeker = await jobSeekerSerivce.createJobSeeker({ input });
     return jwt.sign({ id: JobSeeker.id }, process.env.JWT_SECRETE);
   },
+  createGoogleJobSeeker: async (_, args, { models }) => {
+    const jobSeekerSerivce = new JobSeekerSerivce(models);
+    const JobSeeker = await jobSeekerSerivce.createGoogleJobSeeker(args)
+    return {token:jwt.sign({ id: JobSeeker.id }, process.env.JWT_SECRETE),...JobSeeker}
+  },
   createProfession: async (_, { input }, { models }) => {
     // Mapping the list of names to {name:value}
     const nameArr = input.names.map((name) => ({ name }));
