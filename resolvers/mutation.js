@@ -23,14 +23,14 @@ module.exports = {
       ...JobSeeker,
     };
   },
-  updateProfession: async (_, { other, professionId}, { models,user }) => {
-     const jobSeekerSerivce = new JobSeekerSerivce(models);
+  updateProfession: async (_, { other, professionId }, { models, user }) => {
+    const jobSeekerSerivce = new JobSeekerSerivce(models);
 
-     try {
-      await jobSeekerSerivce.updateProfession({other, professionId,user })
+    try {
+      await jobSeekerSerivce.updateProfession({ other, professionId, user });
       return "Profession updated successfully";
     } catch (error) {
-      throw new Error(`Duplicated profession value ${error}`); 
+      throw new Error(`Duplicated profession value ${error}`);
     }
   },
   signInJobSeeker: async (_, { input }, { models }) => {

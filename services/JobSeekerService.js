@@ -60,6 +60,7 @@ class JobSeekerSerivce {
 
   async updateProfession({ user, other, professionId }) {
     const { employeeProfession, profession } = this.models;
+
     this.isAuthenticatic(user);
 
     if (other) {
@@ -138,7 +139,6 @@ class JobSeekerSerivce {
 
     return JobSeeker;
   }
-  
 
   async attachUserToProfile(
     other,
@@ -416,7 +416,6 @@ class JobSeekerSerivce {
       }
     }
   }
-
 
   async getMessageSenders({ user }) {
     this.isAuthenticatic(user);

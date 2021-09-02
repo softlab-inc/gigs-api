@@ -166,7 +166,6 @@ module.exports = gql`
     license: Upload!
   }
 
-
   input SignInJobSeeker {
     email: String!
     password: String!
@@ -235,7 +234,6 @@ module.exports = gql`
     jobSeekerUpdatePushNotification(pushToken: String): JobSeeker
 
     employerUpdatePushNotification(pushToken: String): Employer
-
 
     userUpdateStatus(status: Int!): JobSeeker
 
