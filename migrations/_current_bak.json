@@ -1,979 +1,979 @@
 {
-    "tables": {
-        "accepted": {
-            "tableName": "accepted",
-            "schema": {
-                "id": {
-                    "autoIncrement": true,
-                    "allowNull": false,
-                    "primaryKey": true,
-                    "field": "id",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "pushToken": {
-                    "allowNull": true,
-                    "field": "pushToken",
-                    "seqType": "Sequelize.TEXT"
-                },
-                "fullName": {
-                    "allowNull": true,
-                    "field": "fullName",
-                    "seqType": "Sequelize.STRING(60)"
-                },
-                "isRead": {
-                    "allowNull": true,
-                    "defaultValue": {
-                        "value": 0
-                    },
-                    "field": "isRead",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "hasAccepted": {
-                    "allowNull": true,
-                    "defaultValue": {
-                        "value": 0
-                    },
-                    "field": "hasAccepted",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "employeeId": {
-                    "allowNull": false,
-                    "references": {
-                        "model": "employee",
-                        "key": "id"
-                    },
-                    "field": "employeeId",
-                    "onDelete": "NO ACTION",
-                    "onUpdate": "CASCADE",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "employerId": {
-                    "allowNull": false,
-                    "references": {
-                        "model": "employer",
-                        "key": "id"
-                    },
-                    "field": "employerId",
-                    "onDelete": "NO ACTION",
-                    "onUpdate": "CASCADE",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "gigId": {
-                    "allowNull": false,
-                    "references": {
-                        "model": "gig",
-                        "key": "id"
-                    },
-                    "field": "gigId",
-                    "onDelete": "NO ACTION",
-                    "onUpdate": "CASCADE",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "phone": {
-                    "allowNull": true,
-                    "field": "phone",
-                    "seqType": "Sequelize.STRING(15)"
-                },
-                "createdAt": {
-                    "allowNull": false,
-                    "field": "createdAt",
-                    "seqType": "Sequelize.DATE"
-                },
-                "updatedAt": {
-                    "allowNull": false,
-                    "field": "updatedAt",
-                    "seqType": "Sequelize.DATE"
-                }
-            },
-            "indexes": {
-                "d2a9d8bdf62d637ada1560f27183f1e7a66bea21": {
-                    "name": "FKaccepted19704",
-                    "using": "BTREE",
-                    "fields": [
-                        {
-                            "name": "employeeId"
-                        }
-                    ],
-                    "options": {
-                        "indexName": "FKaccepted19704",
-                        "name": "FKaccepted19704"
-                    }
-                },
-                "56dd49cbc53a31f40718525f59cf3f3ff65cda54": {
-                    "name": "FKaccepted7198",
-                    "using": "BTREE",
-                    "fields": [
-                        {
-                            "name": "employerId"
-                        }
-                    ],
-                    "options": {
-                        "indexName": "FKaccepted7198",
-                        "name": "FKaccepted7198"
-                    }
-                },
-                "5324ddc4e87f1a381b3598851fc24754d02dd4ee": {
-                    "name": "FKaccepted69561",
-                    "using": "BTREE",
-                    "fields": [
-                        {
-                            "name": "gigId"
-                        }
-                    ],
-                    "options": {
-                        "indexName": "FKaccepted69561",
-                        "name": "FKaccepted69561"
-                    }
-                }
-            }
+  "tables": {
+    "accepted": {
+      "tableName": "accepted",
+      "schema": {
+        "id": {
+          "autoIncrement": true,
+          "allowNull": false,
+          "primaryKey": true,
+          "field": "id",
+          "seqType": "Sequelize.INTEGER"
         },
-        "chat": {
-            "tableName": "chat",
-            "schema": {
-                "id": {
-                    "autoIncrement": true,
-                    "allowNull": false,
-                    "primaryKey": true,
-                    "field": "id",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "content": {
-                    "allowNull": true,
-                    "field": "content",
-                    "seqType": "Sequelize.TEXT"
-                },
-                "employeeId": {
-                    "allowNull": false,
-                    "references": {
-                        "model": "employee",
-                        "key": "id"
-                    },
-                    "field": "employeeId",
-                    "onDelete": "NO ACTION",
-                    "onUpdate": "CASCADE",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "employerId": {
-                    "allowNull": false,
-                    "references": {
-                        "model": "employer",
-                        "key": "id"
-                    },
-                    "field": "employerId",
-                    "onDelete": "NO ACTION",
-                    "onUpdate": "CASCADE",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "from": {
-                    "allowNull": true,
-                    "field": "from",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "to": {
-                    "allowNull": true,
-                    "field": "to",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "fullName": {
-                    "allowNull": true,
-                    "field": "fullName",
-                    "seqType": "Sequelize.STRING(60)"
-                },
-                "avatar": {
-                    "allowNull": true,
-                    "field": "avatar",
-                    "seqType": "Sequelize.TEXT"
-                },
-                "createdAt": {
-                    "allowNull": false,
-                    "field": "createdAt",
-                    "seqType": "Sequelize.DATE"
-                },
-                "updatedAt": {
-                    "allowNull": false,
-                    "field": "updatedAt",
-                    "seqType": "Sequelize.DATE"
-                }
-            },
-            "indexes": {
-                "76b49bb13790acdd3f8852c9acdc16940e87fea6": {
-                    "name": "FKchat560094",
-                    "using": "BTREE",
-                    "fields": [
-                        {
-                            "name": "employeeId"
-                        }
-                    ],
-                    "options": {
-                        "indexName": "FKchat560094",
-                        "name": "FKchat560094"
-                    }
-                },
-                "429ae14fd0cc511d00970ed48483cc37150253b6": {
-                    "name": "FKchat572600",
-                    "using": "BTREE",
-                    "fields": [
-                        {
-                            "name": "employerId"
-                        }
-                    ],
-                    "options": {
-                        "indexName": "FKchat572600",
-                        "name": "FKchat572600"
-                    }
-                }
-            }
+        "pushToken": {
+          "allowNull": true,
+          "field": "pushToken",
+          "seqType": "Sequelize.TEXT"
         },
-        "employee": {
-            "tableName": "employee",
-            "schema": {
-                "id": {
-                    "autoIncrement": true,
-                    "allowNull": false,
-                    "primaryKey": true,
-                    "field": "id",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "fullName": {
-                    "allowNull": true,
-                    "field": "fullName",
-                    "seqType": "Sequelize.STRING(60)"
-                },
-                "bio": {
-                    "allowNull": true,
-                    "field": "bio",
-                    "seqType": "Sequelize.TEXT"
-                },
-                "email": {
-                    "allowNull": true,
-                    "unique": {
-                        "args": true,
-                        "msg": "Oops. Looks like you already have an account with this email address. Please try to login.",
-                        "fields": [
-                            {
-                                "fn": "lower",
-                                "args": [
-                                    {
-                                        "col": "email"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "field": "email",
-                    "seqType": "Sequelize.STRING(50)"
-                },
-                "phone": {
-                    "allowNull": true,
-                    "field": "phone",
-                    "seqType": "Sequelize.STRING(15)"
-                },
-                "password": {
-                    "allowNull": true,
-                    "field": "password",
-                    "seqType": "Sequelize.TEXT"
-                },
-                "profileImagUri": {
-                    "allowNull": true,
-                    "field": "profileImagUri",
-                    "seqType": "Sequelize.TEXT"
-                },
-                "documentImageUri": {
-                    "allowNull": true,
-                    "field": "documentImageUri",
-                    "seqType": "Sequelize.TEXT"
-                },
-                "nationalIdImageUri": {
-                    "allowNull": true,
-                    "field": "nationalIdImageUri",
-                    "seqType": "Sequelize.TEXT"
-                },
-                "status": {
-                    "allowNull": true,
-                    "defaultValue": {
-                        "value": 0
-                    },
-                    "field": "status",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "pushToken": {
-                    "allowNull": true,
-                    "field": "pushToken",
-                    "seqType": "Sequelize.TEXT"
-                },
-                "createdAt": {
-                    "allowNull": false,
-                    "field": "createdAt",
-                    "seqType": "Sequelize.DATE"
-                },
-                "updatedAt": {
-                    "allowNull": false,
-                    "field": "updatedAt",
-                    "seqType": "Sequelize.DATE"
-                }
-            },
-            "indexes": {
-                "01f060afa22cf588052f7256e28d86c5646a43dc": {
-                    "name": "email",
-                    "unique": true,
-                    "using": "BTREE",
-                    "fields": [
-                        {
-                            "name": "email"
-                        }
-                    ],
-                    "options": {
-                        "indexName": "email",
-                        "name": "email",
-                        "indicesType": "UNIQUE",
-                        "type": "UNIQUE"
-                    }
-                }
-            }
+        "fullName": {
+          "allowNull": true,
+          "field": "fullName",
+          "seqType": "Sequelize.STRING(60)"
         },
-        "employeeGig": {
-            "tableName": "employeeGig",
-            "schema": {
-                "id": {
-                    "autoIncrement": true,
-                    "allowNull": false,
-                    "primaryKey": true,
-                    "field": "id",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "imageUrl": {
-                    "allowNull": true,
-                    "field": "imageUrl",
-                    "seqType": "Sequelize.TEXT"
-                },
-                "status": {
-                    "allowNull": true,
-                    "defaultValue": {
-                        "value": 0
-                    },
-                    "field": "status",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "likeCount": {
-                    "allowNull": true,
-                    "field": "likeCount",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "isStarted": {
-                    "allowNull": false,
-                    "defaultValue": {
-                        "value": 0
-                    },
-                    "field": "isStarted",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "reviewsId": {
-                    "allowNull": true,
-                    "references": {
-                        "model": "reviews",
-                        "key": "id"
-                    },
-                    "field": "reviewsId",
-                    "onDelete": "SET NULL",
-                    "onUpdate": "CASCADE",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "gigId": {
-                    "allowNull": false,
-                    "references": {
-                        "model": "gig",
-                        "key": "id"
-                    },
-                    "field": "gigId",
-                    "onDelete": "NO ACTION",
-                    "onUpdate": "CASCADE",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "employeeId": {
-                    "allowNull": false,
-                    "references": {
-                        "model": "employee",
-                        "key": "id"
-                    },
-                    "field": "employeeId",
-                    "onDelete": "NO ACTION",
-                    "onUpdate": "CASCADE",
-                    "seqType": "Sequelize.INTEGER"
-                }
-            },
-            "indexes": {
-                "35623227d615b8c77d17f43647891767b947e057": {
-                    "name": "FKemployeeGi894008",
-                    "using": "BTREE",
-                    "fields": [
-                        {
-                            "name": "reviewsId"
-                        }
-                    ],
-                    "options": {
-                        "indexName": "FKemployeeGi894008",
-                        "name": "FKemployeeGi894008"
-                    }
-                },
-                "5f580a3e637294b70497b8ea63c8250d5fc44098": {
-                    "name": "FKemployeeGi524747",
-                    "using": "BTREE",
-                    "fields": [
-                        {
-                            "name": "gigId"
-                        }
-                    ],
-                    "options": {
-                        "indexName": "FKemployeeGi524747",
-                        "name": "FKemployeeGi524747"
-                    }
-                },
-                "8abd170165dc64bc22318e4b0b081afaea3bc750": {
-                    "name": "FKemployeeGi396986",
-                    "using": "BTREE",
-                    "fields": [
-                        {
-                            "name": "employeeId"
-                        }
-                    ],
-                    "options": {
-                        "indexName": "FKemployeeGi396986",
-                        "name": "FKemployeeGi396986"
-                    }
-                }
-            }
+        "isRead": {
+          "allowNull": true,
+          "defaultValue": {
+            "value": 0
+          },
+          "field": "isRead",
+          "seqType": "Sequelize.INTEGER"
         },
-        "employeeProfession": {
-            "tableName": "employeeProfession",
-            "schema": {
-                "professionId": {
-                    "allowNull": false,
-                    "primaryKey": true,
-                    "references": {
-                        "model": "profession",
-                        "key": "id"
-                    },
-                    "field": "professionId",
-                    "onDelete": "NO ACTION",
-                    "onUpdate": "CASCADE",
-                    "unique": "employeeProfession_professionId_employeeId_unique",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "employeeId": {
-                    "allowNull": false,
-                    "primaryKey": true,
-                    "references": {
-                        "model": "employee",
-                        "key": "id"
-                    },
-                    "field": "employeeId",
-                    "unique": "employeeProfession_professionId_employeeId_unique",
-                    "onDelete": "CASCADE",
-                    "onUpdate": "CASCADE",
-                    "seqType": "Sequelize.INTEGER"
-                }
-            },
-            "indexes": {
-                "cf3367cc1b23f3c8fbbc362dca82553cd7b05eef": {
-                    "name": "FKemployeePr917718",
-                    "using": "BTREE",
-                    "fields": [
-                        {
-                            "name": "professionId"
-                        }
-                    ],
-                    "options": {
-                        "indexName": "FKemployeePr917718",
-                        "name": "FKemployeePr917718"
-                    }
-                },
-                "b2a8a89472aac3a415c4155ed0efcf0563a7fd32": {
-                    "name": "FKemployeePr607259",
-                    "using": "BTREE",
-                    "fields": [
-                        {
-                            "name": "employeeId"
-                        }
-                    ],
-                    "options": {
-                        "indexName": "FKemployeePr607259",
-                        "name": "FKemployeePr607259"
-                    }
-                }
-            }
+        "hasAccepted": {
+          "allowNull": true,
+          "defaultValue": {
+            "value": 0
+          },
+          "field": "hasAccepted",
+          "seqType": "Sequelize.INTEGER"
         },
-        "employer": {
-            "tableName": "employer",
-            "schema": {
-                "id": {
-                    "autoIncrement": true,
-                    "allowNull": false,
-                    "primaryKey": true,
-                    "field": "id",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "fullName": {
-                    "allowNull": true,
-                    "field": "fullName",
-                    "seqType": "Sequelize.STRING(60)"
-                },
-                "companyName": {
-                    "allowNull": true,
-                    "field": "companyName",
-                    "seqType": "Sequelize.STRING(30)"
-                },
-                "email": {
-                    "allowNull": true,
-                    "unique": {
-                        "args": true,
-                        "msg": "Oops. Looks like you already have an account with this email address. Please try to login.",
-                        "fields": [
-                            {
-                                "fn": "lower",
-                                "args": [
-                                    {
-                                        "col": "email"
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "field": "email",
-                    "seqType": "Sequelize.STRING(50)"
-                },
-                "phone": {
-                    "allowNull": true,
-                    "unique": "phone",
-                    "field": "phone",
-                    "seqType": "Sequelize.STRING(15)"
-                },
-                "password": {
-                    "allowNull": true,
-                    "field": "password",
-                    "seqType": "Sequelize.TEXT"
-                },
-                "licenseImageUri": {
-                    "allowNull": true,
-                    "field": "licenseImageUri",
-                    "seqType": "Sequelize.TEXT"
-                },
-                "profileImagUri": {
-                    "allowNull": true,
-                    "field": "profileImagUri",
-                    "seqType": "Sequelize.TEXT"
-                },
-                "status": {
-                    "allowNull": true,
-                    "defaultValue": {
-                        "value": 0
-                    },
-                    "field": "status",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "pushToken": {
-                    "allowNull": true,
-                    "field": "pushToken",
-                    "seqType": "Sequelize.TEXT"
-                },
-                "createdAt": {
-                    "allowNull": false,
-                    "field": "createdAt",
-                    "seqType": "Sequelize.DATE"
-                },
-                "updatedAt": {
-                    "allowNull": false,
-                    "field": "updatedAt",
-                    "seqType": "Sequelize.DATE"
-                }
-            },
-            "indexes": {
-                "3d60619d5dd8998fc638710608b0f174963a34fe": {
-                    "name": "phone",
-                    "unique": true,
-                    "using": "BTREE",
-                    "fields": [
-                        {
-                            "name": "phone"
-                        }
-                    ],
-                    "options": {
-                        "indexName": "phone",
-                        "name": "phone",
-                        "indicesType": "UNIQUE",
-                        "type": "UNIQUE"
-                    }
-                },
-                "01f060afa22cf588052f7256e28d86c5646a43dc": {
-                    "name": "email",
-                    "unique": true,
-                    "using": "BTREE",
-                    "fields": [
-                        {
-                            "name": "email"
-                        }
-                    ],
-                    "options": {
-                        "indexName": "email",
-                        "name": "email",
-                        "indicesType": "UNIQUE",
-                        "type": "UNIQUE"
-                    }
-                }
-            }
+        "employeeId": {
+          "allowNull": false,
+          "references": {
+            "model": "employee",
+            "key": "id"
+          },
+          "field": "employeeId",
+          "onDelete": "NO ACTION",
+          "onUpdate": "CASCADE",
+          "seqType": "Sequelize.INTEGER"
         },
-        "gig": {
-            "tableName": "gig",
-            "schema": {
-                "id": {
-                    "autoIncrement": true,
-                    "allowNull": false,
-                    "primaryKey": true,
-                    "field": "id",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "name": {
-                    "allowNull": true,
-                    "field": "name",
-                    "seqType": "Sequelize.TEXT"
-                },
-                "details": {
-                    "allowNull": true,
-                    "field": "details",
-                    "seqType": "Sequelize.TEXT"
-                },
-                "paymentMethod": {
-                    "allowNull": true,
-                    "defaultValue": {
-                        "value": 0
-                    },
-                    "field": "paymentMethod",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "budget": {
-                    "allowNull": true,
-                    "field": "budget",
-                    "seqType": "Sequelize.DECIMAL(10, 2)"
-                },
-                "duration": {
-                    "allowNull": true,
-                    "field": "duration",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "hourlyRate": {
-                    "allowNull": true,
-                    "field": "hourlyRate",
-                    "seqType": "Sequelize.DECIMAL(7, 2)"
-                },
-                "status": {
-                    "allowNull": true,
-                    "defaultValue": {
-                        "value": 0
-                    },
-                    "field": "status",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "employerId": {
-                    "allowNull": false,
-                    "references": {
-                        "model": "employer",
-                        "key": "id"
-                    },
-                    "field": "employerId",
-                    "onDelete": "NO ACTION",
-                    "onUpdate": "CASCADE",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "professionId": {
-                    "allowNull": false,
-                    "references": {
-                        "model": "profession",
-                        "key": "id"
-                    },
-                    "field": "professionId",
-                    "onDelete": "NO ACTION",
-                    "onUpdate": "CASCADE",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "neededBy": {
-                    "allowNull": true,
-                    "field": "neededBy",
-                    "seqType": "Sequelize.DATE"
-                },
-                "hoursPerDay": {
-                    "allowNull": true,
-                    "field": "hoursPerDay",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "days": {
-                    "allowNull": true,
-                    "field": "days",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "location": {
-                    "allowNull": true,
-                    "field": "location",
-                    "seqType": "Sequelize.TEXT"
-                },
-                "createdAt": {
-                    "allowNull": false,
-                    "field": "createdAt",
-                    "seqType": "Sequelize.DATE"
-                },
-                "updatedAt": {
-                    "allowNull": false,
-                    "field": "updatedAt",
-                    "seqType": "Sequelize.DATE"
-                }
-            },
-            "indexes": {
-                "4bc6be50d93b2a6d6825dbebb404b379878567cd": {
-                    "name": "FKgig622562",
-                    "using": "BTREE",
-                    "fields": [
-                        {
-                            "name": "employerId"
-                        }
-                    ],
-                    "options": {
-                        "indexName": "FKgig622562",
-                        "name": "FKgig622562"
-                    }
-                },
-                "4dca49c89767399a1a06ab56d3d3fe214a5f8e50": {
-                    "name": "FKgig79484",
-                    "using": "BTREE",
-                    "fields": [
-                        {
-                            "name": "professionId"
-                        }
-                    ],
-                    "options": {
-                        "indexName": "FKgig79484",
-                        "name": "FKgig79484"
-                    }
-                }
-            }
+        "employerId": {
+          "allowNull": false,
+          "references": {
+            "model": "employer",
+            "key": "id"
+          },
+          "field": "employerId",
+          "onDelete": "NO ACTION",
+          "onUpdate": "CASCADE",
+          "seqType": "Sequelize.INTEGER"
         },
-        "notified": {
-            "tableName": "notified",
-            "schema": {
-                "id": {
-                    "autoIncrement": true,
-                    "allowNull": false,
-                    "primaryKey": true,
-                    "field": "id",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "gigId": {
-                    "allowNull": false,
-                    "references": {
-                        "model": "gig",
-                        "key": "id"
-                    },
-                    "field": "gigId",
-                    "onDelete": "NO ACTION",
-                    "onUpdate": "CASCADE",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "employeeId": {
-                    "allowNull": false,
-                    "references": {
-                        "model": "employee",
-                        "key": "id"
-                    },
-                    "field": "employeeId",
-                    "onDelete": "NO ACTION",
-                    "onUpdate": "CASCADE",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "status": {
-                    "allowNull": true,
-                    "defaultValue": {
-                        "value": 0
-                    },
-                    "field": "status",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "pushToken": {
-                    "allowNull": true,
-                    "field": "pushToken",
-                    "seqType": "Sequelize.TEXT"
-                },
-                "name": {
-                    "allowNull": true,
-                    "field": "name",
-                    "seqType": "Sequelize.TEXT"
-                },
-                "details": {
-                    "allowNull": true,
-                    "field": "details",
-                    "seqType": "Sequelize.TEXT"
-                },
-                "isRead": {
-                    "allowNull": true,
-                    "defaultValue": {
-                        "value": 0
-                    },
-                    "field": "isRead",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "createdAt": {
-                    "allowNull": false,
-                    "field": "createdAt",
-                    "seqType": "Sequelize.DATE"
-                },
-                "updatedAt": {
-                    "allowNull": false,
-                    "field": "updatedAt",
-                    "seqType": "Sequelize.DATE"
-                }
-            },
-            "indexes": {
-                "4d70a463b5894d2932f4970bd3754017863a792f": {
-                    "name": "FKnotified822795",
-                    "using": "BTREE",
-                    "fields": [
-                        {
-                            "name": "gigId"
-                        }
-                    ],
-                    "options": {
-                        "indexName": "FKnotified822795",
-                        "name": "FKnotified822795"
-                    }
-                },
-                "f1a5f0ad9a7e8ae14d99f11b07e02423063c3a0a": {
-                    "name": "FKnotified98938",
-                    "using": "BTREE",
-                    "fields": [
-                        {
-                            "name": "employeeId"
-                        }
-                    ],
-                    "options": {
-                        "indexName": "FKnotified98938",
-                        "name": "FKnotified98938"
-                    }
-                }
-            }
+        "gigId": {
+          "allowNull": false,
+          "references": {
+            "model": "gig",
+            "key": "id"
+          },
+          "field": "gigId",
+          "onDelete": "NO ACTION",
+          "onUpdate": "CASCADE",
+          "seqType": "Sequelize.INTEGER"
         },
-        "profession": {
-            "tableName": "profession",
-            "schema": {
-                "id": {
-                    "autoIncrement": true,
-                    "allowNull": false,
-                    "primaryKey": true,
-                    "field": "id",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "name": {
-                    "allowNull": true,
-                    "unique": "name",
-                    "field": "name",
-                    "seqType": "Sequelize.STRING(30)"
-                }
-            },
-            "indexes": {
-                "29095f97b10e139149dc1366ef8d292d4c4ee168": {
-                    "name": "name",
-                    "unique": true,
-                    "using": "BTREE",
-                    "fields": [
-                        {
-                            "name": "name"
-                        }
-                    ],
-                    "options": {
-                        "indexName": "name",
-                        "name": "name",
-                        "indicesType": "UNIQUE",
-                        "type": "UNIQUE"
-                    }
-                }
-            }
+        "phone": {
+          "allowNull": true,
+          "field": "phone",
+          "seqType": "Sequelize.STRING(15)"
         },
-        "rating": {
-            "tableName": "rating",
-            "schema": {
-                "id": {
-                    "autoIncrement": true,
-                    "allowNull": false,
-                    "primaryKey": true,
-                    "field": "id",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "value": {
-                    "allowNull": true,
-                    "field": "value",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "tag": {
-                    "allowNull": true,
-                    "field": "tag",
-                    "seqType": "Sequelize.STRING(15)"
-                }
-            },
-            "indexes": []
+        "createdAt": {
+          "allowNull": false,
+          "field": "createdAt",
+          "seqType": "Sequelize.DATE"
         },
-        "reviews": {
-            "tableName": "reviews",
-            "schema": {
-                "id": {
-                    "autoIncrement": true,
-                    "allowNull": false,
-                    "primaryKey": true,
-                    "field": "id",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "status": {
-                    "allowNull": true,
-                    "field": "status",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "message": {
-                    "allowNull": true,
-                    "field": "message",
-                    "seqType": "Sequelize.TEXT"
-                },
-                "ratingId": {
-                    "allowNull": false,
-                    "references": {
-                        "model": "rating",
-                        "key": "id"
-                    },
-                    "field": "ratingId",
-                    "onDelete": "NO ACTION",
-                    "onUpdate": "CASCADE",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "createdAt": {
-                    "allowNull": false,
-                    "field": "createdAt",
-                    "seqType": "Sequelize.DATE"
-                },
-                "updatedAt": {
-                    "allowNull": false,
-                    "field": "updatedAt",
-                    "seqType": "Sequelize.DATE"
-                }
-            },
-            "indexes": {
-                "43c52b5648dfcf0c8785ec0507536167cdd6bc12": {
-                    "name": "FKreviews610743",
-                    "using": "BTREE",
-                    "fields": [
-                        {
-                            "name": "ratingId"
-                        }
-                    ],
-                    "options": {
-                        "indexName": "FKreviews610743",
-                        "name": "FKreviews610743"
-                    }
-                }
-            }
+        "updatedAt": {
+          "allowNull": false,
+          "field": "updatedAt",
+          "seqType": "Sequelize.DATE"
         }
+      },
+      "indexes": {
+        "d2a9d8bdf62d637ada1560f27183f1e7a66bea21": {
+          "name": "FKaccepted19704",
+          "using": "BTREE",
+          "fields": [
+            {
+              "name": "employeeId"
+            }
+          ],
+          "options": {
+            "indexName": "FKaccepted19704",
+            "name": "FKaccepted19704"
+          }
+        },
+        "56dd49cbc53a31f40718525f59cf3f3ff65cda54": {
+          "name": "FKaccepted7198",
+          "using": "BTREE",
+          "fields": [
+            {
+              "name": "employerId"
+            }
+          ],
+          "options": {
+            "indexName": "FKaccepted7198",
+            "name": "FKaccepted7198"
+          }
+        },
+        "5324ddc4e87f1a381b3598851fc24754d02dd4ee": {
+          "name": "FKaccepted69561",
+          "using": "BTREE",
+          "fields": [
+            {
+              "name": "gigId"
+            }
+          ],
+          "options": {
+            "indexName": "FKaccepted69561",
+            "name": "FKaccepted69561"
+          }
+        }
+      }
     },
-    "revision": 1
+    "chat": {
+      "tableName": "chat",
+      "schema": {
+        "id": {
+          "autoIncrement": true,
+          "allowNull": false,
+          "primaryKey": true,
+          "field": "id",
+          "seqType": "Sequelize.INTEGER"
+        },
+        "content": {
+          "allowNull": true,
+          "field": "content",
+          "seqType": "Sequelize.TEXT"
+        },
+        "employeeId": {
+          "allowNull": false,
+          "references": {
+            "model": "employee",
+            "key": "id"
+          },
+          "field": "employeeId",
+          "onDelete": "NO ACTION",
+          "onUpdate": "CASCADE",
+          "seqType": "Sequelize.INTEGER"
+        },
+        "employerId": {
+          "allowNull": false,
+          "references": {
+            "model": "employer",
+            "key": "id"
+          },
+          "field": "employerId",
+          "onDelete": "NO ACTION",
+          "onUpdate": "CASCADE",
+          "seqType": "Sequelize.INTEGER"
+        },
+        "from": {
+          "allowNull": true,
+          "field": "from",
+          "seqType": "Sequelize.INTEGER"
+        },
+        "to": {
+          "allowNull": true,
+          "field": "to",
+          "seqType": "Sequelize.INTEGER"
+        },
+        "fullName": {
+          "allowNull": true,
+          "field": "fullName",
+          "seqType": "Sequelize.STRING(60)"
+        },
+        "avatar": {
+          "allowNull": true,
+          "field": "avatar",
+          "seqType": "Sequelize.TEXT"
+        },
+        "createdAt": {
+          "allowNull": false,
+          "field": "createdAt",
+          "seqType": "Sequelize.DATE"
+        },
+        "updatedAt": {
+          "allowNull": false,
+          "field": "updatedAt",
+          "seqType": "Sequelize.DATE"
+        }
+      },
+      "indexes": {
+        "76b49bb13790acdd3f8852c9acdc16940e87fea6": {
+          "name": "FKchat560094",
+          "using": "BTREE",
+          "fields": [
+            {
+              "name": "employeeId"
+            }
+          ],
+          "options": {
+            "indexName": "FKchat560094",
+            "name": "FKchat560094"
+          }
+        },
+        "429ae14fd0cc511d00970ed48483cc37150253b6": {
+          "name": "FKchat572600",
+          "using": "BTREE",
+          "fields": [
+            {
+              "name": "employerId"
+            }
+          ],
+          "options": {
+            "indexName": "FKchat572600",
+            "name": "FKchat572600"
+          }
+        }
+      }
+    },
+    "employee": {
+      "tableName": "employee",
+      "schema": {
+        "id": {
+          "autoIncrement": true,
+          "allowNull": false,
+          "primaryKey": true,
+          "field": "id",
+          "seqType": "Sequelize.INTEGER"
+        },
+        "fullName": {
+          "allowNull": true,
+          "field": "fullName",
+          "seqType": "Sequelize.STRING(60)"
+        },
+        "bio": {
+          "allowNull": true,
+          "field": "bio",
+          "seqType": "Sequelize.TEXT"
+        },
+        "email": {
+          "allowNull": true,
+          "unique": {
+            "args": true,
+            "msg": "Oops. Looks like you already have an account with this email address. Please try to login.",
+            "fields": [
+              {
+                "fn": "lower",
+                "args": [
+                  {
+                    "col": "email"
+                  }
+                ]
+              }
+            ]
+          },
+          "field": "email",
+          "seqType": "Sequelize.STRING(50)"
+        },
+        "phone": {
+          "allowNull": true,
+          "field": "phone",
+          "seqType": "Sequelize.STRING(15)"
+        },
+        "password": {
+          "allowNull": true,
+          "field": "password",
+          "seqType": "Sequelize.TEXT"
+        },
+        "profileImagUri": {
+          "allowNull": true,
+          "field": "profileImagUri",
+          "seqType": "Sequelize.TEXT"
+        },
+        "documentImageUri": {
+          "allowNull": true,
+          "field": "documentImageUri",
+          "seqType": "Sequelize.TEXT"
+        },
+        "nationalIdImageUri": {
+          "allowNull": true,
+          "field": "nationalIdImageUri",
+          "seqType": "Sequelize.TEXT"
+        },
+        "status": {
+          "allowNull": true,
+          "defaultValue": {
+            "value": 0
+          },
+          "field": "status",
+          "seqType": "Sequelize.INTEGER"
+        },
+        "pushToken": {
+          "allowNull": true,
+          "field": "pushToken",
+          "seqType": "Sequelize.TEXT"
+        },
+        "createdAt": {
+          "allowNull": false,
+          "field": "createdAt",
+          "seqType": "Sequelize.DATE"
+        },
+        "updatedAt": {
+          "allowNull": false,
+          "field": "updatedAt",
+          "seqType": "Sequelize.DATE"
+        }
+      },
+      "indexes": {
+        "01f060afa22cf588052f7256e28d86c5646a43dc": {
+          "name": "email",
+          "unique": true,
+          "using": "BTREE",
+          "fields": [
+            {
+              "name": "email"
+            }
+          ],
+          "options": {
+            "indexName": "email",
+            "name": "email",
+            "indicesType": "UNIQUE",
+            "type": "UNIQUE"
+          }
+        }
+      }
+    },
+    "employeeGig": {
+      "tableName": "employeeGig",
+      "schema": {
+        "id": {
+          "autoIncrement": true,
+          "allowNull": false,
+          "primaryKey": true,
+          "field": "id",
+          "seqType": "Sequelize.INTEGER"
+        },
+        "imageUrl": {
+          "allowNull": true,
+          "field": "imageUrl",
+          "seqType": "Sequelize.TEXT"
+        },
+        "status": {
+          "allowNull": true,
+          "defaultValue": {
+            "value": 0
+          },
+          "field": "status",
+          "seqType": "Sequelize.INTEGER"
+        },
+        "likeCount": {
+          "allowNull": true,
+          "field": "likeCount",
+          "seqType": "Sequelize.INTEGER"
+        },
+        "isStarted": {
+          "allowNull": false,
+          "defaultValue": {
+            "value": 0
+          },
+          "field": "isStarted",
+          "seqType": "Sequelize.INTEGER"
+        },
+        "reviewsId": {
+          "allowNull": true,
+          "references": {
+            "model": "reviews",
+            "key": "id"
+          },
+          "field": "reviewsId",
+          "onDelete": "SET NULL",
+          "onUpdate": "CASCADE",
+          "seqType": "Sequelize.INTEGER"
+        },
+        "gigId": {
+          "allowNull": false,
+          "references": {
+            "model": "gig",
+            "key": "id"
+          },
+          "field": "gigId",
+          "onDelete": "NO ACTION",
+          "onUpdate": "CASCADE",
+          "seqType": "Sequelize.INTEGER"
+        },
+        "employeeId": {
+          "allowNull": false,
+          "references": {
+            "model": "employee",
+            "key": "id"
+          },
+          "field": "employeeId",
+          "onDelete": "NO ACTION",
+          "onUpdate": "CASCADE",
+          "seqType": "Sequelize.INTEGER"
+        }
+      },
+      "indexes": {
+        "35623227d615b8c77d17f43647891767b947e057": {
+          "name": "FKemployeeGi894008",
+          "using": "BTREE",
+          "fields": [
+            {
+              "name": "reviewsId"
+            }
+          ],
+          "options": {
+            "indexName": "FKemployeeGi894008",
+            "name": "FKemployeeGi894008"
+          }
+        },
+        "5f580a3e637294b70497b8ea63c8250d5fc44098": {
+          "name": "FKemployeeGi524747",
+          "using": "BTREE",
+          "fields": [
+            {
+              "name": "gigId"
+            }
+          ],
+          "options": {
+            "indexName": "FKemployeeGi524747",
+            "name": "FKemployeeGi524747"
+          }
+        },
+        "8abd170165dc64bc22318e4b0b081afaea3bc750": {
+          "name": "FKemployeeGi396986",
+          "using": "BTREE",
+          "fields": [
+            {
+              "name": "employeeId"
+            }
+          ],
+          "options": {
+            "indexName": "FKemployeeGi396986",
+            "name": "FKemployeeGi396986"
+          }
+        }
+      }
+    },
+    "employeeProfession": {
+      "tableName": "employeeProfession",
+      "schema": {
+        "professionId": {
+          "allowNull": false,
+          "primaryKey": true,
+          "references": {
+            "model": "profession",
+            "key": "id"
+          },
+          "field": "professionId",
+          "onDelete": "NO ACTION",
+          "onUpdate": "CASCADE",
+          "unique": "employeeProfession_professionId_employeeId_unique",
+          "seqType": "Sequelize.INTEGER"
+        },
+        "employeeId": {
+          "allowNull": false,
+          "primaryKey": true,
+          "references": {
+            "model": "employee",
+            "key": "id"
+          },
+          "field": "employeeId",
+          "unique": "employeeProfession_professionId_employeeId_unique",
+          "onDelete": "CASCADE",
+          "onUpdate": "CASCADE",
+          "seqType": "Sequelize.INTEGER"
+        }
+      },
+      "indexes": {
+        "cf3367cc1b23f3c8fbbc362dca82553cd7b05eef": {
+          "name": "FKemployeePr917718",
+          "using": "BTREE",
+          "fields": [
+            {
+              "name": "professionId"
+            }
+          ],
+          "options": {
+            "indexName": "FKemployeePr917718",
+            "name": "FKemployeePr917718"
+          }
+        },
+        "b2a8a89472aac3a415c4155ed0efcf0563a7fd32": {
+          "name": "FKemployeePr607259",
+          "using": "BTREE",
+          "fields": [
+            {
+              "name": "employeeId"
+            }
+          ],
+          "options": {
+            "indexName": "FKemployeePr607259",
+            "name": "FKemployeePr607259"
+          }
+        }
+      }
+    },
+    "employer": {
+      "tableName": "employer",
+      "schema": {
+        "id": {
+          "autoIncrement": true,
+          "allowNull": false,
+          "primaryKey": true,
+          "field": "id",
+          "seqType": "Sequelize.INTEGER"
+        },
+        "fullName": {
+          "allowNull": true,
+          "field": "fullName",
+          "seqType": "Sequelize.STRING(60)"
+        },
+        "companyName": {
+          "allowNull": true,
+          "field": "companyName",
+          "seqType": "Sequelize.STRING(30)"
+        },
+        "email": {
+          "allowNull": true,
+          "unique": {
+            "args": true,
+            "msg": "Oops. Looks like you already have an account with this email address. Please try to login.",
+            "fields": [
+              {
+                "fn": "lower",
+                "args": [
+                  {
+                    "col": "email"
+                  }
+                ]
+              }
+            ]
+          },
+          "field": "email",
+          "seqType": "Sequelize.STRING(50)"
+        },
+        "phone": {
+          "allowNull": true,
+          "unique": "phone",
+          "field": "phone",
+          "seqType": "Sequelize.STRING(15)"
+        },
+        "password": {
+          "allowNull": true,
+          "field": "password",
+          "seqType": "Sequelize.TEXT"
+        },
+        "licenseImageUri": {
+          "allowNull": true,
+          "field": "licenseImageUri",
+          "seqType": "Sequelize.TEXT"
+        },
+        "profileImagUri": {
+          "allowNull": true,
+          "field": "profileImagUri",
+          "seqType": "Sequelize.TEXT"
+        },
+        "status": {
+          "allowNull": true,
+          "defaultValue": {
+            "value": 0
+          },
+          "field": "status",
+          "seqType": "Sequelize.INTEGER"
+        },
+        "pushToken": {
+          "allowNull": true,
+          "field": "pushToken",
+          "seqType": "Sequelize.TEXT"
+        },
+        "createdAt": {
+          "allowNull": false,
+          "field": "createdAt",
+          "seqType": "Sequelize.DATE"
+        },
+        "updatedAt": {
+          "allowNull": false,
+          "field": "updatedAt",
+          "seqType": "Sequelize.DATE"
+        }
+      },
+      "indexes": {
+        "3d60619d5dd8998fc638710608b0f174963a34fe": {
+          "name": "phone",
+          "unique": true,
+          "using": "BTREE",
+          "fields": [
+            {
+              "name": "phone"
+            }
+          ],
+          "options": {
+            "indexName": "phone",
+            "name": "phone",
+            "indicesType": "UNIQUE",
+            "type": "UNIQUE"
+          }
+        },
+        "01f060afa22cf588052f7256e28d86c5646a43dc": {
+          "name": "email",
+          "unique": true,
+          "using": "BTREE",
+          "fields": [
+            {
+              "name": "email"
+            }
+          ],
+          "options": {
+            "indexName": "email",
+            "name": "email",
+            "indicesType": "UNIQUE",
+            "type": "UNIQUE"
+          }
+        }
+      }
+    },
+    "gig": {
+      "tableName": "gig",
+      "schema": {
+        "id": {
+          "autoIncrement": true,
+          "allowNull": false,
+          "primaryKey": true,
+          "field": "id",
+          "seqType": "Sequelize.INTEGER"
+        },
+        "name": {
+          "allowNull": true,
+          "field": "name",
+          "seqType": "Sequelize.TEXT"
+        },
+        "details": {
+          "allowNull": true,
+          "field": "details",
+          "seqType": "Sequelize.TEXT"
+        },
+        "paymentMethod": {
+          "allowNull": true,
+          "defaultValue": {
+            "value": 0
+          },
+          "field": "paymentMethod",
+          "seqType": "Sequelize.INTEGER"
+        },
+        "budget": {
+          "allowNull": true,
+          "field": "budget",
+          "seqType": "Sequelize.DECIMAL(10, 2)"
+        },
+        "duration": {
+          "allowNull": true,
+          "field": "duration",
+          "seqType": "Sequelize.INTEGER"
+        },
+        "hourlyRate": {
+          "allowNull": true,
+          "field": "hourlyRate",
+          "seqType": "Sequelize.DECIMAL(7, 2)"
+        },
+        "status": {
+          "allowNull": true,
+          "defaultValue": {
+            "value": 0
+          },
+          "field": "status",
+          "seqType": "Sequelize.INTEGER"
+        },
+        "employerId": {
+          "allowNull": false,
+          "references": {
+            "model": "employer",
+            "key": "id"
+          },
+          "field": "employerId",
+          "onDelete": "NO ACTION",
+          "onUpdate": "CASCADE",
+          "seqType": "Sequelize.INTEGER"
+        },
+        "professionId": {
+          "allowNull": false,
+          "references": {
+            "model": "profession",
+            "key": "id"
+          },
+          "field": "professionId",
+          "onDelete": "NO ACTION",
+          "onUpdate": "CASCADE",
+          "seqType": "Sequelize.INTEGER"
+        },
+        "neededBy": {
+          "allowNull": true,
+          "field": "neededBy",
+          "seqType": "Sequelize.DATE"
+        },
+        "hoursPerDay": {
+          "allowNull": true,
+          "field": "hoursPerDay",
+          "seqType": "Sequelize.INTEGER"
+        },
+        "days": {
+          "allowNull": true,
+          "field": "days",
+          "seqType": "Sequelize.INTEGER"
+        },
+        "location": {
+          "allowNull": true,
+          "field": "location",
+          "seqType": "Sequelize.TEXT"
+        },
+        "createdAt": {
+          "allowNull": false,
+          "field": "createdAt",
+          "seqType": "Sequelize.DATE"
+        },
+        "updatedAt": {
+          "allowNull": false,
+          "field": "updatedAt",
+          "seqType": "Sequelize.DATE"
+        }
+      },
+      "indexes": {
+        "4bc6be50d93b2a6d6825dbebb404b379878567cd": {
+          "name": "FKgig622562",
+          "using": "BTREE",
+          "fields": [
+            {
+              "name": "employerId"
+            }
+          ],
+          "options": {
+            "indexName": "FKgig622562",
+            "name": "FKgig622562"
+          }
+        },
+        "4dca49c89767399a1a06ab56d3d3fe214a5f8e50": {
+          "name": "FKgig79484",
+          "using": "BTREE",
+          "fields": [
+            {
+              "name": "professionId"
+            }
+          ],
+          "options": {
+            "indexName": "FKgig79484",
+            "name": "FKgig79484"
+          }
+        }
+      }
+    },
+    "notified": {
+      "tableName": "notified",
+      "schema": {
+        "id": {
+          "autoIncrement": true,
+          "allowNull": false,
+          "primaryKey": true,
+          "field": "id",
+          "seqType": "Sequelize.INTEGER"
+        },
+        "gigId": {
+          "allowNull": false,
+          "references": {
+            "model": "gig",
+            "key": "id"
+          },
+          "field": "gigId",
+          "onDelete": "NO ACTION",
+          "onUpdate": "CASCADE",
+          "seqType": "Sequelize.INTEGER"
+        },
+        "employeeId": {
+          "allowNull": false,
+          "references": {
+            "model": "employee",
+            "key": "id"
+          },
+          "field": "employeeId",
+          "onDelete": "NO ACTION",
+          "onUpdate": "CASCADE",
+          "seqType": "Sequelize.INTEGER"
+        },
+        "status": {
+          "allowNull": true,
+          "defaultValue": {
+            "value": 0
+          },
+          "field": "status",
+          "seqType": "Sequelize.INTEGER"
+        },
+        "pushToken": {
+          "allowNull": true,
+          "field": "pushToken",
+          "seqType": "Sequelize.TEXT"
+        },
+        "name": {
+          "allowNull": true,
+          "field": "name",
+          "seqType": "Sequelize.TEXT"
+        },
+        "details": {
+          "allowNull": true,
+          "field": "details",
+          "seqType": "Sequelize.TEXT"
+        },
+        "isRead": {
+          "allowNull": true,
+          "defaultValue": {
+            "value": 0
+          },
+          "field": "isRead",
+          "seqType": "Sequelize.INTEGER"
+        },
+        "createdAt": {
+          "allowNull": false,
+          "field": "createdAt",
+          "seqType": "Sequelize.DATE"
+        },
+        "updatedAt": {
+          "allowNull": false,
+          "field": "updatedAt",
+          "seqType": "Sequelize.DATE"
+        }
+      },
+      "indexes": {
+        "4d70a463b5894d2932f4970bd3754017863a792f": {
+          "name": "FKnotified822795",
+          "using": "BTREE",
+          "fields": [
+            {
+              "name": "gigId"
+            }
+          ],
+          "options": {
+            "indexName": "FKnotified822795",
+            "name": "FKnotified822795"
+          }
+        },
+        "f1a5f0ad9a7e8ae14d99f11b07e02423063c3a0a": {
+          "name": "FKnotified98938",
+          "using": "BTREE",
+          "fields": [
+            {
+              "name": "employeeId"
+            }
+          ],
+          "options": {
+            "indexName": "FKnotified98938",
+            "name": "FKnotified98938"
+          }
+        }
+      }
+    },
+    "profession": {
+      "tableName": "profession",
+      "schema": {
+        "id": {
+          "autoIncrement": true,
+          "allowNull": false,
+          "primaryKey": true,
+          "field": "id",
+          "seqType": "Sequelize.INTEGER"
+        },
+        "name": {
+          "allowNull": true,
+          "unique": "name",
+          "field": "name",
+          "seqType": "Sequelize.STRING(30)"
+        }
+      },
+      "indexes": {
+        "29095f97b10e139149dc1366ef8d292d4c4ee168": {
+          "name": "name",
+          "unique": true,
+          "using": "BTREE",
+          "fields": [
+            {
+              "name": "name"
+            }
+          ],
+          "options": {
+            "indexName": "name",
+            "name": "name",
+            "indicesType": "UNIQUE",
+            "type": "UNIQUE"
+          }
+        }
+      }
+    },
+    "rating": {
+      "tableName": "rating",
+      "schema": {
+        "id": {
+          "autoIncrement": true,
+          "allowNull": false,
+          "primaryKey": true,
+          "field": "id",
+          "seqType": "Sequelize.INTEGER"
+        },
+        "value": {
+          "allowNull": true,
+          "field": "value",
+          "seqType": "Sequelize.INTEGER"
+        },
+        "tag": {
+          "allowNull": true,
+          "field": "tag",
+          "seqType": "Sequelize.STRING(15)"
+        }
+      },
+      "indexes": []
+    },
+    "reviews": {
+      "tableName": "reviews",
+      "schema": {
+        "id": {
+          "autoIncrement": true,
+          "allowNull": false,
+          "primaryKey": true,
+          "field": "id",
+          "seqType": "Sequelize.INTEGER"
+        },
+        "status": {
+          "allowNull": true,
+          "field": "status",
+          "seqType": "Sequelize.INTEGER"
+        },
+        "message": {
+          "allowNull": true,
+          "field": "message",
+          "seqType": "Sequelize.TEXT"
+        },
+        "ratingId": {
+          "allowNull": false,
+          "references": {
+            "model": "rating",
+            "key": "id"
+          },
+          "field": "ratingId",
+          "onDelete": "NO ACTION",
+          "onUpdate": "CASCADE",
+          "seqType": "Sequelize.INTEGER"
+        },
+        "createdAt": {
+          "allowNull": false,
+          "field": "createdAt",
+          "seqType": "Sequelize.DATE"
+        },
+        "updatedAt": {
+          "allowNull": false,
+          "field": "updatedAt",
+          "seqType": "Sequelize.DATE"
+        }
+      },
+      "indexes": {
+        "43c52b5648dfcf0c8785ec0507536167cdd6bc12": {
+          "name": "FKreviews610743",
+          "using": "BTREE",
+          "fields": [
+            {
+              "name": "ratingId"
+            }
+          ],
+          "options": {
+            "indexName": "FKreviews610743",
+            "name": "FKreviews610743"
+          }
+        }
+      }
+    }
+  },
+  "revision": 1
 }

@@ -27,10 +27,16 @@ module.exports = {
     const jobSeekerSerivce = new JobSeekerSerivce(models);
 
     try {
-      await jobSeekerSerivce.updateProfession({ other, professionId, user });
-      return "Profession updated successfully";
+      let result = await jobSeekerSerivce.updateProfession({
+        other,
+        professionId,
+        user,
+      });
+      return {
+        token: jwt.sign({ id: result }, process.env.JWT_SECRETE),
+      };
     } catch (error) {
-      throw new Error(`Duplicated profession value ${error}`);
+      throw new Error(`Error occured while updating profession`);
     }
   },
   signInJobSeeker: async (_, { input }, { models }) => {

@@ -64,16 +64,34 @@ class JobSeekerSerivce {
     this.isAuthenticatic(user);
 
     if (other) {
-      const newProfession = await profession.create({ name: other });
-      await employeeProfession.create({
-        professionId: newProfession.id,
-        employeeId: user.id,
-      });
+      try {
+        const newProfession = await profession.create({ name: other });
+
+        await employeeProfession.create({
+          professionId: newProfession.id,
+          employeeId: user.id,
+        });
+
+        return user.id;
+      } catch (error) {
+        const data = await await profession.findOne({
+          where: { name: other },
+          attributes: ["id"],
+        });
+
+        await employeeProfession.create({
+          professionId: data.dataValues,
+          employeeId: user.id,
+        });
+
+        return user.id;
+      }
     } else {
       await employeeProfession.create({
         professionId,
         employeeId: user.id,
       });
+      return user.id;
     }
   }
 
