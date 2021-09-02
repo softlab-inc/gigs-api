@@ -236,7 +236,7 @@ module.exports = gql`
 
     employerUpdatePushNotification(pushToken: String): Employer
 
-    createProfession(other: String,professionId:Int): JobSeeker
+    createProfession(other: String,professionId:Int!): JobSeeker
 
     userUpdateStatus(status: Int!): JobSeeker
 
