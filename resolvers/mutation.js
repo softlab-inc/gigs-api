@@ -23,7 +23,7 @@ module.exports = {
       ...JobSeeker,
     };
   },
-  createProfession: async (_, { name }, { models,user}) => {
+  createProfession: async (_, {professionId,other}, { models,user}) => {
     // Mapping the list of names to {name:value}
     const nameArr = input.names.map((name) => ({ name }));
 
