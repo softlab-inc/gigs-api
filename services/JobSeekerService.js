@@ -139,9 +139,6 @@ class JobSeekerSerivce {
     return JobSeeker;
   }
   
-  async updateProfession({ professionId,other,user}){
-  
-  }
 
   async attachUserToProfile(
     other,

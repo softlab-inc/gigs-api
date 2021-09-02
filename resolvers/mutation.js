@@ -23,17 +23,6 @@ module.exports = {
       ...JobSeeker,
     };
   },
-  createProfession: async (_, {professionId,other}, { models,user}) => {
-    // Mapping the list of names to {name:value}
-    const nameArr = input.names.map((name) => ({ name }));
-
-    try {
-      await models.profession.bulkCreate(nameArr);
-      return "Professions created successfully";
-    } catch (error) {
-      throw new Error(`Duplicated profession values ${error}`);
-    }
-  },
   updateProfession: async (_, { other, professionId}, { models,user }) => {
      const jobSeekerSerivce = new JobSeekerSerivce(models);
 
