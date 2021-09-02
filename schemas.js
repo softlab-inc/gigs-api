@@ -166,9 +166,6 @@ module.exports = gql`
     license: Upload!
   }
 
-  input CreateProfession {
-    names: [String!]!
-  }
 
   input SignInJobSeeker {
     email: String!
@@ -239,7 +236,7 @@ module.exports = gql`
 
     employerUpdatePushNotification(pushToken: String): Employer
 
-    createProfession(input: CreateProfession): String!
+    createProfession(names: String!): JobSeeker
 
     userUpdateStatus(status: Int!): JobSeeker
 
