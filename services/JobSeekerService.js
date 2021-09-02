@@ -138,6 +138,10 @@ class JobSeekerSerivce {
 
     return JobSeeker;
   }
+  
+  async updateProfession({ professionId,other,user}){
+  
+  }
 
   async attachUserToProfile(
     other,
@@ -415,6 +419,7 @@ class JobSeekerSerivce {
       }
     }
   }
+
 
   async getMessageSenders({ user }) {
     this.isAuthenticatic(user);
