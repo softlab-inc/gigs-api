@@ -209,7 +209,7 @@ module.exports = gql`
     #deprecated
     createJobSeeker(input: CreateJobSeekerInput): String!
     
-    createJobSeeker2(input: CreateJobSeekerInput): String!
+    createJobSeeker2(input: CreateJobSeeker2Input): String!
 
     createGoogleJobSeeker(
       email: String!
