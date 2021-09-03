@@ -162,8 +162,6 @@ module.exports = gql`
     password: String!
     email: String!
     phone: String!
-    professionId: Int!
-    other: String
   }
 
   input CreateEmployerInput {
