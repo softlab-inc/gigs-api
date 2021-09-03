@@ -29,6 +29,7 @@ module.exports = {
     };
   },
   updateProfession: async (_, { other, professionId }, { models, user }) => {
+  
     const jobSeekerSerivce = new JobSeekerSerivce(models);
 
     try {
