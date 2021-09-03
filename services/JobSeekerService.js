@@ -158,6 +158,41 @@ class JobSeekerSerivce {
 
     return JobSeeker;
   }
+  
+  async createJobSeeker2(content) {
+  
+    let {
+      fullName,
+      email,
+      phone,
+      password,
+    } = content.input;
+
+    email = email.trim().toLowerCase();
+
+    const { employee, employeeProfession, profession } = this.models;
+
+    // hashing the user password
+    const hashed = await bcrypt.hash(password, 10);
+
+
+    const user = await employee.findOne({ where: { email } });
+
+    if (!user) {
+        throw new AuthenticationError(
+        "Oops. Looks like you already have an account with this email address. Please try to login."
+      );
+    }
+
+    const JobSeeker = await employee.create({
+      fullName,
+      email,
+      phone,
+      password: hashed,
+    });
+
+    return JobSeeker;
+  }
 
   async attachUserToProfile(
     other,
