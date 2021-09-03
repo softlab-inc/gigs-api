@@ -156,6 +156,15 @@ module.exports = gql`
     professionId: Int!
     other: String
   }
+  
+  input CreateJobSeeker2Input {
+    fullName: String!
+    password: String!
+    email: String!
+    phone: String!
+    professionId: Int!
+    other: String
+  }
 
   input CreateEmployerInput {
     fullName: String!
@@ -197,7 +206,10 @@ module.exports = gql`
 
     employerUpdateReadNotifications: String!
 
+    #deprecated
     createJobSeeker(input: CreateJobSeekerInput): String!
+    
+    createJobSeeker2(input: CreateJobSeekerInput): String!
 
     createGoogleJobSeeker(
       email: String!
