@@ -46,15 +46,17 @@ class JobSeekerSerivce {
     });
   }
 
-  async createGoogleJobSeeker(data) {
+  async createGoogleJobSeeker(data,jwt) {
+  
     const { employee } = this.models;
 
     const user = await employee.findOne({ where: { email: data.email } });
 
     if (user) {
-      return user;
+      return {...user,token: jwt.sign({ id: JobSeeker.id }, process.env.JWT_SECRETE)};
     } else {
-      return await employee.create({ ...data });
+      let user = await employee.create({ ...data });
+      return {...user,isNew:true,token: jwt.sign({ id: JobSeeker.id }, process.env.JWT_SECRETE)};
     }
   }
 

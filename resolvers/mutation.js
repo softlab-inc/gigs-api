@@ -22,11 +22,9 @@ module.exports = {
   },
   createGoogleJobSeeker: async (_, args, { models }) => {
     const jobSeekerSerivce = new JobSeekerSerivce(models);
-    const JobSeeker = await jobSeekerSerivce.createGoogleJobSeeker(args);
-    return {
-      token: jwt.sign({ id: JobSeeker.id }, process.env.JWT_SECRETE),
-      ...JobSeeker,
-    };
+    const JobSeeker = await jobSeekerSerivce.createGoogleJobSeeker(args,jwt);
+    return JobSeeker;
+    
   },
   updateProfession: async (_, { other, professionId }, { models, user }) => {
   
