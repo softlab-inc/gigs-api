@@ -87,6 +87,7 @@ class JobSeekerSerivce {
         return user.id;
       }
     } else {
+    
       await employeeProfession.create({
         professionId,
         employeeId: user.id,
