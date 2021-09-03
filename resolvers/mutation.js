@@ -17,7 +17,7 @@ module.exports = {
   },
   createJobSeeker2: async (_, { input }, { models }) => {
     const jobSeekerSerivce = new JobSeekerSerivce(models);
-    const JobSeeker = await jobSeekerSerivce.createJobSeeker({ input });
+    const JobSeeker = await jobSeekerSerivce.createJobSeeker2({ input });
     return jwt.sign({ id: JobSeeker.id }, process.env.JWT_SECRETE);
   },
   createGoogleJobSeeker: async (_, args, { models }) => {

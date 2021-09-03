@@ -178,7 +178,7 @@ class JobSeekerSerivce {
 
     const user = await employee.findOne({ where: { email } });
 
-    if (!user) {
+    if (user) {
         throw new AuthenticationError(
         "Oops. Looks like you already have an account with this email address. Please try to login."
       );
