@@ -15,6 +15,7 @@ module.exports = gql`
     nationalIdImageUri: String
     status: Int
     isNew:Boolean
+    token:String
     pushToken: String
     hasProfession: [Profession!]
     hasNotifications: [Notification!]
