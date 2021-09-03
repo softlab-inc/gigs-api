@@ -53,10 +53,10 @@ class JobSeekerSerivce {
     const user = await employee.findOne({ where: { email: data.email } });
 
     if (user) {
-      return {...user,token: jwt.sign({ id: JobSeeker.id }, process.env.JWT_SECRETE)};
+      return {...user.dataValues,isNew:false,token: jwt.sign({ id: user.id }, process.env.JWT_SECRETE)};
     } else {
       let user = await employee.create({ ...data });
-      return {...user,isNew:true,token: jwt.sign({ id: JobSeeker.id }, process.env.JWT_SECRETE)};
+      return {...user.dataValues,isNew:true,token: jwt.sign({ id:user.id }, process.env.JWT_SECRETE)};
     }
   }
 
