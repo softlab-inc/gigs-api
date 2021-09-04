@@ -31,7 +31,7 @@ module.exports = {
     const jobSeekerSerivce = new JobSeekerSerivce(models);
 
     try {
-      let result = await jobSeekerSerivce.updateProfession({
+      let result = await jobSeekerSerivce.updateProfession({ 
         other,
         professionId,
         user,
