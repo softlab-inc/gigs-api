@@ -75,7 +75,7 @@ class JobSeekerSerivce {
         });
 
         return user.id;
-      } catch (error) {
+      } catch (error) { 
         const data = await await profession.findOne({
           where: { name: other },
           attributes: ["id"],
