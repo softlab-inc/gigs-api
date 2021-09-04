@@ -29,14 +29,14 @@ module.exports = {
   updateProfession: async (_, { other, professionId }, { models, user }) => {
   
     const jobSeekerSerivce = new JobSeekerSerivce(models);
-
+  
     try {
       let result = await jobSeekerSerivce.updateProfession({ 
         other,
         professionId,
         user,
       });
-      return  jwt.sign({ id: result }, process.env.JWT_SECRETE),
+      return jwt.sign({ id: result }, process.env.JWT_SECRETE);
     } catch (error) {
       throw new Error(`Error occured while updating profession`);
     }
