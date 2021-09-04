@@ -33,7 +33,7 @@ module.exports = {
     try {
       let result = await jobSeekerSerivce.updateProfession({ 
         other,
-        professionId,
+        professionId, 
         user,
       });
       return jwt.sign({ id: result }, process.env.JWT_SECRETE);
