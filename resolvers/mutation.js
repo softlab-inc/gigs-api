@@ -36,9 +36,7 @@ module.exports = {
         professionId,
         user,
       });
-      return {
-        token: jwt.sign({ id: result }, process.env.JWT_SECRETE),
-      };
+      return  jwt.sign({ id: result }, process.env.JWT_SECRETE),
     } catch (error) {
       throw new Error(`Error occured while updating profession`);
     }
