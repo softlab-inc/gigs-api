@@ -119,10 +119,10 @@ module.exports = {
   jobSeekerSendMessage: async (
     _,
     { content, employerId },
-    { models, user, pubsub }
+    { services:{JobSeekerSerivce}, user, pubsub }
   ) => {
-    const jobSeekerService = new JobSeekerSerivce(models);
-    return await jobSeekerService.jobSeekerSendMessage({
+  
+    return await JobSeekerService.jobSeekerSendMessage({
       content,
       employerId,
       user,
@@ -132,49 +132,47 @@ module.exports = {
   employerSendMessage: async (
     _,
     { content, employeeId },
-    { models, user, pubsub }
+    { services:{EmployerService}, user, pubsub }
   ) => {
-    const employerService = new EmployerService(models);
-    return await employerService.employerSendMessage({
+  
+    return await EmployerService.employerSendMessage({
       content,
       employeeId,
       user,
       pubsub,
     });
   },
-  sendEmail: async (_, { email, isEmployer }, { models, cryptr }) => {
-    const result = new MailerService();
-    const employerService = new EmployerService(models);
-    const jobSeekerService = new JobSeekerSerivce(models);
+
+  sendEmail: async (_, { email, isEmployer }, {servies:{EmployerService,JobSeekerService,MailerService}, cryptr }) => {
 
     let id = "";
 
     if (isEmployer) {
-      id = await employerService.findByEmail({ email, cryptr });
+      id = await EmployerService.findByEmail({ email, cryptr });
     } else {
-      id = await jobSeekerService.findByEmail({ email, cryptr });
+      id = await JobSeekerService.findByEmail({ email, cryptr });
     }
-
-    return await result.sendMail({ email, id, isEmployer });
+    
+    return await MailerService.sendMail({ email, id, isEmployer });
   },
-  gigAccepted: async (_, args, { models, user, pubsub }) => {
-    const jobSeekerService = new JobSeekerSerivce(models);
-    const accepted = await jobSeekerService.acceptGig({ args, user, pubsub });
+  
+  gigAccepted: async (_, args, { services:{ JobSeekerService,NotificationService}, user, pubsub }) => {
+    const accepted = await JobSeekerService.acceptGig({ args, user, pubsub });
     console.log({ accepted });
     console.log([{ ...accepted.dataValues }]);
-    const notificationService = new NotificationService();
-    const messages = notificationService.generateAcceptedMessages([
+
+    const messages = NotificationService.generateAcceptedMessages([
       { ...accepted.dataValues },
     ]);
     console.log({ messages });
-    const tickets = await notificationService.createChunckOfNotifications(
+    const tickets = await NotificationService.createChunckOfNotifications(
       messages
     );
     console.log({ tickets });
     pubsub.publish("onAcceptGig", { onAcceptGig: accepted });
     return accepted;
   },
-  uploadFiletoS3: async (_, { file }, context) => {
+  uploadFiletoS3: async (_, { file }, {services:{AWS3Service}}) => {
     const result = await AWS3Service.handleFileUpload(file);
     const { Location } = result;
     return Location;
