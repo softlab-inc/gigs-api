@@ -62,48 +62,39 @@ module.exports = {
 
     return newUser;
   },
-  employerUploadProfileImage: async (_, { profileImage }, { models, user }) => {
-    const employerService = new EmployerService(models);
+  employerUploadProfileImage: async (_, { profileImage }, { services: {EmployerService}, user }) => {
 
-    const newUser = employerService.uploadProfileImage({ user, profileImage });
+    const newUser = EmployerService.uploadProfileImage({ user, profileImage });
 
     return newUser;
   },
+  createEmployer: async (_, { input }, {  services: {EmployerService} }) => {
 
-  createEmployer: async (_, { input }, { models }) => {
-    const employerService = new EmployerService(models);
-
-    const Employer = await employerService.createEmployer({ input });
+    const Employer = await EmployerService.createEmployer({ input });
 
     return jwt.sign({ id: Employer.id }, process.env.JWT_SECRETE);
   },
-  signInEmployer: async (_, { input }, { models }) => {
-    const employerService = new EmployerService(models);
+  signInEmployer: async (_, { input }, {  services: {EmployerService} }) => {
 
-    const Employer = await employerService.signInEmployer({ input });
+    const Employer = await EmployerService.signInEmployer({ input });
 
     return jwt.sign({ id: Employer.id }, process.env.JWT_SECRETE);
   },
-  employerCreateGig: async (_, { input }, { models, user, pubsub }) => {
-    const employerService = new EmployerService(models);
+  employerCreateGig: async (_, { input }, {  services: {EmployerService,GigService,NotificationService}, user, pubsub }) => {
 
-    const notificationService = new NotificationService();
-
-    const gigService = new GigService(models);
-
-    const gig = await employerService.employerCreateGig({
+    const gig = await EmployerService.employerCreateGig({
       user,
       input,
       pubsub,
     });
     console.log({ gig });
-    const notifiedEmployees = await gigService.notifyAllJobSeekers(gig);
+    const notifiedEmployees = await GigService.notifyAllJobSeekers(gig);
 
     console.log({ notifiedEmployees });
 
-    const messages = notificationService.generateMessages(notifiedEmployees);
+    const messages = NotificationService.generateMessages(notifiedEmployees);
     console.log({ messages });
-    const tickets = await notificationService.createChunckOfNotifications(
+    const tickets = await NotificationService.createChunckOfNotifications(
       messages
     );
 
@@ -114,18 +105,16 @@ module.exports = {
   jobSeekerUpdatePushNotification: async (
     _,
     { pushToken },
-    { models, user }
+    { services: { JobSeekerService }, user }
   ) => {
-    const jobSeekerService = new JobSeekerSerivce(models);
-    return await jobSeekerService.updatePushToken({ user, pushToken });
+    return await JobSeekerService.updatePushToken({ user, pushToken });
   },
   employerUpdatePushNotification: async (
     _,
     { pushToken },
-    { models, user }
+    {  services: { EmployerService }, user }
   ) => {
-    const employerService = new EmployerService(models);
-    return await employerService.updatePushToken({ user, pushToken });
+    return await EmployerService.updatePushToken({ user, pushToken });
   },
   jobSeekerSendMessage: async (
     _,
