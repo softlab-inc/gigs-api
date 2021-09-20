@@ -30,6 +30,7 @@ bottle.service('NotificationService',AppServices.NotificationService);
 bottle.service('MailerService',AppServices.MailerService);
 bottle.service('AWS3Service',AppServices.AWS3Service);
 
+
 console.log({bottle})
 
 const services = bottle.container;

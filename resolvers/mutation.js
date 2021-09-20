@@ -177,19 +177,19 @@ module.exports = {
     const { Location } = result;
     return Location;
   },
-  jobSeekerUpdateData: async (_, { phone, bio }, { models, user }) => {
-    const jobSeekerService = new JobSeekerSerivce(models);
-    const newUser = await jobSeekerService.jobSeekerUpdateData({
+  jobSeekerUpdateData: async (_, { phone, bio }, { services:{JobSeekerService}, user }) => {
+
+    const newUser = await JobSeekerService.jobSeekerUpdateData({
       phone,
       bio,
       user,
     });
     return newUser;
   },
-  employerUpdateData: async (_, { phone }, { models, user }) => {
-    const employerService = new EmployerService(models);
-    const newUser = await employerService.employerUpdateData({ phone, user });
-    return newUser;
+  employerUpdateData: async (_, { phone }, { services:{EmployerService}, user }) => {
+
+    return  await EmployerService.employerUpdateData({ phone, user });
+
   },
   testSubScription: async (_, { token }, { models, user, pubsub }) => {
     pubsub.publish("onTestSubscription", { onTestSubscription: token });
@@ -198,20 +198,18 @@ module.exports = {
   employerHireJobSeeker: async (
     _,
     { gigId, employeeId },
-    { models, pubsub, user }
+    { services:{EmployerService,NotificationService}, pubsub, user }
   ) => {
-    const employerService = new EmployerService(models);
-    const notificationService = new NotificationService();
-    const employeeAndGig = await employerService.employerHire({
+    const employeeAndGig = await EmployerService.employerHire({
       gigId,
       employeeId,
       user,
     });
-    const messages = notificationService.generateHiredMessages([
+    const messages = NotificationService.generateHiredMessages([
       { ...employeeAndGig },
     ]);
     console.log({ messages });
-    const tickets = await notificationService.createChunckOfNotifications(
+    const tickets = await NotificationService.createChunckOfNotifications(
       messages
     );
     console.log(tickets);
