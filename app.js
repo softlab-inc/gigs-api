@@ -11,6 +11,7 @@ const { PubSub } = require("graphql-subscriptions");
 require("dotenv").config();
 const getUser = require("./utils/getUser");
 const Cryptr = require("cryptr");
+const Services = require("./services");
 // updating the maximum number  of event listners from 10 - 100
 require("events").EventEmitter.prototype._maxListeners = 100;
 const cryptr = new Cryptr(process.env.JWT_SECRETE);
@@ -18,10 +19,16 @@ const cryptr = new Cryptr(process.env.JWT_SECRETE);
 const typeDefs = require("./schemas");
 // Providing a resolver to the schema fields
 const resolvers = require("./resolvers");
+//bottle is a dependence inject jabascript library that is going to inject services
+const bottle = new Bottle();
 
 
 
+bottle.factory('JobSeekerSerivce', (container) => new Services.JobSeekerSerivce(models));
+
+console.log({ Services ,bottle});
 const pubsub = new PubSub();
+
 
 /**
  * Integrating the APOLLO_SERVER to server our Graph GL API
