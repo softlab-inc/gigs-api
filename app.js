@@ -23,10 +23,13 @@ const resolvers = require("./resolvers");
 const bottle = new Bottle();
 
 
+bottle.factory('JobSeekerSerivce',()=> new Services.JobSeekerSerivce(models));
 
-bottle.factory('JobSeekerSerivce', (container) => new Services.JobSeekerSerivce(models));
 
-console.log({ Services ,bottle});
+console.log({bottle})
+
+bottle.container.JobSeekerSerivce.testing()
+
 const pubsub = new PubSub();
 
 
