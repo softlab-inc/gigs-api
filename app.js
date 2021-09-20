@@ -11,13 +11,15 @@ const { PubSub } = require("graphql-subscriptions");
 require("dotenv").config();
 const getUser = require("./utils/getUser");
 const Cryptr = require("cryptr");
-// updating the maximum number from 10 - 100
+// updating the maximum number  of event listners from 10 - 100
 require("events").EventEmitter.prototype._maxListeners = 100;
 const cryptr = new Cryptr(process.env.JWT_SECRETE);
 // Constructing a schema, using the GraphGL schema query language
 const typeDefs = require("./schemas");
 // Providing a resolver to the schema fields
 const resolvers = require("./resolvers");
+
+
 
 const pubsub = new PubSub();
 
@@ -75,13 +77,7 @@ app.use(cookieParser());
 app.use(cors());
 app.use(helmet());
 
-/**
- * Exporsing static files where all uploads shall be stored
- */
-app.use(express.static(path.join(__dirname, "/uploads/profile-images/")));
-app.use(express.static(path.join(__dirname, "/uploads/document-images/")));
-app.use(express.static(path.join(__dirname, "/uploads/id-images/")));
-app.use(express.static(path.join(__dirname, "/uploads/license-images/")));
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
