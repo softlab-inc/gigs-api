@@ -18,18 +18,14 @@ module.exports = {
     const JobSeeker = await JobSeekerService.createJobSeeker2({ input });
     return jwt.sign({ id: JobSeeker.id }, process.env.JWT_SECRETE);
   },
-  createGoogleJobSeeker: async (_, args, { models }) => {
-    const jobSeekerSerivce = new JobSeekerSerivce(models);
-    const JobSeeker = await jobSeekerSerivce.createGoogleJobSeeker(args,jwt);
+  createGoogleJobSeeker: async (_, args, { services: { JobSeekerService } } ) => {
+    const JobSeeker = await JobSeekerService.createGoogleJobSeeker(args,jwt);
     return JobSeeker;
-    
   },
-  updateProfession: async (_, { other, professionId }, { models, user }) => {
-  
-    const jobSeekerSerivce = new JobSeekerSerivce(models);
+  updateProfession: async (_, { other, professionId }, { services: { JobSeekerService }, user }) => {
   
     try {
-      let result = await jobSeekerSerivce.updateProfession({ 
+      let result = await JobSeekerService.updateProfession({ 
         other,
         professionId, 
         user,
@@ -39,18 +35,16 @@ module.exports = {
       throw new Error(`Error occured while updating profession`);
     }
   },
-  signInJobSeeker: async (_, { input }, { models }) => {
-    const jobSeekerService = new JobSeekerSerivce(models);
+  signInJobSeeker: async (_, { input }, { services: { JobSeekerService }}) => {
 
-    const user = await jobSeekerService.signInJobSeeker({ input });
+    const user = await JobSeekerService.signInJobSeeker({ input });
 
     // signing the user and returning the json web token
     return jwt.sign({ id: user.id }, process.env.JWT_SECRETE);
   },
-  userUpdateStatus: async (_, { status }, { models, user, pubsub }) => {
-    const jobSeekerService = new JobSeekerSerivce(models);
+  userUpdateStatus: async (_, { status }, { services: { JobSeekerService }, user, pubsub }) => {
 
-    const newUser = await jobSeekerService.userUpdateStatus({
+    const newUser = await JobSeekerService.userUpdateStatus({
       user,
       pubsub,
       status,
@@ -61,11 +55,10 @@ module.exports = {
   jobSeekerUploadProfileImage: async (
     _,
     { profileImage },
-    { models, user }
+    { services: { JobSeekerService }, user }
   ) => {
-    const jobSeekerService = new JobSeekerSerivce(models);
 
-    const newUser = jobSeekerService.uploadProfileImage({ user, profileImage });
+    const newUser = JobSeekerService.uploadProfileImage({ user, profileImage });
 
     return newUser;
   },

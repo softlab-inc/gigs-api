@@ -22,15 +22,11 @@ const resolvers = require("./resolvers");
 //bottle is a dependence inject jabascript library that is going to inject services
 const bottle = new Bottle();
 
-
+//registering services to bottle
 bottle.factory('JobSeekerService',()=> new AppServices.JobSeekerSerivce(models));
-
-
-console.log({bottle})
 
 const services = bottle.container;
 
- services.JobSeekerService.testing()
 
 const pubsub = new PubSub();
 
