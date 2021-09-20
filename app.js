@@ -24,6 +24,8 @@ const bottle = new Bottle();
 
 //registering services to bottle
 bottle.factory('JobSeekerService',()=> new AppServices.JobSeekerSerivce(models));
+bottle.factory('EmployerService',()=> new AppServices.EmployerService(models));
+
 
 const services = bottle.container;
 
