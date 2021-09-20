@@ -11,7 +11,7 @@ const { PubSub } = require("graphql-subscriptions");
 require("dotenv").config();
 const getUser = require("./utils/getUser");
 const Cryptr = require("cryptr");
-const Services = require("./services");
+const AppServices = require("./services");
 // updating the maximum number  of event listners from 10 - 100
 require("events").EventEmitter.prototype._maxListeners = 100;
 const cryptr = new Cryptr(process.env.JWT_SECRETE);
@@ -23,12 +23,14 @@ const resolvers = require("./resolvers");
 const bottle = new Bottle();
 
 
-bottle.factory('JobSeekerSerivce',()=> new Services.JobSeekerSerivce(models));
+bottle.factory('JobSeekerService',()=> new AppServices.JobSeekerSerivce(models));
 
 
 console.log({bottle})
 
-bottle.container.JobSeekerSerivce.testing()
+const services = bottle.container;
+
+ services.JobSeekerService.testing()
 
 const pubsub = new PubSub();
 
@@ -48,7 +50,7 @@ const server = new ApolloServer({
 
       const user = getUser(token);
 
-      return { models, user, pubsub, cryptr };
+      return { models, user, pubsub, cryptr,services,models };
     }
   },
   subscriptions: {

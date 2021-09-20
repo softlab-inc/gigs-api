@@ -10,14 +10,12 @@ const {
 } = require("../services");
 
 module.exports = {
-  createJobSeeker: async (_, { input }, { models }) => {
-    const jobSeekerSerivce = new JobSeekerSerivce(models);
-    const JobSeeker = await jobSeekerSerivce.createJobSeeker({ input });
+  createJobSeeker: async (_, { input }, { services:{JobSeekerService} }) => {
+    const JobSeeker = await JobSeekerService.createJobSeeker({ input });
     return jwt.sign({ id: JobSeeker.id }, process.env.JWT_SECRETE);
   },
-  createJobSeeker2: async (_, { input }, { models }) => {
-    const jobSeekerSerivce = new JobSeekerSerivce(models);
-    const JobSeeker = await jobSeekerSerivce.createJobSeeker2({ input });
+  createJobSeeker2: async (_, { input }, {  services:{JobSeekerService}  }) => {
+    const JobSeeker = await JobSeekerService.createJobSeeker2({ input });
     return jwt.sign({ id: JobSeeker.id }, process.env.JWT_SECRETE);
   },
   createGoogleJobSeeker: async (_, args, { models }) => {
