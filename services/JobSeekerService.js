@@ -489,6 +489,11 @@ class JobSeekerSerivce {
     console.log({ data });
     return data;
   }
+  
+  testing(){
+    console.log("Test run successfully")
+  }
+  
 }
 
 module.exports = JobSeekerSerivce;

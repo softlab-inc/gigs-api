@@ -3,23 +3,40 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const models = require("./models");
-const path = require("path");
 const cors = require("cors");
 const helmet = require("helmet");
+const Bottle = require("bottlejs");
 const { ApolloServer } = require("apollo-server-express");
 const { PubSub } = require("graphql-subscriptions");
 require("dotenv").config();
 const getUser = require("./utils/getUser");
 const Cryptr = require("cryptr");
-// updating the maximum number from 10 - 100
+const AppServices = require("./services");
+// updating the maximum number  of event listners from 10 - 100
 require("events").EventEmitter.prototype._maxListeners = 100;
 const cryptr = new Cryptr(process.env.JWT_SECRETE);
 // Constructing a schema, using the GraphGL schema query language
 const typeDefs = require("./schemas");
 // Providing a resolver to the schema fields
 const resolvers = require("./resolvers");
+//bottle is a dependence inject jabascript library that is going to inject services
+const bottle = new Bottle();
+
+//registering services to bottle a DI library
+bottle.factory('JobSeekerService',()=> new AppServices.JobSeekerSerivce(models));
+bottle.factory('EmployerService',()=> new AppServices.EmployerService(models));
+bottle.factory('GigService',()=> new AppServices.GigService(models));
+bottle.service('NotificationService',AppServices.NotificationService);
+bottle.service('MailerService',AppServices.MailerService);
+bottle.service('AWS3Service',AppServices.AWS3Service);
+
+console.log({bottle})
+
+const services = bottle.container;
+
 
 const pubsub = new PubSub();
+
 
 /**
  * Integrating the APOLLO_SERVER to server our Graph GL API
@@ -36,7 +53,7 @@ const server = new ApolloServer({
 
       const user = getUser(token);
 
-      return { models, user, pubsub, cryptr };
+      return { models, user, pubsub, cryptr,services,models };
     }
   },
   subscriptions: {
@@ -75,13 +92,7 @@ app.use(cookieParser());
 app.use(cors());
 app.use(helmet());
 
-/**
- * Exporsing static files where all uploads shall be stored
- */
-app.use(express.static(path.join(__dirname, "/uploads/profile-images/")));
-app.use(express.static(path.join(__dirname, "/uploads/document-images/")));
-app.use(express.static(path.join(__dirname, "/uploads/id-images/")));
-app.use(express.static(path.join(__dirname, "/uploads/license-images/")));
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
