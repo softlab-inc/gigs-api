@@ -248,27 +248,23 @@ module.exports = {
     });
     return employeeAndGig;
   },
-  employeeUpdateGigStatus: async (_, { gigId, status }, { models, user }) => {
-    const jobSeekerService = new JobSeekerSerivce(models);
-    return await jobSeekerService.updateGigStatus({ user, gigId, status });
+  employeeUpdateGigStatus: async (_, { gigId, status }, { services:{JobSeekerService}, user }) => {
+    return await JobSeekerService.updateGigStatus({ user, gigId, status });
   },
-  employerUpdateReadNotifications: async (_, args, { user, models }) => {
-    const employerService = new EmployerService(models);
-    await employerService.updateReadNotifications({ user });
+  employerUpdateReadNotifications: async (_, args, { user, services:{ EmployerService} }) => {
+    await EmployerService.updateReadNotifications({ user });
     return "Notifications update successfully...";
   },
-  jobSeekerUpdateReadNotifications: async (_, args, { user, models }) => {
-    const jobSeekerService = new JobSeekerSerivce(models);
-    await jobSeekerService.updateReadNotifications({ user });
+  jobSeekerUpdateReadNotifications: async (_, args, { user, services:{JobSeekerService} }) => {
+    await JobSeekerService.updateReadNotifications({ user });
     return "Notifications update successfully...";
   },
   jobSeekerUpdatePassword: async (
     _,
     { id, password, confirmPassword },
-    { models, cryptr }
+    { services:{ JobSeekerService}, cryptr }
   ) => {
-    const jobSeekerService = new JobSeekerSerivce(models);
-    return await jobSeekerService.updatePassword({
+    return await JobSeekerService.updatePassword({
       id,
       password,
       confirmPassword,
@@ -278,10 +274,9 @@ module.exports = {
   employerUpdatePassword: async (
     _,
     { id, password, confirmPassword },
-    { models, cryptr }
+    { services:{EmployerService}, cryptr }
   ) => {
-    const employerService = new EmployerService(models);
-    return await employerService.updatePassword({
+    return await EmployerService.updatePassword({
       id,
       password,
       confirmPassword,
