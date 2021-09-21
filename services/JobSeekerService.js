@@ -46,17 +46,24 @@ class JobSeekerSerivce {
     });
   }
 
-  async createGoogleJobSeeker(data,jwt) {
-  
+  async createGoogleJobSeeker(data, jwt) {
     const { employee } = this.models;
 
     const user = await employee.findOne({ where: { email: data.email } });
 
     if (user) {
-      return {...user.dataValues,isNew:false,token: jwt.sign({ id: user.id }, process.env.JWT_SECRETE)};
+      return {
+        ...user.dataValues,
+        isNew: false,
+        token: jwt.sign({ id: user.id }, process.env.JWT_SECRETE),
+      };
     } else {
       let user = await employee.create({ ...data });
-      return {...user.dataValues,isNew:true,token: jwt.sign({ id:user.id }, process.env.JWT_SECRETE)};
+      return {
+        ...user.dataValues,
+        isNew: true,
+        token: jwt.sign({ id: user.id }, process.env.JWT_SECRETE),
+      };
     }
   }
 
@@ -75,7 +82,7 @@ class JobSeekerSerivce {
         });
 
         return user.id;
-      } catch (error) {  
+      } catch (error) {
         const data = await await profession.findOne({
           where: { name: other },
           attributes: ["id"],
@@ -89,7 +96,6 @@ class JobSeekerSerivce {
         return user.id;
       }
     } else {
-    
       await employeeProfession.create({
         professionId,
         employeeId: user.id,
@@ -160,15 +166,9 @@ class JobSeekerSerivce {
 
     return JobSeeker;
   }
-  
+
   async createJobSeeker2(content) {
-  
-    let {
-      fullName,
-      email,
-      phone,
-      password,
-    } = content.input;
+    let { fullName, email, phone, password } = content.input;
 
     email = email.trim().toLowerCase();
 
@@ -177,11 +177,10 @@ class JobSeekerSerivce {
     // hashing the user password
     const hashed = await bcrypt.hash(password, 10);
 
-
     const user = await employee.findOne({ where: { email } });
 
     if (user) {
-        throw new AuthenticationError(
+      throw new AuthenticationError(
         "Oops. Looks like you already have an account with this email address. Please try to login."
       );
     }
@@ -489,11 +488,10 @@ class JobSeekerSerivce {
     console.log({ data });
     return data;
   }
-  
-  testing(){
-    console.log("Test run successfully")
+
+  testing() {
+    console.log("Test run successfully");
   }
-  
 }
 
 module.exports = JobSeekerSerivce;
