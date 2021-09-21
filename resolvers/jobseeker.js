@@ -1,28 +1,21 @@
-const { JobSeekerSerivce } = require("../services/");
 
 module.exports = {
-  hasProfession: async ({ id }, args, { models }) => {
-    const jobSeekerService = new JobSeekerSerivce(models);
-    return await jobSeekerService.getProfessions({ employeeId: id });
+  hasProfession: async ({ id }, args, { services:{JobSeekerService} }) => {
+    return await JobSeekerService.getProfessions({ employeeId: id });
   },
-  hasNotifications: async ({ id }, args, { models }) => {
-    const jobSeekerService = new JobSeekerSerivce(models);
-    return await jobSeekerService.getNotifications({ employeeId: id });
+  hasNotifications: async ({ id }, args, { services:{JobSeekerService} }) => {
+    return await JobSeekerService.getNotifications({ employeeId: id });
   },
-  unReadNotifications: async ({ id }, args, { models }) => {
-    const jobSeekerService = new JobSeekerSerivce(models);
-    return await jobSeekerService.getUnReadNotifications({ employeeId: id });
+  unReadNotifications: async ({ id }, args, { services:{JobSeekerService} }) => {
+    return await JobSeekerService.getUnReadNotifications({ employeeId: id });
   },
-  readNotifications: async ({ id }, args, { models }) => {
-    const jobSeekerService = new JobSeekerSerivce(models);
-    return await jobSeekerService.getReadNotifications({ employeeId: id });
+  readNotifications: async ({ id }, args, { services:{JobSeekerService} }) => {
+    return await JobSeekerService.getReadNotifications({ employeeId: id });
   },
-  pendingGigs: async ({ id }, args, { models }) => {
-    const jobSeekerService = new JobSeekerSerivce(models);
-    return await jobSeekerService.getPendingGigs({ employeeId: id });
+  pendingGigs: async ({ id }, args, { services:{JobSeekerService} }) => {
+    return await JobSeekerService.getPendingGigs({ employeeId: id });
   },
-  recentEmployers: async ({ id }, args, { models }) => {
-    const jobSeekerService = new JobSeekerSerivce(models);
-    return await jobSeekerService.getRecentEmployers({ employeeId: id });
+  recentEmployers: async ({ id }, args, { services:{JobSeekerService} }) => {
+    return await JobSeekerService.getRecentEmployers({ employeeId: id });
   },
 };
