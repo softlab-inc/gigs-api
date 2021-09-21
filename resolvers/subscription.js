@@ -1,6 +1,5 @@
 const { withFilter } = require("apollo-server-express");
 const getUser = require("../utils/getUser");
-const { GigService } = require("../services/");
 
 module.exports = {
   onStatusChange: {
@@ -16,11 +15,10 @@ module.exports = {
        */
     subscribe: withFilter(
       (_, __, { pubsub }) => pubsub.asyncIterator("onGigCreated"),
-      async ({ onGigCreated }, { token }, { models }) => {
-        const gigService = new GigService(models);
+      async ({ onGigCreated }, { token }, { services: {GigService}}) => {
         const { professionId } = onGigCreated;
         const user = getUser(token);
-        const notified = await gigService.notifyJobSeeker({
+        const notified = await GigService.notifyJobSeeker({
           professionId,
           employeeId: user.id,
         });
