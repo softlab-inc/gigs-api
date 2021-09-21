@@ -23,20 +23,24 @@ const resolvers = require("./resolvers");
 const bottle = new Bottle();
 
 //registering services to bottle a DI library
-bottle.factory('JobSeekerService',()=> new AppServices.JobSeekerSerivce(models));
-bottle.factory('EmployerService',()=> new AppServices.EmployerService(models));
-bottle.factory('GigService',()=> new AppServices.GigService(models));
-bottle.service('NotificationService',AppServices.NotificationService);
-bottle.service('MailerService',AppServices.MailerService);
-bottle.service('AWS3Service',AppServices.AWS3Service);
+bottle.factory(
+  "JobSeekerService",
+  () => new AppServices.JobSeekerSerivce(models)
+);
+bottle.factory(
+  "EmployerService",
+  () => new AppServices.EmployerService(models)
+);
+bottle.factory("GigService", () => new AppServices.GigService(models));
+bottle.service("NotificationService", AppServices.NotificationService);
+bottle.service("MailerService", AppServices.MailerService);
+bottle.service("AWS3Service", AppServices.AWS3Service);
 
-console.log({bottle})
+console.log({ bottle });
 
 const services = bottle.container;
 
-
 const pubsub = new PubSub();
-
 
 /**
  * Integrating the APOLLO_SERVER to server our Graph GL API
@@ -47,13 +51,13 @@ const server = new ApolloServer({
   resolvers,
   context: ({ req, connection }) => {
     if (connection) {
-      return { connection, pubsub, models };
+      return { connection, pubsub, models, services };
     } else {
       const token = req.headers.authorization || "";
 
       const user = getUser(token);
 
-      return { models, user, pubsub, cryptr,services,models };
+      return { models, user, pubsub, cryptr, services, models };
     }
   },
   subscriptions: {
@@ -91,8 +95,6 @@ app.use(logger("dev"));
 app.use(cookieParser());
 app.use(cors());
 app.use(helmet());
-
-
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -14,8 +14,8 @@ module.exports = gql`
     documentImageUri: String
     nationalIdImageUri: String
     status: Int
-    isNew:Boolean
-    token:String
+    isNew: Boolean
+    token: String
     pushToken: String
     hasProfession: [Profession!]
     hasNotifications: [Notification!]
@@ -158,7 +158,7 @@ module.exports = gql`
     professionId: Int!
     other: String
   }
-  
+
   input CreateJobSeeker2Input {
     fullName: String!
     password: String!
@@ -208,7 +208,7 @@ module.exports = gql`
 
     #deprecated
     createJobSeeker(input: CreateJobSeekerInput): String!
-    
+
     createJobSeeker2(input: CreateJobSeeker2Input): String!
 
     createGoogleJobSeeker(
