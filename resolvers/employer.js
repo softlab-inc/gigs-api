@@ -1,4 +1,3 @@
-const { EmployerService } = require("../services");
 
 // hasAccepted -> wasHired for job
 module.exports = {
@@ -10,8 +9,7 @@ module.exports = {
     }),
   unReadHasAccepted: async ({ id }, args, { models }) =>
     await models.accepted.findAll({ where: { employerId: id, isRead: 0 } }),
-  recentHires: async ({ id: employerId }, args, { models, user }) => {
-    const employerService = new EmployerService(models);
-    return await employerService.getRecentHires({ employerId, user });
+  recentHires: async ({ id: employerId }, args, { services:{EmployerService}, user }) => {
+    return await EmployerService.getRecentHires({ employerId, user });
   },
 };
