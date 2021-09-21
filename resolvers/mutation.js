@@ -239,21 +239,33 @@ module.exports = {
     });
     return employeeAndGig;
   },
-  employeeUpdateGigStatus: async (_, { gigId, status }, { services:{JobSeekerService}, user }) => {
+  employeeUpdateGigStatus: async (
+    _,
+    { gigId, status },
+    { services: { JobSeekerService }, user }
+  ) => {
     return await JobSeekerService.updateGigStatus({ user, gigId, status });
   },
-  employerUpdateReadNotifications: async (_, args, { user, services:{ EmployerService} }) => {
+  employerUpdateReadNotifications: async (
+    _,
+    args,
+    { user, services: { EmployerService } }
+  ) => {
     await EmployerService.updateReadNotifications({ user });
     return "Notifications update successfully...";
   },
-  jobSeekerUpdateReadNotifications: async (_, args, { user, services:{JobSeekerService} }) => {
+  jobSeekerUpdateReadNotifications: async (
+    _,
+    args,
+    { user, services: { JobSeekerService } }
+  ) => {
     await JobSeekerService.updateReadNotifications({ user });
     return "Notifications update successfully...";
   },
   jobSeekerUpdatePassword: async (
     _,
     { id, password, confirmPassword },
-    { services:{ JobSeekerService}, cryptr }
+    { services: { JobSeekerService }, cryptr }
   ) => {
     return await JobSeekerService.updatePassword({
       id,
@@ -265,7 +277,7 @@ module.exports = {
   employerUpdatePassword: async (
     _,
     { id, password, confirmPassword },
-    { services:{EmployerService}, cryptr }
+    { services: { EmployerService }, cryptr }
   ) => {
     return await EmployerService.updatePassword({
       id,
