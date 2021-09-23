@@ -130,7 +130,7 @@ module.exports = {
   jobSeekerSendMessage: async (
     _,
     { content, employerId },
-    { services: { JobSeekerSerivce }, user, pubsub }
+    { services: { JobSeekerService }, user, pubsub }
   ) => {
     return await JobSeekerService.jobSeekerSendMessage({
       content,
