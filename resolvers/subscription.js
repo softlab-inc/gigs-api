@@ -15,7 +15,7 @@ module.exports = {
        */
     subscribe: withFilter(
       (_, __, { pubsub }) => pubsub.asyncIterator("onGigCreated"),
-      async ({ onGigCreated }, { token }, { services: {GigService}}) => {
+      async ({ onGigCreated }, { token }, { services: { GigService } }) => {
         const { professionId } = onGigCreated;
         const user = getUser(token);
         const notified = await GigService.notifyJobSeeker({
