@@ -28,7 +28,7 @@ class MailerService {
     }
   }
   
-  async sendMailToAny({mail,message,subject}){
+  async sendMailToAny({email,message,subject}){
       
       sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
       
@@ -38,7 +38,7 @@ class MailerService {
       subject: subject,
       text: message,
       html: `
-                  <html>
+            <html>
                 <body>
                 <h5> ${subject} </h5>
                 <hr/>
@@ -47,6 +47,14 @@ class MailerService {
             </html>
           `,
     };
+    
+     try {
+      await sgMail.send(msg);
+      return "Email has been sent succcessfully";
+    } catch (error) {
+      throw new Error(error);
+    }
+    
   }
   
 }
