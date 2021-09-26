@@ -27,5 +27,12 @@ class MailerService {
       throw new Error(error);
     }
   }
+  
+  async sendMailToAny({mail,message,subject}){
+
+  }
+  
 }
+
+
 module.exports = MailerService;
