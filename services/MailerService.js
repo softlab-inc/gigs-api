@@ -27,12 +27,12 @@ class MailerService {
       throw new Error(error);
     }
   }
+
+  async sendMailToAny({ email, message, subject }) {
   
-  async sendMailToAny({email,message,subject}){
-      
-      sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
-      
-      const msg = {
+    sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
+
+    const msg = {
       to: email, // Change to your recipient
       from: process.env.SENDER_EMAIL, // Change to your verified sender
       subject: subject,
@@ -47,17 +47,14 @@ class MailerService {
             </html>
           `,
     };
-    
-     try {
+
+    try {
       await sgMail.send(msg);
       return "Email has been sent succcessfully";
     } catch (error) {
       throw new Error(error);
     }
-    
   }
-  
 }
-
 
 module.exports = MailerService;
