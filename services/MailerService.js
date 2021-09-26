@@ -29,7 +29,24 @@ class MailerService {
   }
   
   async sendMailToAny({mail,message,subject}){
-
+      
+      sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
+      
+      const msg = {
+      to: email, // Change to your recipient
+      from: process.env.SENDER_EMAIL, // Change to your verified sender
+      subject: subject,
+      text: message,
+      html: `
+                  <html>
+                <body>
+                <h5> ${subject} </h5>
+                <hr/>
+                <p>${message}</p>
+              </body>
+            </html>
+          `,
+    };
   }
   
 }
