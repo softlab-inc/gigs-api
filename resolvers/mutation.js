@@ -132,6 +132,8 @@ module.exports = {
     { content, employerId },
     { services: { JobSeekerService }, user, pubsub }
   ) => {
+     
+  
     return await JobSeekerService.jobSeekerSendMessage({
       content,
       employerId,
@@ -144,6 +146,8 @@ module.exports = {
     { content, employeeId },
     { services: { EmployerService }, user, pubsub }
   ) => {
+  
+  
     return await EmployerService.employerSendMessage({
       content,
       employeeId,

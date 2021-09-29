@@ -451,6 +451,8 @@ class JobSeekerSerivce {
     return encryptedString;
   }
 
+
+
   async updatePassword({ id, password, confirmPassword, cryptr }) {
     const userId = Number(cryptr.decrypt(id));
     console.log(userId);

@@ -38,9 +38,10 @@ bottle.service("AWS3Service", AppServices.AWS3Service);
 
 const services = bottle.container;
 
-// console.log({ services });
+console.log({ services });
 
 (async function () {
+  // let result = await services.GigService.notifyAllEmployees(models.employee, 3, 'Software engineer', 'Greate software engineer');
 
   // let result = await services.MailerService.sendMailToAny({ email: 'raymondkalumba360@gmail.com', message: 'Good morning bro', subject: 'Greeting' });
   
