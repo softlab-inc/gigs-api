@@ -38,14 +38,6 @@ bottle.service("AWS3Service", AppServices.AWS3Service);
 
 const services = bottle.container;
 
-// console.log({ services });
-
-(async function () {
-
-  // let result = await services.MailerService.sendMailToAny({ email: 'raymondkalumba360@gmail.com', message: 'Good morning bro', subject: 'Greeting' });
-  
-  // console.log({result})
-})();
 
 const pubsub = new PubSub();
 

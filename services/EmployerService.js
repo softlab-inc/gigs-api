@@ -310,6 +310,11 @@ class EmployerService {
     return await this.employer({ user });
   }
 
+async findById({id}){
+   const user = await this.models.employer.findOne({ where: {id},attributes:["email"] });
+  return user.dataValues;
+}
+
   async updateReadNotifications({ user }) {
     this.isAuthenticatic(user);
     const result = await this.models.accepted.findAll({

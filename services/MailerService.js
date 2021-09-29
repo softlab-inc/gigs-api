@@ -1,4 +1,4 @@
-const sgMail = require("@sendgrid/mail");
+const sgMail = require("@sendgrid/mail");  
 
 class MailerService {
   async sendMail({ email, id, isEmployer }) {

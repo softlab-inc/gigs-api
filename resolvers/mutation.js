@@ -130,8 +130,12 @@ module.exports = {
   jobSeekerSendMessage: async (
     _,
     { content, employerId },
-    { services: { JobSeekerService }, user, pubsub }
+    { services: { JobSeekerService,EmployerService, MailerService}, user, pubsub }
   ) => {
+     
+    let recieverMail = await EmployerService.findById({ id: employerId });
+    await MailerService.sendMailToAny({...recieverMail,message:"You have a new message, Open your Gigs App",subject:"New message"})
+  
     return await JobSeekerService.jobSeekerSendMessage({
       content,
       employerId,
@@ -142,8 +146,12 @@ module.exports = {
   employerSendMessage: async (
     _,
     { content, employeeId },
-    { services: { EmployerService }, user, pubsub }
+    { services: { EmployerService,JobSeekerService, MailerService }, user, pubsub }
   ) => {
+  
+    let recieverMail = await JobSeekerService.findById({ id: employeeId });
+    await MailerService.sendMailToAny({...recieverMail,message:"You have a new message, Open your Gigs App",subject:"New message"})
+  
     return await EmployerService.employerSendMessage({
       content,
       employeeId,
