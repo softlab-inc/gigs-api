@@ -451,7 +451,10 @@ class JobSeekerSerivce {
     return encryptedString;
   }
 
-
+async findById({id}){
+   const user = await this.models.employee.findOne({ where: {id},attributes:["email"] });
+  return user.dataValues;
+}
 
   async updatePassword({ id, password, confirmPassword, cryptr }) {
     const userId = Number(cryptr.decrypt(id));
