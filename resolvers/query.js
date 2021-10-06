@@ -52,8 +52,8 @@ module.exports = {
       limit: 20,
     }),
 
-  jobSeekerNotifications: async (_, __, { services: {}, user }) => {
-    const jobSeekerService = new JobSeekerSerivce(models);
+  jobSeekerNotifications: async (_, __, { services: {JobSeekerService}, user }) => {
+    const jobSeekerService = new JobSeekerService(models);
     return await jobSeekerService.getAllNotifications({ user });
   },
 

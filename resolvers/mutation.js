@@ -163,7 +163,7 @@ module.exports = {
   sendEmail: async (
     _,
     { email, isEmployer },
-    { servies: { EmployerService, JobSeekerService, MailerService }, cryptr }
+    { services: { EmployerService, JobSeekerService, MailerService }, cryptr }
   ) => {
     let id = "";
 
