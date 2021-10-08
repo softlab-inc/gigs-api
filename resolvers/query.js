@@ -53,8 +53,7 @@ module.exports = {
     }),
 
   jobSeekerNotifications: async (_, __, { services: {JobSeekerService}, user }) => {
-    const jobSeekerService = new JobSeekerService(models);
-    return await jobSeekerService.getAllNotifications({ user });
+    return await JobSeekerService.getAllNotifications({ user });
   },
 
   recentHires: async (_, __, { services: {}, user }) => {
