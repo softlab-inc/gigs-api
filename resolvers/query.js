@@ -53,18 +53,15 @@ module.exports = {
     }),
 
   jobSeekerNotifications: async (_, __, { services: {JobSeekerService}, user }) => {
-    const jobSeekerService = new JobSeekerService(models);
-    return await jobSeekerService.getAllNotifications({ user });
+    return await JobSeekerService.getAllNotifications({ user });
   },
 
-  recentHires: async (_, __, { services: {}, user }) => {
-    const employerService = new EmployerService(models);
-    return await employerService.getRecentHires({ user });
+  recentHires: async (_, __, { services: {EmployerService}, user }) => {
+    return await EmployerService.getRecentHires({ user });
   },
 
-  employerMessages: async (_, __, { services: {}, user }) => {
-    const employerService = new EmployerService(models);
-    return await employerService.getMessageSenders({ user });
+  employerMessages: async (_, __, { services: {EmployerService}, user }) => {
+    return await EmployerService.getMessageSenders({ user });
   },
 
   jobSeekerMessages: async (
@@ -84,6 +81,6 @@ module.exports = {
   },
 
   getGetJobSeeker: async (_, { id }, { services: { JobSeekerService } }) => {
-    return await jobSeekerService.JobSeeker({ user: { id } });
+    return await JobSeekerService.JobSeeker({ user: { id } });
   },
 };
