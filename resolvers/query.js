@@ -81,6 +81,6 @@ module.exports = {
   },
 
   getGetJobSeeker: async (_, { id }, { services: { JobSeekerService } }) => {
-    return await jobSeekerService.JobSeeker({ user: { id } });
+    return await JobSeekerService.JobSeeker({ user: { id } });
   },
 };
