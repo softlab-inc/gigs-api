@@ -14,14 +14,14 @@ const Cryptr = require("cryptr");
 const AppServices = require("./services");
 // updating the maximum number  of event listners from 10 - 100
 require("events").EventEmitter.prototype._maxListeners = 100;
-const cryptr = new Cryptr(process.env.JWT_SECRETE);
+// const cryptr = new Cryptr(process.env.JWT_SECRETE);
 // Constructing a schema, using the GraphGL schema query language
 const typeDefs = require("./schemas");
 // Providing a resolver to the schema fields
 const resolvers = require("./resolvers");
 //bottle is a dependence inject jabascript library that is going to inject services
 const bottle = new Bottle();
-
+console.log({test:process.env.JWT_SECRETE})
 //registering services to bottle a DI library
 bottle.factory(
   "JobSeekerService",
