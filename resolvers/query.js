@@ -90,7 +90,10 @@ module.exports = {
     return result;
   },
 
-  getGetJobSeeker: async (_, { id }, { services: { JobSeekerService } }) => {
+  getGetJobSeeker: async (_, { id }, { services: { JobSeekerService} }) => {
     return await JobSeekerService.JobSeeker({ user: { id } });
+  },
+  jobSeekers: async (_, { services: { JobSeekerService } }) => {
+    return await JobSeekerService.getGetJobSeeker();
   },
 };

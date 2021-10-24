@@ -357,6 +357,10 @@ class JobSeekerSerivce {
   async getGetJobSeeker({ id }) {
     return await this.models.employee.findOne({ where: id });
   }
+  
+  async getGetJobSeekers() {
+    return await this.models.employee.findAll();
+  }
 
   async hasAcceptedAlready({ gigId, employeeId }) {
     return await this.models.accepted.findOne({ where: { gigId, employeeId } });
