@@ -70,6 +70,9 @@ module.exports = {
   businesses: async (_, __, { services: { EmployerService } }) => {
     return await EmployerService.getEmployers();
   },
+  employers: async (_, __, { services: { EmployerService } }) => {
+    return await EmployerService.getEmployers();
+  },
 
   jobSeekerMessages: async (
     _,
