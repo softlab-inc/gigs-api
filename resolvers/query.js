@@ -67,8 +67,8 @@ module.exports = {
   employerMessages: async (_, __, { services: { EmployerService }, user }) => {
     return await EmployerService.getMessageSenders({ user });
   },
-  businesses: async (_, __, { services: { EmployerService }, user }) => {
-    return await EmployerService.getMessageSenders({ user });
+  businesses: async (_, __, { services: { EmployerService } }) => {
+    return await EmployerService.getEmployers();
   },
 
   jobSeekerMessages: async (
