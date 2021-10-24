@@ -69,6 +69,12 @@ module.exports = gql`
     unReadHasAccepted: [Accepted!]
   }
 
+  fragment Business on Employer {
+    id
+    fullName
+    companyName
+  }
+
   type Location {
     id: Int!
     logitude: String
@@ -135,6 +141,7 @@ module.exports = gql`
     jobSeekers: [JobSeeker!]
     professions: [Profession!]
     gig: Gig
+    businesses:[Employer!]
     createdGigs: [Gig!]
     employerChats(employeeId: Int!): [Chat!]
     jobSeekerChats(employerId: Int!): [Chat!]

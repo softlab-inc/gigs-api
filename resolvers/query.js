@@ -52,15 +52,22 @@ module.exports = {
       limit: 20,
     }),
 
-  jobSeekerNotifications: async (_, __, { services: {JobSeekerService}, user }) => {
+  jobSeekerNotifications: async (
+    _,
+    __,
+    { services: { JobSeekerService }, user }
+  ) => {
     return await JobSeekerService.getAllNotifications({ user });
   },
 
-  recentHires: async (_, __, { services: {EmployerService}, user }) => {
+  recentHires: async (_, __, { services: { EmployerService }, user }) => {
     return await EmployerService.getRecentHires({ user });
   },
 
-  employerMessages: async (_, __, { services: {EmployerService}, user }) => {
+  employerMessages: async (_, __, { services: { EmployerService }, user }) => {
+    return await EmployerService.getMessageSenders({ user });
+  },
+  businesses: async (_, __, { services: { EmployerService }, user }) => {
     return await EmployerService.getMessageSenders({ user });
   },
 

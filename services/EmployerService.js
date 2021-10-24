@@ -169,6 +169,10 @@ class EmployerService {
   async getEmployer({ id }) {
     return await this.models.employer.findOne({ where: id });
   }
+  
+  async getEmployers() {
+    return await this.models.employer.findAll();
+  }
 
   async employerSendMessage({ content, employeeId, user, pubsub }) {
     this.isAuthenticatic(user);
