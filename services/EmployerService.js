@@ -170,6 +170,10 @@ class EmployerService {
     return await this.models.employer.findOne({ where: id });
   }
 
+  async getEmployers() {
+    return await this.models.employer.findAll();
+  }
+
   async employerSendMessage({ content, employeeId, user, pubsub }) {
     this.isAuthenticatic(user);
     const employer = await this.getEmployer({ id: user.id });
@@ -310,10 +314,13 @@ class EmployerService {
     return await this.employer({ user });
   }
 
-async findById({id}){
-   const user = await this.models.employer.findOne({ where: {id},attributes:["email"] });
-  return user.dataValues;
-}
+  async findById({ id }) {
+    const user = await this.models.employer.findOne({
+      where: { id },
+      attributes: ["email"],
+    });
+    return user.dataValues;
+  }
 
   async updateReadNotifications({ user }) {
     this.isAuthenticatic(user);

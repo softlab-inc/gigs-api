@@ -52,16 +52,26 @@ module.exports = {
       limit: 20,
     }),
 
-  jobSeekerNotifications: async (_, __, { services: {JobSeekerService}, user }) => {
+  jobSeekerNotifications: async (
+    _,
+    __,
+    { services: { JobSeekerService }, user }
+  ) => {
     return await JobSeekerService.getAllNotifications({ user });
   },
 
-  recentHires: async (_, __, { services: {EmployerService}, user }) => {
+  recentHires: async (_, __, { services: { EmployerService }, user }) => {
     return await EmployerService.getRecentHires({ user });
   },
 
-  employerMessages: async (_, __, { services: {EmployerService}, user }) => {
+  employerMessages: async (_, __, { services: { EmployerService }, user }) => {
     return await EmployerService.getMessageSenders({ user });
+  },
+  businesses: async (_, __, { services: { EmployerService } }) => {
+    return await EmployerService.getEmployers();
+  },
+  employers: async (_, __, { services: { EmployerService } }) => {
+    return await EmployerService.getEmployers();
   },
 
   jobSeekerMessages: async (
@@ -80,7 +90,15 @@ module.exports = {
     return result;
   },
 
-  getGetJobSeeker: async (_, { id }, { services: { JobSeekerService } }) => {
+  getGetJobSeeker: async (
+    _,
+    __,
+    { id },
+    { services: { JobSeekerService } }
+  ) => {
     return await JobSeekerService.JobSeeker({ user: { id } });
+  },
+  jobSeekers: async (_, __, { services: { JobSeekerService } }) => {
+    return await JobSeekerService.getGetJobSeekers();
   },
 };

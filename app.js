@@ -21,7 +21,6 @@ const typeDefs = require("./schemas");
 const resolvers = require("./resolvers");
 //bottle is a dependence inject jabascript library that is going to inject services
 const bottle = new Bottle();
-
 //registering services to bottle a DI library
 bottle.factory(
   "JobSeekerService",
@@ -37,7 +36,6 @@ bottle.service("MailerService", AppServices.MailerService);
 bottle.service("AWS3Service", AppServices.AWS3Service);
 
 const services = bottle.container;
-
 
 const pubsub = new PubSub();
 
@@ -56,7 +54,7 @@ const server = new ApolloServer({
 
       const user = getUser(token);
 
-      return { models, user, pubsub, cryptr, services, models };
+      return { models, user, pubsub, cryptr, services };
     }
   },
   subscriptions: {

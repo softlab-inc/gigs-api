@@ -58,7 +58,7 @@ class JobSeekerSerivce {
         token: jwt.sign({ id: user.id }, process.env.JWT_SECRETE),
       };
     } else {
-      let user = await employee.create({ ...data });
+      const user = await employee.create({ ...data });
       return {
         ...user.dataValues,
         isNew: true,
@@ -172,7 +172,7 @@ class JobSeekerSerivce {
 
     email = email.trim().toLowerCase();
 
-    const { employee, employeeProfession, profession } = this.models;
+    const { employee } = this.models;
 
     // hashing the user password
     const hashed = await bcrypt.hash(password, 10);
@@ -358,6 +358,10 @@ class JobSeekerSerivce {
     return await this.models.employee.findOne({ where: id });
   }
 
+  async getGetJobSeekers() {
+    return await this.models.employee.findAll();
+  }
+
   async hasAcceptedAlready({ gigId, employeeId }) {
     return await this.models.accepted.findOne({ where: { gigId, employeeId } });
   }
@@ -451,10 +455,13 @@ class JobSeekerSerivce {
     return encryptedString;
   }
 
-async findById({id}){
-   const user = await this.models.employee.findOne({ where: {id},attributes:["email"] });
-  return user.dataValues;
-}
+  async findById({ id }) {
+    const user = await this.models.employee.findOne({
+      where: { id },
+      attributes: ["email"],
+    });
+    return user.dataValues;
+  }
 
   async updatePassword({ id, password, confirmPassword, cryptr }) {
     const userId = Number(cryptr.decrypt(id));

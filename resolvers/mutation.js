@@ -27,14 +27,14 @@ module.exports = {
     { services: { JobSeekerService }, user }
   ) => {
     try {
-      let result = await JobSeekerService.updateProfession({
+      const result = await JobSeekerService.updateProfession({
         other,
         professionId,
         user,
       });
       return jwt.sign({ id: result }, process.env.JWT_SECRETE);
     } catch (error) {
-      throw new Error(`Error occured while updating profession`);
+      throw new Error("Error occured while updating profession");
     }
   },
   signInJobSeeker: async (_, { input }, { services: { JobSeekerService } }) => {
@@ -130,12 +130,19 @@ module.exports = {
   jobSeekerSendMessage: async (
     _,
     { content, employerId },
-    { services: { JobSeekerService,EmployerService, MailerService}, user, pubsub }
+    {
+      services: { JobSeekerService, EmployerService, MailerService },
+      user,
+      pubsub,
+    }
   ) => {
-     
-    let recieverMail = await EmployerService.findById({ id: employerId });
-    await MailerService.sendMailToAny({...recieverMail,message:"You have a new message, Open your Gigs App",subject:"New message"})
-  
+    const recieverMail = await EmployerService.findById({ id: employerId });
+    await MailerService.sendMailToAny({
+      ...recieverMail,
+      message: "You have a new message, Open your Gigs App",
+      subject: "New message",
+    });
+
     return await JobSeekerService.jobSeekerSendMessage({
       content,
       employerId,
@@ -146,12 +153,19 @@ module.exports = {
   employerSendMessage: async (
     _,
     { content, employeeId },
-    { services: { EmployerService,JobSeekerService, MailerService }, user, pubsub }
+    {
+      services: { EmployerService, JobSeekerService, MailerService },
+      user,
+      pubsub,
+    }
   ) => {
-  
-    let recieverMail = await JobSeekerService.findById({ id: employeeId });
-    await MailerService.sendMailToAny({...recieverMail,message:"You have a new message, Open your Gigs App",subject:"New message"})
-  
+    const recieverMail = await JobSeekerService.findById({ id: employeeId });
+    await MailerService.sendMailToAny({
+      ...recieverMail,
+      message: "You have a new message, Open your Gigs App",
+      subject: "New message",
+    });
+
     return await EmployerService.employerSendMessage({
       content,
       employeeId,
