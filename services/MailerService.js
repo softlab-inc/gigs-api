@@ -1,4 +1,4 @@
-const sgMail = require("@sendgrid/mail");  
+const sgMail = require("@sendgrid/mail");
 
 class MailerService {
   async sendMail({ email, id, isEmployer }) {
@@ -29,7 +29,6 @@ class MailerService {
   }
 
   async sendMailToAny({ email, message, subject }) {
-  
     sgMail.setApiKey(process.env.SEND_GRID_API_KEY);
 
     const msg = {

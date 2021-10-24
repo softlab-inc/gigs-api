@@ -141,7 +141,7 @@ module.exports = gql`
     jobSeekers: [JobSeeker!]
     professions: [Profession!]
     gig: Gig
-    businesses:[Employer!]
+    businesses: [Employer!]
     createdGigs: [Gig!]
     employerChats(employeeId: Int!): [Chat!]
     jobSeekerChats(employerId: Int!): [Chat!]

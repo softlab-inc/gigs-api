@@ -37,7 +37,6 @@ bottle.service("AWS3Service", AppServices.AWS3Service);
 
 const services = bottle.container;
 
-
 const pubsub = new PubSub();
 
 /**
@@ -55,7 +54,7 @@ const server = new ApolloServer({
 
       const user = getUser(token);
 
-      return { models, user, pubsub, cryptr, services, models };
+      return { models, user, pubsub, cryptr, services };
     }
   },
   subscriptions: {
