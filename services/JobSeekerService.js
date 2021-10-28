@@ -248,7 +248,11 @@ class JobSeekerSerivce {
     const user = await this.models.employee.findOne({ where: { email } });
 
     this.isAuthenticatic(user);
-
+    
+    if(!user.password){
+     throw new AuthenticationError("Signin using Google button");
+    }
+    
     // comparing the password with the hash stored in the database
     const valid = await bcrypt.compare(password, user.password);
 

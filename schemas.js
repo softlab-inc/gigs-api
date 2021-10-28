@@ -221,7 +221,7 @@ module.exports = gql`
     createGoogleJobSeeker(
       email: String!
       fullName: String!
-      profileImagUri: String!
+      profileImagUri: String
     ): JobSeeker!
 
     createGoogleEmployer(
