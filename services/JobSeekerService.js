@@ -264,6 +264,7 @@ class JobSeekerSerivce {
   }
 
   async userUpdateStatus({ status, user, pubsub }) {
+  
     if (!user) {
       throw new AuthenticationError("You should be signed!");
     }
