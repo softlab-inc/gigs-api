@@ -303,7 +303,9 @@ module.exports = gql`
 
     onStatusChange: JobSeeker!
 
-    onJobSeekerSentMessage(token: String!): Chat!
+    onJobSeekerSentMessage(token: String!): Gig!
+    
+    onJobSeekerCompleteGig(token: String!): Chat!
 
     onEmployerSentMessage(token: String!): Chat!
 
