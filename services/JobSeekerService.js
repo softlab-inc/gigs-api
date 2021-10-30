@@ -255,7 +255,7 @@ class JobSeekerSerivce {
     
     // comparing the password with the hash stored in the database
     const valid = await bcrypt.compare(password, user.password);
-
+    console.log({valid})
     if (!valid) {
       throw new AuthenticationError("Incorrrect password! try gain");
     }
@@ -431,6 +431,15 @@ class JobSeekerSerivce {
   }
 
   async updateGigStatus({ user, gigId, status }) {
+    this.isAuthenticatic(user);
+    await this.models.employeeGig.update(
+      { isStarted: status },
+      { where: { gigId, employeeId: user.id } }
+    );
+    return await this.getPendingGigs({ employeeId: user.id });
+  }
+  
+  async completeGig({ user, gigId, status }) {
     this.isAuthenticatic(user);
     await this.models.employeeGig.update(
       { isStarted: status },
