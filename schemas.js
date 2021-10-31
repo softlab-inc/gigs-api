@@ -152,6 +152,7 @@ module.exports = gql`
     employerMessages: [Messages!]
     jobSeekerMessages: [Messages!]
     pendingGigs: [Gig!]
+    completeGigs: [Gig!]
   }
 
   #InputFields

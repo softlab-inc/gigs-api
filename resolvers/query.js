@@ -89,6 +89,13 @@ module.exports = {
     console.log({ result });
     return result;
   },
+  completeGigs: async (_, __, { services: { JobSeekerService }, user }) => {
+    const result = await JobSeekerService.getCompleteGigs({
+      employeeId: user.id,
+    });
+    console.log({ result });
+    return result;
+  },
 
   getGetJobSeeker: async (
     _,

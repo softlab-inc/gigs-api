@@ -18,6 +18,7 @@ module.exports = {
     args,
     { services: { JobSeekerService } }
   ) => {
+    console.log({args})
     const JobSeeker = await JobSeekerService.createGoogleJobSeeker(args, jwt);
     return JobSeeker;
   },
