@@ -99,7 +99,6 @@ module.exports = {
 
   getGetJobSeeker: async (
     _,
-    __,
     { id },
     { services: { JobSeekerService } }
   ) => {
