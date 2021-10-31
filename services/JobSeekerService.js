@@ -402,7 +402,22 @@ class JobSeekerSerivce {
 
   async getPendingGigs({ employeeId }) {
     const data = await this.models.employeeGig.findAll({
-      where: { employeeId,isStated:0},
+      where: {
+        employeeId,
+        [Op.or]: [{ isStated: HAS_PENDING }, { isStated: HAS_STARTED}],
+      },
+      include: [this.models.gig],
+      order: [["id", "DESC"]],
+    });
+    return data.map((data) => ({
+      ...data.dataValues,
+      ...data.get("gig").dataValues,
+    }));
+  }
+  
+  async getCompleteGigs({ employeeId }) {
+    const data = await this.models.employeeGig.findAll({
+      where: { employeeId,isStated:HAS_COMPLETE},
       include: [this.models.gig],
       order: [["id", "DESC"]],
     });
@@ -445,17 +460,23 @@ class JobSeekerSerivce {
   
   async getGigOwner({gigId}){
     let {dataValues} = this.models.gig.findOne({where:{id:gigId},include:[this.models.employer]})
-    return dataValues.employer;
+    return {...dataValues};
   }
   
   async completeGig({ user, gigId, status }) {
     this.isAuthenticatic(user);
-    let {dataValues} = this.getGetJobSeeker({id:user.id});
+    let jobSeeker = this.getGetJobSeeker({id:user.id});
+    let employerAndGig = await this.getGigOwner({gigId})
     await this.models.employeeGig.update(
       { isStarted: HAS_COMPLETED },
       { where: { gigId, employeeId: user.id } }
     );
-    return await this.getPendingGigs({ employeeId: user.id });
+   let complteGigs =  await this.getCompleteGigs({ employeeId: user.id });
+   return {
+     complteGigs,
+     jobSeeker,
+     employerAndGig,
+   };
   }
 
   async updateReadNotifications({ user }) {

@@ -39,12 +39,6 @@ const services = bottle.container;
 
 const pubsub = new PubSub();
 
-(async ()=>{
-
-    let {dataValues} = await models.gig.findOne({where:{id:1},include:[models.employer]})
-     console.log({employer:dataValues.employer})
-
-})()
 
 /**
  * Integrating the APOLLO_SERVER to server our Graph GL API
