@@ -8,9 +8,9 @@ const Op = Sequelize.Op;
 
 const { AuthenticationError } = require("apollo-server-express");
 
-const IS_STARTED = 1;
-const IS_COMPLETE = 2;
-const IS_PENDING = 0;
+const HAS_STARTED = 1;
+const HAS_COMPLETED = 2;
+const HAS_PENDING = 0;
 
 class JobSeekerSerivce {
   constructor(models) {
@@ -259,7 +259,7 @@ class JobSeekerSerivce {
     
     // comparing the password with the hash stored in the database
     const valid = await bcrypt.compare(password, user.password);
-    console.log({valid})
+
     if (!valid) {
       throw new AuthenticationError("Incorrrect password! try gain");
     }
@@ -437,21 +437,22 @@ class JobSeekerSerivce {
   async updateGigStatus({ user, gigId, status }) {
     this.isAuthenticatic(user);
     await this.models.employeeGig.update(
-      { isStarted: status },
+      { isStarted: HAS_STARTED },
       { where: { gigId, employeeId: user.id } }
     );
     return await this.getPendingGigs({ employeeId: user.id });
   }
   
-  async gigOwner({gigId}){
-    
+  async getGigOwner({gigId}){
+    let {dataValues} = this.models.gig.findOne({where:{id:gigId},include:[this.models.employer]})
+    return dataValues.employer;
   }
   
   async completeGig({ user, gigId, status }) {
     this.isAuthenticatic(user);
     let {dataValues} = this.getGetJobSeeker({id:user.id});
     await this.models.employeeGig.update(
-      { isStarted: status },
+      { isStarted: HAS_COMPLETED },
       { where: { gigId, employeeId: user.id } }
     );
     return await this.getPendingGigs({ employeeId: user.id });
