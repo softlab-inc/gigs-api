@@ -275,14 +275,14 @@ module.exports = {
   ) => {
     const { completeGigs, data } =
       await JobSeekerService.completeGig({ user, gigId });
-    console.log({ completeGigs, data });
-    //  const messages = NotificationService.generateAcceptedMessages([
-    //    { ...accepted.dataValues },
-    //  ]);
-    //  console.log({ messages });
-    //  const tickets = await NotificationService.createChunckOfNotifications(
-    //    messages
-    //  );
+
+     const messages = NotificationService.generateAcceptedMessages([
+       { ...data }
+     ]);
+     
+     await NotificationService.createChunckOfNotifications(
+       messages
+     );
 
     return completeGigs;
   },

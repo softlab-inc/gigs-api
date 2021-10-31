@@ -473,7 +473,7 @@ class JobSeekerSerivce {
       { where: { gigId, employeeId: user.id } }
     );
     let completeGigs = await this.getCompleteGigs({ employeeId: user.id });
-     
+      
     return {
       completeGigs,
       data: {
@@ -481,6 +481,7 @@ class JobSeekerSerivce {
         pushToken: gigDetails.employer.pushToken,
         budget: gigDetails.dataValues.budget,
         name: gigDetails.dataValues.name,
+        gigId: gigDetails.dataValues.id,
       },
     };
   }
