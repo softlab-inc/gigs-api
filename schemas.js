@@ -294,7 +294,7 @@ module.exports = gql`
 
     employeeUpdateGigStatus(gigId: Int!, status: Int!): [Gig!]
     
-    employeeComplteGig(gigId: Int!, status: Int!): [Gig!]
+    employeeCompleteGig(gigId: Int!): [Gig!]
   }
 
   #Subscriptions

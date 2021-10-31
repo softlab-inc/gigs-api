@@ -252,11 +252,11 @@ class JobSeekerSerivce {
     const user = await this.models.employee.findOne({ where: { email } });
 
     this.isAuthenticatic(user);
-    
-    if(!user.password){
-     throw new AuthenticationError("Signin using Google button");
+
+    if (!user.password) {
+      throw new AuthenticationError("Signin using Google button");
     }
-    
+
     // comparing the password with the hash stored in the database
     const valid = await bcrypt.compare(password, user.password);
 
@@ -268,7 +268,6 @@ class JobSeekerSerivce {
   }
 
   async userUpdateStatus({ status, user, pubsub }) {
-  
     if (!user) {
       throw new AuthenticationError("You should be signed!");
     }
@@ -293,7 +292,6 @@ class JobSeekerSerivce {
 
     let profileImagUri = "";
 
-    // profileImagUri = await getResult(profileImage, PROFILE_FOLDER);
     const result = await AWS3Service.handleFileUpload(profileImage);
 
     profileImagUri = result.Location;
@@ -404,7 +402,7 @@ class JobSeekerSerivce {
     const data = await this.models.employeeGig.findAll({
       where: {
         employeeId,
-        [Op.or]: [{ isStated: HAS_PENDING }, { isStated: HAS_STARTED}],
+        [Op.or]: [{ isStarted: HAS_PENDING }, { isStarted: HAS_STARTED }],
       },
       include: [this.models.gig],
       order: [["id", "DESC"]],
@@ -414,10 +412,10 @@ class JobSeekerSerivce {
       ...data.get("gig").dataValues,
     }));
   }
-  
+
   async getCompleteGigs({ employeeId }) {
     const data = await this.models.employeeGig.findAll({
-      where: { employeeId,isStated:HAS_COMPLETE},
+      where: { employeeId, isStarted: HAS_COMPLETED },
       include: [this.models.gig],
       order: [["id", "DESC"]],
     });
@@ -457,26 +455,34 @@ class JobSeekerSerivce {
     );
     return await this.getPendingGigs({ employeeId: user.id });
   }
-  
-  async getGigOwner({gigId}){
-    let {dataValues} = this.models.gig.findOne({where:{id:gigId},include:[this.models.employer]})
-    return {...dataValues};
+
+  async getGigOwner({ gigId }) {
+    let gigAndOwner = await this.models.gig.findOne({
+      where: { id: gigId },
+      include: [this.models.employer],
+    });
+    return { ...gigAndOwner };
   }
-  
-  async completeGig({ user, gigId, status }) {
+
+  async completeGig({ user, gigId }) {
     this.isAuthenticatic(user);
-    let jobSeeker = this.getGetJobSeeker({id:user.id});
-    let employerAndGig = await this.getGigOwner({gigId})
+    let jobSeeker = await this.getGetJobSeeker({ id: user.id });
+    let gigDetails = await this.getGigOwner({ gigId });
     await this.models.employeeGig.update(
       { isStarted: HAS_COMPLETED },
       { where: { gigId, employeeId: user.id } }
     );
-   let complteGigs =  await this.getCompleteGigs({ employeeId: user.id });
-   return {
-     complteGigs,
-     jobSeeker,
-     employerAndGig,
-   };
+    let completeGigs = await this.getCompleteGigs({ employeeId: user.id });
+     
+    return {
+      completeGigs,
+      data: {
+        fullName: jobSeeker.fullName,
+        pushToken: gigDetails.employer.pushToken,
+        budget: gigDetails.dataValues.budget,
+        name: gigDetails.dataValues.name,
+      },
+    };
   }
 
   async updateReadNotifications({ user }) {
