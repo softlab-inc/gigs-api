@@ -268,6 +268,24 @@ module.exports = {
   ) => {
     return await JobSeekerService.updateGigStatus({ user, gigId, status });
   },
+  employeeCompleteGig: async (
+    _,
+    { gigId },
+    { services: { JobSeekerService, NotificationService }, user }
+  ) => {
+    const { completeGigs, data } =
+      await JobSeekerService.completeGig({ user, gigId });
+
+     const messages = NotificationService.generateAcceptedMessages([
+       { ...data }
+     ]);
+     
+     await NotificationService.createChunckOfNotifications(
+       messages
+     );
+
+    return completeGigs;
+  },
   employerUpdateReadNotifications: async (
     _,
     args,
