@@ -10,6 +10,32 @@ class NotificationService {
   // Align all notification into one chunck and to be sent and notification with similar content shall be compressed
   // send the chunk at once
 
+  generateCompleteGigsMessages(data) {
+    const messages = [];
+
+    for (const completeGigs of data) {
+      if (completeGigs.pushToken === null) continue;
+
+      if (!Expo.isExpoPushToken(completeGigs.pushToken)) {
+        console.error(
+          `Push token ${completeGigs.pushToken} is not a valid Expo push token`
+        );
+        continue;
+      }
+
+      messages.push({
+        to: completeGigs.pushToken,
+        sound: "default",
+        title: "GiG Complete",
+        body: `${completeGigs.fullName} has completed Your Gig ${completeGigs.name} you will be paying off ${completeGigs.budget} UGX as agreed`,
+        data: { gigId: completeGigs.gigId, toScreen: "Notifications" },
+        priority: "high",
+      });
+    }
+
+    return messages;
+  }
+
   generateAcceptedMessages(data) {
     const messages = [];
 
