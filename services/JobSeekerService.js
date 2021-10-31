@@ -8,6 +8,10 @@ const Op = Sequelize.Op;
 
 const { AuthenticationError } = require("apollo-server-express");
 
+const IS_STARTED = 1;
+const IS_COMPLETE = 2;
+const IS_PENDING = 0;
+
 class JobSeekerSerivce {
   constructor(models) {
     this.models = models;
@@ -398,7 +402,7 @@ class JobSeekerSerivce {
 
   async getPendingGigs({ employeeId }) {
     const data = await this.models.employeeGig.findAll({
-      where: { employeeId },
+      where: { employeeId,isStated:0},
       include: [this.models.gig],
       order: [["id", "DESC"]],
     });
@@ -439,8 +443,13 @@ class JobSeekerSerivce {
     return await this.getPendingGigs({ employeeId: user.id });
   }
   
+  async gigOwner({gigId}){
+    
+  }
+  
   async completeGig({ user, gigId, status }) {
     this.isAuthenticatic(user);
+    let {dataValues} = this.getGetJobSeeker({id:user.id});
     await this.models.employeeGig.update(
       { isStarted: status },
       { where: { gigId, employeeId: user.id } }

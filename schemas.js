@@ -293,6 +293,8 @@ module.exports = gql`
     employerHireJobSeeker(gigId: Int!, employeeId: Int!): Gig
 
     employeeUpdateGigStatus(gigId: Int!, status: Int!): [Gig!]
+    
+    employeeComplteGig(gigId: Int!, status: Int!): [Gig!]
   }
 
   #Subscriptions
