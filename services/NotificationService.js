@@ -28,7 +28,11 @@ class NotificationService {
         sound: "default",
         title: "GiG Complete",
         body: `${completeGigs.fullName} has completed Your Gig ${completeGigs.name} you will be paying off ${completeGigs.budget} UGX as agreed`,
-        data: { gigId: completeGigs.gigId, toScreen: "Gigs" },
+        data: {
+          gigId: completeGigs.gigId,
+          toScreen: "Gigs",
+          message: `${completeGigs.fullName} has completed Your Gig ${completeGigs.name} you will be paying off ${completeGigs.budget} UGX as agreed`,
+        },
         priority: "high",
       });
     }

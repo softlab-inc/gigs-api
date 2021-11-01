@@ -86,17 +86,18 @@ module.exports = {
     const result = await JobSeekerService.getPendingGigs({
       employeeId: user.id,
     });
+
+    return result;
+  },
+  completeGigs: async (_, __, { services: { JobSeekerService }, user }) => {
+    const result = await JobSeekerService.getCompleteGigs({
+      employeeId: user.id,
+    });
     console.log({ result });
     return result;
   },
-
-  getGetJobSeeker: async (
-    _,
-    __,
-    { id },
-    { services: { JobSeekerService } }
-  ) => {
-    return await JobSeekerService.JobSeeker({ user: { id } });
+  getGetJobSeeker: async (_, { id }, { services: { JobSeekerService } }) => {
+    return await JobSeekerService.getGetJobSeeker({ id });
   },
   jobSeekers: async (_, __, { services: { JobSeekerService } }) => {
     return await JobSeekerService.getGetJobSeekers();

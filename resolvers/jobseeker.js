@@ -26,6 +26,9 @@ module.exports = {
   pendingGigs: async ({ id }, args, { services: { JobSeekerService } }) => {
     return await JobSeekerService.getPendingGigs({ employeeId: id });
   },
+  completeGigs: async ({ id }, args, { services: { JobSeekerService } }) => {
+    return await JobSeekerService.getCompleteGigs({ employeeId: id });
+  },
   recentEmployers: async ({ id }, args, { services: { JobSeekerService } }) => {
     return await JobSeekerService.getRecentEmployers({ employeeId: id });
   },
