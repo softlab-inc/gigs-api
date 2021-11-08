@@ -21,6 +21,7 @@ class JobSeekerSerivce {
     this.isAuthenticatic(user);
     return await this.models.notified.findAll({
       where: { employeeId: user.id },
+      order: [["id", "DESC"]],
     });
   }
 
