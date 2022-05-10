@@ -26,10 +26,7 @@ bottle.factory(
   "JobSeekerService",
   () => new AppServices.JobSeekerSerivce(models)
 );
-bottle.factory(
-  "EmployerService",
-  () => new AppServices.EmployerService(models)
-);
+bottle.factory("EmployerService",() => new AppServices.EmployerService(models));
 bottle.factory("GigService", () => new AppServices.GigService(models));
 bottle.service("NotificationService", AppServices.NotificationService);
 bottle.service("MailerService", AppServices.MailerService);
