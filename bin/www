@@ -1,31 +1,29 @@
 #!/usr/bin/env node
 
-//http server 
+//http server
 const http = require('http');
 
-//express and apollo server instance 
-const {app,server} = require('../app');
+//express and apollo server instance
+const { app, server } = require('../app');
 
 const debug = require('debug')('api:server');
 
-const PORT= normalizePort(process.env.PORT || '4000');
+const PORT = normalizePort(process.env.PORT || '4000');
 
 const httpServer = http.createServer(app);
 
 server.installSubscriptionHandlers(httpServer);
 
 httpServer.listen(PORT, () => {
-  console.log(`🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`)
-  console.log(`🚀 Subscriptions ready at ws://localhost:${PORT}${server.subscriptionsPath}`)
-})
-
+  console.log(`🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`);
+  console.log(`🚀 Subscriptions ready at ws://localhost:${PORT}${server.subscriptionsPath}`);
+});
 
 app.on('error', onError);
 app.on('listening', onListening);
 
 function normalizePort(val) {
   const port = parseInt(val, 10);
-
 
   if (isNaN(port)) {
     return val;
@@ -43,9 +41,7 @@ function onError(error) {
     throw error;
   }
 
-  const bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
+  const bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
@@ -64,8 +60,6 @@ function onError(error) {
 
 function onListening() {
   const addr = server.address();
-  const bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
+  const bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }

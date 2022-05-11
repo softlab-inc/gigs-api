@@ -18,7 +18,7 @@ module.exports = {
     args,
     { services: { JobSeekerService } }
   ) => {
-    console.log({args})
+    console.log({ args });
     const JobSeeker = await JobSeekerService.createGoogleJobSeeker(args, jwt);
     return JobSeeker;
   },
@@ -274,16 +274,16 @@ module.exports = {
     { gigId },
     { services: { JobSeekerService, NotificationService }, user }
   ) => {
-    const { completeGigs, data } =
-      await JobSeekerService.completeGig({ user, gigId });
+    const { completeGigs, data } = await JobSeekerService.completeGig({
+      user,
+      gigId,
+    });
 
-     const messages = NotificationService.generateCompleteGigsMessages([
-       { ...data },
-     ]);
-     
-     await NotificationService.createChunckOfNotifications(
-       messages
-     );
+    const messages = NotificationService.generateCompleteGigsMessages([
+      { ...data },
+    ]);
+
+    await NotificationService.createChunckOfNotifications(messages);
 
     return completeGigs;
   },

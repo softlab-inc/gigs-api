@@ -26,7 +26,10 @@ bottle.factory(
   "JobSeekerService",
   () => new AppServices.JobSeekerSerivce(models)
 );
-bottle.factory("EmployerService",() => new AppServices.EmployerService(models));
+bottle.factory(
+  "EmployerService",
+  () => new AppServices.EmployerService(models)
+);
 bottle.factory("GigService", () => new AppServices.GigService(models));
 bottle.service("NotificationService", AppServices.NotificationService);
 bottle.service("MailerService", AppServices.MailerService);
@@ -35,7 +38,6 @@ bottle.service("AWS3Service", AppServices.AWS3Service);
 const services = bottle.container;
 
 const pubsub = new PubSub();
-
 
 /**
  * Integrating the APOLLO_SERVER to server our Graph GL API

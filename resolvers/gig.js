@@ -12,7 +12,7 @@ module.exports = {
     return data.map((data) => ({
       ...data.get("employee").dataValues,
       status: data.status,
-      isStarted:data.isStarted
+      isStarted: data.isStarted,
     })); // update employee onLine status with gig progress status
   },
 };

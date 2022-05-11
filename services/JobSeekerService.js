@@ -474,7 +474,7 @@ class JobSeekerSerivce {
       { where: { gigId, employeeId: user.id } }
     );
     let completeGigs = await this.getCompleteGigs({ employeeId: user.id });
-      
+
     return {
       completeGigs,
       data: {

@@ -15,7 +15,7 @@ module.exports = gql`
     nationalIdImageUri: String
     status: Int
     isNew: Boolean
-    isStarted:Int
+    isStarted: Int
     token: String
     pushToken: String
     hasProfession: [Profession!]
@@ -295,7 +295,7 @@ module.exports = gql`
     employerHireJobSeeker(gigId: Int!, employeeId: Int!): Gig
 
     employeeUpdateGigStatus(gigId: Int!, status: Int!): [Gig!]
-    
+
     employeeCompleteGig(gigId: Int!): [Gig!]
   }
 
