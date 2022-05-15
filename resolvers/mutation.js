@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken"); // json web token module
+const AWS3Service = require("../services/AWS3Service");
 
 module.exports = {
   createJobSeeker: async (_, { input }, { services: { JobSeekerService } }) => {
@@ -211,10 +212,10 @@ module.exports = {
     pubsub.publish("onAcceptGig", { onAcceptGig: accepted });
     return accepted;
   },
-  uploadFiletoS3: async (_, { file }, { services: { AWS3Service } }) => {
+  uploadFiletoS3: async (_, { file }) => {
     const result = await AWS3Service.handleFileUpload(file);
-    const { Location } = result;
-    return Location;
+    // const { Location } = result;
+    return result;
   },
   jobSeekerUpdateData: async (
     _,

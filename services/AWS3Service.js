@@ -1,34 +1,44 @@
-const { v4: uuidv4 } = require('uuid');
-
 // the actual upload happens here
+const fs = require("fs");
+const path = require("path");
+const axios = require("axios");
+const FormData = require("form-data");
+
 const handleFileUpload = async (file) => {
   const { createReadStream, filename } = await file;
 
-  // const _buffer = createReadStream();
-
-  // const streamSize = await findStreamSize(_buffer);
-
-  // if (streamSize > MAX_UPLOAD_FILE_SIZE) {
-  //   throw new ForbiddenError("Uploaded file must not exceed 1 Mb");
-  // }
-
-  const key = uuidv4();
-
-  return key;
+  const stream = createReadStream();
+  const root = path.resolve("./assets");
+  const filePath = path.join(root, filename);
+  const out = fs.createWriteStream(filePath);
+  stream.pipe(out);
+  const data = new FormData();
+  data.append("image", fs.createReadStream(filePath));
+  axios
+    .post(
+      "https://api.imgbb.com/1/upload?expiration=600&key=c0bd7f3650e117098dbb225c2990c0dd",
+      { ...data },
+      {
+        headers: data.getHeaders(),
+      }
+    )
+    .then((response) => {
+      console.log({ response });
+      return "success...";
+    })
+    .catch((error) => {
+      if (error.response) {
+        console.log("response", error.response);
+        //do something
+      } else if (error.request) {
+        console.log("request", error.request);
+        //do something else
+      } else if (error.message) {
+        //do something other than the other two
+        console.log("message", error.request);
+      }
+      return "error...";
+    });
 };
-
-// const findStreamSize = (_buffer) => {
-//   const chunk = [];
-
-//   return new Promise((resolve, reject) =>
-//     _buffer
-//       .on("data", (data) => chunk.push(data))
-//       .on("end", () => {
-//         const buffer = Buffer.concat(chunk);
-//         resolve(buffer.length);
-//       })
-//       .on("error", (error) => reject(error))
-//   );
-// };
 
 module.exports = { handleFileUpload };

@@ -3,10 +3,9 @@
   // Controls if the editor should automatically format the line after typing
   "beautify.onSave": true,
   "editor.formatOnType": true,
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
 
   // You can auto format any files based on the file extensions type.
-  "beautify.JSfiles": ["js", "json", "jsbeautifyrc", "jshintrc", "ts"],
   "beautify.JSfiles": ["js", "json", "jsbeautifyrc", "jshintrc", "ts"],
   "beautify.HTMLfiles": ["htm", "html"]
 }
