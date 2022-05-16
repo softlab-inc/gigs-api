@@ -24,7 +24,7 @@ const handleFileUpload = async (file) => {
 
 module.exports = { handleFileUpload };
 
-//Image manipulation
+//Image manipulation with node-modules
 //----------------------------------------------------------------
 // const filePath = path.join(path.resolve("./assets"), filename);
 // const ws = fs.createWriteStream(filePath);
