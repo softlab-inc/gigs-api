@@ -4,7 +4,7 @@ const FormData = require("form-data");
 const handleFileUpload = async (file) => {
   const { createReadStream, filename } = await file;
   const url =
-    "https://api.imgbb.com/1/upload?expiration=600&key=c0bd7f3650e117098dbb225c2990c0dd";
+    "https://api.imgbb.com/1/upload?key=c0bd7f3650e117098dbb225c2990c0dd";
 
   const stream = createReadStream();
 
