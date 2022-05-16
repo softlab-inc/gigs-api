@@ -214,8 +214,9 @@ module.exports = {
   },
   uploadFiletoS3: async (_, { file }) => {
     const result = await AWS3Service.handleFileUpload(file);
-    // const { Location } = result;
-    return result;
+    const { Location } = result;
+    console.log({ result });
+    return Location;
   },
   jobSeekerUpdateData: async (
     _,
