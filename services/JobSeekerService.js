@@ -458,7 +458,7 @@ class JobSeekerSerivce {
   }
 
   async getGigOwner({ gigId }) {
-    let gigAndOwner = await this.models.gig.findOne({
+    const gigAndOwner = await this.models.gig.findOne({
       where: { id: gigId },
       include: [this.models.employer],
     });
@@ -467,13 +467,13 @@ class JobSeekerSerivce {
 
   async completeGig({ user, gigId }) {
     this.isAuthenticatic(user);
-    let jobSeeker = await this.getGetJobSeeker({ id: user.id });
-    let gigDetails = await this.getGigOwner({ gigId });
+    const jobSeeker = await this.getGetJobSeeker({ id: user.id });
+    const gigDetails = await this.getGigOwner({ gigId });
     await this.models.employeeGig.update(
       { isStarted: HAS_COMPLETED },
       { where: { gigId, employeeId: user.id } }
     );
-    let completeGigs = await this.getCompleteGigs({ employeeId: user.id });
+    const completeGigs = await this.getCompleteGigs({ employeeId: user.id });
 
     return {
       completeGigs,
